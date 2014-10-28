@@ -1,0 +1,94 @@
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\obj\Debug\InterBook2._0.csprojResolveAssemblyReference.cache
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\InterBook2._0.dll.config
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\InterBook2._0.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\InterBook2._0.pdb
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\Antlr3.Runtime.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\EntityFramework.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\EntityFramework.SqlServer.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\Microsoft.Web.Infrastructure.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\Newtonsoft.Json.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Net.Http.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Net.Http.WebRequest.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.Helpers.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.Mvc.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.Optimization.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.Razor.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.WebPages.Deployment.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.WebPages.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.WebPages.Razor.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\WebGrease.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\Antlr3.Runtime.pdb
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\EntityFramework.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\EntityFramework.SqlServer.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\Newtonsoft.Json.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.Optimization.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Net.Http.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Net.Http.WebRequest.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.Helpers.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.Mvc.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.Razor.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.WebPages.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.WebPages.Deployment.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\System.Web.WebPages.Razor.xml
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\EntityFramework.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\System.Net.Http.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\System.Net.Http.WebRequest.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\System.Web.Helpers.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\System.Web.Mvc.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\System.Web.Razor.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\System.Web.WebPages.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\System.Web.WebPages.Deployment.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\bin\fr\System.Web.WebPages.Razor.resources.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\obj\Debug\InterBook2._0.dll
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\obj\Debug\InterBook2._0.pdb
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\obj\Debug\InterBook2._0.Views.Home.App_LocalResources.Index.resources
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\obj\Debug\InterBook2._0.csproj.GenerateResource.Cache
+c:\users\dell\documents\visual studio 2013\Projects\InterBook2.0\InterBook2.0\obj\Debug\InterBook2._0.Views.Search.App_LocalResources.Index.resources
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\InterBook2._0.dll.config
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\InterBook2._0.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\InterBook2._0.pdb
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\Antlr3.Runtime.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\EntityFramework.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\EntityFramework.SqlServer.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\Newtonsoft.Json.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Net.Http.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Net.Http.WebRequest.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.Helpers.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.Mvc.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.Optimization.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.Razor.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.WebPages.Deployment.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.WebPages.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.WebPages.Razor.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\WebGrease.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\Antlr3.Runtime.pdb
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\EntityFramework.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\EntityFramework.SqlServer.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\Newtonsoft.Json.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.Optimization.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Net.Http.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Net.Http.WebRequest.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.Helpers.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.Mvc.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.Razor.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.WebPages.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.WebPages.Deployment.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\System.Web.WebPages.Razor.xml
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\EntityFramework.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Net.Http.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Net.Http.WebRequest.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.Helpers.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.Mvc.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.Razor.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.WebPages.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.WebPages.Deployment.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.WebPages.Razor.resources.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.csprojResolveAssemblyReference.cache
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Home.App_LocalResources.Index.resources
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Search.App_LocalResources.Index.resources
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.csproj.GenerateResource.Cache
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.pdb

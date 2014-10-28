@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InterBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityType Name="Ref_Profession">
+    <Key>
+      <PropertyRef Name="id_Profession" />
+    </Key>
+    <Property Name="id_Profession" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Ref_Ville">
+    <Key>
+      <PropertyRef Name="id_Ville" />
+    </Key>
+    <Property Name="id_Ville" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Util">
+    <Key>
+      <PropertyRef Name="IdU" />
+    </Key>
+    <Property Name="IdU" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idu_email" Type="int" />
+  </EntityType>
+  <EntityType Name="Util_Profession">
+    <Key>
+      <PropertyRef Name="id_Util_Profession" />
+    </Key>
+    <Property Name="id_Util_Profession" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdU" Type="int" />
+    <Property Name="id_Profession" Type="int" />
+  </EntityType>
+  <EntityType Name="Util_Ville">
+    <Key>
+      <PropertyRef Name="id_Util_Ville" />
+    </Key>
+    <Property Name="id_Util_Ville" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdU" Type="int" />
+    <Property Name="id_Ville" Type="int" />
+  </EntityType>
+  <Association Name="FK_Util_Profession_Ref_Profession">
+    <End Role="Ref_Profession" Type="Self.Ref_Profession" Multiplicity="0..1" />
+    <End Role="Util_Profession" Type="Self.Util_Profession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Profession">
+        <PropertyRef Name="id_Profession" />
+      </Principal>
+      <Dependent Role="Util_Profession">
+        <PropertyRef Name="id_Profession" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Profession_Util">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Profession" Type="Self.Util_Profession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Profession">
+        <PropertyRef Name="IdU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Ville_Ref_Ville">
+    <End Role="Ref_Ville" Type="Self.Ref_Ville" Multiplicity="0..1" />
+    <End Role="Util_Ville" Type="Self.Util_Ville" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Ville">
+        <PropertyRef Name="id_Ville" />
+      </Principal>
+      <Dependent Role="Util_Ville">
+        <PropertyRef Name="id_Ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Ville_Util">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Ville" Type="Self.Util_Ville" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Ville">
+        <PropertyRef Name="IdU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="SearchByVilleProfession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ville" Type="varchar" Mode="In" />
+    <Parameter Name="profession" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="InterBookModelStoreContainer">
+    <EntitySet Name="Ref_Profession" EntityType="Self.Ref_Profession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_Ville" EntityType="Self.Ref_Ville" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util" EntityType="Self.Util" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util_Profession" EntityType="Self.Util_Profession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util_Ville" EntityType="Self.Util_Ville" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Util_Profession_Ref_Profession" Association="Self.FK_Util_Profession_Ref_Profession">
+      <End Role="Ref_Profession" EntitySet="Ref_Profession" />
+      <End Role="Util_Profession" EntitySet="Util_Profession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Profession_Util" Association="Self.FK_Util_Profession_Util">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Profession" EntitySet="Util_Profession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Ville_Ref_Ville" Association="Self.FK_Util_Ville_Ref_Ville">
+      <End Role="Ref_Ville" EntitySet="Ref_Ville" />
+      <End Role="Util_Ville" EntitySet="Util_Ville" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Ville_Util" Association="Self.FK_Util_Ville_Util">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Ville" EntitySet="Util_Ville" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

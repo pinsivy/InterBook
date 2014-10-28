@@ -1,0 +1,17 @@
+﻿@using System.Web.Optimization
+@model InterBook2._0.Models.SearchModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Media/css/Recherche")
+
+<section class="results">
+    @foreach (var u in Model.lu)
+    {
+        <p>@u.IdU.ToString()</p>
+        <br />
+        <p>@u.idu_email.ToString()</p>
+    }
+</section>

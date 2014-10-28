@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InterBookModelStoreContainer" CdmEntityContainer="InterBookEntities">
+    <EntitySetMapping Name="Util">
+      <EntityTypeMapping TypeName="InterBookModel.Util">
+        <MappingFragment StoreEntitySet="Util">
+          <ScalarProperty Name="IdU" ColumnName="IdU" />
+          <ScalarProperty Name="idu_email" ColumnName="idu_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Util_Profession">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Profession">
+        <MappingFragment StoreEntitySet="Util_Profession">
+          <ScalarProperty Name="id_Profession" ColumnName="id_Profession" />
+          <ScalarProperty Name="IdU" ColumnName="IdU" />
+          <ScalarProperty Name="id_Util_Profession" ColumnName="id_Util_Profession" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Util_Ville">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Ville">
+        <MappingFragment StoreEntitySet="Util_Ville">
+          <ScalarProperty Name="id_Ville" ColumnName="id_Ville" />
+          <ScalarProperty Name="IdU" ColumnName="IdU" />
+          <ScalarProperty Name="id_Util_Ville" ColumnName="id_Util_Ville" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Profession">
+      <EntityTypeMapping TypeName="InterBookModel.Ref_Profession">
+        <MappingFragment StoreEntitySet="Ref_Profession">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="id_Profession" ColumnName="id_Profession" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Ville">
+      <EntityTypeMapping TypeName="InterBookModel.Ref_Ville">
+        <MappingFragment StoreEntitySet="Ref_Ville">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="id_Ville" ColumnName="id_Ville" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SearchByVilleProfession" FunctionName="InterBookModel.Store.SearchByVilleProfession" />
+  </EntityContainerMapping>
+</Mapping>

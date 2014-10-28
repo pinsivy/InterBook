@@ -1,0 +1,242 @@
+﻿/*A supprimer lors de l'intégration côté front*/
+/*Helper*/
+.clear
+{
+	clear: both;
+}
+.show
+{
+	display: block !important;
+}
+.hide
+{
+	display: none;
+}
+p, h1, h2, h3, h4, h5, h6
+{
+	margin: 0;
+}
+input[type=text], input[type=email]
+	{
+		
+		font-size: 14px;
+		line-height: 1.428571429;
+		color: #555;
+		vertical-align: middle;
+		background-color: #FFF;
+		border: 1px solid #CCC;
+		
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+		-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+		transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	}
+input[type=text]:focus , input[type=email]:focus {
+		border-color: #66AFE9;
+		outline: 0;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+	}
+select
+{
+	padding: 10px;
+}
+/*_Layout.cshtml*/
+body
+{
+	/*width: 810px;*/
+	margin: auto;
+}
+header, footer
+{
+	text-align: center;
+}
+header
+{
+    background-color : #000000;
+    margin-bottom: 0;
+    border: none;
+    z-index: 1001;
+    min-height: 80px;
+    clear: both;
+}
+header div.container
+{
+    width : 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+header img.logoInterBook
+{
+    float : left;
+    height: 80px;
+}
+
+footer
+{
+	clear: both;
+}
+footer #facebook, footer #twitter
+{
+	margin: 10px;
+}
+footer ul, footer p
+{
+	margin: 0;
+	padding: 0;
+	font-size: 11px;
+}
+
+footer ul li
+{
+	display: inline;
+}
+
+/*home.cshtml*/
+#home, #viral
+{
+	text-align: left;
+	width: 600px;
+	margin: auto;
+}
+	#home .row, #viral .row
+	{
+		margin: 10px;
+	}
+	#home .row.fb
+	{
+		text-align: center;
+	}
+	#home .row label, #viral .row label
+	{
+		display: inline-block;
+		width: 140px;
+	}
+	#home .row input[type=text],
+    #viral .row input[type=text],
+    #home .row input[type=email],
+    #viral .row input[type=email]
+
+	{
+		width: 310px;
+		height: 34px;
+		padding: 6px 12px;
+		border-radius: 4px;
+	}
+		
+	#home .row.submit, #viral .row.submit
+	{
+		text-align: right;
+	}
+	#home .row .civ
+	{
+		width: 50px;
+	}
+	#home .field-validation-error, #viral .field-validation-error
+	{
+		font-size: 11px;
+		color: #F00;
+		display: inline-block;
+		margin-left: 145px;
+	}
+
+/*Relog*/
+
+#dejaInscrit
+{
+    height: 80px;
+}
+
+#dejaInscrit a
+{
+    color: #000;
+}
+
+#box-inscrit
+{
+    display:none;
+    margin-top: 4px ;
+}
+
+#relogEmail
+{
+    margin-left: 145px;
+}
+
+#btnRelog
+{
+    margin-left: 30px;
+    width: 65px;
+}
+
+
+/*Explication*/
+.bt
+{
+	float: right;
+	width: 147px;
+	background-color: #2F5A76;
+	padding: 10px;
+}
+
+.bt a
+{
+	text-decoration: none;
+	color: #fff;
+}
+
+/*Diffusion*/
+.search-input
+{
+	float: left;
+	height: 18px;
+	width: 250px;
+}
+.search-button
+{
+	margin-left: -1px;
+	cursor: pointer;
+}
+
+.friends
+{
+	width: 620px;
+	margin: auto;
+	border: 1px solid;
+	padding: 5px;
+}
+.friend-wrapper
+{
+	overflow-y: auto;
+	height: 250px;
+}
+.friend-item
+{
+	width: 200px;
+	float: left;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+	.friend-item img
+	{
+		float: left;
+		margin-right: 5px;
+	}
+
+	.friend-item .friend-content
+	{
+		margin-top: 5px;
+	}
+.friend-message
+{
+	text-align: center;
+	margin: 10px;
+	color: #ED143D;
+	font-size: 12px;
+}
+	
+
+
+
+	

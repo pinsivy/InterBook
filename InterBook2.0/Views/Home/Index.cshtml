@@ -1,0 +1,36 @@
+﻿@using InterBook2._0.Views.Home.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.HomeModel
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@Styles.Render("~/Media/css/home")
+<section class="form">
+    @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+    {
+        @Html.ValidationSummary(true)
+        @Html.TextBoxFor(x => x.Profession, new { @class = "inputQuery", placeholder = Index.Quoi })
+        @Html.TextBoxFor(x => x.Ville, new { @class = "inputQuery", placeholder = Index.Ou })
+        <input type="submit" class="inputQuery" value="@Index.Valider" />
+        @Html.ValidationMessageFor(x => x.Profession)
+        @Html.ValidationMessageFor(x => x.Ville)
+    }
+</section>
+
+<script>
+    $(function () {
+        var user = {
+            id: 1,
+            Firstname: "sdfs"
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/About",
+            data: user,
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+</script>

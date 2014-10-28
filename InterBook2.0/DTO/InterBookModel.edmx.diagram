@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="953271f0c08c4d898cf441f3173b9adb" Name="Diagram1">
+        <EntityTypeShape EntityType="InterBookModel.Ref_Profession" Width="1.5" PointX="5.375" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InterBookModel.Ref_Ville" Width="1.5" PointX="5.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InterBookModel.Util" Width="1.5" PointX="0.625" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="InterBookModel.Util_Profession" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InterBookModel.Util_Ville" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Profession_Ref_Profession" ManuallyRouted="false" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Ville_Ref_Ville" ManuallyRouted="false" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Profession_Util" ManuallyRouted="false" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Ville_Util" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InterBookModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="Util">
+    <Key>
+      <PropertyRef Name="IdU" />
+    </Key>
+    <Property Name="IdU" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idu_email" Type="Int32" />
+    <NavigationProperty Name="Util_Profession" Relationship="InterBookModel.FK_Util_Profession_Util" FromRole="Util" ToRole="Util_Profession" />
+    <NavigationProperty Name="Util_Ville" Relationship="InterBookModel.FK_Util_Ville_Util" FromRole="Util" ToRole="Util_Ville" />
+  </EntityType>
+  <EntityContainer Name="InterBookEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Util" EntityType="Self.Util" />
+    <EntitySet Name="Util_Profession" EntityType="InterBookModel.Util_Profession" />
+    <EntitySet Name="Util_Ville" EntityType="InterBookModel.Util_Ville" />
+    <EntitySet Name="Ref_Profession" EntityType="InterBookModel.Ref_Profession" />
+    <EntitySet Name="Ref_Ville" EntityType="InterBookModel.Ref_Ville" />
+    <AssociationSet Name="FK_Util_Profession_Ref_Profession" Association="InterBookModel.FK_Util_Profession_Ref_Profession">
+      <End Role="Ref_Profession" EntitySet="Ref_Profession" />
+      <End Role="Util_Profession" EntitySet="Util_Profession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Ville_Ref_Ville" Association="InterBookModel.FK_Util_Ville_Ref_Ville">
+      <End Role="Ref_Ville" EntitySet="Ref_Ville" />
+      <End Role="Util_Ville" EntitySet="Util_Ville" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Profession_Util" Association="InterBookModel.FK_Util_Profession_Util">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Profession" EntitySet="Util_Profession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Ville_Util" Association="InterBookModel.FK_Util_Ville_Util">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Ville" EntitySet="Util_Ville" />
+    </AssociationSet>
+    <FunctionImport Name="SearchByVilleProfession" EntitySet="Util" ReturnType="Collection(InterBookModel.Util)">
+      <Parameter Name="ville" Mode="In" Type="String" />
+      <Parameter Name="profession" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Util_Profession">
+    <Key>
+      <PropertyRef Name="id_Util_Profession" />
+    </Key>
+    <Property Name="id_Util_Profession" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdU" Type="Int32" />
+    <Property Name="id_Profession" Type="Int32" />
+    <NavigationProperty Name="Ref_Profession" Relationship="InterBookModel.FK_Util_Profession_Ref_Profession" FromRole="Util_Profession" ToRole="Ref_Profession" />
+    <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Profession_Util" FromRole="Util_Profession" ToRole="Util" />
+  </EntityType>
+  <EntityType Name="Util_Ville">
+    <Key>
+      <PropertyRef Name="id_Util_Ville" />
+    </Key>
+    <Property Name="id_Util_Ville" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdU" Type="Int32" />
+    <Property Name="id_Ville" Type="Int32" />
+    <NavigationProperty Name="Ref_Ville" Relationship="InterBookModel.FK_Util_Ville_Ref_Ville" FromRole="Util_Ville" ToRole="Ref_Ville" />
+    <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Ville_Util" FromRole="Util_Ville" ToRole="Util" />
+  </EntityType>
+  <EntityType Name="Ref_Profession">
+    <Key>
+      <PropertyRef Name="id_Profession" />
+    </Key>
+    <Property Name="id_Profession" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Util_Profession" Relationship="InterBookModel.FK_Util_Profession_Ref_Profession" FromRole="Ref_Profession" ToRole="Util_Profession" />
+  </EntityType>
+  <EntityType Name="Ref_Ville">
+    <Key>
+      <PropertyRef Name="id_Ville" />
+    </Key>
+    <Property Name="id_Ville" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Util_Ville" Relationship="InterBookModel.FK_Util_Ville_Ref_Ville" FromRole="Ref_Ville" ToRole="Util_Ville" />
+  </EntityType>
+  <Association Name="FK_Util_Profession_Ref_Profession">
+    <End Type="InterBookModel.Ref_Profession" Role="Ref_Profession" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Profession" Role="Util_Profession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Profession">
+        <PropertyRef Name="id_Profession" />
+      </Principal>
+      <Dependent Role="Util_Profession">
+        <PropertyRef Name="id_Profession" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Ville_Ref_Ville">
+    <End Type="InterBookModel.Ref_Ville" Role="Ref_Ville" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Ville" Role="Util_Ville" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Ville">
+        <PropertyRef Name="id_Ville" />
+      </Principal>
+      <Dependent Role="Util_Ville">
+        <PropertyRef Name="id_Ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Profession_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Profession" Role="Util_Profession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Profession">
+        <PropertyRef Name="IdU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Ville_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Ville" Role="Util_Ville" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Ville">
+        <PropertyRef Name="IdU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
