@@ -23,6 +23,13 @@ namespace InterBook2._0
             );
 
             routes.MapRoute(
+                name: "User",
+                url: "u/{idu}",
+                defaults: new { controller = "User", action = "Index", idu = "" },
+                constraints: new { id = "[0-9]*" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

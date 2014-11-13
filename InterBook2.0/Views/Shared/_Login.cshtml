@@ -1,0 +1,91 @@
+﻿@using System.Web.Optimization
+@using InterBook2._0.Views.Shared.App_LocalResources;
+@model InterBook2._0.Models.ModelBase
+
+<a id="connexion" class="lien-menu poplight" data-width="500" data-rel="popup_connexion" href="#">CONNEXION</a><!--
+--><a id="sinscrireMenu" class="lien-menu" href="/Account/SignIn">S'INSCRIRE</a>
+
+<div id="popup_connexion" class="popup_block">
+    <h2>CONNEXION</h2>
+    <span id="errorVide"></span>
+    <div>
+        <input id="emailConnecter" name="emailConnecter" placeholder="@Index.Email" type="email" />
+    </div>
+    <div>
+        <input id="passwordConnecter" name="passwordConnecter" placeholder="@Index.Password" type="password" />
+    </div>
+    <div>
+        <input type="submit" id="btnConnecter" value="OK" />
+    </div>
+    <div>
+        <a id="password" class="poplight" data-width="500" data-rel="popup_Relog" href="#">Mot de passe oublié ?</a>
+        <a id="sinscrire" href="/Account/SignIn">S'inscrire</a>
+    </div>
+</div>
+
+<script>
+    jQuery(function ($) {
+        $('a.poplight').on('click', function () {
+            //if ($('#fade').length)
+            //{
+            //    $('.popup_block').hide();
+            //    $('#fade, a.close').remove();
+            //}
+            var popID = $(this).data('rel'); //Trouver la pop-up correspondante
+            var popWidth = $(this).data('width'); //Trouver la largeur
+
+            //Faire apparaitre la pop-up et ajouter le bouton de fermeture
+            $('#' + popID).fadeIn().css({ 'width': popWidth }).prepend('<a href="#" class="close"><span id="fermePop" style="color:#FFFFFF">X<span></a>');
+
+            //Récupération du margin, qui permettra de centrer la fenêtre - on ajuste de 80px en conformité avec le CSS
+            var popMargTop = ($('#' + popID).height() + 80) / 2;
+            var popMargLeft = ($('#' + popID).width() + 80) / 2;
+
+            //Apply Margin to Popup
+            $('#' + popID).css({
+                'margin-top': -popMargTop,
+                'margin-left': -popMargLeft
+            });
+
+            //Apparition du fond - .css({'filter' : 'alpha(opacity=80)'}) pour corriger les bogues d'anciennes versions de IE
+            $('body').append('<div id="fade"></div>');
+            $('#fade').css({ 'filter': 'alpha(opacity=80)' }).fadeIn();
+
+            return false;
+        });
+
+
+        //Close Popups and Fade Layer
+        $('body').on('click', 'a.close, #fade', function () { //Au clic sur le body...
+            $('#fade , .popup_block').fadeOut(function () {
+                $('#fade, a.close').remove();
+            }); //...ils disparaissent ensemble
+
+            return false;
+        });
+
+        $("#errorVide").hide();
+        $("#btnConnecter").on("click", function () {
+            if ($("#emailConnecter").val() != "" && $("#passwordConnecter").val() != "")
+            {
+                var user = {
+                    email: $("#emailConnecter").val(),
+                    mdp: $("#passwordConnecter").val()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/User/Connecter",
+                    data: user,
+                    success: function (result) {
+                        window.location.replace(result.Message);
+                    }
+                });
+            }
+            else
+            {
+                $("#errorVide").text("Veuillez remplir tous les champs.").show();
+            }
+        });
+    });
+</script>

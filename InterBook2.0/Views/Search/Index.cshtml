@@ -1,17 +1,159 @@
-﻿@using System.Web.Optimization
+﻿@using InterBook2._0.Views.Search.App_LocalResources;
+@using System.Web.Optimization
 @model InterBook2._0.Models.SearchModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Styles.Render("~/Media/css/Recherche")
+@Styles.Render("~/Media/css/Search")
 
-<section class="results">
-    @foreach (var u in Model.lu)
+@*FORMULAIRE*@
+<section class="container">
+    <div class="form">
+        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+            @Html.LabelFor(x => x.Profession)
+            @Html.TextBoxFor(x => x.Profession, new { @class = "inputQuery", placeholder = Index.Quoi })
+            @Html.LabelFor(x => x.Ville)
+            @Html.TextBoxFor(x => x.Ville, new { @class = "inputQuery", placeholder = Index.Ou })
+            <input type="submit" class="inputQuery" value="@Index.Valider" />
+            @Html.ValidationMessageFor(x => x.Profession)
+            @Html.ValidationMessageFor(x => x.Ville)
+        }
+    </div>
+</section>
+
+@*FILTRES*@
+<script type="text/javascript">
+
+    function changeFilter(vars, id)
     {
-        <p>@u.IdU.ToString()</p>
-        <br />
-        <p>@u.idu_email.ToString()</p>
+        if (vars[id] == undefined) {
+            $("#" + id + " > li").each(function (i) {
+                if (i != 0)
+                    $(this).html("<a rel='filter' href='" + document.URL + "&" + id + "=" + i + "'>" + $("#" + id + "-" + i).html() + "</a>")
+            });
+        }
+        else if (vars[id] != undefined) {
+            $("#" + id + " > li").each(function (i) {
+                if (i != vars[id])
+                    $(this).html("<a rel='filter' href='" + document.URL.replace("&" + id + "=" + vars[id], "&" + id + "=" + i) + "'>" + $("#" + id + "-" + i).text() + "</a>")
+                else
+                    $(this).html($("#" + id + "-" + i).text())
+            });
+        }
     }
+
+    function changeResults(vars) {
+        var filtres = {
+            ville: vars["ville"],
+            profession: vars["profession"],
+            experience: vars["exp"],
+            contrat: vars["cont"]
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "/Search/Filtre",
+            dataType: "json",
+            contentType: "application/json",
+            data: filtres
+            })
+            .done(function (data) {
+                console.log(data);
+                $("#results").html("");
+                data.forEach(function (u) {
+                    $("#results").append("          \
+                        <article>                   \
+                            <a href='" + location.protocol + "//" + location.hostname + (location.port ? ':' + location.port : '') + "/u/" + u["IdU"] + "'>" + u["IdU"] + "</a>           \
+                            <br />                  \
+                            IDU_Email : " + u["idu_Email"] + "           \
+                            <br />                  \
+                            Experience : " + u["Util_Experience"][0]["Ref_Experience"]["Description"] + "           \
+                            <br />                  \
+                            Contrat : " + u["Util_Contrat"][0]["Ref_Contrat"]["Description"] + "           \
+                        </article>                  \
+                        <hr />                      \
+                        ");
+                });
+            })
+            .fail(function () {
+                console.log("error");
+            })
+    }
+
+    function filter()
+    {
+        var vars = [], hash;
+        var q = decodeURIComponent(document.URL).split('?')[1];
+        if (q != undefined) {
+            q = q.split('&');
+            for (var i = 0; i < q.length; i++) {
+                hash = q[i].split('=');
+                //vars.push(hash[1]);   vars[0]
+                vars[hash[0].toLowerCase()] = hash[1];  // vars["ville"]
+            }
+        }
+        changeResults(vars);
+        $("#filter > ul").each(function () {
+            changeFilter(vars, this.id);
+            //this.Attr("id").split("-")[0]
+        });
+    }
+
+    function recur() {
+        $('a[rel="filter"]').on('click', function () {
+            //Recupere le lien cliqué
+            pageurl = this.href;
+
+            //Change l'url du navigateur
+            if (pageurl != window.location) {
+                window.history.pushState({ path: pageurl }, '', pageurl);
+                filter();
+                recur();
+            }
+            return false;
+        });
+        
+    }
+
+    $(function () {
+        filter();
+        recur();
+    });
+</script>
+
+<section class="container">
+
+
+    @*RESULTATS*@
+    <div id="results" class="results right">
+        @*@foreach (var u in Model.lu)
+            {
+                <p>@u.IdU.ToString()</p>
+                <br />
+                <p>@u.idu_email.ToString()</p>
+                <hr />
+            }*@
+    </div>
+
+    <div id="filter" class="filter right">
+        Expérience
+        <ul id="exp">
+            <li id="exp-0">Tous</li>
+            <li id="exp-1">Junior (0 à 1 ans)</li>
+            <li id="exp-2">Expérimenté (2 à 5 ans)</li>
+            <li id="exp-3">Senior (6+)</li>
+        </ul>
+        Type de contrat
+        <ul id="cont">
+            <li id="cont-0">Tous</li>
+            <li id="cont-1">CDI</li>
+            <li id="cont-2">CDD</li>
+            <li id="cont-3">Stage</li>
+            <li id="cont-4">Freelance</li>
+        </ul>
+    </div>
 </section>

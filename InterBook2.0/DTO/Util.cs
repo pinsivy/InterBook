@@ -18,12 +18,26 @@ namespace InterBook2._0.DTO
         {
             this.Util_Profession = new HashSet<Util_Profession>();
             this.Util_Ville = new HashSet<Util_Ville>();
+            this.Util_Contrat = new HashSet<Util_Contrat>();
+            this.Util_Experience = new HashSet<Util_Experience>();
         }
     
         public int IdU { get; set; }
-        public Nullable<int> idu_email { get; set; }
+        public Nullable<int> id_Declinaison_Culture { get; set; }
+        public Nullable<int> id_From { get; set; }
+        public string mdp { get; set; }
+        public string uid { get; set; }
+        public Nullable<int> idu_Email { get; set; }
+        public Nullable<int> idu_Postal { get; set; }
+        public Nullable<int> idu_Telmobile { get; set; }
+        public Nullable<System.DateTime> dCrea { get; set; }
+        public Nullable<System.DateTime> dMAJ { get; set; }
     
         public virtual ICollection<Util_Profession> Util_Profession { get; set; }
         public virtual ICollection<Util_Ville> Util_Ville { get; set; }
+        public virtual ICollection<Util_Contrat> Util_Contrat { get; set; }
+        public virtual ICollection<Util_Experience> Util_Experience { get; set; }
+        public virtual Util_Email Util_Email { get; set; }
+        public virtual Util_Postal Util_Postal { get; set; }
     }
 }

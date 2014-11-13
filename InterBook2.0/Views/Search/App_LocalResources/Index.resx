@@ -120,4 +120,13 @@
   <data name="Description" xml:space="preserve">
     <value>Description :</value>
   </data>
+  <data name="Ou" xml:space="preserve">
+    <value>Où ?</value>
+  </data>
+  <data name="Quoi" xml:space="preserve">
+    <value>Quoi ?</value>
+  </data>
+  <data name="Valider" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
 </root>

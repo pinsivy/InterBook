@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@using InterBook2._0.Views.Shared.App_LocalResources;
 @model InterBook2._0.Models.ModelBase
 
 <!DOCTYPE html>
@@ -20,16 +21,31 @@
     <!--Page Css-->
     @RenderSection("styles", required: false)
 
+    <!--Global JS-->
+    @Styles.Render("~/Media/js/base")
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <!--Modernizr-->
     @Scripts.Render("~/Media/js/modernizr")
 </head>
 <body>
     <header>
-        <div class="container">
-            <img src="~/Media/img/commun/interbook.png" class="logoInterBook" />
+        <div class="header">
+            <div id="desktop" class="container">
+                <div id="menu-left" class="left">
+                    <a href="/"><img src="~/Media/img/commun/interbook.png" class="logoInterBook" /></a>
+                </div>
+                <div id="menu-right" class="right">
+                    @Html.Partial("_Login")
+                </div>
+            </div>
         </div>
     </header>
+
     @RenderBody()
+
     <footer></footer>
-</body>
+
+    </body>
 </html>

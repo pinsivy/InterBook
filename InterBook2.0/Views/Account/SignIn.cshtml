@@ -1,0 +1,79 @@
+﻿@using InterBook2._0.Views.Account.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.SignInModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Media/css/Account")
+
+@*FORMULAIRE*@
+<section class="container">
+    <h1>S'INSCRIRE</h1>
+    <div class="form">
+        @using (Html.BeginForm("SignIn", "Account", FormMethod.Post))
+        {
+            /*********************/
+            /*      CIVILITE    **/
+            /*********************/
+            <div>
+                @Html.RadioButtonFor(mdl => mdl.Civilite, "2", new { @class = "inputQuery", id = "Mme", Name = "civilite" })
+                @Html.LabelFor(x => x.Civilite, SignIn.CivMme, new { @class = "civ", @for = "Mme" })
+
+                @Html.RadioButtonFor(mdl => mdl.Civilite, "1", new { @class = "inputQuery", id = "M", Name = "civilite" })
+                @Html.LabelFor(x => x.Civilite, SignIn.CivM, new { @class = "civ", @for = "M" })<br />
+
+                @Html.ValidationMessageFor(mdl => mdl.Civilite)
+            </div>
+
+            /*********************/
+            /*      PRENOM      **/
+            /*********************/
+            <div>
+                @Html.TextBoxFor(x => x.Prenom, new { @class = "inputQuery", Name = "prenom", placeholder = SignIn.Prenom })
+                @Html.ValidationMessageFor(x => x.Prenom)
+            </div>
+
+            /*********************/
+            /*      NOM         **/
+            /*********************/
+            <div>
+                @Html.TextBoxFor(x => x.Nom, new { @class = "inputQuery", Name = "nom", placeholder = SignIn.Nom })
+                @Html.ValidationMessageFor(x => x.Nom)
+            </div>
+
+            /*********************/
+            /*      EMAIL       **/
+            /*********************/
+            <div>
+                @Html.TextBoxFor(x => x.Email, new { @class = "inputQuery", Name = "email", placeholder = SignIn.Email })
+                @Html.ValidationMessageFor(x => x.Email)
+            </div>
+
+            /*********************/
+            /*     PASSWORD     **/
+            /*********************/
+            <div>
+                @Html.PasswordFor(x => x.Password, new { @class = "inputQuery", Name = "password", placeholder = SignIn.Password })
+                @Html.ValidationMessageFor(x => x.Password)
+            </div>
+
+            /*********************/
+            /*  PASSWORDCONFIRM **/
+            /*********************/
+            <div>
+                @Html.PasswordFor(x => x.PasswordConfirm, new { @class = "inputQuery", Name = "passwordConfirm", placeholder = SignIn.PasswordConfirm })
+                @Html.ValidationMessageFor(x => x.PasswordConfirm)
+            </div>
+
+            /*********************/
+            /*      BOUTON      **/
+            /*********************/
+            <div>
+                <input type="submit" class="inputQuery" value="@SignIn.Creer" />
+                @Html.ValidationSummary(true)
+            </div>
+        }
+    </div>
+</section>

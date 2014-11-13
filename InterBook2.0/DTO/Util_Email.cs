@@ -10,10 +10,19 @@
 namespace InterBook2._0.DTO
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class SearchByVilleProfession_Result
+    public partial class Util_Email
     {
-        public int IdU { get; set; }
-        public Nullable<int> idu_email { get; set; }
+        public Util_Email()
+        {
+            this.Utils = new HashSet<Util>();
+        }
+    
+        public int idu_Email { get; set; }
+        public string email { get; set; }
+        public Nullable<System.DateTime> dCrea { get; set; }
+    
+        public virtual ICollection<Util> Utils { get; set; }
     }
 }

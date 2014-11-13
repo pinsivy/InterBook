@@ -61,6 +61,96 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à InvalidCivilite.
+        /// </summary>
+        internal static string InvalidCivilite {
+            get {
+                return ResourceManager.GetString("InvalidCivilite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à InvalidEmail.
+        /// </summary>
+        internal static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à InvalidNom.
+        /// </summary>
+        internal static string InvalidNom {
+            get {
+                return ResourceManager.GetString("InvalidNom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à InvalidPrenom.
+        /// </summary>
+        internal static string InvalidPrenom {
+            get {
+                return ResourceManager.GetString("InvalidPrenom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RequiredCivilite.
+        /// </summary>
+        internal static string RequiredCivilite {
+            get {
+                return ResourceManager.GetString("RequiredCivilite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RequiredEmail.
+        /// </summary>
+        internal static string RequiredEmail {
+            get {
+                return ResourceManager.GetString("RequiredEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RequiredNom.
+        /// </summary>
+        internal static string RequiredNom {
+            get {
+                return ResourceManager.GetString("RequiredNom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RequiredPassword.
+        /// </summary>
+        internal static string RequiredPassword {
+            get {
+                return ResourceManager.GetString("RequiredPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RequiredPasswordConfirm.
+        /// </summary>
+        internal static string RequiredPasswordConfirm {
+            get {
+                return ResourceManager.GetString("RequiredPasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à RequiredPrenom.
+        /// </summary>
+        internal static string RequiredPrenom {
+            get {
+                return ResourceManager.GetString("RequiredPrenom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Veuillez préciser une profession..
         /// </summary>
         internal static string RequiredProfession {

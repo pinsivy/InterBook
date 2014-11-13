@@ -5,7 +5,7 @@ using System.Web;
 
 namespace InterBook2._0.BLL
 {
-    public class SessionManager
+    public static class SessionManager
     {
         public static SessionObject Current
         {

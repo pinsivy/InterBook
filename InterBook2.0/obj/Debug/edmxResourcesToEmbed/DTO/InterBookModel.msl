@@ -1,32 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="InterBookModelStoreContainer" CdmEntityContainer="InterBookEntities">
-    <EntitySetMapping Name="Util">
-      <EntityTypeMapping TypeName="InterBookModel.Util">
-        <MappingFragment StoreEntitySet="Util">
-          <ScalarProperty Name="IdU" ColumnName="IdU" />
-          <ScalarProperty Name="idu_email" ColumnName="idu_email" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Util_Profession">
-      <EntityTypeMapping TypeName="InterBookModel.Util_Profession">
-        <MappingFragment StoreEntitySet="Util_Profession">
-          <ScalarProperty Name="id_Profession" ColumnName="id_Profession" />
-          <ScalarProperty Name="IdU" ColumnName="IdU" />
-          <ScalarProperty Name="id_Util_Profession" ColumnName="id_Util_Profession" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Util_Ville">
-      <EntityTypeMapping TypeName="InterBookModel.Util_Ville">
-        <MappingFragment StoreEntitySet="Util_Ville">
-          <ScalarProperty Name="id_Ville" ColumnName="id_Ville" />
-          <ScalarProperty Name="IdU" ColumnName="IdU" />
-          <ScalarProperty Name="id_Util_Ville" ColumnName="id_Util_Ville" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SearchByVilleProfession" FunctionName="InterBookModel.Store.SearchByVilleProfession" />
     <EntitySetMapping Name="Ref_Profession">
       <EntityTypeMapping TypeName="InterBookModel.Ref_Profession">
         <MappingFragment StoreEntitySet="Ref_Profession">
@@ -43,6 +18,118 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SearchByVilleProfession" FunctionName="InterBookModel.Store.SearchByVilleProfession" />
+    <EntitySetMapping Name="Utils">
+      <EntityTypeMapping TypeName="InterBookModel.Util">
+        <MappingFragment StoreEntitySet="Util">
+          <ScalarProperty Name="IdU" ColumnName="idU" />
+          <ScalarProperty Name="dMAJ" ColumnName="dMAJ" />
+          <ScalarProperty Name="dCrea" ColumnName="dCrea" />
+          <ScalarProperty Name="idu_Telmobile" ColumnName="idu_Telmobile" />
+          <ScalarProperty Name="idu_Postal" ColumnName="idu_Postal" />
+          <ScalarProperty Name="idu_Email" ColumnName="idu_Email" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="mdp" ColumnName="mdp" />
+          <ScalarProperty Name="id_From" ColumnName="id_From" />
+          <ScalarProperty Name="id_Declinaison_Culture" ColumnName="id_Declinaison_Culture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Util_Profession">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Profession">
+        <MappingFragment StoreEntitySet="Util_Profession">
+          <ScalarProperty Name="IdU" ColumnName="IdU" />
+          <ScalarProperty Name="id_Profession" ColumnName="id_Profession" />
+          <ScalarProperty Name="id_Util_Profession" ColumnName="id_Util_Profession" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Util_Ville">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Ville">
+        <MappingFragment StoreEntitySet="Util_Ville">
+          <ScalarProperty Name="IdU" ColumnName="IdU" />
+          <ScalarProperty Name="id_Ville" ColumnName="id_Ville" />
+          <ScalarProperty Name="id_Util_Ville" ColumnName="id_Util_Ville" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Contrat">
+      <EntityTypeMapping TypeName="InterBookModel.Ref_Contrat">
+        <MappingFragment StoreEntitySet="Ref_Contrat">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="id_Contrat" ColumnName="id_Contrat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Experience">
+      <EntityTypeMapping TypeName="InterBookModel.Ref_Experience">
+        <MappingFragment StoreEntitySet="Ref_Experience">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="id_Experience" ColumnName="id_Experience" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Util_Contrat">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Contrat">
+        <MappingFragment StoreEntitySet="Util_Contrat">
+          <ScalarProperty Name="id_Contrat" ColumnName="id_Contrat" />
+          <ScalarProperty Name="IdU" ColumnName="IdU" />
+          <ScalarProperty Name="id_Util_Contrat" ColumnName="id_Util_Contrat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Util_Experience">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Experience">
+        <MappingFragment StoreEntitySet="Util_Experience">
+          <ScalarProperty Name="id_Experience" ColumnName="id_Experience" />
+          <ScalarProperty Name="IdU" ColumnName="IdU" />
+          <ScalarProperty Name="id_Util_Experience" ColumnName="id_Util_Experience" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SearchByVilleProfessionExperienceContrat" FunctionName="InterBookModel.Store.SearchByVilleProfessionExperienceContrat" />
+    <EntitySetMapping Name="Ref_Culture">
+      <EntityTypeMapping TypeName="InterBookModel.Ref_Culture">
+        <MappingFragment StoreEntitySet="Ref_Culture">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id_Culture" ColumnName="id_Culture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Pays">
+      <EntityTypeMapping TypeName="InterBookModel.Ref_Pays">
+        <MappingFragment StoreEntitySet="Ref_Pays">
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="id_Culture" ColumnName="id_Culture" />
+          <ScalarProperty Name="codeINSEE" ColumnName="codeINSEE" />
+          <ScalarProperty Name="id_Pays" ColumnName="id_Pays" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Util_Email">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Email">
+        <MappingFragment StoreEntitySet="Util_Email">
+          <ScalarProperty Name="dCrea" ColumnName="dCrea" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="idu_Email" ColumnName="idu_Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Util_Postal">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Postal">
+        <MappingFragment StoreEntitySet="Util_Postal">
+          <ScalarProperty Name="dCrea" ColumnName="dCrea" />
+          <ScalarProperty Name="id_Pays" ColumnName="id_Pays" />
+          <ScalarProperty Name="ville" ColumnName="ville" />
+          <ScalarProperty Name="cp" ColumnName="cp" />
+          <ScalarProperty Name="adresse2" ColumnName="adresse2" />
+          <ScalarProperty Name="adresse1" ColumnName="adresse1" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="id_Civilite" ColumnName="id_Civilite" />
+          <ScalarProperty Name="idu_Postal" ColumnName="idu_Postal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SetUtilEmail" FunctionName="InterBookModel.Store.SetUtilEmail" />
   </EntityContainerMapping>
 </Mapping>

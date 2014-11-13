@@ -117,6 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="InvalidCivilite" xml:space="preserve">
+    <value>InvalidCivilite</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>InvalidEmail</value>
+  </data>
+  <data name="InvalidNom" xml:space="preserve">
+    <value>InvalidNom</value>
+  </data>
+  <data name="InvalidPrenom" xml:space="preserve">
+    <value>InvalidPrenom</value>
+  </data>
+  <data name="RequiredCivilite" xml:space="preserve">
+    <value>RequiredCivilite</value>
+  </data>
+  <data name="RequiredEmail" xml:space="preserve">
+    <value>RequiredEmail</value>
+  </data>
+  <data name="RequiredNom" xml:space="preserve">
+    <value>RequiredNom</value>
+  </data>
+  <data name="RequiredPassword" xml:space="preserve">
+    <value>RequiredPassword</value>
+  </data>
+  <data name="RequiredPasswordConfirm" xml:space="preserve">
+    <value>RequiredPasswordConfirm</value>
+  </data>
+  <data name="RequiredPrenom" xml:space="preserve">
+    <value>RequiredPrenom</value>
+  </data>
   <data name="RequiredProfession" xml:space="preserve">
     <value>Veuillez préciser une profession.</value>
   </data>

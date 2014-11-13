@@ -39,8 +39,16 @@ namespace InterBook2._0.App_Start
                 "~/Media/css/Home.css")
             );
 
-            bundles.Add(new StyleBundle("~/Media/css/recherche").Include(
-                "~/Media/css/Recherche.css")
+            bundles.Add(new StyleBundle("~/Media/css/search").Include(
+                "~/Media/css/Search.css")
+            );
+
+            bundles.Add(new StyleBundle("~/Media/css/user").Include(
+                "~/Media/css/User.css")
+            );
+
+            bundles.Add(new StyleBundle("~/Media/css/Account").Include(
+                "~/Media/css/Account.css")
             );
 
         }

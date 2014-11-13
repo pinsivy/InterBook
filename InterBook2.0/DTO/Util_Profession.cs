@@ -15,8 +15,8 @@ namespace InterBook2._0.DTO
     public partial class Util_Profession
     {
         public int id_Util_Profession { get; set; }
-        public Nullable<int> IdU { get; set; }
-        public Nullable<int> id_Profession { get; set; }
+        public int id_Profession { get; set; }
+        public int IdU { get; set; }
     
         public virtual Ref_Profession Ref_Profession { get; set; }
         public virtual Util Util { get; set; }

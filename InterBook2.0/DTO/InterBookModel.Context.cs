@@ -29,9 +29,17 @@ namespace InterBook2._0.DTO
     
         public virtual DbSet<Ref_Profession> Ref_Profession { get; set; }
         public virtual DbSet<Ref_Ville> Ref_Ville { get; set; }
-        public virtual DbSet<Util> Util { get; set; }
+        public virtual DbSet<Util> Utils { get; set; }
         public virtual DbSet<Util_Profession> Util_Profession { get; set; }
         public virtual DbSet<Util_Ville> Util_Ville { get; set; }
+        public virtual DbSet<Ref_Contrat> Ref_Contrat { get; set; }
+        public virtual DbSet<Ref_Experience> Ref_Experience { get; set; }
+        public virtual DbSet<Util_Contrat> Util_Contrat { get; set; }
+        public virtual DbSet<Util_Experience> Util_Experience { get; set; }
+        public virtual DbSet<Ref_Culture> Ref_Culture { get; set; }
+        public virtual DbSet<Ref_Pays> Ref_Pays { get; set; }
+        public virtual DbSet<Util_Email> Util_Email { get; set; }
+        public virtual DbSet<Util_Postal> Util_Postal { get; set; }
     
         public virtual ObjectResult<Util> SearchByVilleProfession(string ville, string profession)
         {
@@ -42,8 +50,81 @@ namespace InterBook2._0.DTO
             var professionParameter = profession != null ?
                 new ObjectParameter("profession", profession) :
                 new ObjectParameter("profession", typeof(string));
-
+    
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util>("SearchByVilleProfession", villeParameter, professionParameter);
+        }
+    
+        public virtual ObjectResult<Util> SearchByVilleProfession(string ville, string profession, MergeOption mergeOption)
+        {
+            var villeParameter = ville != null ?
+                new ObjectParameter("ville", ville) :
+                new ObjectParameter("ville", typeof(string));
+    
+            var professionParameter = profession != null ?
+                new ObjectParameter("profession", profession) :
+                new ObjectParameter("profession", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util>("SearchByVilleProfession", mergeOption, villeParameter, professionParameter);
+        }
+    
+        public virtual ObjectResult<Util> SearchByVilleProfessionExperienceContrat(string ville, string profession, string experience, string contrat)
+        {
+            var villeParameter = ville != null ?
+                new ObjectParameter("ville", ville) :
+                new ObjectParameter("ville", typeof(string));
+    
+            var professionParameter = profession != null ?
+                new ObjectParameter("profession", profession) :
+                new ObjectParameter("profession", typeof(string));
+    
+            var experienceParameter = experience != null ?
+                new ObjectParameter("experience", experience) :
+                new ObjectParameter("experience", typeof(string));
+    
+            var contratParameter = contrat != null ?
+                new ObjectParameter("contrat", contrat) :
+                new ObjectParameter("contrat", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util>("SearchByVilleProfessionExperienceContrat", villeParameter, professionParameter, experienceParameter, contratParameter);
+        }
+    
+        public virtual ObjectResult<Util> SearchByVilleProfessionExperienceContrat(string ville, string profession, string experience, string contrat, MergeOption mergeOption)
+        {
+            var villeParameter = ville != null ?
+                new ObjectParameter("ville", ville) :
+                new ObjectParameter("ville", typeof(string));
+    
+            var professionParameter = profession != null ?
+                new ObjectParameter("profession", profession) :
+                new ObjectParameter("profession", typeof(string));
+    
+            var experienceParameter = experience != null ?
+                new ObjectParameter("experience", experience) :
+                new ObjectParameter("experience", typeof(string));
+    
+            var contratParameter = contrat != null ?
+                new ObjectParameter("contrat", contrat) :
+                new ObjectParameter("contrat", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util>("SearchByVilleProfessionExperienceContrat", mergeOption, villeParameter, professionParameter, experienceParameter, contratParameter);
+        }
+    
+        public virtual ObjectResult<Util_Email> SetUtilEmail(string email)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util_Email>("SetUtilEmail", emailParameter);
+        }
+    
+        public virtual ObjectResult<Util_Email> SetUtilEmail(string email, MergeOption mergeOption)
+        {
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util_Email>("SetUtilEmail", mergeOption, emailParameter);
         }
     }
 }

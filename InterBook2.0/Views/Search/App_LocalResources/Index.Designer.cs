@@ -68,5 +68,32 @@ namespace InterBook2._0.Views.Search.App_LocalResources {
                 return ResourceManager.GetString("Description", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Où ?.
+        /// </summary>
+        public static string Ou {
+            get {
+                return ResourceManager.GetString("Ou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Quoi ?.
+        /// </summary>
+        public static string Quoi {
+            get {
+                return ResourceManager.GetString("Quoi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Rechercher.
+        /// </summary>
+        public static string Valider {
+            get {
+                return ResourceManager.GetString("Valider", resourceCulture);
+            }
+        }
     }
 }

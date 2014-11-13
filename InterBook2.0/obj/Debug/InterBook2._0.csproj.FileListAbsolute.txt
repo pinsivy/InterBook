@@ -86,9 +86,14 @@ C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.Razor.resou
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.WebPages.resources.dll
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.WebPages.Deployment.resources.dll
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\fr\System.Web.WebPages.Razor.resources.dll
-C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.csprojResolveAssemblyReference.cache
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Home.App_LocalResources.Index.resources
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Search.App_LocalResources.Index.resources
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.csproj.GenerateResource.Cache
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.dll
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.pdb
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.User.App_LocalResources.Index.resources
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Shared.App_LocalResources.Index.resources
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.csprojResolveAssemblyReference.cache
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Dashboard.App_LocalResources.Index.resources
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Account.App_LocalResources.SignIn.resources
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Account.App_LocalResources.Criterions.resources

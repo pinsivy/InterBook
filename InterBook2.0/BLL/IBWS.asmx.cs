@@ -21,7 +21,7 @@ namespace InterBook2._0.BLL
         InterBookEntities _db;
 
         [WebMethod]
-        public void save()
+        public void Save()
         {
             _db.SaveChanges();
         }
@@ -30,7 +30,7 @@ namespace InterBook2._0.BLL
         public Util GetUtilByIdu(int idu)
         {
             _db = new InterBookEntities();
-            var u = (from m in _db.Util where m.IdU == idu select m).FirstOrDefault();
+            var u = (from m in _db.Utils where m.IdU == idu select m).FirstOrDefault();
             return u;
         }
 
@@ -49,6 +49,74 @@ namespace InterBook2._0.BLL
                 }
             }
             return lu;
+        }
+
+
+        [WebMethod]
+        public List<Util> GetUtilsByVilleProfessionExperienceContrat(string Ville, string Profession, string Experience, string Contrat)
+        {
+            _db = new InterBookEntities();
+            var us = _db.SearchByVilleProfessionExperienceContrat(Ville, Profession, Experience, Contrat);
+            List<Util> lu = null;
+            if (us != null)
+            {
+                lu = new List<Util>();
+                foreach (Util u in us)
+                {
+                    lu.Add(u);
+                }
+            }
+            return lu;
+        }
+
+        [WebMethod]
+        public void InsertLine(Util u)
+        {
+            _db = new InterBookEntities();
+            _db.Utils.Add(u);
+            Save();
+        }
+
+        [WebMethod]
+        public void InsertLine(Util_Postal up)
+        {
+            _db = new InterBookEntities();
+            _db.Util_Postal.Add(up);
+            Save();
+        }
+
+        [WebMethod]
+        public void InsertLine(Util_Email ue)
+        {
+            _db = new InterBookEntities();
+            _db.Util_Email.Add(ue);
+            Save();
+        }
+
+        [WebMethod]
+        public Util_Email ReturnUtilEmailByEmail(string email)
+        {
+            _db = new InterBookEntities();
+            var ue = _db.SetUtilEmail(email);
+
+            if (ue != null)
+            {
+                return ue.FirstOrDefault();
+            }
+            return null;
+        }
+
+        [WebMethod]
+        public Util GetUtilByEmailMdp(string email, string mdp)
+        {
+            _db = new InterBookEntities();
+            var u = (from m in _db.Utils
+                     join e in _db.Util_Email on m.idu_Email equals e.idu_Email
+                     where m.mdp == mdp && e.email == email
+                     select m).FirstOrDefault();
+            if (u != null)
+                return u;
+            return null;
         }
     }
 }

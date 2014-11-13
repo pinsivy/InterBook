@@ -1,0 +1,29 @@
+﻿.form div
+{
+    margin-bottom : 1em;
+}
+
+.form input[type="text"], .form input[type="password"], .form input[type="submit"]{
+    font-size: 1em;
+    height: 1.5em;
+    width : 250px;
+}
+
+.form input[type="submit"]{
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 1225px) {
+    .form input[type="text"], .form input[type="password"]
+    {
+        width: 90%;
+    }
+    .form div
+    {
+        margin-left: 10px;
+    }
+}
+
