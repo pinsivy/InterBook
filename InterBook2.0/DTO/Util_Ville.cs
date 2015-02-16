@@ -15,8 +15,8 @@ namespace InterBook2._0.DTO
     public partial class Util_Ville
     {
         public int id_Util_Ville { get; set; }
-        public int id_Ville { get; set; }
-        public int IdU { get; set; }
+        public Nullable<int> id_Ville { get; set; }
+        public Nullable<int> IdU { get; set; }
     
         public virtual Ref_Ville Ref_Ville { get; set; }
         public virtual Util Util { get; set; }

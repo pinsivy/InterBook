@@ -23,7 +23,7 @@ namespace InterBook2._0.Controllers
                 model = new SearchModel();
 
             //Recherche dans l'API
-            IBWS ws = new IBWS();
+            //IBWS ws = new IBWS();
 
             return View(model);
         }
@@ -31,13 +31,13 @@ namespace InterBook2._0.Controllers
         //
         // Get: /Search/Filtre
         [AllowAnonymous]
-        public String Filtre(string ville, string profession, string experience, string contrat)
+        public String Filtre(string ville, DateTime? debut, DateTime? fin, string profession, string experience, string contrat)
         {
             IBWS ws = new IBWS();
-            List<Util> lu = new List<Util>();
-            lu = ws.GetUtilsByVilleProfessionExperienceContrat(ville, profession, experience, contrat);
-
-            return JsonConvert.SerializeObject(lu, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }); ;
+            string json = ws.GetUtilsByVilleProfessionExperienceContrat(ville, profession, experience, contrat);
+            List<Util> la = JsonConvert.DeserializeObject<List<Util>>(json);
+            la = la;
+            return json;
         }
 
 

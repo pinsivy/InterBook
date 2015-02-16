@@ -10,22 +10,6 @@
     <EntitySet Name="Utils" EntityType="InterBookModel.Util" />
     <EntitySet Name="Util_Profession" EntityType="InterBookModel.Util_Profession" />
     <EntitySet Name="Util_Ville" EntityType="InterBookModel.Util_Ville" />
-    <AssociationSet Name="FK_Util_Profession_Ref_Profession" Association="InterBookModel.FK_Util_Profession_Ref_Profession">
-      <End Role="Ref_Profession" EntitySet="Ref_Profession" />
-      <End Role="Util_Profession" EntitySet="Util_Profession" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Util_Ville_Ref_Ville" Association="InterBookModel.FK_Util_Ville_Ref_Ville">
-      <End Role="Ref_Ville" EntitySet="Ref_Ville" />
-      <End Role="Util_Ville" EntitySet="Util_Ville" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Util_Profession_Util" Association="InterBookModel.FK_Util_Profession_Util">
-      <End Role="Util" EntitySet="Utils" />
-      <End Role="Util_Profession" EntitySet="Util_Profession" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Util_Ville_Util" Association="InterBookModel.FK_Util_Ville_Util">
-      <End Role="Util" EntitySet="Utils" />
-      <End Role="Util_Ville" EntitySet="Util_Ville" />
-    </AssociationSet>
     <EntitySet Name="Ref_Contrat" EntityType="InterBookModel.Ref_Contrat" />
     <EntitySet Name="Ref_Experience" EntityType="InterBookModel.Ref_Experience" />
     <EntitySet Name="Util_Contrat" EntityType="InterBookModel.Util_Contrat" />
@@ -36,26 +20,86 @@
       <Parameter Name="experience" Mode="In" Type="String" />
       <Parameter Name="contrat" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Ref_Culture" EntityType="InterBookModel.Ref_Culture" />
+    <EntitySet Name="Ref_Pays" EntityType="InterBookModel.Ref_Pays" />
+    <EntitySet Name="Util_Email" EntityType="InterBookModel.Util_Email" />
+    <EntitySet Name="Util_Postal" EntityType="InterBookModel.Util_Postal" />
+    <FunctionImport Name="SetUtilEmail" EntitySet="Util_Email" ReturnType="Collection(InterBookModel.Util_Email)">
+      <Parameter Name="email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetUtilDispoByIdrdIdu" EntitySet="Util_Dispo" ReturnType="Collection(InterBookModel.Util_Dispo)">
+      <Parameter Name="idu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Util_Dispo" EntityType="InterBookModel.Util_Dispo" />
+    <EntitySet Name="Ref_Dispo" EntityType="InterBookModel.Ref_Dispo" />
+    <EntitySet Name="Ref_Mailing" EntityType="InterBookModel.Ref_Mailing" />
+    <EntitySet Name="Ref_TypeConsentement" EntityType="InterBookModel.Ref_TypeConsentement" />
+    <EntitySet Name="UE_envoi" EntityType="InterBookModel.UE_envoi" />
+    <EntitySet Name="Util_Consentement" EntityType="InterBookModel.Util_Consentement" />
     <AssociationSet Name="FK_Util_Contrat_Ref_Contrat" Association="InterBookModel.FK_Util_Contrat_Ref_Contrat">
       <End Role="Ref_Contrat" EntitySet="Ref_Contrat" />
       <End Role="Util_Contrat" EntitySet="Util_Contrat" />
     </AssociationSet>
-    <AssociationSet Name="FK_Util_Experience_Ref_Experience" Association="InterBookModel.FK_Util_Experience_Ref_Experience">
-      <End Role="Ref_Experience" EntitySet="Ref_Experience" />
-      <End Role="Util_Experience" EntitySet="Util_Experience" />
+    <AssociationSet Name="FK_Ref_Pays_Ref_Culture" Association="InterBookModel.FK_Ref_Pays_Ref_Culture">
+      <End Role="Ref_Culture" EntitySet="Ref_Culture" />
+      <End Role="Ref_Pays" EntitySet="Ref_Pays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Dispo_Ref_Dispo" Association="InterBookModel.FK_Util_Dispo_Ref_Dispo">
+      <End Role="Ref_Dispo" EntitySet="Ref_Dispo" />
+      <End Role="Util_Dispo" EntitySet="Util_Dispo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UE_envoi_Ref_Mailing" Association="InterBookModel.FK_UE_envoi_Ref_Mailing">
+      <End Role="Ref_Mailing" EntitySet="Ref_Mailing" />
+      <End Role="UE_envoi" EntitySet="UE_envoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Consentement_Ref_Mailing" Association="InterBookModel.FK_Util_Consentement_Ref_Mailing">
+      <End Role="Ref_Mailing" EntitySet="Ref_Mailing" />
+      <End Role="Util_Consentement" EntitySet="Util_Consentement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Postal_Ref_Pays" Association="InterBookModel.FK_Util_Postal_Ref_Pays">
+      <End Role="Ref_Pays" EntitySet="Ref_Pays" />
+      <End Role="Util_Postal" EntitySet="Util_Postal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Profession_Ref_Profession" Association="InterBookModel.FK_Util_Profession_Ref_Profession">
+      <End Role="Ref_Profession" EntitySet="Ref_Profession" />
+      <End Role="Util_Profession" EntitySet="Util_Profession" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Consentement_Ref_TypeConsentement" Association="InterBookModel.FK_Util_Consentement_Ref_TypeConsentement">
+      <End Role="Ref_TypeConsentement" EntitySet="Ref_TypeConsentement" />
+      <End Role="Util_Consentement" EntitySet="Util_Consentement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Ville_Ref_Ville" Association="InterBookModel.FK_Util_Ville_Ref_Ville">
+      <End Role="Ref_Ville" EntitySet="Ref_Ville" />
+      <End Role="Util_Ville" EntitySet="Util_Ville" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UE_envoi_Util" Association="InterBookModel.FK_UE_envoi_Util">
+      <End Role="Util" EntitySet="Utils" />
+      <End Role="UE_envoi" EntitySet="UE_envoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UE_envoi_Util_Email" Association="InterBookModel.FK_UE_envoi_Util_Email">
+      <End Role="Util_Email" EntitySet="Util_Email" />
+      <End Role="UE_envoi" EntitySet="UE_envoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Consentement_Util" Association="InterBookModel.FK_Util_Consentement_Util">
+      <End Role="Util" EntitySet="Utils" />
+      <End Role="Util_Consentement" EntitySet="Util_Consentement" />
     </AssociationSet>
     <AssociationSet Name="FK_Util_Contrat_Util" Association="InterBookModel.FK_Util_Contrat_Util">
       <End Role="Util" EntitySet="Utils" />
       <End Role="Util_Contrat" EntitySet="Util_Contrat" />
     </AssociationSet>
+    <AssociationSet Name="FK_Util_Dispo_Util" Association="InterBookModel.FK_Util_Dispo_Util">
+      <End Role="Util" EntitySet="Utils" />
+      <End Role="Util_Dispo" EntitySet="Util_Dispo" />
+    </AssociationSet>
     <AssociationSet Name="FK_Util_Experience_Util" Association="InterBookModel.FK_Util_Experience_Util">
       <End Role="Util" EntitySet="Utils" />
       <End Role="Util_Experience" EntitySet="Util_Experience" />
     </AssociationSet>
-    <EntitySet Name="Ref_Culture" EntityType="InterBookModel.Ref_Culture" />
-    <EntitySet Name="Ref_Pays" EntityType="InterBookModel.Ref_Pays" />
-    <EntitySet Name="Util_Email" EntityType="InterBookModel.Util_Email" />
-    <EntitySet Name="Util_Postal" EntityType="InterBookModel.Util_Postal" />
+    <AssociationSet Name="FK_Util_Profession_Util" Association="InterBookModel.FK_Util_Profession_Util">
+      <End Role="Util" EntitySet="Utils" />
+      <End Role="Util_Profession" EntitySet="Util_Profession" />
+    </AssociationSet>
     <AssociationSet Name="FK_Util_Util_Email" Association="InterBookModel.FK_Util_Util_Email">
       <End Role="Util_Email" EntitySet="Util_Email" />
       <End Role="Util" EntitySet="Utils" />
@@ -64,23 +108,20 @@
       <End Role="Util_Postal" EntitySet="Util_Postal" />
       <End Role="Util" EntitySet="Utils" />
     </AssociationSet>
-    <AssociationSet Name="FK_Ref_Pays_Ref_Culture" Association="InterBookModel.FK_Ref_Pays_Ref_Culture">
-      <End Role="Ref_Culture" EntitySet="Ref_Culture" />
-      <End Role="Ref_Pays" EntitySet="Ref_Pays" />
+    <AssociationSet Name="FK_Util_Ville_Util" Association="InterBookModel.FK_Util_Ville_Util">
+      <End Role="Util" EntitySet="Utils" />
+      <End Role="Util_Ville" EntitySet="Util_Ville" />
     </AssociationSet>
-    <AssociationSet Name="FK_Util_Postal_Ref_Pays" Association="InterBookModel.FK_Util_Postal_Ref_Pays">
-      <End Role="Ref_Pays" EntitySet="Ref_Pays" />
-      <End Role="Util_Postal" EntitySet="Util_Postal" />
+    <AssociationSet Name="FK_Util_Experience_Ref_Experience" Association="InterBookModel.FK_Util_Experience_Ref_Experience">
+      <End Role="Ref_Experience" EntitySet="Ref_Experience" />
+      <End Role="Util_Experience" EntitySet="Util_Experience" />
     </AssociationSet>
-    <FunctionImport Name="SetUtilEmail" EntitySet="Util_Email" ReturnType="Collection(InterBookModel.Util_Email)">
-      <Parameter Name="email" Mode="In" Type="String" />
-    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Ref_Profession">
     <Key>
       <PropertyRef Name="id_Profession" />
     </Key>
-    <Property Name="id_Profession" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_Profession" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Util_Profession" Relationship="InterBookModel.FK_Util_Profession_Ref_Profession" FromRole="Ref_Profession" ToRole="Util_Profession" />
   </EntityType>
@@ -97,29 +138,32 @@
       <PropertyRef Name="IdU" />
     </Key>
     <Property Name="IdU" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <NavigationProperty Name="Util_Profession" Relationship="InterBookModel.FK_Util_Profession_Util" FromRole="Util" ToRole="Util_Profession" />
-    <NavigationProperty Name="Util_Ville" Relationship="InterBookModel.FK_Util_Ville_Util" FromRole="Util" ToRole="Util_Ville" />
-    <NavigationProperty Name="Util_Contrat" Relationship="InterBookModel.FK_Util_Contrat_Util" FromRole="Util" ToRole="Util_Contrat" />
-    <NavigationProperty Name="Util_Experience" Relationship="InterBookModel.FK_Util_Experience_Util" FromRole="Util" ToRole="Util_Experience" />
     <Property Name="id_Declinaison_Culture" Type="Int32" />
     <Property Name="id_From" Type="Int32" />
     <Property Name="mdp" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="uid" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="uid" Type="Guid" />
     <Property Name="idu_Email" Type="Int32" />
     <Property Name="idu_Postal" Type="Int32" />
     <Property Name="idu_Telmobile" Type="Int32" />
     <Property Name="dCrea" Type="DateTime" Precision="3" />
     <Property Name="dMAJ" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UE_envoi" Relationship="InterBookModel.FK_UE_envoi_Util" FromRole="Util" ToRole="UE_envoi" />
+    <NavigationProperty Name="Util_Consentement" Relationship="InterBookModel.FK_Util_Consentement_Util" FromRole="Util" ToRole="Util_Consentement" />
+    <NavigationProperty Name="Util_Contrat" Relationship="InterBookModel.FK_Util_Contrat_Util" FromRole="Util" ToRole="Util_Contrat" />
+    <NavigationProperty Name="Util_Dispo" Relationship="InterBookModel.FK_Util_Dispo_Util" FromRole="Util" ToRole="Util_Dispo" />
+    <NavigationProperty Name="Util_Experience" Relationship="InterBookModel.FK_Util_Experience_Util" FromRole="Util" ToRole="Util_Experience" />
+    <NavigationProperty Name="Util_Profession" Relationship="InterBookModel.FK_Util_Profession_Util" FromRole="Util" ToRole="Util_Profession" />
     <NavigationProperty Name="Util_Email" Relationship="InterBookModel.FK_Util_Util_Email" FromRole="Util" ToRole="Util_Email" />
     <NavigationProperty Name="Util_Postal" Relationship="InterBookModel.FK_Util_Util_Postal" FromRole="Util" ToRole="Util_Postal" />
+    <NavigationProperty Name="Util_Ville" Relationship="InterBookModel.FK_Util_Ville_Util" FromRole="Util" ToRole="Util_Ville" />
   </EntityType>
   <EntityType Name="Util_Profession">
     <Key>
       <PropertyRef Name="id_Util_Profession" />
     </Key>
     <Property Name="id_Util_Profession" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_Profession" Type="Int32" Nullable="false" />
-    <Property Name="IdU" Type="Int32" Nullable="false" />
+    <Property Name="id_Profession" Type="Int32" />
+    <Property Name="IdU" Type="Int32" />
     <NavigationProperty Name="Ref_Profession" Relationship="InterBookModel.FK_Util_Profession_Ref_Profession" FromRole="Util_Profession" ToRole="Ref_Profession" />
     <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Profession_Util" FromRole="Util_Profession" ToRole="Util" />
   </EntityType>
@@ -128,59 +172,11 @@
       <PropertyRef Name="id_Util_Ville" />
     </Key>
     <Property Name="id_Util_Ville" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_Ville" Type="Int32" Nullable="false" />
-    <Property Name="IdU" Type="Int32" Nullable="false" />
+    <Property Name="id_Ville" Type="Int32" />
+    <Property Name="IdU" Type="Int32" />
     <NavigationProperty Name="Ref_Ville" Relationship="InterBookModel.FK_Util_Ville_Ref_Ville" FromRole="Util_Ville" ToRole="Ref_Ville" />
     <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Ville_Util" FromRole="Util_Ville" ToRole="Util" />
   </EntityType>
-  <Association Name="FK_Util_Profession_Ref_Profession">
-    <End Type="InterBookModel.Ref_Profession" Role="Ref_Profession" Multiplicity="1" />
-    <End Type="InterBookModel.Util_Profession" Role="Util_Profession" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ref_Profession">
-        <PropertyRef Name="id_Profession" />
-      </Principal>
-      <Dependent Role="Util_Profession">
-        <PropertyRef Name="id_Profession" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Util_Ville_Ref_Ville">
-    <End Type="InterBookModel.Ref_Ville" Role="Ref_Ville" Multiplicity="1" />
-    <End Type="InterBookModel.Util_Ville" Role="Util_Ville" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ref_Ville">
-        <PropertyRef Name="id_Ville" />
-      </Principal>
-      <Dependent Role="Util_Ville">
-        <PropertyRef Name="id_Ville" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Util_Profession_Util">
-    <End Type="InterBookModel.Util" Role="Util" Multiplicity="1" />
-    <End Type="InterBookModel.Util_Profession" Role="Util_Profession" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Util">
-        <PropertyRef Name="IdU" />
-      </Principal>
-      <Dependent Role="Util_Profession">
-        <PropertyRef Name="IdU" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Util_Ville_Util">
-    <End Type="InterBookModel.Util" Role="Util" Multiplicity="1" />
-    <End Type="InterBookModel.Util_Ville" Role="Util_Ville" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Util">
-        <PropertyRef Name="IdU" />
-      </Principal>
-      <Dependent Role="Util_Ville">
-        <PropertyRef Name="IdU" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Ref_Contrat">
     <Key>
       <PropertyRef Name="id_Contrat" />
@@ -202,8 +198,8 @@
       <PropertyRef Name="id_Util_Contrat" />
     </Key>
     <Property Name="id_Util_Contrat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdU" Type="Int32" Nullable="false" />
-    <Property Name="id_Contrat" Type="Int32" Nullable="false" />
+    <Property Name="IdU" Type="Int32" />
+    <Property Name="id_Contrat" Type="Int32" />
     <NavigationProperty Name="Ref_Contrat" Relationship="InterBookModel.FK_Util_Contrat_Ref_Contrat" FromRole="Util_Contrat" ToRole="Ref_Contrat" />
     <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Contrat_Util" FromRole="Util_Contrat" ToRole="Util" />
   </EntityType>
@@ -212,59 +208,11 @@
       <PropertyRef Name="id_Util_Experience" />
     </Key>
     <Property Name="id_Util_Experience" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="IdU" Type="Int32" Nullable="false" />
-    <Property Name="id_Experience" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Ref_Experience" Relationship="InterBookModel.FK_Util_Experience_Ref_Experience" FromRole="Util_Experience" ToRole="Ref_Experience" />
+    <Property Name="IdU" Type="Int32" />
+    <Property Name="id_Experience" Type="Int32" />
     <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Experience_Util" FromRole="Util_Experience" ToRole="Util" />
+    <NavigationProperty Name="Ref_Experience" Relationship="InterBookModel.FK_Util_Experience_Ref_Experience" FromRole="Util_Experience" ToRole="Ref_Experience" />
   </EntityType>
-  <Association Name="FK_Util_Contrat_Ref_Contrat">
-    <End Type="InterBookModel.Ref_Contrat" Role="Ref_Contrat" Multiplicity="1" />
-    <End Type="InterBookModel.Util_Contrat" Role="Util_Contrat" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ref_Contrat">
-        <PropertyRef Name="id_Contrat" />
-      </Principal>
-      <Dependent Role="Util_Contrat">
-        <PropertyRef Name="id_Contrat" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Util_Experience_Ref_Experience">
-    <End Type="InterBookModel.Ref_Experience" Role="Ref_Experience" Multiplicity="1" />
-    <End Type="InterBookModel.Util_Experience" Role="Util_Experience" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ref_Experience">
-        <PropertyRef Name="id_Experience" />
-      </Principal>
-      <Dependent Role="Util_Experience">
-        <PropertyRef Name="id_Experience" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Util_Contrat_Util">
-    <End Type="InterBookModel.Util" Role="Util" Multiplicity="1" />
-    <End Type="InterBookModel.Util_Contrat" Role="Util_Contrat" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Util">
-        <PropertyRef Name="IdU" />
-      </Principal>
-      <Dependent Role="Util_Contrat">
-        <PropertyRef Name="IdU" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Util_Experience_Util">
-    <End Type="InterBookModel.Util" Role="Util" Multiplicity="1" />
-    <End Type="InterBookModel.Util_Experience" Role="Util_Experience" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Util">
-        <PropertyRef Name="IdU" />
-      </Principal>
-      <Dependent Role="Util_Experience">
-        <PropertyRef Name="IdU" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Ref_Culture">
     <Key>
       <PropertyRef Name="id_Culture" />
@@ -291,6 +239,7 @@
     <Property Name="idu_Email" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
     <Property Name="dCrea" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="UE_envoi" Relationship="InterBookModel.FK_UE_envoi_Util_Email" FromRole="Util_Email" ToRole="UE_envoi" />
     <NavigationProperty Name="Utils" Relationship="InterBookModel.FK_Util_Util_Email" FromRole="Util_Email" ToRole="Util" />
   </EntityType>
   <EntityType Name="Util_Postal">
@@ -298,7 +247,7 @@
       <PropertyRef Name="idu_Postal" />
     </Key>
     <Property Name="idu_Postal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_Civilite" Type="Int32" Nullable="false" />
+    <Property Name="id_Civilite" Type="Int32" />
     <Property Name="nom" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
     <Property Name="prenom" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
     <Property Name="adresse1" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
@@ -307,9 +256,281 @@
     <Property Name="ville" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
     <Property Name="id_Pays" Type="Int32" />
     <Property Name="dCrea" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="Utils" Relationship="InterBookModel.FK_Util_Util_Postal" FromRole="Util_Postal" ToRole="Util" />
+    <Property Name="numeroTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="permis" Type="Int32" />
     <NavigationProperty Name="Ref_Pays" Relationship="InterBookModel.FK_Util_Postal_Ref_Pays" FromRole="Util_Postal" ToRole="Ref_Pays" />
+    <NavigationProperty Name="Utils" Relationship="InterBookModel.FK_Util_Util_Postal" FromRole="Util_Postal" ToRole="Util" />
   </EntityType>
+  <ComplexType Name="GetUtilDispoByIdrdIdu_Result">
+    <Property Type="DateTime" Name="dDispo" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdU" Nullable="true" />
+    <Property Type="Int32" Name="id_Ref_Dispo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUtilDispoByIdrdIdu2_Result">
+    <Property Type="DateTime" Name="dDispo" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdU" Nullable="true" />
+    <Property Type="Int32" Name="id_Ref_Dispo" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetUtilDispoByIdrdIdu_Result1">
+    <Property Type="DateTime" Name="dDispo" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdU" Nullable="true" />
+    <Property Type="Int32" Name="id_Ref_Dispo" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Util_Dispo">
+    <Key>
+      <PropertyRef Name="id_Util_Dispo" />
+    </Key>
+    <Property Name="id_Util_Dispo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dDispo" Type="DateTime" Precision="3" />
+    <Property Name="idU" Type="Int32" />
+    <Property Name="id_Ref_Dispo" Type="Int32" />
+    <NavigationProperty Name="Ref_Dispo" Relationship="InterBookModel.FK_Util_Dispo_Ref_Dispo" FromRole="Util_Dispo" ToRole="Ref_Dispo" />
+    <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Dispo_Util" FromRole="Util_Dispo" ToRole="Util" />
+  </EntityType>
+  <EntityType Name="Ref_Dispo">
+    <Key>
+      <PropertyRef Name="id_Ref_Dispo" />
+    </Key>
+    <Property Name="id_Ref_Dispo" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Util_Dispo" Relationship="InterBookModel.FK_Util_Dispo_Ref_Dispo" FromRole="Ref_Dispo" ToRole="Util_Dispo" />
+  </EntityType>
+  <EntityType Name="Ref_Mailing">
+    <Key>
+      <PropertyRef Name="id_Mailing" />
+    </Key>
+    <Property Name="id_Mailing" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UE_envoi" Relationship="InterBookModel.FK_UE_envoi_Ref_Mailing" FromRole="Ref_Mailing" ToRole="UE_envoi" />
+    <NavigationProperty Name="Util_Consentement" Relationship="InterBookModel.FK_Util_Consentement_Ref_Mailing" FromRole="Ref_Mailing" ToRole="Util_Consentement" />
+  </EntityType>
+  <EntityType Name="Ref_TypeConsentement">
+    <Key>
+      <PropertyRef Name="id_Ref_TypeConsentement" />
+    </Key>
+    <Property Name="id_Ref_TypeConsentement" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Util_Consentement" Relationship="InterBookModel.FK_Util_Consentement_Ref_TypeConsentement" FromRole="Ref_TypeConsentement" ToRole="Util_Consentement" />
+  </EntityType>
+  <EntityType Name="UE_envoi">
+    <Key>
+      <PropertyRef Name="id_UE_envoi" />
+    </Key>
+    <Property Name="id_UE_envoi" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_mailing" Type="Int32" />
+    <Property Name="idu_email" Type="Int32" />
+    <Property Name="idu" Type="Int32" />
+    <Property Name="dEnvoi" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Ref_Mailing" Relationship="InterBookModel.FK_UE_envoi_Ref_Mailing" FromRole="UE_envoi" ToRole="Ref_Mailing" />
+    <NavigationProperty Name="Util" Relationship="InterBookModel.FK_UE_envoi_Util" FromRole="UE_envoi" ToRole="Util" />
+    <NavigationProperty Name="Util_Email" Relationship="InterBookModel.FK_UE_envoi_Util_Email" FromRole="UE_envoi" ToRole="Util_Email" />
+  </EntityType>
+  <EntityType Name="Util_Consentement">
+    <Key>
+      <PropertyRef Name="id_Util_Consentement" />
+    </Key>
+    <Property Name="id_Util_Consentement" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_TypeConsentement" Type="Int32" />
+    <Property Name="valeur" Type="Int32" />
+    <Property Name="id_Mailing" Type="Int32" />
+    <Property Name="idu" Type="Int32" />
+    <Property Name="dRecueil" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Ref_Mailing" Relationship="InterBookModel.FK_Util_Consentement_Ref_Mailing" FromRole="Util_Consentement" ToRole="Ref_Mailing" />
+    <NavigationProperty Name="Ref_TypeConsentement" Relationship="InterBookModel.FK_Util_Consentement_Ref_TypeConsentement" FromRole="Util_Consentement" ToRole="Ref_TypeConsentement" />
+    <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Consentement_Util" FromRole="Util_Consentement" ToRole="Util" />
+  </EntityType>
+  <Association Name="FK_Util_Contrat_Ref_Contrat">
+    <End Type="InterBookModel.Ref_Contrat" Role="Ref_Contrat" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Contrat" Role="Util_Contrat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Contrat">
+        <PropertyRef Name="id_Contrat" />
+      </Principal>
+      <Dependent Role="Util_Contrat">
+        <PropertyRef Name="id_Contrat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ref_Pays_Ref_Culture">
+    <End Type="InterBookModel.Ref_Culture" Role="Ref_Culture" Multiplicity="0..1" />
+    <End Type="InterBookModel.Ref_Pays" Role="Ref_Pays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Culture">
+        <PropertyRef Name="id_Culture" />
+      </Principal>
+      <Dependent Role="Ref_Pays">
+        <PropertyRef Name="id_Culture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Dispo_Ref_Dispo">
+    <End Type="InterBookModel.Ref_Dispo" Role="Ref_Dispo" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Dispo" Role="Util_Dispo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Dispo">
+        <PropertyRef Name="id_Ref_Dispo" />
+      </Principal>
+      <Dependent Role="Util_Dispo">
+        <PropertyRef Name="id_Ref_Dispo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UE_envoi_Ref_Mailing">
+    <End Type="InterBookModel.Ref_Mailing" Role="Ref_Mailing" Multiplicity="0..1" />
+    <End Type="InterBookModel.UE_envoi" Role="UE_envoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Mailing">
+        <PropertyRef Name="id_Mailing" />
+      </Principal>
+      <Dependent Role="UE_envoi">
+        <PropertyRef Name="id_mailing" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Consentement_Ref_Mailing">
+    <End Type="InterBookModel.Ref_Mailing" Role="Ref_Mailing" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Consentement" Role="Util_Consentement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Mailing">
+        <PropertyRef Name="id_Mailing" />
+      </Principal>
+      <Dependent Role="Util_Consentement">
+        <PropertyRef Name="id_Mailing" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Postal_Ref_Pays">
+    <End Type="InterBookModel.Ref_Pays" Role="Ref_Pays" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Postal" Role="Util_Postal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Pays">
+        <PropertyRef Name="id_Pays" />
+      </Principal>
+      <Dependent Role="Util_Postal">
+        <PropertyRef Name="id_Pays" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Profession_Ref_Profession">
+    <End Type="InterBookModel.Ref_Profession" Role="Ref_Profession" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Profession" Role="Util_Profession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Profession">
+        <PropertyRef Name="id_Profession" />
+      </Principal>
+      <Dependent Role="Util_Profession">
+        <PropertyRef Name="id_Profession" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Consentement_Ref_TypeConsentement">
+    <End Type="InterBookModel.Ref_TypeConsentement" Role="Ref_TypeConsentement" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Consentement" Role="Util_Consentement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_TypeConsentement">
+        <PropertyRef Name="id_Ref_TypeConsentement" />
+      </Principal>
+      <Dependent Role="Util_Consentement">
+        <PropertyRef Name="id_TypeConsentement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Ville_Ref_Ville">
+    <End Type="InterBookModel.Ref_Ville" Role="Ref_Ville" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Ville" Role="Util_Ville" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Ville">
+        <PropertyRef Name="id_Ville" />
+      </Principal>
+      <Dependent Role="Util_Ville">
+        <PropertyRef Name="id_Ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UE_envoi_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.UE_envoi" Role="UE_envoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="UE_envoi">
+        <PropertyRef Name="idu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UE_envoi_Util_Email">
+    <End Type="InterBookModel.Util_Email" Role="Util_Email" Multiplicity="0..1" />
+    <End Type="InterBookModel.UE_envoi" Role="UE_envoi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util_Email">
+        <PropertyRef Name="idu_Email" />
+      </Principal>
+      <Dependent Role="UE_envoi">
+        <PropertyRef Name="idu_email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Consentement_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Consentement" Role="Util_Consentement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Consentement">
+        <PropertyRef Name="idu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Contrat_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Contrat" Role="Util_Contrat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Contrat">
+        <PropertyRef Name="IdU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Dispo_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Dispo" Role="Util_Dispo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Dispo">
+        <PropertyRef Name="idU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Experience_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Experience" Role="Util_Experience" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Experience">
+        <PropertyRef Name="IdU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Profession_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Profession" Role="Util_Profession" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Profession">
+        <PropertyRef Name="IdU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Util_Util_Email">
     <End Type="InterBookModel.Util_Email" Role="Util_Email" Multiplicity="0..1" />
     <End Type="InterBookModel.Util" Role="Util" Multiplicity="*" />
@@ -334,27 +555,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Ref_Pays_Ref_Culture">
-    <End Type="InterBookModel.Ref_Culture" Role="Ref_Culture" Multiplicity="0..1" />
-    <End Type="InterBookModel.Ref_Pays" Role="Ref_Pays" Multiplicity="*" />
+  <Association Name="FK_Util_Ville_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Ville" Role="Util_Ville" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Ref_Culture">
-        <PropertyRef Name="id_Culture" />
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
       </Principal>
-      <Dependent Role="Ref_Pays">
-        <PropertyRef Name="id_Culture" />
+      <Dependent Role="Util_Ville">
+        <PropertyRef Name="IdU" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Util_Postal_Ref_Pays">
-    <End Type="InterBookModel.Ref_Pays" Role="Ref_Pays" Multiplicity="0..1" />
-    <End Type="InterBookModel.Util_Postal" Role="Util_Postal" Multiplicity="*" />
+  <Association Name="FK_Util_Experience_Ref_Experience">
+    <End Type="InterBookModel.Ref_Experience" Role="Ref_Experience" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Experience" Role="Util_Experience" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Ref_Pays">
-        <PropertyRef Name="id_Pays" />
+      <Principal Role="Ref_Experience">
+        <PropertyRef Name="id_Experience" />
       </Principal>
-      <Dependent Role="Util_Postal">
-        <PropertyRef Name="id_Pays" />
+      <Dependent Role="Util_Experience">
+        <PropertyRef Name="id_Experience" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

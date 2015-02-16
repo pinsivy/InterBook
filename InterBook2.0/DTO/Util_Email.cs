@@ -16,6 +16,7 @@ namespace InterBook2._0.DTO
     {
         public Util_Email()
         {
+            this.UE_envoi = new HashSet<UE_envoi>();
             this.Utils = new HashSet<Util>();
         }
     
@@ -23,6 +24,7 @@ namespace InterBook2._0.DTO
         public string email { get; set; }
         public Nullable<System.DateTime> dCrea { get; set; }
     
+        public virtual ICollection<UE_envoi> UE_envoi { get; set; }
         public virtual ICollection<Util> Utils { get; set; }
     }
 }

@@ -1,8 +1,9 @@
-﻿using InterBook2._0.DTO;
-using Resources;
+﻿using InterBook2._0.App_GlobalResources;
+using InterBook2._0.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,15 +15,15 @@ namespace InterBook2._0.Models
 
     }
 
-    public class SignUpModel : ModelBase
+    public class SignInModel : ModelBase
     {
         public Util u { get; set; }
     }
 
-    public class SignInModel : ModelBase
+    public class SignUpModel : ModelBase
     {
         [Required(ErrorMessageResourceName = "RequiredCivilite", ErrorMessageResourceType = typeof(Errors))]
-        [Range(1, 3, ErrorMessageResourceName = "InvalidCivilite", ErrorMessageResourceType = typeof(Errors))]
+        [Range(1, 2, ErrorMessageResourceName = "InvalidCivilite", ErrorMessageResourceType = typeof(Errors))]
         public byte Civilite { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredNom", ErrorMessageResourceType = typeof(Errors))]
@@ -32,6 +33,15 @@ namespace InterBook2._0.Models
         [Required(ErrorMessageResourceName = "RequiredPrenom", ErrorMessageResourceType = typeof(Errors))]
         [RegularExpression("^([a-zA-Z' äàâæçèéêëîïôùûüœ-]{1,50})$", ErrorMessageResourceName = "InvalidPrenom", ErrorMessageResourceType = typeof(Errors))]
         public string Prenom { get; set; }
+
+        [Required(ErrorMessageResourceName = "RequiredCivilite", ErrorMessageResourceType = typeof(Errors))]
+        [Range(1, 3, ErrorMessageResourceName = "InvalidCivilite", ErrorMessageResourceType = typeof(Errors))]
+        public byte Permis { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessageResourceName = "RequiredPrenom", ErrorMessageResourceType = typeof(Errors))]
+        [RegularExpression("^([0-9]{10})$", ErrorMessageResourceName = "InvalidPrenom", ErrorMessageResourceType = typeof(Errors))]
+        public string NumTel { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredEmail", ErrorMessageResourceType = typeof(Errors))]
         [RegularExpression(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessageResourceName = "InvalidEmail", ErrorMessageResourceType = typeof(Errors))]
@@ -48,5 +58,7 @@ namespace InterBook2._0.Models
         [DataType(DataType.Password)]
         [Compare("Password")]
         public string PasswordConfirm { get; set; }
+
+        public Guid uid { get; set; }
     }
 }

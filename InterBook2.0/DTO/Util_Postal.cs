@@ -20,7 +20,7 @@ namespace InterBook2._0.DTO
         }
     
         public int idu_Postal { get; set; }
-        public int id_Civilite { get; set; }
+        public Nullable<int> id_Civilite { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
         public string adresse1 { get; set; }
@@ -29,8 +29,10 @@ namespace InterBook2._0.DTO
         public string ville { get; set; }
         public Nullable<int> id_Pays { get; set; }
         public Nullable<System.DateTime> dCrea { get; set; }
+        public string numeroTel { get; set; }
+        public Nullable<int> permis { get; set; }
     
-        public virtual ICollection<Util> Utils { get; set; }
         public virtual Ref_Pays Ref_Pays { get; set; }
+        public virtual ICollection<Util> Utils { get; set; }
     }
 }

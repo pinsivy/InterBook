@@ -1,0 +1,56 @@
+﻿@model Website.Models.ShowSessionModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestion des données techniques</title>
+    <style>
+        #hor-zebra {
+            font-family: "Segoe UI", Helvetica, Verdana;
+            font-size: 14px;
+            text-align: left;
+            border-collapse: collapse;
+            margin: 20px;
+        }  
+        #hor-zebra th {
+            font-size: 20px;
+            font-weight: bold;
+            color: #525252;
+            padding: 10px 8px;
+            text-align: left;
+        }
+        #hor-zebra td {
+            color: #525252;
+            padding: 4px 4px 4px 16px;
+        }
+        .noSession {
+            font-family: "Segoe UI", Helvetica, Verdana;
+            text-align: center;
+        }
+        
+        .modal {
+            margin: 15px 0;
+            padding: 5px;
+            border: 2px solid #D4D4D4;
+        }
+
+        .modal.infotech {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+        @if (!Model.HasSession)
+        {
+            <p class="noSession">Vous n'avez pas de session sur le site web pour le moment.</p>
+        }
+
+        <div class="modal infotech"></div>
+        @foreach (var item in Model.Templates)
+        {
+            <div class="modal">
+                @Html.Raw(item)
+            </div>
+        }
+</body>
+</html>

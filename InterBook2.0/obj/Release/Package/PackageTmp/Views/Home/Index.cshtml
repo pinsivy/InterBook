@@ -1,0 +1,106 @@
+﻿@using InterBook2._0.Views.Home.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.HomeModel
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@Styles.Render("~/Media/css/home")
+<section class="container">
+    <div id="titre">
+        <div id="titreTexte1">Bienvenue sur <span>InterBook</span></div>
+        <div id="titreTexte2">Le site qui vous accompagne dans la recherche d’emploi spécialisé dans l’univers des spectacles...</div>
+    </div>
+    <div class="form">
+        <div id="rechercherTexte"><img src="~/Media/img/home/flecheRecherche.png" />Rechercher</div>
+        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+            @Html.TextBoxFor(x => x.Profession, new { @class = "inputQuery", placeholder = Index.Quoi })
+            @Html.TextBoxFor(x => x.Debut, new { @class = "inputQuery", id = "DateDebut", placeholder = "De" })
+            @Html.TextBoxFor(x => x.Fin, new { @class = "inputQuery", id = "DateFin", placeholder = "à" })
+            @Html.TextBoxFor(x => x.Ville, new { @class = "inputQuery", placeholder = Index.Ou })
+            <input type="submit" value="" />
+            <button id="lienRechercheAvancee"></button>
+            @Html.ValidationMessageFor(x => x.Profession)
+            @Html.ValidationMessageFor(x => x.Ville)
+        }
+    </div>
+</section>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script> @*http://keith-wood.name/datepick.html*@
+
+<script>
+    $(function () {
+
+        $("#DateDebut").datepicker({
+            firstDay: 1, //0=Dim, 1=Lun
+            defaultDate: "-1",
+            changeMonth: true,
+            numberOfMonths: 1,
+            dateFormat: 'dd MM yy',
+            onClose: function (selectedDate) {
+                $("#DateFin").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#DateFin").datepicker({
+            changeMonth: true,
+            numberOfMonths: 1,
+            dateFormat: 'dd MM yy',
+            onClose: function (selectedDate) {
+                $("#DateDebut").datepicker("option", "maxDate", selectedDate);
+            }
+        });
+
+        var availableTags = [
+            "Réalisateur",
+            "Autre"
+        ];
+        $("#Profession").autocomplete({
+            source: function (request, response) {
+
+                $.ajax({
+                    dataType: "json",
+                    type: 'Get',
+                    url: 'Home/GetProfessions',
+                    data: {
+                        debut: $('#Profession').val(),
+                        maxRows: 8
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        response($.map(data, function (item) {
+                            return item.Description;
+                        }));
+                    }
+                });
+            }
+        });
+        
+        var autocompleteVille;
+        function initialize() {
+            autocompleteVille = new google.maps.places.Autocomplete(
+                (document.getElementById('Ville')),
+                { types: ['geocode'] });
+        }
+        $(function () {
+            initialize();
+        });
+
+        
+        //var user = {
+        //    id: 1,
+        //    Firstname: "sdfs"
+        //};
+
+        //$.ajax({
+        //    type: "POST",
+        //    url: "/Home/About",
+        //    data: user,
+        //    success: function (data) {
+        //        console.log(data);
+        //    }
+        //});
+    });
+
+</script>

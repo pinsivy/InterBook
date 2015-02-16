@@ -70,6 +70,15 @@ namespace InterBook2._0.Views.Shared.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à اسم.
+        /// </summary>
+        public static string Nom {
+            get {
+                return ResourceManager.GetString("Nom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Mot de passe.
         /// </summary>
         public static string Password {

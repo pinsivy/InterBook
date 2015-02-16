@@ -1,9 +1,12 @@
 ﻿using InterBook2._0.BLL;
+using InterBook2._0.BLL.Mail;
 using InterBook2._0.DTO;
 using InterBook2._0.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -11,24 +14,31 @@ namespace InterBook2._0.Controllers
 {
     public class AccountController : BaseController
     {
-        //
-        // GET: Account/SignIn
+        // INSCRIPTION
+        // GET: Account/SignUp
         [HttpGet]
-        public ActionResult SignIn()
+        public ActionResult SignUp()
         {
-            return View(new SignInModel());
+            SignUpModel sum = new SignUpModel();
+            if (SessionManager.Current.Util != null && SessionManager.Current.Util.Util_Email != null)
+                sum.Email = SessionManager.Current.Util.Util_Email.email;
+            return View(sum);
         }
 
-        //
-        // POST: Account/SignIn
+        // INSCRIPTION
+        // POST: Account/SignUp
         [HttpPost]
-        public ActionResult SignIn(SignInModel model)
+        public ActionResult SignUp(SignUpModel model)
         {
             //ALLER SUR /Dashboard
             if (ModelState.IsValid)
             {
                 ////INSERTION BDD UTIL_EMAIL
-                Util_Email ue = UtilEmailManager.ReturnUtilEmailByEmail(model.Email);
+                if(SessionManager.Current.Util.Util_Email.email != model.Email)
+                {
+                    SessionManager.Current.Util.Util_Email = UtilEmailManager.ReturnUtilEmailByEmail(model.Email);
+                    UtilEmailManager.InsertLine(SessionManager.Current.Util.Util_Email);
+                }
 
                 ////INSERTION BDD UTIL_POSTAL
                 Util_Postal up = new Util_Postal
@@ -36,9 +46,44 @@ namespace InterBook2._0.Controllers
                     dCrea = DateTime.Now,
                     id_Civilite = model.Civilite,
                     nom = Capitalize(model.Nom),
-                    prenom = Capitalize(model.Prenom)
+                    prenom = Capitalize(model.Prenom),
+                    permis = model.Permis,
+                    numeroTel = model.NumTel.ToString()
                 };
                 UtilPostalManager.InsertLine(up);
+
+                //INSERTION BDD UTIL
+                Util u = SessionManager.Current.Util;
+                u.idu_Postal = up.idu_Postal;
+
+                UtilManager.InsertLine(u, true);
+                SessionManager.Current.Util.Util_Postal = up;
+
+                return this.SetPageRedirect("Account", "Criterions");
+            }
+
+            return View(model);
+        }
+
+        // INSCRIPTION
+        // POST: Account/SignUpHome
+        [HttpPost]
+        public JsonResult SignUpHome(string email, string mdp)
+        {
+            Util_Email utilEmail = UtilEmailManager.GetUtilEmailByEmail(email);
+            if (utilEmail != null)
+            {
+                return Json(new { Success = true, Message = "connu" });
+            }
+            else
+            {
+                ////INSERTION BDD UTIL_EMAIL
+                Util_Email ue = UtilEmailManager.ReturnUtilEmailByEmail(email);
+
+                //Hachage MdP
+                byte[] data = System.Text.Encoding.ASCII.GetBytes(mdp);
+                data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+                String mdpHash = System.Text.Encoding.Default.GetString(data);
 
                 //INSERTION BDD UTIL
                 Util u = new Util
@@ -46,15 +91,22 @@ namespace InterBook2._0.Controllers
                     dCrea = DateTime.Now,
                     id_Declinaison_Culture = 1,
                     idu_Email = ue.idu_Email,
-                    idu_Postal = up.idu_Postal,
-                    mdp = model.Password
+                    mdp = mdpHash,
+                    uid = DefaultValueManager.ReturnSQLGuid()
                 };
                 UtilManager.InsertLine(u, true);
+                SessionManager.Current.Util.Util_Email = ue;
 
-                return this.SetPageRedirect("Account", "Criterions");
+                //Insertion Consentement
+                UtilConsentementManager.InsertConsentement(null, u.IdU, 1, 0);
+                UtilConsentementManager.InsertConsentement(null, u.IdU, 2, 1);
+
+                //Envoi de l'email de confirmaion
+                MailBase mb = new MailBase("Confirmez votre compte", "Voir ce mail sur ordinateur ?", "InterBook", 1, SessionManager.Current.Util);
+                MailManager.SendMail(mb);
+
+                return Json(new { Success = true, Message = "200" });
             }
-
-            return View(model);
         }
 
         public static string Capitalize(string value)
@@ -93,28 +145,36 @@ namespace InterBook2._0.Controllers
             return View(cm);
         }
 
-        //
-        // GET: Account/SignUp
+        // CONNEXION
+        // GET: Account/SignIn
         [HttpGet]
-        public ActionResult SignUp()
+        public ActionResult SignIn()
         {
-            SignUpModel cm = new SignUpModel();
+            SignInModel cm = new SignInModel();
             return View(cm);
         }
 
-        //
-        // POST: Account/SignUp
+        // CONNEXION
+        // POST: Account/SignIn
         [HttpPost]
-        public ActionResult SignUp(SignUpModel cm)
+        public JsonResult SignIn(string email, string mdp)
         {
-            if (ModelState.IsValid)
+            //Hachage MdP
+            byte[] data = System.Text.Encoding.ASCII.GetBytes(mdp);
+            data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+            String mdpHash = System.Text.Encoding.Default.GetString(data);
+
+            Util util = UtilManager.GetUtilByEmailMdp(email, mdpHash);
+            if (util == null)
             {
-                //INSERTION BDD UTIL_EMAIL
-                //INSERTION BDD UTIL_POSTAL
-                //INSERTION BDD UTIL
-                return this.SetPageRedirect("Dashboard", "Index");
+                return Json(new { Success = true, Reponse = "0", Message = "inconnu" });
             }
-            return View(cm);
+            SessionManager.Current.Util = util;
+
+            if (util.Util_Postal != null)
+                return Json(new { Success = true, Reponse = "1", Message = util.Util_Postal.prenom });
+            else
+                return Json(new { Success = true, Reponse = "2", Message = email });
         }
     }
 }

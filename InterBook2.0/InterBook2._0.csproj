@@ -56,6 +56,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -64,6 +68,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
@@ -88,9 +100,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
@@ -98,12 +107,6 @@
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -134,30 +137,53 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Commun.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="App_GlobalResources\Errors.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Errors.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Attributes\LoadModelBaseAttribute.cs" />
     <Compile Include="BLL\BaseManager.cs" />
     <Compile Include="BLL\IBWS.asmx.cs">
       <DependentUpon>IBWS.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="BLL\DefaultValueManager.cs" />
+    <Compile Include="BLL\Mail\MailBase.cs" />
     <Compile Include="BLL\SessionManager.cs" />
     <Compile Include="BLL\SessionObject.cs" />
+    <Compile Include="BLL\UtilConsentementManager.cs" />
+    <Compile Include="BLL\UtilDispoManager.cs" />
+    <Compile Include="BLL\Mail\MailManager.cs" />
     <Compile Include="BLL\UtilPostalManager.cs" />
     <Compile Include="BLL\UtilEmailManager.cs" />
     <Compile Include="BLL\UtilManager.cs" />
     <Compile Include="BLL\VisiteManager.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BuyPlansController.cs" />
+    <Compile Include="Controllers\ConfirmController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DesaboController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HowController.cs" />
+    <Compile Include="Controllers\ShowSessionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="DTO\GetUtilDispoByIdrdIdu2_Result.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\GetUtilDispoByIdrdIdu_Result.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\GetUtilDispoByIdrdIdu_Result1.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\InterBookModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -179,7 +205,13 @@
     <Compile Include="DTO\Ref_Culture.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Ref_Dispo.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Ref_Experience.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Ref_Mailing.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Ref_Pays.cs">
@@ -188,13 +220,25 @@
     <Compile Include="DTO\Ref_Profession.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Ref_TypeConsentement.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Ref_Ville.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\UE_envoi.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Util.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Util_Consentement.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Util_Contrat.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Util_Dispo.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Util_Email.cs">
@@ -215,12 +259,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\IdentifAutoHandler.cs" />
+    <Compile Include="Handlers\DelogHandler.cs" />
+    <Compile Include="Handlers\MailHandler.cs" />
+    <Compile Include="Models\BuyPlansModel.cs" />
+    <Compile Include="Models\ConfirmModel.cs" />
     <Compile Include="Models\DashboardModel.cs">
       <Generator>ResXFileCodeGenerator</Generator>
     </Compile>
     <Compile Include="Models\AccountModel.cs">
       <Generator>ResXFileCodeGenerator</Generator>
     </Compile>
+    <Compile Include="Models\DesaboModel.cs" />
+    <Compile Include="Models\ErrorModel.cs" />
+    <Compile Include="Models\HowModel.cs" />
+    <Compile Include="Models\ShowSessionModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
@@ -232,6 +285,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Criterions.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\BuyPlans\App_LocalResources\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dashboard\App_LocalResources\Index.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -240,6 +298,11 @@
     <Compile Include="Views\Home\App_LocalResources\Index.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\How\App_LocalResources\Index.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>Index.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\Search\App_LocalResources\Index.Designer.cs">
@@ -252,10 +315,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Account\App_LocalResources\SignIn.Designer.cs">
+    <Compile Include="Views\Account\App_LocalResources\SignUp.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>SignIn.resx</DependentUpon>
+      <DependentUpon>SignUp.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\User\App_LocalResources\Index.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -278,9 +341,35 @@
     <Content Include="Media\css\Site.css" />
     <Content Include="Media\img\commun\en-GB\FbConnect.png" />
     <Content Include="Media\img\commun\favicon.ico" />
+    <Content Include="Media\img\commun\fr-FR\errorConnexion.png" />
+    <Content Include="Media\img\commun\fr-FR\facebook-icon.png" />
     <Content Include="Media\img\commun\fr-FR\FbConnect.png" />
+    <Content Include="Media\img\commun\fr-FR\fbHeader.png" />
+    <Content Include="Media\img\commun\fr-FR\Google-Plus-icon.png" />
+    <Content Include="Media\img\commun\fr-FR\googleHeader.png" />
+    <Content Include="Media\img\commun\fr-FR\imgCentre.jpg" />
+    <Content Include="Media\img\commun\fr-FR\LinkedIn-icon.jpg" />
+    <Content Include="Media\img\commun\fr-FR\logoFooter.png" />
+    <Content Include="Media\img\commun\fr-FR\logoHeader.png" />
+    <Content Include="Media\img\commun\fr-FR\separateurConnexion.png" />
+    <Content Include="Media\img\commun\fr-FR\tabletteHeader.png" />
     <Content Include="Media\img\commun\IMG.jpg" />
     <Content Include="Media\img\commun\interbook.png" />
+    <Content Include="Media\img\commun\fr-FR\bonhommeConnexion.png" />
+    <Content Include="Media\img\commun\fr-FR\cadenasConnexion.png" />
+    <Content Include="Media\img\home\calendar.png" />
+    <Content Include="Media\img\home\flecheAutocompletion.png" />
+    <Content Include="Media\img\home\flecheKm.png" />
+    <Content Include="Media\img\home\flecheRecherche.png" />
+    <Content Include="Media\img\home\loupe.png" />
+    <Content Include="Media\img\home\mapMarker.png" />
+    <Content Include="Media\img\home\outil.png" />
+    <Content Include="Media\img\home\rechercheAvancee.png" />
+    <Content Include="Media\img\search\contacter.png" />
+    <Content Include="Media\img\search\flecheCritere.png" />
+    <Content Include="Media\img\search\flecheHautCriteres.png" />
+    <Content Include="Media\img\signup\fr-FR\photoCommun.gif" />
+    <Content Include="Media\js\easing.js" />
     <Content Include="Media\js\vendors\all.js" />
     <Content Include="Media\js\vendors\chosen.jquery.js" />
     <Content Include="Media\js\vendors\chosen.jquery.min.js" />
@@ -318,6 +407,7 @@
     <Content Include="Media\js\vendors\validators.js" />
     <Content Include="Media\js\vendors\widgets.js" />
     <Content Include="Media\js\vendors\xtcore.js" />
+    <Content Include="Media\mail\0001.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -328,14 +418,22 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Account\SignIn.cshtml" />
-    <Content Include="Views\SignUp\Index.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Account\Criterions.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\ShowSession\Index.cshtml" />
+    <Content Include="Views\BuyPlans\Index.cshtml" />
+    <Content Include="Views\How\Index.cshtml" />
+    <Content Include="Views\Confirm\Index.cshtml" />
+    <Content Include="Views\Desabo\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\InterBook.pubxml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Error\Http404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Media\img\signup\en-GB\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -365,16 +463,18 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Commun.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+    <EmbeddedResource Include="App_GlobalResources\Commun.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Commun.Designer.cs</LastGenOutput>
-    </Content>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Errors.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
+    <EmbeddedResource Include="App_GlobalResources\Errors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Errors.Designer.cs</LastGenOutput>
-    </Content>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -387,11 +487,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Criterions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\BuyPlans\App_LocalResources\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Dashboard\App_LocalResources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\App_LocalResources\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\How\App_LocalResources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -403,10 +511,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="Views\SignUp\App_LocalResources\Index.resx" />
-    <EmbeddedResource Include="Views\Account\App_LocalResources\SignIn.resx">
+    <EmbeddedResource Include="Views\Account\App_LocalResources\SignUp.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SignIn.Designer.cs</LastGenOutput>
+      <LastGenOutput>SignUp.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\User\App_LocalResources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

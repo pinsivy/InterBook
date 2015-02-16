@@ -15,10 +15,10 @@ namespace InterBook2._0.DTO
     public partial class Util_Experience
     {
         public int id_Util_Experience { get; set; }
-        public int IdU { get; set; }
-        public int id_Experience { get; set; }
+        public Nullable<int> IdU { get; set; }
+        public Nullable<int> id_Experience { get; set; }
     
-        public virtual Ref_Experience Ref_Experience { get; set; }
         public virtual Util Util { get; set; }
+        public virtual Ref_Experience Ref_Experience { get; set; }
     }
 }

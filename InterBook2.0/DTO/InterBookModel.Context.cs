@@ -40,6 +40,12 @@ namespace InterBook2._0.DTO
         public virtual DbSet<Ref_Pays> Ref_Pays { get; set; }
         public virtual DbSet<Util_Email> Util_Email { get; set; }
         public virtual DbSet<Util_Postal> Util_Postal { get; set; }
+        public virtual DbSet<Util_Dispo> Util_Dispo { get; set; }
+        public virtual DbSet<Ref_Dispo> Ref_Dispo { get; set; }
+        public virtual DbSet<Ref_Mailing> Ref_Mailing { get; set; }
+        public virtual DbSet<Ref_TypeConsentement> Ref_TypeConsentement { get; set; }
+        public virtual DbSet<UE_envoi> UE_envoi { get; set; }
+        public virtual DbSet<Util_Consentement> Util_Consentement { get; set; }
     
         public virtual ObjectResult<Util> SearchByVilleProfession(string ville, string profession)
         {
@@ -125,6 +131,24 @@ namespace InterBook2._0.DTO
                 new ObjectParameter("email", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util_Email>("SetUtilEmail", mergeOption, emailParameter);
+        }
+    
+        public virtual ObjectResult<Util_Dispo> GetUtilDispoByIdrdIdu(Nullable<int> idu)
+        {
+            var iduParameter = idu.HasValue ?
+                new ObjectParameter("idu", idu) :
+                new ObjectParameter("idu", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util_Dispo>("GetUtilDispoByIdrdIdu", iduParameter);
+        }
+    
+        public virtual ObjectResult<Util_Dispo> GetUtilDispoByIdrdIdu(Nullable<int> idu, MergeOption mergeOption)
+        {
+            var iduParameter = idu.HasValue ?
+                new ObjectParameter("idu", idu) :
+                new ObjectParameter("idu", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Util_Dispo>("GetUtilDispoByIdrdIdu", mergeOption, iduParameter);
         }
     }
 }

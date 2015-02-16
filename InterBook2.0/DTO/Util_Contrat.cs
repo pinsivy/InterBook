@@ -15,8 +15,8 @@ namespace InterBook2._0.DTO
     public partial class Util_Contrat
     {
         public int id_Util_Contrat { get; set; }
-        public int IdU { get; set; }
-        public int id_Contrat { get; set; }
+        public Nullable<int> IdU { get; set; }
+        public Nullable<int> id_Contrat { get; set; }
     
         public virtual Ref_Contrat Ref_Contrat { get; set; }
         public virtual Util Util { get; set; }

@@ -1,5 +1,5 @@
-﻿using InterBook2._0.DTO;
-using Resources;
+﻿using InterBook2._0.App_GlobalResources;
+using InterBook2._0.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,5 +20,12 @@ namespace InterBook2._0.Models
         [DisplayName("Où ?")]
         [Required(ErrorMessageResourceName = "RequiredVille", ErrorMessageResourceType = typeof(Errors))]
         public string Ville { get; set; }
+
+
+        [DisplayName("De")]
+        public DateTime Debut { get; set; }
+
+        [DisplayName("à")]
+        public DateTime Fin { get; set; }
     }
 }

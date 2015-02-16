@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Ce fichier est utilisé par le processus de publication/package de votre projet Web. Vous pouvez personnaliser le comportement de ce processus
+en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la page http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAASYCIb2hgBkKTZSwJ0s4sjgAAAAACAAAAAAAQZgAAAAEAACAAAAB18InMxpPQBRsNkl8iQHl/DXVbrhuInjOHpeWY6GUfgQAAAAAOgAAAAAIAACAAAAAgRWvZ3FrEVmP+b/2drYQkLt98ryth/OvvZ4xbReInTCAAAACP1llAcAHPWbQdZ8ejwVxuVYmzXcesVsItsqL+sQTQ50AAAADws/Jrl24tmAmANWxW9YQ2vpsqaV2DoYGgsMUbPUfWJsKx8PHFnxOJ8jdlR6GdKSyJ5p4S/ObhOuCnu9SLQ3lA</EncryptedPassword>
+    <_PublishTargetUrl>ftp://interbook-dev.com/httpdocs</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>10/27/2014 18:46:12</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>10/27/2014 18:46:12</publishTime>
+    </File>
+    <File Include="bin/App_GlobalResources/Commun.Designer.cs">
+      <publishTime>02/12/2015 01:07:48</publishTime>
+    </File>
+    <File Include="bin/App_GlobalResources/Commun.resx">
+      <publishTime>10/27/2014 18:22:46</publishTime>
+    </File>
+    <File Include="bin/App_GlobalResources/Errors.Designer.cs">
+      <publishTime>02/12/2015 01:07:50</publishTime>
+    </File>
+    <File Include="bin/App_GlobalResources/Errors.resx">
+      <publishTime>11/06/2014 21:51:01</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/27/2014 18:09:57</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/27/2014 18:09:57</publishTime>
+    </File>
+    <File Include="bin/fr/EntityFramework.resources.dll">
+      <publishTime>10/27/2014 18:10:02</publishTime>
+    </File>
+    <File Include="bin/fr/System.Net.Http.Formatting.resources.dll">
+      <publishTime>10/27/2014 18:05:09</publishTime>
+    </File>
+    <File Include="bin/fr/System.Net.Http.resources.dll">
+      <publishTime>07/09/2013 11:34:42</publishTime>
+    </File>
+    <File Include="bin/fr/System.Net.Http.WebRequest.resources.dll">
+      <publishTime>07/09/2013 11:34:40</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.Helpers.resources.dll">
+      <publishTime>10/27/2014 18:05:07</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.Http.resources.dll">
+      <publishTime>10/27/2014 18:05:08</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.Http.WebHost.resources.dll">
+      <publishTime>10/27/2014 18:05:08</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.Mvc.resources.dll">
+      <publishTime>10/27/2014 18:05:08</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.Razor.resources.dll">
+      <publishTime>10/27/2014 18:05:07</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.WebPages.Deployment.resources.dll">
+      <publishTime>10/27/2014 18:05:07</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.WebPages.Razor.resources.dll">
+      <publishTime>10/27/2014 18:05:07</publishTime>
+    </File>
+    <File Include="bin/fr/System.Web.WebPages.resources.dll">
+      <publishTime>10/27/2014 18:05:07</publishTime>
+    </File>
+    <File Include="bin/InterBook2._0.dll">
+      <publishTime>02/12/2015 21:23:31</publishTime>
+    </File>
+    <File Include="bin/InterBook2._0.pdb">
+      <publishTime>02/12/2015 21:23:31</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>10/27/2014 18:05:03</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Mvc.FixedDisplayModes.dll">
+      <publishTime>10/27/2014 18:05:05</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/27/2014 18:46:12</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.dll">
+      <publishTime>07/10/2012 12:07:38</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>10/27/2014 18:05:05</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.WebRequest.dll">
+      <publishTime>07/10/2012 12:07:38</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>10/27/2014 18:05:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>10/27/2014 18:05:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>10/27/2014 18:05:06</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>10/27/2014 18:05:05</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>10/27/2014 18:46:13</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>10/27/2014 18:05:03</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>10/27/2014 18:05:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>10/27/2014 18:05:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>10/27/2014 18:05:04</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>10/27/2014 18:46:13</publishTime>
+    </File>
+    <File Include="BLL/IBWS.asmx">
+      <publishTime>10/27/2014 18:11:51</publishTime>
+    </File>
+    <File Include="DTO/InterBookModel.edmx.diagram">
+      <publishTime>02/11/2015 18:25:41</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>10/27/2014 18:04:59</publishTime>
+    </File>
+    <File Include="Media/css/Account.css">
+      <publishTime>01/08/2015 16:09:48</publishTime>
+    </File>
+    <File Include="Media/css/Home.css">
+      <publishTime>01/29/2015 21:20:58</publishTime>
+    </File>
+    <File Include="Media/css/jquery-ui-1.10.3.custom.css">
+      <publishTime>10/27/2014 19:19:47</publishTime>
+    </File>
+    <File Include="Media/css/normalize.css">
+      <publishTime>10/27/2014 19:19:59</publishTime>
+    </File>
+    <File Include="Media/css/normalize.min.css">
+      <publishTime>10/27/2014 19:19:59</publishTime>
+    </File>
+    <File Include="Media/css/Search.css">
+      <publishTime>01/29/2015 21:20:58</publishTime>
+    </File>
+    <File Include="Media/css/Site.css">
+      <publishTime>01/06/2015 16:39:52</publishTime>
+    </File>
+    <File Include="Media/img/commun/en-GB/FbConnect.png">
+      <publishTime>10/27/2014 19:27:01</publishTime>
+    </File>
+    <File Include="Media/img/commun/favicon.ico">
+      <publishTime>10/27/2014 19:27:01</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/bonhommeConnexion.png">
+      <publishTime>12/18/2014 18:47:42</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/cadenasConnexion.png">
+      <publishTime>12/18/2014 18:47:42</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/errorConnexion.png">
+      <publishTime>12/17/2014 11:09:51</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/facebook-icon.png">
+      <publishTime>12/16/2014 18:12:47</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/FbConnect.png">
+      <publishTime>10/27/2014 19:27:01</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/fbHeader.png">
+      <publishTime>12/15/2014 23:44:23</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/Google-Plus-icon.png">
+      <publishTime>12/16/2014 18:12:47</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/googleHeader.png">
+      <publishTime>12/15/2014 23:44:23</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/imgCentre.jpg">
+      <publishTime>12/17/2014 12:14:07</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/LinkedIn-icon.jpg">
+      <publishTime>12/16/2014 18:21:30</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/logoFooter.png">
+      <publishTime>12/17/2014 13:51:53</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/logoHeader.png">
+      <publishTime>12/15/2014 23:46:30</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/separateurConnexion.png">
+      <publishTime>12/16/2014 18:32:02</publishTime>
+    </File>
+    <File Include="Media/img/commun/fr-FR/tabletteHeader.png">
+      <publishTime>12/15/2014 23:44:23</publishTime>
+    </File>
+    <File Include="Media/img/commun/IMG.jpg">
+      <publishTime>10/27/2014 19:27:01</publishTime>
+    </File>
+    <File Include="Media/img/commun/interbook.png">
+      <publishTime>10/27/2014 19:27:01</publishTime>
+    </File>
+    <File Include="Media/img/home/calendar.png">
+      <publishTime>12/17/2014 17:37:37</publishTime>
+    </File>
+    <File Include="Media/img/home/flecheAutocompletion.png">
+      <publishTime>12/18/2014 23:43:35</publishTime>
+    </File>
+    <File Include="Media/img/home/flecheKm.png">
+      <publishTime>12/17/2014 17:37:37</publishTime>
+    </File>
+    <File Include="Media/img/home/flecheRecherche.png">
+      <publishTime>12/17/2014 17:37:37</publishTime>
+    </File>
+    <File Include="Media/img/home/loupe.png">
+      <publishTime>12/17/2014 17:37:37</publishTime>
+    </File>
+    <File Include="Media/img/home/mapMarker.png">
+      <publishTime>12/17/2014 17:37:37</publishTime>
+    </File>
+    <File Include="Media/img/home/outil.png">
+      <publishTime>12/17/2014 16:49:41</publishTime>
+    </File>
+    <File Include="Media/img/home/rechercheAvancee.png">
+      <publishTime>12/17/2014 17:37:37</publishTime>
+    </File>
+    <File Include="Media/img/search/contacter.png">
+      <publishTime>12/19/2014 14:28:08</publishTime>
+    </File>
+    <File Include="Media/img/search/flecheCritere.png">
+      <publishTime>12/19/2014 14:28:08</publishTime>
+    </File>
+    <File Include="Media/img/search/flecheHautCriteres.png">
+      <publishTime>12/19/2014 14:28:08</publishTime>
+    </File>
+    <File Include="Media/img/signup/fr-FR/photoCommun.gif">
+      <publishTime>01/07/2015 14:19:18</publishTime>
+    </File>
+    <File Include="Media/js/easing.js">
+      <publishTime>12/16/2014 16:21:29</publishTime>
+    </File>
+    <File Include="Media/js/vendors/all.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/chosen.jquery.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/chosen.jquery.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/easing/EasePack.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-1.10.2.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-1.10.2.map">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-1.10.2.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-1.10.2.min.map">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-1.9.1.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-1.9.1.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-2.0.2.map">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-2.0.2.min.map">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-ui-1.8.16.custom.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-ui.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery-ui.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery.gsap.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery.gsap.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery.unobtrusive-ajax.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery.unobtrusive-ajax.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery.validate.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery.validate.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery.validate.unobtrusive.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/jquery.validate.unobtrusive.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/knockout-2.3.0.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/modernizr-2.6.2-respond-1.1.0.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/modernizr-2.6.2-respond-1.1.0.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/BezierPlugin.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/ColorPropsPlugin.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/CSSPlugin.min.js">
+      <publishTime>10/27/2014 19:19:04</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/CSSRulePlugin.min.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/EaselPlugin.min.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/RaphaelPlugin.min.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/RoundPropsPlugin.min.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/ScrollToPlugin.min.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/plugins/ThrowPropsPlugin.min.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/TweenMax.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/TweenMax.min.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/validators.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/widgets.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/js/vendors/xtcore.js">
+      <publishTime>10/27/2014 19:19:05</publishTime>
+    </File>
+    <File Include="Media/mail/0001.html">
+      <publishTime>02/12/2015 14:49:29</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>02/12/2015 15:57:44</publishTime>
+    </File>
+    <File Include="Views/Account/Criterions.cshtml">
+      <publishTime>11/07/2014 16:11:21</publishTime>
+    </File>
+    <File Include="Views/Account/SignUp.cshtml">
+      <publishTime>02/11/2015 11:54:53</publishTime>
+    </File>
+    <File Include="Views/BuyPlans/Index.cshtml">
+      <publishTime>01/29/2015 19:24:04</publishTime>
+    </File>
+    <File Include="Views/Confirm/Index.cshtml">
+      <publishTime>02/12/2015 10:48:20</publishTime>
+    </File>
+    <File Include="Views/Dashboard/Index.cshtml">
+      <publishTime>02/09/2015 22:50:35</publishTime>
+    </File>
+    <File Include="Views/Desabo/Index.cshtml">
+      <publishTime>02/11/2015 23:58:47</publishTime>
+    </File>
+    <File Include="Views/Error/Error.cshtml">
+      <publishTime>02/12/2015 15:16:55</publishTime>
+    </File>
+    <File Include="Views/Error/Http404.cshtml">
+      <publishTime>02/12/2015 15:16:40</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>02/12/2015 16:22:26</publishTime>
+    </File>
+    <File Include="Views/How/Index.cshtml">
+      <publishTime>01/29/2015 19:25:41</publishTime>
+    </File>
+    <File Include="Views/Search/Index.cshtml">
+      <publishTime>02/12/2015 16:21:40</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>01/29/2015 19:26:10</publishTime>
+    </File>
+    <File Include="Views/Shared/_Login.cshtml">
+      <publishTime>01/30/2015 12:04:15</publishTime>
+    </File>
+    <File Include="Views/ShowSession/Index.cshtml">
+      <publishTime>12/14/2014 23:29:03</publishTime>
+    </File>
+    <File Include="Views/User/Index.cshtml">
+      <publishTime>11/05/2014 19:17:32</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>10/27/2014 18:04:59</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>02/12/2015 23:09:18</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

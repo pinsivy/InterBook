@@ -1,0 +1,21 @@
+﻿@using InterBook2._0.Views.Account.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.CriterionsModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Media/css/Account")
+
+@*FORMULAIRE*@
+<section class="container">
+    <h1>Critères</h1>
+    <div class="form">
+        @using (Html.BeginForm("Criterions", "Account", FormMethod.Post))
+        {
+            <input type="submit" class="inputQuery" value="@Criterions.Creer" />
+        }
+
+    </div>
+</section>

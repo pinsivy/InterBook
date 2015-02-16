@@ -1,0 +1,190 @@
+﻿@using InterBook2._0.Views.Account.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.SignUpModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Media/css/Account")
+
+@*FORMULAIRE*@
+<section class="container">
+    <div id="info">
+        Bienvenue,<br /><br />
+        Vous venez de vous inscrire sur interbook veuillez remplir vore profil afin de commencer l’aventure.
+    </div>
+
+    <div class="form">
+        @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
+        {
+            <div id="bloc1" class="bloc">
+                <div class="titreBloc">
+                    <div class="numero"><div>1</div></div>
+                    <div class="titre">Mon Profil</div>
+                    <div><hr /></div>
+                </div>
+                <div class="questionBloc">
+                    <div>
+                        @*PHOTO*@
+                        <img src="~/Media/img/signup/fr-FR/photoCommun.gif" />
+                    </div>
+                    <div class="table">
+                        <div class="table-row">
+                            <div class="table-cell">@Html.LabelFor(x => x.Nom, SignUp.Nom, new { @for = "nom" }) :</div>
+                            <div class="table-cell">@Html.TextBoxFor(x => x.Nom, new { @class = "inputQuery", Name = "nom" })</div>
+                            <div class="table-cell">Profession : </div>
+                            <div class="table-cell"></div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">@Html.LabelFor(x => x.Prenom, SignUp.Prenom, new { @for = "prenom" }) :</div>
+                            <div class="table-cell">@Html.TextBoxFor(x => x.Prenom, new { @class = "inputQuery", Name = "prenom" })</div>
+                            <div class="table-cell">Permis : </div>
+                            <div class="table-cell">
+                                @Html.RadioButtonFor(mdl => mdl.Permis, "1", new { @class = "inputQuery", id = "moto", Name = "permis" })
+                                @Html.LabelFor(x => x.Permis, "M", new { @class = "civ", @for = "moto" })
+
+                                @Html.RadioButtonFor(mdl => mdl.Permis, "2", new { @class = "inputQuery", id = "voiture", Name = "permis" })
+                                @Html.LabelFor(x => x.Permis, "V", new { @class = "civ", @for = "voiture" })
+
+                                @Html.RadioButtonFor(mdl => mdl.Permis, "3", new { @class = "inputQuery", id = "camion", Name = "permis" })
+                                @Html.LabelFor(x => x.Permis, "C", new { @class = "civ", @for = "camion" })
+                            </div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">Age : </div>
+                            <div class="table-cell"></div>
+                            <div class="table-cell">@Html.LabelFor(x => x.NumTel, "Tel", new { @for = "numTel" }) :</div>
+                            <div class="table-cell">@Html.TextBoxFor(x => x.NumTel, new { @class = "inputQuery", Name = "numTel", placeholder = "0612345678" })</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">Sexe :</div>
+                            <div class="table-cell">
+                                @Html.RadioButtonFor(mdl => mdl.Civilite, "2", new { @class = "inputQuery", id = "Mme", Name = "civilite" })
+                                @Html.LabelFor(x => x.Civilite, SignUp.CivMme, new { @class = "civ", @for = "Mme" })
+
+                                @Html.RadioButtonFor(mdl => mdl.Civilite, "1", new { @class = "inputQuery", id = "M", Name = "civilite" })
+                                @Html.LabelFor(x => x.Civilite, SignUp.CivM, new { @class = "civ", @for = "M" })
+                            </div>
+                            <div class="table-cell">Mail : </div>
+                            <div class="table-cell">@Html.TextBoxFor(x => x.Email, new { @class = "inputQuery", Name = "email" })</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell">Ville : </div>
+                            <div class="table-cell"></div>
+                            <div class="table-cell">Mot de passe : </div>
+                            <div class="table-cell">@Html.PasswordFor(x => x.Password, new { @class = "inputQuery", Name = "password" })</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="table-cell"></div>
+                            <div class="table-cell"></div>
+                            <div class="table-cell">Mot de passe (Confirmation) : </div>
+                            <div class="table-cell">@Html.PasswordFor(x => x.PasswordConfirm, new { @class = "inputQuery", Name = "passwordConfirm" })</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bloc2et3">
+                <div id="bloc2" class="bloc">
+                    <div class="titreBloc">
+                        <div class="numero"><div>2</div></div>
+                        <div class="titre">Mes Compétences</div>
+                        <div><hr /></div>
+                    </div>
+                    <div>
+                        <div>Mon experience</div>
+                        <div>Mon CV</div>
+                        <div>Mon motivations</div>
+                    </div>
+                </div>
+                <div id="bloc3" class="bloc">
+                    <div class="titreBloc">
+                        <div class="numero"><div>3</div></div>
+                        <div class="titre">Mes Disponibilitées</div>
+                        <div><hr /></div>
+                    </div>
+                    <div>
+                        <div id="calendar">
+                        </div>
+                        <script>
+                            function showMonth(year, numMonth)
+                            {
+                                $("#calendar").html("");
+                                var d = new Date(year, numMonth),
+                                   locale = "fr-FR";
+                                var now = new Date();
+                                now.setHours(0, 0, 0, 0);
+                                var firstDayOfMonth = new Date(d.getFullYear(), d.getMonth(), 1);
+                                var numeroFirstDay = firstDayOfMonth.getDay();
+                                var jour = new Date(year, numMonth);
+                                jour.setDate(firstDayOfMonth.getDate() - ((numeroFirstDay == 0 ? 7 : numeroFirstDay) - 1));
+                                var zModulo = 1;
+
+                                var append = "";
+                                append += "<div id='moisCalendar'><span id='prev' class='left'><<<</span> " + d.toLocaleString(locale, { month: "long" }).toUpperCase() + " " + d.toLocaleString(locale, { year: "numeric" }).toUpperCase() + " <span id='next' class='right'>>>></span></div>";
+
+                                var jours = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+                                append += "<div class='table-row'>\
+                                               <div class='table-cell'>" + jours[0] + "</div>\
+                                               <div class='table-cell'>" + jours[1] + "</div>\
+                                               <div class='table-cell'>" + jours[2] + "</div>\
+                                               <div class='table-cell'>" + jours[3] + "</div>\
+                                               <div class='table-cell'>" + jours[4] + "</div>\
+                                               <div class='table-cell'>" + jours[5] + "</div>\
+                                               <div class='table-cell'>" + jours[6] + "</div>\
+                                           </div>";
+                                while (
+                                   (jour.getFullYear() < d.getFullYear() && jour.getMonth() == 11)
+                                || (jour.getFullYear() > d.getFullYear() && jour.getMonth() == 0 && zModulo % 7 != 1)
+                                || (jour.getFullYear() == d.getFullYear() && jour.getMonth() <= d.getMonth())
+                                ||  zModulo % 7 != 1) {
+                                    if (zModulo % 7 == 1) {
+                                        append += "<div class='table-row'>";
+                                    }
+                                    append += "<div class='table-cell' style='background-color: rgb(0, 190, 30);'>";
+                                    if (now.getDate() == jour.getDate())
+                                        append += "<span style='font-weight:bold;'>" + jour.getDate() + "</span>";
+                                    else
+                                        append += jour.getDate();
+                                    append += "</div>";
+                                    if (zModulo % 7 == 0) {
+                                        append += "</div>";
+                                    }
+                                    jour.setDate(jour.getDate() + 1);
+                                    zModulo += 1;
+                                }
+                                $("#calendar").html(append);
+                                $('#calendar #prev').on('click', function () {
+                                    d.setMonth(d.getMonth() - 1);
+                                    showMonth(d.getFullYear(), d.getMonth());
+                                });
+                                $('#calendar #next').on('click', function () {
+                                    d.setMonth(d.getMonth() + 1);
+                                    showMonth(d.getFullYear(), d.getMonth());
+                                });
+                                $('#calendar .table-cell').on('click', function () {
+                                    var color = $(this).css("background-color");
+                                    color = color == "rgb(240, 240, 240)" ? "rgb(0, 190, 30)" : "rgb(240, 240, 240)";
+                                    $(this).css("background-color", color);
+                                });
+                            }
+                            $(function () {
+                                var d = new Date(),
+                                   locale = "fr-FR";
+                                showMonth(d.getFullYear(), d.getMonth());
+                                
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            /*********************/
+            /*      BOUTON      **/
+            /*********************/
+            <div>
+                <input type="submit" class="inputQuery" id="btnEnregistrer" value="@SignUp.Enregistrer" />
+                @Html.ValidationSummary(true)
+            </div>
+        }
+    </div>
+</section>

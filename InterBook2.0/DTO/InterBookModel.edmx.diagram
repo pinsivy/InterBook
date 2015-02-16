@@ -5,31 +5,45 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="953271f0c08c4d898cf441f3173b9adb" Name="Diagram1">
-        <EntityTypeShape EntityType="InterBookModel.Ref_Profession" Width="1.5" PointX="8" PointY="4.625" />
+        <EntityTypeShape EntityType="InterBookModel.Ref_Profession" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="InterBookModel.Ref_Ville" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="InterBookModel.Util" Width="1.5" PointX="4.25" PointY="0.5" />
-        <EntityTypeShape EntityType="InterBookModel.Util_Profession" Width="1.5" PointX="6.125" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InterBookModel.Util_Profession" Width="1.5" PointX="6.375" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="InterBookModel.Util_Ville" Width="1.5" PointX="2.375" PointY="0.5" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Profession_Ref_Profession" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Ville_Ref_Ville" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Profession_Util" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Ville_Util" />
         <EntityTypeShape EntityType="InterBookModel.Ref_Contrat" Width="1.5" PointX="8" PointY="0.5" />
-        <EntityTypeShape EntityType="InterBookModel.Ref_Experience" Width="1.5" PointX="0.5" PointY="4.625" />
+        <EntityTypeShape EntityType="InterBookModel.Ref_Experience" Width="1.5" PointX="0.5" PointY="2.875" />
         <EntityTypeShape EntityType="InterBookModel.Util_Contrat" Width="1.5" PointX="6.125" PointY="0.5" />
-        <EntityTypeShape EntityType="InterBookModel.Util_Experience" Width="1.5" PointX="2.375" PointY="4.625" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Contrat_Ref_Contrat" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Experience_Ref_Experience" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Contrat_Util" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Experience_Util" />
-        <EntityTypeShape EntityType="InterBookModel.Ref_Culture" Width="1.5" PointX="9.875" PointY="4.625" />
+        <EntityTypeShape EntityType="InterBookModel.Util_Experience" Width="1.5" PointX="2.375" PointY="2.75" />
+        <EntityTypeShape EntityType="InterBookModel.Ref_Culture" Width="1.5" PointX="10.25" PointY="4.625" />
         <EntityTypeShape EntityType="InterBookModel.Ref_Pays" Width="1.5" PointX="11.75" PointY="0.5" />
-        <EntityTypeShape EntityType="InterBookModel.Util_Email" Width="1.5" PointX="0.5" PointY="2.5" />
+        <EntityTypeShape EntityType="InterBookModel.Util_Email" Width="1.5" PointX="0.5" PointY="4.75" />
         <EntityTypeShape EntityType="InterBookModel.Util_Postal" Width="1.5" PointX="9.875" PointY="0.5" />
+        <EntityTypeShape EntityType="InterBookModel.Util_Dispo" Width="1.5" PointX="5.875" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InterBookModel.Ref_Dispo" Width="1.5" PointX="8" PointY="6.75" />
+        <EntityTypeShape EntityType="InterBookModel.Ref_Mailing" Width="1.5" PointX="0.5" PointY="8.375" />
+        <EntityTypeShape EntityType="InterBookModel.Ref_TypeConsentement" Width="1.5" PointX="0.5" PointY="10.75" />
+        <EntityTypeShape EntityType="InterBookModel.UE_envoi" Width="1.5" PointX="2.375" PointY="6.75" />
+        <EntityTypeShape EntityType="InterBookModel.Util_Consentement" Width="1.5" PointX="2.375" PointY="9.625" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Contrat_Ref_Contrat" />
+        <AssociationConnector Association="InterBookModel.FK_Ref_Pays_Ref_Culture" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Dispo_Ref_Dispo" />
+        <AssociationConnector Association="InterBookModel.FK_UE_envoi_Ref_Mailing" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Consentement_Ref_Mailing" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Postal_Ref_Pays" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Profession_Ref_Profession" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Consentement_Ref_TypeConsentement" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Ville_Ref_Ville" />
+        <AssociationConnector Association="InterBookModel.FK_UE_envoi_Util" />
+        <AssociationConnector Association="InterBookModel.FK_UE_envoi_Util_Email" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Consentement_Util" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Contrat_Util" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Dispo_Util" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Experience_Util" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Profession_Util" />
         <AssociationConnector Association="InterBookModel.FK_Util_Util_Email" />
         <AssociationConnector Association="InterBookModel.FK_Util_Util_Postal" />
-        <AssociationConnector Association="InterBookModel.FK_Ref_Pays_Ref_Culture" />
-        <AssociationConnector Association="InterBookModel.FK_Util_Postal_Ref_Pays" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Ville_Util" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Experience_Ref_Experience" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

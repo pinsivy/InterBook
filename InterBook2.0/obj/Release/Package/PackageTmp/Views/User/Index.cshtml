@@ -1,0 +1,25 @@
+﻿@using InterBook2._0.Views.Search.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.UserModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Media/css/User")
+
+@*FORMULAIRE*@
+<section class="container">
+    <div class="form">@Model.u.IdU
+        <br />
+        @Model.u.idu_Email
+        <br />
+        @*@foreach (var ue in Model.u.Util_Experience)
+            {
+                <p>ue.id_Util_Experience.toString()</p>
+            }*@
+
+
+
+    </div>
+</section>

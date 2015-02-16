@@ -1,4 +1,5 @@
 ﻿using InterBook2._0.BLL;
+using InterBook2._0.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,25 +27,25 @@ namespace InterBook2._0.Models
         /// <summary>
         /// Titre de l'op
         /// </summary>
-        public string Title { get { return Resources.Commun.Title; } }
+        public string Title { get { return App_GlobalResources.Commun.Title; } }
 
         /// <summary>
         /// Sujet du mail de contact (Visible dans le footer)
         /// </summary>
-        public string SujetMailContact { get { return Resources.Commun.SujetMailContact; } }
+        public string SujetMailContact { get { return App_GlobalResources.Commun.SujetMailContact; } }
 
         /// <summary>
         /// Footer
         /// </summary>
-        public string ReglementTitle { get { return Resources.Commun.ReglementTitle; } }
+        public string ReglementTitle { get { return App_GlobalResources.Commun.ReglementTitle; } }
 
-        public string ReglementContent { get { return Resources.Commun.ReglementContent; } }
+        public string ReglementContent { get { return App_GlobalResources.Commun.ReglementContent; } }
 
-        public string CharteTitle { get { return Resources.Commun.CharteTitle; } }
+        public string CharteTitle { get { return App_GlobalResources.Commun.CharteTitle; } }
 
-        public string CharteContent { get { return Resources.Commun.CharteContent; } }
+        public string CharteContent { get { return App_GlobalResources.Commun.CharteContent; } }
 
-        private string _mentionlegale = Resources.Commun.Mentionlegale;
+        private string _mentionlegale = App_GlobalResources.Commun.Mentionlegale;
         /// <summary>
         /// Mentions légales de l'application. Si les mentions doivent changer selon la vue, il suffit de le changer dans le modèle de la vue.
         /// Exemple: page de diffusion => DiffusionModel.MentionLegale = blabla

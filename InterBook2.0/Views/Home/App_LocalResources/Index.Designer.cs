@@ -61,7 +61,7 @@ namespace InterBook2._0.Views.Home.App_LocalResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Où ?.
+        ///   Recherche une chaîne localisée semblable à Ou ?.
         /// </summary>
         public static string Ou {
             get {

@@ -1,0 +1,47 @@
+﻿@model Website.Models.ModelBase
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    //var stacktrace = Model.Exception.StackTrace.Replace(" at ", "<br /> at ");
+}
+
+<style>
+    .error {
+        width: 90%;
+        margin: auto;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 5px;
+        margin-top: 20px;
+        font-family: Verdana;
+        border: 1px solid #000;
+        text-align: center;
+    }
+
+        .error h2 {
+            color: #F01158;
+            margin: 0;
+        }
+
+        .error h4 {
+            font-size: 14px;
+            margin: 0 0 10px 30px;
+        }
+
+        .error p {
+            font-size: 12px;
+            color: #423333;
+            margin-left: 10px;
+        }
+</style>
+
+<div class="error">
+    <h2>Erreur 500</h2>
+    <p>
+        Il semble que la page que vous recherchiez rencontre une erreur. <br />
+        Pour revenir à l'accueil, <a href="/delog">cliquez ici</a>.<br />
+        Merci de nous contacter si vous rencontrez ce problème à nouveau.<br />
+        Veuillez accepter toutes nos excuses.
+    </p>
+</div>

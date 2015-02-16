@@ -4,11 +4,13 @@ using InterBook2._0.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace InterBook2._0.Controllers
 {
+    [Serializable]
     public class HomeController : BaseController
     {
         [HttpGet]
@@ -31,6 +33,19 @@ namespace InterBook2._0.Controllers
             //BLL.SessionManager.Current.Util = u;
 
             return View(hm);
+        }
+
+        // POST: Home/GetProfessions
+        [HttpGet]
+        public JsonResult GetProfessions(string debut, string maxRows)
+        {
+            List<Ref_Profession> rps = UtilManager.GetProfessions(debut, maxRows);
+            if (rps == null)
+            {
+                return Json(null);
+            }
+
+            return Json(rps, JsonRequestBehavior.AllowGet);
         }
     }
 }

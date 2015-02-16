@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -56,7 +57,36 @@ namespace InterBook2._0.BLL
             };
         }
 
-        
+        public static string PathServer
+        {
+            get
+            {
+                string domaine = HttpContext.Current.Request["SERVER_NAME"];
+                string retour = HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request["SERVER_NAME"];
+                if (domaine == "localhost")
+                    retour = "http://" + HttpContext.Current.Request.Url.Authority;
+                return retour;
+            }
+        }
+
+        public static string EmailNoReply
+        {
+            get
+            {
+
+                return ConfigurationManager.AppSettings["EmailNoReply"];
+            }
+        }
+
+
+        public static string EmailSupport
+        {
+            get
+            {
+
+                return ConfigurationManager.AppSettings["EmailSupport"];
+            }
+        }
     }
     
     public class Back
