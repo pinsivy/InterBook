@@ -117,10 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="APropos" xml:space="preserve">
+    <value>A propos</value>
+  </data>
+  <data name="CGU" xml:space="preserve">
+    <value>CGU</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment ça marche ?</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Disponibilite" xml:space="preserve">
+    <value>Disponibilité</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="Mentions" xml:space="preserve">
+    <value>Mentions Légales</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Mot de passe</value>
+  </data>
+  <data name="SeConnecter" xml:space="preserve">
+    <value>Se Connecter</value>
+  </data>
+  <data name="SeDeconnecter" xml:space="preserve">
+    <value>Se déconnecter</value>
   </data>
 </root>

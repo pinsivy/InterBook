@@ -11,8 +11,16 @@
             <button id="linkedInConnexion">Connexion avec LinkedIn</button>
         </div>
         <div id="separateurConnexion" class="inlineBlock">OU</div>
-        <div id="formConnexion" class="inlineBlock">
+        <form id="formConnexion" class="inlineBlock">
             <span id="errorVide"></span>
+            <div>
+                <div class="fonctionCo">
+                    <input type="radio" name="fonction" id="particulier" value="1" checked="checked"><label for="particulier">Particulier</label>
+                </div>
+                <div class="fonctionCo">
+                    <input type="radio" name="fonction" id="entreprise" value="0"><label for="entreprise">Entreprise</label>
+                </div>
+            </div>
             <div>
                 <div class="membreCo">
                     <input type="radio" name="membre" id="membreYes" value="1" checked="checked"><label for="membreYes">Déjà Membre</label>
@@ -22,31 +30,31 @@
                 </div>
             </div>
             <div>
+                <div class='iconEmailConnecter'></div>
                 <input id="emailConnecter" class="inputCo" name="emailConnecter" placeholder="@Index.Email" type="email" />
             </div>
             <div>
+                <div class='iconPasswordConnecter'></div>
                 <input id="passwordConnecter" class="inputCo" name="passwordConnecter" placeholder="@Index.Password" type="password" />
             </div>
             <div id="divBoutonCon">
                 <a href="#" id="mdpOublie">Mot de passe oublié ?</a>
-                <a href="#" id="btnConnecter">Valider</a>
+                <input type="submit" id="btnConnecter" value="Valider" />
             </div>
-        </div>
+        </form>
         <script>
             $(function () {
-
                 //RADIO BUTTON
-                $("#membreYes, #membreNo").change(function () {
-                    if ($("#membreNo").is(":checked"))
-                        $("#membreNo").parent().css("background", "#cbcbcb");
+                $("#particulier, #entreprise, #membreYes, #membreNo").change(function () {
+                    if ($(this).is(":checked"))
+                        $(this).parent().css("background", "#cbcbcb");
                     else
-                        $("#membreNo").parent().css("background", "none");
-                    if ($("#membreYes").is(":checked"))
-                        $("#membreYes").parent().css("background", "#cbcbcb");
-                    else
-                        $("#membreYes").parent().css("background", "none");
+                        $(this).parent().css("background", "none");
                 });
-
+                $(".fonctionCo, .membreCo").click(function () {
+                    $("input", this).attr('checked', true);
+                    $("#particulier, #entreprise, #membreYes, #membreNo").change();
+                });
                 //MOT DE PASSE OUBLIE
                 $("#mdpOublie").click(function (evt) {
                     if ($("#passwordConnecter").parent().is(":visible")) {
@@ -54,8 +62,7 @@
                         $("#mdpOublie").html("retour");
                         $("#btnConnecter").html("Envoyer");
                     }
-                    else
-                    {
+                    else {
                         $("#passwordConnecter").parent().show();
                         $("#mdpOublie").html("Mot de passe oublié ?");
                         $("#btnConnecter").html("Valider");
@@ -68,51 +75,79 @@
                     if ($('#emailConnecter').val() == '')
                         return false;
 
+                    $('body').append('<div id="fadeLogin"></div><img src="/Media/img/commun/loading.gif" width="128" height="128" id="imgLogin" />');
+                    $('#fadeLogin, #imgLogin').css({ 'filter': 'alpha(opacity=90)' }).fadeIn();
+
                     //SE CONNECTER
                     if ($("#membreYes").is(":checked")) {
-                        var o = { email: $("#emailConnecter").val(), mdp: $("#passwordConnecter").val() };
+
+                        var o = { particulier: $(".fonctionCo input:checked").val(), email: $("#emailConnecter").val(), mdp: $("#passwordConnecter").val() };
                         $.ajax({
                             type: "POST",
                             url: "/Account/SignIn",
                             data: o,
-                            datatype: 'json' ,
+                            datatype: 'json',
                             success: function (result) {
-                                if (result.Reponse == "2")
+
+                                $('#fadeLogin, #imgLogin').fadeOut().remove();
+
+                                if (result.Reponse == "2" && $(".fonctionCo input:checked").val() == "1")
                                     window.location = "/Account/SignUp";
+                                else if (result.Reponse == "2" && $(".fonctionCo input:checked").val() == "0")
+                                    window.location = "/Account/SignUpE";
 
                                 if (result.Reponse == "0")
-                                    alert("Erreur d'authentification");
-                                if (result.Reponse == "1")
-                                {
-                                    $('#fade').fadeOut().remove();
-                                    $('#connexionPart').animate({ 'top': '-=300px' }, 800, function () { $('#connexionPart').hide(); $('a.close').remove(); });
-                                    $("#headerDroite").html("<a href='/dashboard'>" + result.Message + "</a>");
+                                    alert("Erreur d'authentification : association login / mot de passe incorrect");
+                                if (result.Reponse == "1") {
+                                    location.reload();
+                                    //$('#fade').fadeOut().remove();
+                                    //$('#connexionPart')
+                                    //.animate(
+                                    //{ top: "-300px" },
+                                    //{
+                                    //    duration: 800,
+                                    //    easing: "easeInOutBack",
+                                    //    complete: function () {
+                                    //        $('#connexionPart').hide(); $('a.close').remove();
+                                    //    }
+                                    //});
+
+                                    //$("#rightPanel").html("<a href='/dashboard'>" + result.Message + "</a>");
                                 }
                             }
                         });
+
                     }
                     //S'INSCRIRE
-                    else if ($("#membreNo").is(":checked"))
-                    {
-                        var o = { email: $("#emailConnecter").val(), mdp: $("#passwordConnecter").val() };
+                    else if ($("#membreNo").is(":checked")) {
+                        var o = { particulier: $(".fonctionCo input:checked").val(), email: $("#emailConnecter").val(), mdp: $("#passwordConnecter").val() };
                         $.ajax({
                             type: "POST",
                             url: "/Account/SignUpHome",
                             data: o,
                             datatype: 'json',
+                            //beforeSend: function () {
+                            //    $('#divBoutonCon').append('<img src="/Media/img/commun/loading.gif" width="20" height="20" id="loaderBtn" />');
+                            //    $('#divBoutonCon #loaderBtn').remove();
+                            //},
                             success: function (result) {
-                                if (result.Message == "200")
+
+                                $('#fadeLogin, #imgLogin').fadeOut().remove();
+
+                                if (result.Message == "200" && $(".fonctionCo input:checked").val() == "1")
                                     window.location = "/Account/SignUp";
+                                else if (result.Message == "200" && $(".fonctionCo input:checked").val() == "0")
+                                    window.location = "/Account/SignUpE";
                                 else
                                     alert("déjà existant");
                             }
                         });
                     }
-                    //S'INSCRIRE
-                    else if ($("#membreCo").is(":checked")) {
-                        window.location = "/Account/SignUp";
-                    }
                 });
+            });
+
+            jQuery(function ($) {
+                $("#particulier, #entreprise, #membreYes, #membreNo").change();
             });
         </script>
     </div>

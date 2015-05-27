@@ -70,7 +70,7 @@ namespace Website.Models
                         foreach (var info in GetPropertInfos(prp.GetValue(o, null), t.Name))
                             yield return info;
                     }
-                    else if (prp.DeclaringType.ToString() == ((MemberInfo)prp).DeclaringType.FullName)
+                    else if (prp.DeclaringType.ToString() == ((MemberInfo)prp).DeclaringType.FullName && prp.DeclaringType.ToString() != "System.Web.HttpApplicationState")
                     {
                         var value = prp.GetValue(o, null);
                         IList il = value as IList;

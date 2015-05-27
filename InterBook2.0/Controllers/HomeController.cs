@@ -1,8 +1,10 @@
 ﻿using InterBook2._0.BLL;
 using InterBook2._0.DTO;
 using InterBook2._0.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -23,7 +25,8 @@ namespace InterBook2._0.Controllers
             //var u = BLL.UtilManager.GetUtilByIdU(1);
 
             //METHODE 2
-            //IBWS ws = new IBWS();
+            //if (SessionManager.Current.ws == null)
+            //SessionManager.Current.ws = new IBWS();
             //var u = ws.GetUtilByIdu(1);
             //if (u != null)
             //{
@@ -35,7 +38,7 @@ namespace InterBook2._0.Controllers
             return View(hm);
         }
 
-        // POST: Home/GetProfessions
+        // AJAX: Home/GetProfessions
         [HttpGet]
         public JsonResult GetProfessions(string debut, string maxRows)
         {
@@ -46,6 +49,28 @@ namespace InterBook2._0.Controllers
             }
 
             return Json(rps, JsonRequestBehavior.AllowGet);
+        }
+
+        // AJAX: Home/GetVilles
+        [HttpGet]
+        public JsonResult GetVilles(string debut, string maxRows)
+        {
+            List<Ref_VilleSimple> rvs = UtilManager.GetVilles(debut, maxRows);
+            if (rvs == null)
+                return Json(null);
+
+            return Json(rvs, JsonRequestBehavior.AllowGet);
+        }
+
+        // AJAX: Home/GetVilles
+        [HttpGet]
+        public JsonResult GetVilleGeoloc(string latitude, string longitude, string distance)
+        {
+            Ref_VilleSimple rv = UtilManager.GetVilleGeoloc(double.Parse(latitude.Replace(".", ",")), double.Parse(longitude.Replace(".", ",")), int.Parse(distance));
+            if (rv == null)
+                return Json(null);
+
+            return Json(rv, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace InterBook2._0.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            DeclinaisonCultureManager.SetCulture();
 
             // le contrôleur et l'action demandé
             string currentCtrl = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.ToLower();
@@ -19,40 +20,14 @@ namespace InterBook2._0.Controllers
 
             UrlHelper helper = new UrlHelper(filterContext.RequestContext);
 
-            string sessionControllerAction = SessionManager.Current.CurrentPage;
+            string sessionControllerAction = string.Format("{0}/{1}", currentCtrl, currentAction);
 
-            //////////////////////////////
-            // RETIRER
-            //////////////////////////////
-            if (false)
+            // Gestion des back
+            Back back = BaseManager.HandleBacks(sessionControllerAction.ToLower());
+            if (back != null)
             {
-                // Il y a rien en session
-                if (string.IsNullOrEmpty(sessionControllerAction))
-                {
-                    // On ajoute le contrôleur et l'action demandé dans la variable contenant la session
-                    sessionControllerAction = string.Format("{0}/{1}", currentCtrl, currentAction);
-                }
-                else
-                {
-                    string[] actionCtrl = sessionControllerAction.Split('/');
-                    string sessionCtrl = actionCtrl[0].ToLower();
-                    string sessionAction = actionCtrl[1].ToLower();
-
-                    // La demande courante est différente de ce qu'il y a en session
-                    if (currentCtrl != sessionCtrl)
-                    {
-                        filterContext.Result = new RedirectResult(helper.Action(sessionAction, sessionCtrl));
-                        return;
-                    }
-                }
-
-                // Gestion des back
-                Back back = BaseManager.HandleBacks(sessionControllerAction.ToLower());
-                if (back != null)
-                {
-                    filterContext.Result = new RedirectResult(helper.Action(back.Action, back.Controller));
-                    return;
-                }
+                filterContext.Result = new RedirectResult(helper.Action(back.Action, back.Controller));
+                return;
             }
         }
 
@@ -60,6 +35,15 @@ namespace InterBook2._0.Controllers
         {
             SessionManager.Current.CurrentPage = string.Format("{0}/{1}", controller, action);
             return RedirectToAction(action, controller);
+        }
+
+        public ActionResult MenuProfil()
+        {
+            var rd = ControllerContext.ParentActionViewContext.RouteData;
+            var currentAction = rd.GetRequiredString("action");
+            var currentController = rd.GetRequiredString("controller");
+            
+            return View();
         }
     }
 }

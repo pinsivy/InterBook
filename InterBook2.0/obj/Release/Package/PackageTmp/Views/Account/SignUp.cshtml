@@ -7,6 +7,7 @@
 }
 
 @Styles.Render("~/Media/css/Account")
+<link href="~/Media/css/lib/multiple-select.css" rel="stylesheet" />
 
 @*FORMULAIRE*@
 <section class="container">
@@ -16,7 +17,7 @@
     </div>
 
     <div class="form">
-        @using (Html.BeginForm("SignUp", "Account", FormMethod.Post))
+        @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { enctype = "multipart/form-data", name = "monFormulaire", id="form1" }))
         {
             <div id="bloc1" class="bloc">
                 <div class="titreBloc">
@@ -25,62 +26,303 @@
                     <div><hr /></div>
                 </div>
                 <div class="questionBloc">
-                    <div>
-                        @*PHOTO*@
-                        <img src="~/Media/img/signup/fr-FR/photoCommun.gif" />
+                    <div class="left">
+                        @*
+                            PHOTO
+                        *@
+                        <div style="position:relative;">
+                            <img id="Photo" src="~/Media/img/signup/fr-FR/photoCommun.gif" width="138" height="158" />
+                            <input type="file" id="inputFileJpg" name="inputFileJpg" style="width: 138px;height:158px;opacity:0;position: absolute;vertical-align: middle;left: 0px;cursor:pointer;top: 0px;" />
+                            <button id="supprFileJpg" style="display:none;">Supprimer</button>
+                        </div>
+                        <span class="field-validation-error" id="errorJpg"></span>
                     </div>
-                    <div class="table">
-                        <div class="table-row">
-                            <div class="table-cell">@Html.LabelFor(x => x.Nom, SignUp.Nom, new { @for = "nom" }) :</div>
-                            <div class="table-cell">@Html.TextBoxFor(x => x.Nom, new { @class = "inputQuery", Name = "nom" })</div>
-                            <div class="table-cell">Profession : </div>
-                            <div class="table-cell"></div>
+                    <div class="left divInfos">
+                        @*
+                            PRENOM
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.Prenom, SignUp.Prenom, new { @for = "prenom" }) :</div>
+                            <div class="right">@Html.TextBoxFor(x => x.Prenom, new { @class = "inputQuery", Name = "prenom" })</div>
                         </div>
-                        <div class="table-row">
-                            <div class="table-cell">@Html.LabelFor(x => x.Prenom, SignUp.Prenom, new { @for = "prenom" }) :</div>
-                            <div class="table-cell">@Html.TextBoxFor(x => x.Prenom, new { @class = "inputQuery", Name = "prenom" })</div>
-                            <div class="table-cell">Permis : </div>
-                            <div class="table-cell">
-                                @Html.RadioButtonFor(mdl => mdl.Permis, "1", new { @class = "inputQuery", id = "moto", Name = "permis" })
-                                @Html.LabelFor(x => x.Permis, "M", new { @class = "civ", @for = "moto" })
-
-                                @Html.RadioButtonFor(mdl => mdl.Permis, "2", new { @class = "inputQuery", id = "voiture", Name = "permis" })
-                                @Html.LabelFor(x => x.Permis, "V", new { @class = "civ", @for = "voiture" })
-
-                                @Html.RadioButtonFor(mdl => mdl.Permis, "3", new { @class = "inputQuery", id = "camion", Name = "permis" })
-                                @Html.LabelFor(x => x.Permis, "C", new { @class = "civ", @for = "camion" })
-                            </div>
+                        @*
+                            NOM
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.Nom, SignUp.Nom, new { @for = "nom" }) :</div>
+                            <div class="right">@Html.TextBoxFor(x => x.Nom, new { @class = "inputQuery", Name = "nom" })</div>
                         </div>
-                        <div class="table-row">
-                            <div class="table-cell">Age : </div>
-                            <div class="table-cell"></div>
-                            <div class="table-cell">@Html.LabelFor(x => x.NumTel, "Tel", new { @for = "numTel" }) :</div>
-                            <div class="table-cell">@Html.TextBoxFor(x => x.NumTel, new { @class = "inputQuery", Name = "numTel", placeholder = "0612345678" })</div>
+                        @*
+                            AGE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Age : </div>
+                            <div class="right"></div>
                         </div>
-                        <div class="table-row">
-                            <div class="table-cell">Sexe :</div>
-                            <div class="table-cell">
+                        @*
+                            SEXE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Sexe :</div>
+                            <div class="right">
                                 @Html.RadioButtonFor(mdl => mdl.Civilite, "2", new { @class = "inputQuery", id = "Mme", Name = "civilite" })
                                 @Html.LabelFor(x => x.Civilite, SignUp.CivMme, new { @class = "civ", @for = "Mme" })
 
                                 @Html.RadioButtonFor(mdl => mdl.Civilite, "1", new { @class = "inputQuery", id = "M", Name = "civilite" })
                                 @Html.LabelFor(x => x.Civilite, SignUp.CivM, new { @class = "civ", @for = "M" })
                             </div>
-                            <div class="table-cell">Mail : </div>
-                            <div class="table-cell">@Html.TextBoxFor(x => x.Email, new { @class = "inputQuery", Name = "email" })</div>
                         </div>
-                        <div class="table-row">
-                            <div class="table-cell">Ville : </div>
-                            <div class="table-cell"></div>
-                            <div class="table-cell">Mot de passe : </div>
-                            <div class="table-cell">@Html.PasswordFor(x => x.Password, new { @class = "inputQuery", Name = "password" })</div>
+                        @*
+                            EMAIL
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Mail : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.Email, new { @class = "inputQuery", Name = "email" })</div>
                         </div>
-                        <div class="table-row">
-                            <div class="table-cell"></div>
-                            <div class="table-cell"></div>
-                            <div class="table-cell">Mot de passe (Confirmation) : </div>
-                            <div class="table-cell">@Html.PasswordFor(x => x.PasswordConfirm, new { @class = "inputQuery", Name = "passwordConfirm" })</div>
+                        @*
+                            TELEPHONE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.NumTel, "Tel", new { @for = "numTel" }) :</div>
+                            <div class="right">@Html.TextBoxFor(x => x.NumTel, new { @class = "inputQuery", Name = "numTel", placeholder = "0612345678" })</div>
                         </div>
+                        @*
+                            VILLE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.Ville, SignUp.Ville, new { @for = "ville" }) : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.Ville, new { @class = "inputQuery", Name = "ville", required = "required", autocomplete = "off" })</div>
+                        </div>
+                        @*
+                            PERMIS
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Permis : </div>
+                            <div class="right">
+                                @Html.CheckBoxFor(mdl => mdl.PermisA, new { @class = "inputQuery", id = "moto" })
+                                <label class="civ" for="moto"><img src="~/Media/img/signup/fr-FR/moto.gif" /></label>
+                                @Html.CheckBoxFor(mdl => mdl.PermisB, new { @class = "inputQuery", id = "voiture" })
+                                <label class="civ" for="voiture"><img src="~/Media/img/signup/fr-FR/voiture.gif" /></label>
+                                @Html.CheckBoxFor(mdl => mdl.PermisC, new { @class = "inputQuery", id = "camion" })
+                                <label class="civ" for="camion"><img src="~/Media/img/signup/fr-FR/camion.gif" /></label>
+                            </div>
+                        </div>
+                        @*
+                            PROFESSION
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Profession : <br /></div>
+                            <div class="right">
+                                <div class="table" id="tableProfession">
+                                    <div class="table-row"><input type="text" name="lProfession[0]" class="inputQuery Profession" /></div>
+                                </div>
+                                <button id="plus">Ajouter une autre profession</button>
+                                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+                                <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+                                <script>
+                                    var nbP = 1;
+                                    $("#plus").click(function () {
+                                        if (nbP < 5) {
+                                            $("#tableProfession").append("<div class=\"table-row\"><input type=\"text\" name=\"lProfession[" + (nbP) + "]\" class=\"inputQuery Profession\" /></div>");
+                                            nbP++;
+                                        }
+                                        if (nbP >= 5)
+                                            $("#plus").hide();
+
+                                        return false;
+                                    });
+                                    var options = {
+                                        source: function (request, response) {
+
+                                            $.ajax({
+                                                dataType: "json",
+                                                type: 'Get',
+                                                url: '/Home/GetProfessions',
+                                                search: function () { $(this).addClass('ui-autocomplete-loading'); },
+                                                open: function () { $(this).removeClass('ui-autocomplete-loading'); },
+                                                delay: 0,
+                                                data: {
+                                                    debut: request.term,
+                                                    maxRows: 8
+                                                },
+                                                success: function (data) {
+                                                    response($.map(data, function (item) {
+                                                        return item.Description;
+                                                    }));
+                                                }
+                                            });
+                                        }
+                                    };
+                                    $(document).on('keydown.autocomplete', ".Profession", function () {
+                                        $(this).autocomplete(options);
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+                <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+                <script>
+                    //Autocompletion Ville
+                    $(function () {
+                        $("#Ville").autocomplete({
+                            source: function (request, response) {
+
+                                $.ajax({
+                                    dataType: "json",
+                                    type: 'Get',
+                                    url: '/Home/GetVilles',
+                                    search: function () { $(this).addClass('ui-autocomplete-loading'); },
+                                    open: function () { $(this).removeClass('ui-autocomplete-loading'); },
+                                    delay: 0,
+                                    data: {
+                                        debut: request.term,
+                                        maxRows: 8
+                                    },
+                                    success: function (data) {
+                                        response($.map(data, function (item) {
+                                            return retour = item.article + item.ville;
+                                        }));
+                                    }
+                                });
+                            }
+                        });
+                    });
+                </script>
+                <div class="titreBloc">
+                    Ma Géolocalisation<br/>
+                    <span class="sousTitre">Selectionnez les zones de recherche où l'on pourra vous localiser</span>
+                </div>
+                <div class="blocGeo">
+                    <div class="choisi" id="choisi">
+
+                    </div>
+                    <div>
+                        <input type="checkbox" name="france" id="franceInput" checked="checked"><label for="franceInput">Je souhaite travailler dans toute la France</label>
+                    </div>
+                    <div id="selectChoisi">
+                        @Html.DropDownGroupListFor(m => m.SubmittedDepartement, Model.DepartementList, new { multiple = "multiple", @class = "multiselect" })
+
+                        <script src="~/Media/js/jquery.multiple.select.js"></script>
+                        <script>
+                            var json = {"DepartementChoisi" : []}
+                            function refreshListe()
+                            {
+                                textDepartementChoisi = "";
+
+                                $.each(json.DepartementChoisi, function (i, v) {
+                                    textDepartementChoisi += v.Region + " / ";
+                                    $.each(json.DepartementChoisi[i].Departement, function (j, w) {
+                                        if (j > 0)
+                                            textDepartementChoisi += ", "; 
+                                        textDepartementChoisi += w.nom_Departement + "<span class=\"croixDep\" onclick='$(\"label input[value=" + w.id_Departement + "]\").click();'>X</span>";
+                                    });
+                                    textDepartementChoisi += "<br/>"
+                                });
+
+                                if (textDepartementChoisi != "")
+                                {
+                                    $("#choisi").html(textDepartementChoisi);
+                                    $("#choisi").show();
+                                }
+                                else
+                                    $("#choisi").hide();
+
+                            }
+                            $(function () {
+                                $('#franceInput').change(function () {
+                                    if ($(this).prop('checked')) {
+                                        $('#SubmittedDepartement').multipleSelect('disable');
+                                        $("#SubmittedDepartement").multipleSelect("checkAll");
+                                        $("#choisi").hide();
+                                        json.DepartementChoisi.splice(0);
+                                    }
+                                    else {
+                                        $('#SubmittedDepartement').multipleSelect('enable');
+                                        $("#SubmittedDepartement").multipleSelect("uncheckAll");
+                                    }
+                                });
+                                $('#franceInput').change();
+                            });
+                            $('#SubmittedDepartement').multipleSelect({
+                                allSelected: 'Toute la France', selectAllText: 'Toute la France', selectAllDelimiter: ['', ''],
+                                selectAll: false, multiple: true, multipleWidth: 150, width: '100%', placeholder: "Sélectionnez les départements", countSelected: "# département(s) choisi(s)",
+                                onOptgroupClick: function (view) {
+
+                                    var existe = -1;
+                                    $.each(json.DepartementChoisi, function (i, v) {
+                                        if (v.Region == view.label.trim()) {
+                                            existe = i;
+                                        }
+                                    });
+
+                                    if (view.checked)
+                                    {
+                                        var departementsDuGroupe = [];
+                                        $('#SubmittedDepartement').find("optgroup[label='" + view.label.trim() + "'] option").each(function () {
+                                            departementsDuGroupe.push({ "id_Departement": $(this).attr("value"), "nom_Departement": $(this).text() });
+                                        });
+                                        if (existe != -1) {//existe
+                                            json.DepartementChoisi[existe].Departement = departementsDuGroupe;
+                                        }
+                                        else {//créer
+                                            json.DepartementChoisi.push({ "Region": view.label.trim(), "Departement": departementsDuGroupe });
+                                        }
+
+                                        refreshListe();
+                                    }
+                                    else
+                                    {
+                                        if (existe != -1) {//existe
+                                            json.DepartementChoisi.splice(existe, 1);
+                                        }
+                                    }
+                                    refreshListe();
+                                },
+                                onClick: function (view) {
+                                    var region = $("#SubmittedDepartement option[value=" + view.value + "]").parent().attr("label");
+
+                                    var existe = -1;
+                                    $.each(json.DepartementChoisi, function (i, v) {
+                                        if (v.Region == region) {
+                                            existe = i;
+                                        }
+                                    });
+
+                                    if (view.checked) {
+
+                                        if (existe != -1) {//existe
+                                            json.DepartementChoisi[existe].Departement.push({ "id_Departement": view.value, "nom_Departement": view.label.trim() });
+                                        }
+                                        else {//créer
+                                            json.DepartementChoisi.push({ "Region": region, "Departement": [{ "id_Departement": view.value, "nom_Departement": view.label.trim() }] });
+                                        }
+
+                                        refreshListe();
+                                    }
+                                    else {
+                                        if (existe != -1) {//existe
+                                            var depSuppr = -1;
+                                            $.each(json.DepartementChoisi[existe].Departement, function (j, w) {
+                                                if (w.id_Departement == view.value) {
+                                                    depSuppr = j;
+                                                }
+                                            });
+                                            if (depSuppr != -1)
+                                                json.DepartementChoisi[existe].Departement.splice(depSuppr, 1);
+                                            if (json.DepartementChoisi[existe].Departement.length == 0)
+                                                json.DepartementChoisi.splice(existe, 1);
+                                        }
+                                    }
+                                    refreshListe();
+                                }
+                            });
+                        </script>
+                    </div>
+                    <div>
+                        <input type="checkbox" name="etranger" id="etrangerInput"><label for="etrangerInput">Je souhaite travailler à l'étranger</label>
                     </div>
                 </div>
             </div>
@@ -91,10 +333,43 @@
                         <div class="titre">Mes Compétences</div>
                         <div><hr /></div>
                     </div>
-                    <div>
-                        <div>Mon experience</div>
-                        <div>Mon CV</div>
-                        <div>Mon motivations</div>
+                    <div class="table">
+                        @*
+                            EXPERIENCE
+                        *@
+                        <div class="table-row">
+                            <div class="table-cell">
+                                Mon experience :
+                            </div>
+                            <div class="table-cell">
+                                @Html.DropDownListFor(m => m.Experience, Model.ExperienceList)
+                            </div>
+                        </div>
+                        @*
+                            CV
+                        *@
+                        <div class="table-row">
+                            <div class="table-cell">
+                                Mon CV :
+                            </div>
+                            <div class="table-cell">
+                                <input type="file" id="inputFilePdf" name="inputFilePdf" />
+                                <span class="field-validation-error" id="errorPdf"></span>
+                                <button id="supprFilePdf" style="display:none;">Supprimer</button>
+                                @Html.ValidationMessage("File")
+                            </div>
+                        </div>
+                        @*
+                            MOTIVATION
+                        *@
+                        <div class="table-row">
+                            <div class="table-cell">
+                                Mon motivations :
+                            </div>
+                            <div class="table-cell">
+                                @Html.TextAreaFor(x => x.Motivation, new { @class = "inputQuery", Name = "motivation" })
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div id="bloc3" class="bloc">
@@ -104,76 +379,248 @@
                         <div><hr /></div>
                     </div>
                     <div>
-                        <div id="calendar">
-                        </div>
+                        <div id="datepicker"></div>
+                        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+                        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+                        <script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script>
                         <script>
-                            function showMonth(year, numMonth)
-                            {
-                                $("#calendar").html("");
-                                var d = new Date(year, numMonth),
-                                   locale = "fr-FR";
-                                var now = new Date();
-                                now.setHours(0, 0, 0, 0);
-                                var firstDayOfMonth = new Date(d.getFullYear(), d.getMonth(), 1);
-                                var numeroFirstDay = firstDayOfMonth.getDay();
-                                var jour = new Date(year, numMonth);
-                                jour.setDate(firstDayOfMonth.getDate() - ((numeroFirstDay == 0 ? 7 : numeroFirstDay) - 1));
-                                var zModulo = 1;
+                            //DATEPICKER
+                            var disponible = [];
+                            var reserver = [];
+                            var i = 0;
 
-                                var append = "";
-                                append += "<div id='moisCalendar'><span id='prev' class='left'><<<</span> " + d.toLocaleString(locale, { month: "long" }).toUpperCase() + " " + d.toLocaleString(locale, { year: "numeric" }).toUpperCase() + " <span id='next' class='right'>>>></span></div>";
-
-                                var jours = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
-                                append += "<div class='table-row'>\
-                                               <div class='table-cell'>" + jours[0] + "</div>\
-                                               <div class='table-cell'>" + jours[1] + "</div>\
-                                               <div class='table-cell'>" + jours[2] + "</div>\
-                                               <div class='table-cell'>" + jours[3] + "</div>\
-                                               <div class='table-cell'>" + jours[4] + "</div>\
-                                               <div class='table-cell'>" + jours[5] + "</div>\
-                                               <div class='table-cell'>" + jours[6] + "</div>\
-                                           </div>";
-                                while (
-                                   (jour.getFullYear() < d.getFullYear() && jour.getMonth() == 11)
-                                || (jour.getFullYear() > d.getFullYear() && jour.getMonth() == 0 && zModulo % 7 != 1)
-                                || (jour.getFullYear() == d.getFullYear() && jour.getMonth() <= d.getMonth())
-                                ||  zModulo % 7 != 1) {
-                                    if (zModulo % 7 == 1) {
-                                        append += "<div class='table-row'>";
+                            $.ajax({
+                                dataType: "json",
+                                type: 'Get',
+                                async: false,
+                                url: '/Dashboard/RecupDispo',
+                                success: function (data) {
+                                    for (i = 0; i < data.length; i++) {
+                                        if (data[i].id_Ref_Dispo == 1) {
+                                            disponible.push(data[i]);
+                                        }
+                                        else if (data[i].id_Ref_Dispo == 2) {
+                                            reserver.push(data[i]);
+                                        }
                                     }
-                                    append += "<div class='table-cell' style='background-color: rgb(0, 190, 30);'>";
-                                    if (now.getDate() == jour.getDate())
-                                        append += "<span style='font-weight:bold;'>" + jour.getDate() + "</span>";
-                                    else
-                                        append += jour.getDate();
-                                    append += "</div>";
-                                    if (zModulo % 7 == 0) {
-                                        append += "</div>";
-                                    }
-                                    jour.setDate(jour.getDate() + 1);
-                                    zModulo += 1;
                                 }
-                                $("#calendar").html(append);
-                                $('#calendar #prev').on('click', function () {
-                                    d.setMonth(d.getMonth() - 1);
-                                    showMonth(d.getFullYear(), d.getMonth());
-                                });
-                                $('#calendar #next').on('click', function () {
-                                    d.setMonth(d.getMonth() + 1);
-                                    showMonth(d.getFullYear(), d.getMonth());
-                                });
-                                $('#calendar .table-cell').on('click', function () {
-                                    var color = $(this).css("background-color");
-                                    color = color == "rgb(240, 240, 240)" ? "rgb(0, 190, 30)" : "rgb(240, 240, 240)";
-                                    $(this).css("background-color", color);
-                                });
-                            }
-                            $(function () {
-                                var d = new Date(),
-                                   locale = "fr-FR";
-                                showMonth(d.getFullYear(), d.getMonth());
-                                
                             });
+
+
+                            setDays = function (day, month, year) {
+                                var result = [true, 'option', 'En option'];
+                                var boolReserver = false;
+                                var rl = 0;
+                                var i = 0;
+
+                                if ((reserver != null)) {
+                                    rl = reserver.length;
+
+                                    for (i = 0; i < rl; i++) {
+                                        var milli = reserver[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
+                                        var d = new Date(parseInt(milli));
+                                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
+                                            result = [false, "reserver", "Déjà réservé"];
+                                            boolReserver = true;
+                                        }
+                                    }
+                                }
+
+                                if ((!boolReserver) && disponible != null) {
+                                    rl = disponible.length;
+
+                                    for (i = 0; i < rl; i++) {
+                                        var milli = disponible[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
+                                        var d = new Date(parseInt(milli));
+                                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
+                                            result = [true, 'disponible', "Disponible"];
+                                        }
+                                    }
+                                }
+
+                                return result;
+                            }
+
+                            selectedDay = function (dateText, inst) {
+                                var i = 0;
+
+                                setTimeout(function () {
+                                    var j = parseInt(dateText.slice(0, 2), 10);
+                                    var m = parseInt(dateText.slice(3, 5), 10) - 1;
+                                    var y = parseInt(dateText.slice(6), 10);
+
+                                    var dtemp = new Date(y, m, j).getTime();
+                                    var suppr = false;
+                                    for (var i = 0; i < disponible.length; i++) {
+                                        var milli = disponible[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
+                                        var d = new Date(parseInt(milli)).getTime();
+                                        var dtemp = new Date(y, m, j).getTime();
+                                        if (d == dtemp) {
+                                            disponible.splice(i, 1);
+                                            suppr = true;
+                                        }
+                                    }
+
+                                    if (!suppr)
+                                        disponible.push({ dDispo: "" + dtemp });
+
+                                    $("#datepicker").datepicker("refresh");
+                                }, 0);
+                            }
+
+                            $("#datepicker").datepicker({
+                                firstDay: 1, //0=Dim, 1=Lun
+                                numberOfMonths: 1,
+                                stepMonths: 1,
+                                showButtonPanel: true,
+                                currentText: "Aujourd'hui",
+                                nextText: "Suivant",
+                                prevText: "Précédent",
+                                minDate: new Date(),
+                                beforeShowDay: function (date) {
+                                    return setDays(date.getDate(), date.getMonth(), date.getFullYear());
+                                },
+                                onSelect: function (dateText, inst) {
+                                    selectedDay(dateText, inst);
+                                }
+                            });
+
+                            $(window).load(function () {
+                                $("#datepicker").bind("mouseover", function () {
+                                    $("td.reserver > span", this).css("background", "#c32e2e");
+                                    $("td.option > a", this).css("background", "#ffcc00");
+                                    $("td.disponible > a", this).css("background", "#87ce18");
+                                });
+                                $("#datepicker").mouseover();
+                            });
+
+                            //IMAGE
+                            $("#inputFileJpg").change(function () {
+                                readURL(this, checkfile("Jpg"));
+                            });
+                            $("#supprFileJpg").click(function () {
+                                document.getElementById('inputFileJpg').value = '';
+                                readURL(this, checkfile("Jpg"));
+                                return false;
+                            });
+                            $("#inputFilePdf").change(function () {
+                                if (checkfile("Pdf"))
+                                    $("#supprFilePdf").show();
+                                else {
+                                    document.getElementById('inputFilePdf').value = '';
+                                    $("#supprFilePdf").hide();
+                                }
+                            });
+                            $("#supprFilePdf").click(function () {
+                                document.getElementById('inputFilePdf').value = '';
+                                checkfile("Pdf");
+                                $("#supprFilePdf").hide();
+                                return false;
+                            });
+
+                            function readURL(input, valide) {
+                                var reader = new FileReader();
+
+                                if (input.files && input.files[0] && valide) {
+                                    reader.onload = function (e) {
+                                        $('#Photo').attr('src', e.target.result);
+                                    }
+
+                                    reader.readAsDataURL(input.files[0]);
+                                    $("#supprFileJpg").show();
+                                }
+                                else
+                                {
+                                    $('#Photo').attr('src', '/Media/img/signup/fr-FR/photoCommun.gif');
+                                    document.getElementById('inputFileJpg').value = '';
+                                    $("#supprFileJpg").hide();
+                                }
+                            }
+
+                            //get file size
+                            function GetFileSize(fileid) {
+                                try {
+                                    var fileSize = 0;
+                                    //for IE
+                                    //if (navigator.userAgent.match("Trident")) {
+                                    //    //before making an object of ActiveXObject, 
+                                    //    //please make sure ActiveX is enabled in your IE browser
+                                    //    var objFSO = new ActiveXObject("Scripting.FileSystemObject"); var filePath = $("#" + fileid)[0].value;
+                                    //    var objFile = objFSO.getFile(filePath);
+                                    //    var fileSize = objFile.size; //size in kb
+                                    //    fileSize = fileSize / 1048576; //size in mb 
+                                    //}
+                                    //    //for FF, Safari, Opeara and Others
+                                    //else {
+                                        fileSize = $("#" + fileid)[0].files[0].size //size in kb
+                                        fileSize = fileSize / 1048576; //size in mb 
+                                    //}
+                                    return fileSize;
+                                }
+                                catch (e) {
+                                    alert("Error is :" + e);
+                                }
+                            }
+
+                            //get file path from client system
+                            function getNameFromPath(strFilepath) {
+                                var objRE = new RegExp(/([^\/\\]+)$/);
+                                var strName = objRE.exec(strFilepath);
+
+                                if (strName == null) {
+                                    return null;
+                                }
+                                else {
+                                    return strName[0];
+                                }
+                            }
+
+                            function checkfile(type) {
+                                var file = getNameFromPath($("#inputFile" + type).val());
+                                if (file != null) {
+                                    var extension = file.substr((file.lastIndexOf('.') + 1));
+                                    // alert(extension);
+                                    if (type == "Pdf") {
+                                        if (extension.toLowerCase() == "pdf")
+                                            flag = true;
+                                        else {
+                                            flag = false;
+                                            $("#error" + type).text("You can upload only pdf extension file");
+                                        }
+                                    }
+                                    else {
+                                        switch (extension.toLowerCase()) {
+                                            case 'jpg':
+                                            case 'png':
+                                            case 'gif':
+                                                flag = true;
+                                                break;
+                                            default:
+                                                flag = false;
+                                                $("#error" + type).text("You can upload only jpg,png,gif extension file");
+                                        }
+                                    }
+                                }
+                                if (file == null) {
+                                    
+                                    return true;
+                                }
+                                else if (flag == false) {
+
+                                    return false;
+                                }
+                                else {
+                                    var size = GetFileSize('inputFile' + type);
+                                    if (size > 3) {
+                                        $("#error" + type).text("You can upload file up to 3 MB");
+                                        return false;
+                                    }
+                                    else {
+                                        $("#error" + type).text("");
+                                    }
+                                }
+                                return flag;
+                            }
                         </script>
                     </div>
                 </div>
@@ -182,7 +629,7 @@
             /*      BOUTON      **/
             /*********************/
             <div>
-                <input type="submit" class="inputQuery" id="btnEnregistrer" value="@SignUp.Enregistrer" />
+                <input type="submit" class="inputQuery" id="btnEnregistrer" value="@SignUp.Enregistrer" onclick="return checkfile('Pdf') && checkfile('Jpg');" />
                 @Html.ValidationSummary(true)
             </div>
         }

@@ -8,22 +8,34 @@
     margin: 0;
     padding: 0;
 }
-html, body {
+html, body{
+
     height: 100%;
+    font-weight: normal;
+    font-size: 14px;
+    background-color: #e7e7e7;
+    font-family: "Helvetica LT Std", sans-serif;
 }
-body
-{
-    display: table;
-    width: 100%;
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px #f9f9f9 inset;
 }
-.page-row
-{
-  display: table-row;
-  height: 1px;
+#page{
+    min-height: 100%;
+	height: auto !important;
+	height: 100%;
+    margin: -60px auto -60px;
 }
-.page-row-expanded
+.left
 {
-    height: 100%;
+    float:left;
+}
+.right
+{
+    float:right;
+}
+a {
+
+    text-decoration: none;
 }
 input
 {
@@ -33,109 +45,256 @@ input
 {
     clear: both;
 }
-/*
- *
- *HEADER
- *
- */
-.header
-{
-    background-color : #FFFFFF;
-    margin-bottom: 0;
-    border: none;
-    min-height: 80px;
-    -webkit-box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.3);
+#wrap {
+
+    height: 100%;
     position: relative;
-    z-index : 4;
 }
-header .menu, footer .menu {
-    display: table;
-    overflow: hidden;
-    height: 80px;
+
+.container {
+
+    width: 990px;
+    margin: auto auto;
 }
-header .menu div, header .menu #logoHeader {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-header .lien-menu
+button:focus
 {
-    font-size : 1em;
-    line-height: 80px;
-    padding: 32px;
-    text-decoration : none;
+    /*enlève les bordures bleues au clic*/
+    outline:0;
 }
-        /*
-         *
-         *HEDAER GAUCHE
-         *
-         */
-header .menu #logoHeader {
-    background-color:#c32e2e;
-    width: 150px;
+
+
+
+
+/* HEADER */
+.header {
+
+    width: 100%; height: 60px;
+    margin: auto auto;
+    padding: 0;
+    position: relative;
+    z-index : 10;
+    background: #FFF;
+    box-shadow: 0px 0px 2px 2px rgba(80,80,80,.3);
+    -webkit-box-shadow:0px 0px 2px 2px rgba(80,80,80,.3);
+    -o-box-shadow: 0px 0px 2px 2px rgba(80,80,80,.3);
+    -moz-box-shadow: 0px 0px 2px 2px rgba(80,80,80,.3);
 }
-header .menu #logoHeader img{
-    opacity: 1;
-    -webkit-transition: opacity .5s linear 0.25s; 
-    -moz-transition: opacity .5s linear 0.25s;
-    transition: opacity .5s linear 0.25s;
+
+
+
+
+/* LEFT PANEL LOGO SOCIAL BOUTON */
+.header .container > #leftPanel {
+
+    width: auto; height: 100%;
+    float: left;
 }
-header .menu #fbHeader {
-    padding-left: 10px;
+
+.header .container #leftPanel > #logo {
+
+    width: auto;
+    float:left;  
+    display: block; text-align: center;
+    
 }
-header #rsHeader {
+
+
+.header .container #leftPanel #logo > a {
+
+    display: block; width: 60px; height: 46px;
+    background: #c32e2e; text-decoration: none;
+    text-align: center; padding: 14px 10px 0px 10px;
+}
+
+.header .container #leftPanel #logo a > img {
+
+    width: 100%; display: block; border: none;
+    text-align: center;
+
+}
+
+
+.header .container #leftPanel > #rsHeader {
+
+    width: auto; height: 100%;
+    float:left; display: block;
+    line-height: 60px; padding-left: 5px;
+}
+
+.gHeader {
+}
+
+
+
+
+
+/* RIGHT PANEL CONNEXION */
+.header .container > #rightPanel {
+
+    height: 100%;
+    float:right; margin-right: 10px;
+}
+
+.howWork a, .nameHeader p, .nameHeader a {
+
+    text-decoration: none;
+    font-size: 14px;
+    color: rgba(180,180,180,1);
+}
+
+.howWork a:hover, .howWork a:focus {
+
+    text-decoration: underline;
+}
+.header .container #rightPanel div {
+    width: auto; height: auto;
+    float:left;
+    display: block;
     margin-left: 20px;
+    position: relative;
 }
-        /*
-         *
-         *HEDAER DROITE
-         *
-         */
-header .menu #tabletteHeader {
-    margin-right: 35px;
+.header .container #rightPanel .drapeauHeader
+{
+    margin-left: 0px;
 }
-header .menu #seConnecter {
+.drapeauHeader .dropdown-menu img
+{
+    cursor: pointer;
+    padding: 4px;
+}
+.drapeauHeader p img
+{
+    margin-right: 4px;
+}
+.drapeauHeader img:hover, .drapeauHeader img:focus, .nameHeader a:hover, .nameHeader a:focus{
+    background: #f7f6f6;
+}
+.header .container #rightPanel .howWork > a, .header .container #rightPanel .nameHeader > p, .header .container #rightPanel .drapeauHeader > p {
+    line-height: 60px;
+}
+.nameHeader .dropdown-menu, .drapeauHeader .dropdown-menu
+{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 9;
+    display: none;
+    float: left;
+    padding: 5px 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+.nameHeader .dropdown-menu
+{
+    min-width: 100px;
+}
+.nameHeader .dropdown-menu li a
+{
+    display: block;
+    padding: 5px 20px;
+    min-width: 100px;
+}
+.header .container #rightPanel div > #tabletteHeader {
+
+    padding-top: 10px;
+    display: block;
+    margin-left: 30px;
+    line-height: 60px;
+}
+
+.header .container #rightPanel div > #seConnecter {
+    
     padding: 10px;
     background-color:#299fe3;
     box-shadow: 2px 2px 0px #1e6ca2;
-    margin-right: 45px;
     text-transform: uppercase;
-    color:#FFFFFF;
+    color:#FFFFFF; font-weight: normal;
     text-decoration: none;
-    position:relative;
+    line-height: 60px;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
 }
-header .menu #seConnecter:active {
+
+.header .container #rightPanel div > #seConnecter:active {
     box-shadow: 1px 1px 0px #1e6ca2;
     top:1px;
     left:1px;
 }
-/*
- *
- *CONNEXION
- *
- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* PANEL POPUP CONNEXION AFFICHAGE */
 header #connexionPart{
     background-color:#FFFFFF;
     display: none;
-    position: relative;
-    z-index : 3;
+    width: 100%; height: auto;
+    position: absolute;
+    z-index : 9;
     top: -300px;
 }
 #fade {
-	display: none;
-	background: #000000;
-	position: absolute; left: 0; bottom: 0;
-	width: 100%; height: 100%;
-	opacity: .80;
-	z-index: 2;
+    display: none;
+    background: #000000;
+    position: fixed; left: 0; bottom: 0;
+    width: 100%; height: 100%;
+    opacity: .80;
+    z-index: 2;
 }
-#fermePop {
-	float: right;
-	/*margin: 130px 0 0 0;*/
-    color:#c32e2e;
-    font-size:2em;
-    background-color:#FFFFFF;
-    padding: 10px;
+#fadeLogin {
+    display: none;
+    background: #000000;
+    position: fixed; left: 0; bottom: 0;
+    width: 100%; height: 100%;
+    opacity: .80;
+    z-index: 11;
+}
+#imgLogin{
+    display: block;
+    z-index: 12;
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+}
+a.close {
+    float: right;
+    width: 50px; height: 50px;
+
+    /*margin: 130px 0 0 0;*/
+    color: #fff;
+    background: #c32e2e;
+    position: relative;
+    top: 50px; right: 50%;
+    font-size:2em; text-decoration: none;
+    /*padding: 10px;*/
+}
+a.close #fermePop{
+    padding: 20px 0px 0px 15px;
+    line-height: 50px;
+    position: relative;
 }
 #connexion
 {
@@ -143,7 +302,7 @@ header #connexionPart{
     overflow: hidden;
     height: 200px;
     margin: auto;
-    padding: 40px 0px 30px 0px;
+    padding-top: 40px;
 }
         /*
          *
@@ -207,7 +366,7 @@ button#linkedInConnexion
          */
 #separateurConnexion
 {
-    background:url(../img/commun/fr-FR/separateurConnexion.png) no-repeat left top;
+    background:url(../img/commun/fr-FR/separateurConnexion.png) no-repeat center center;
     color:#FFFFFF;
     text-transform : uppercase;
     display: table-cell;
@@ -232,32 +391,38 @@ button#linkedInConnexion
 {
     font-size: 1em;
     height: 35px;
+    width: 200px;
     border:none;
-    width: 230px;
-    padding-left:40px;
-    background-size: 35px 35px;
-    background-position: left center;
-    background-repeat: no-repeat;
     border-bottom: 2px #cbcbcb solid;
 }
-.membreCo
+
+.iconEmailConnecter, .iconPasswordConnecter
+{
+    background: #f9f9f9 url(../img/commun/fr-FR/bonhommeConnexion.png) no-repeat left center;
+    float:left;
+    width:35px;
+    height:35px;
+    border-bottom: 2px #cbcbcb solid;
+}
+.membreCo, .fonctionCo
 {
     padding: 8px 5px;
     display: inline-block;
+    cursor: pointer;
 }
-.membreCo > input
+.membreCo > input, .fonctionCo > input
 {
     margin-right: 5px;
 }
-.membreCo *
+.membreCo *, .fonctionCo *
 {
     cursor: pointer;
 }
-#emailConnecter
+.iconEmailConnecter
 {
     background: #f9f9f9 url(../img/commun/fr-FR/bonhommeConnexion.png) no-repeat left center;
 }
-#passwordConnecter
+.iconPasswordConnecter
 {
     background: #f9f9f9 url(../img/commun/fr-FR/cadenasConnexion.png) no-repeat left center;
 }
@@ -282,89 +447,122 @@ button#linkedInConnexion
     padding: 9px 12px;
     text-decoration: none;
 }
-/*
- *
- *PAGE
- *
- */
-#page
-{
-    /*z-index: 0;*/
-}
-/*
- *
- *FOOTER
- *
- */
-/*footer
-{
-    background-color: #FFFFFF;
-    height : 80px;
-    width: 100%;
-	position:relative;
-	bottom:0;
-	left:0;
-}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* FOOTER */
 
 footer {
-    background-color: #FFFFFF;
-    height: 80px;
+
+    height: 60px; width: 100%;
+    background: rgba(255,255,255,1);
 }
-footer .menu div {
-    display: table-cell;
-    vertical-align: middle;
+
+.footer {
+
+    width: auto; height: 60px;
+    padding: 0; margin: auto auto;
+
+}
+
+.footer > #interbookFooter {
+
+    width: 190px; height: 100%;
+    float: left; line-height: 60px;
+    color: rgba(80,80,80,1); text-align: center;
+}
+
+.footer > #mentionsFooter {
+
+    width: 700px; height: 100%;
+    float: left; line-height: 60px;
     text-align: center;
-}
-footer .menu #interbookFooter {
-    width: 170px;
-    padding-right:10px;
-}
-footer .menu #mentionsFooter a {
-    text-decoration: none;
-    color: #231d1c;
-    padding: 0 10px 0 10px;
-}
-footer .menu #mentionsFooter a:hover {
-    text-decoration: underline;
-}
-footer .menu #logoFooter {
-    background-color:#231d1c;
-    width: 80px;
-}
-/**FIN 16/12/2014**/
 
-#errorVide
-{
-    color : #FF0000;
 }
 
-/**************************************************************************/
-.container
-{
-    width : 960px;
-    margin-left: auto;
-    margin-right: auto;
-}
-.left
-{
-    float:left;
-}
-.right
-{
-    float:right;
-}
-.inlineBlock
-{
-    display:inline-block;
-}
-.marginAuto
-{
-    margin: auto;
+.footer #mentionsFooter > a {
+
+    text-align: center; margin-left: 10px;
+    color: rgba(180,180,180,1);
+    font-weight: normal;
 }
 
-@media screen and (max-width: 960px) {
-    .container
-    {
+.footer > #logoFooter {
+
+    background: rgba(33,33,33,1);
+    width: auto; height: auto;
+    float: right; padding: 18px;
+    border: none; 
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 990px) {
+
+    .container{
         width: 100%;
     }
+
+    .header .container #rightPanel > .howWork
+    {
+
+        display: none;
+    }
+
+    .header .container #rightPanel div > #tabletteHeader
+    {
+
+        display: none;
+    }
+
+    #social, #formConnexion, #separateurConnexion
+    {
+        display: table-row;
+    }
+
+    #separateurConnexion
+    {
+        color: #000000;
+        background: none;
+        font-weight: bold;
+    }
+
+    .footer > #interbookFooter
+    {
+        margin-left: 10px;
+    }
+
+    .footer > #mentionsFooter
+    {
+        display:none;
+    }
 }
+
+
+
+
+
+
+

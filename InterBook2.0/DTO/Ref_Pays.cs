@@ -24,7 +24,7 @@ namespace InterBook2._0.DTO
         public Nullable<int> id_Culture { get; set; }
         public string description { get; set; }
     
-        public virtual Ref_Culture Ref_Culture { get; set; }
         public virtual ICollection<Util_Postal> Util_Postal { get; set; }
+        public virtual Ref_Culture Ref_Culture { get; set; }
     }
 }

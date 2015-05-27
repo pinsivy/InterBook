@@ -43,6 +43,12 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AuthorizeNet">
+      <HintPath>..\packages\AuthorizeNet.1.8.3\lib\AuthorizeNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DropDownList_Optgroup">
+      <HintPath>..\packages\DropDownList.Optgroup.MVC.1.0.0\lib\net40\DropDownList_Optgroup.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
@@ -147,6 +153,8 @@
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Attributes\LoadModelBaseAttribute.cs" />
+    <Compile Include="BLL\ApplicationManager.cs" />
+    <Compile Include="BLL\ApplicationObject.cs" />
     <Compile Include="BLL\BaseManager.cs" />
     <Compile Include="BLL\IBWS.asmx.cs">
       <DependentUpon>IBWS.asmx</DependentUpon>
@@ -154,17 +162,25 @@
     </Compile>
     <Compile Include="BLL\DefaultValueManager.cs" />
     <Compile Include="BLL\Mail\MailBase.cs" />
+    <Compile Include="BLL\DeclinaisonCultureManager.cs" />
     <Compile Include="BLL\SessionManager.cs" />
     <Compile Include="BLL\SessionObject.cs" />
     <Compile Include="BLL\UtilConsentementManager.cs" />
+    <Compile Include="BLL\ReservationManager.cs" />
+    <Compile Include="BLL\UeEnvoiManager.cs" />
+    <Compile Include="BLL\UtilFavorisManager.cs" />
+    <Compile Include="BLL\UtilContactManager.cs" />
+    <Compile Include="BLL\UtilProfessionManager.cs" />
+    <Compile Include="BLL\UtilGeoManager.cs" />
+    <Compile Include="BLL\UtilMessageManager.cs" />
     <Compile Include="BLL\UtilDispoManager.cs" />
     <Compile Include="BLL\Mail\MailManager.cs" />
+    <Compile Include="BLL\UtilInfoManager.cs" />
     <Compile Include="BLL\UtilPostalManager.cs" />
     <Compile Include="BLL\UtilEmailManager.cs" />
     <Compile Include="BLL\UtilManager.cs" />
     <Compile Include="BLL\VisiteManager.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\BuyPlansController.cs" />
     <Compile Include="Controllers\ConfirmController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -175,13 +191,16 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="DTO\GetUtilDispoByIdrdIdu2_Result.cs">
+    <Compile Include="DTO\Abonnement.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DTO\GetUtilDispoByIdrdIdu_Result.cs">
+    <Compile Include="DTO\GetRefVilleByLongLatRayon_Result.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DTO\GetUtilDispoByIdrdIdu_Result1.cs">
+    <Compile Include="DTO\GetUtilSearchByLongLatIddepRayonDateAndParam_Result.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\GetUtilSearchByLongLatIddepRayonDate_Result.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\InterBookModel.Context.cs">
@@ -199,16 +218,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InterBookModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DTO\RefVilleByNom_Result.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Ref_Contrat.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Ref_Culture.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Ref_Declinaison_Culture.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Ref_Departement.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Ref_Dispo.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Ref_Domaine.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Ref_EtatReservation.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Ref_Experience.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Ref_From.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Ref_Mailing.cs">
@@ -220,10 +257,22 @@
     <Compile Include="DTO\Ref_Profession.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Ref_Region.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Ref_TypeConsentement.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Ref_Ville.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Reservation.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\SetReservation_Result.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\SetUtilFavoris_Result.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\UE_envoi.cs">
@@ -235,16 +284,37 @@
     <Compile Include="DTO\Util_Consentement.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Util_Contact.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Util_Contrat.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Util_Dispo.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Util_MessageSimple.cs" />
+    <Compile Include="DTO\Util_DispoSimple.cs" />
+    <Compile Include="DTO\Ref_VilleSimple.cs" />
     <Compile Include="DTO\Util_Email.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Util_Experience.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Util_Favoris.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Util_Geo.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Util_Info.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Util_Info_Entreprise.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Util_Message.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Util_Postal.cs">
@@ -253,16 +323,13 @@
     <Compile Include="DTO\Util_Profession.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DTO\Util_Ville.cs">
-      <DependentUpon>InterBookModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\IdentifAutoHandler.cs" />
     <Compile Include="Handlers\DelogHandler.cs" />
+    <Compile Include="Handlers\ReservationHandler.cs" />
     <Compile Include="Handlers\MailHandler.cs" />
-    <Compile Include="Models\BuyPlansModel.cs" />
     <Compile Include="Models\ConfirmModel.cs" />
     <Compile Include="Models\DashboardModel.cs">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -285,30 +352,70 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Criterions.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\BuyPlans\App_LocalResources\Index.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.resx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Dashboard\App_LocalResources\Index.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\App_LocalResources\Index.it.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.it.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\App_LocalResources\Index.es.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home\App_LocalResources\Index.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.de.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\Home\App_LocalResources\Index.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Index.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Home\App_LocalResources\Index.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\How\App_LocalResources\Index.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.de.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\How\App_LocalResources\Index.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\How\App_LocalResources\Index.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\How\App_LocalResources\Index.es.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\How\App_LocalResources\Index.it.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.it.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Search\App_LocalResources\Index.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\App_LocalResources\Index.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.de.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\App_LocalResources\Index.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -319,6 +426,21 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>SignUp.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\App_LocalResources\Index.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\App_LocalResources\Index.es.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.es.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\App_LocalResources\Index.it.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Index.it.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\User\App_LocalResources\Index.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -333,12 +455,44 @@
     <Content Include="BLL\IBWS.asmx" />
     <Content Include="Global.asax" />
     <Content Include="Media\css\Account.css" />
+    <Content Include="Media\css\lib\images\bx_loader.gif" />
+    <Content Include="Media\css\lib\images\controls.png" />
+    <Content Include="Media\css\lib\jquery.bxslider.css" />
+    <Content Include="Media\css\lib\multiple-select.css" />
+    <Content Include="Media\css\D.css" />
+    <Content Include="Media\css\Dashboard.css" />
+    <Content Include="Media\css\User.css" />
     <Content Include="Media\css\Search.css" />
     <Content Include="Media\css\Home.css" />
     <Content Include="Media\css\jquery-ui-1.10.3.custom.css" />
     <Content Include="Media\css\normalize.css" />
     <Content Include="Media\css\normalize.min.css" />
     <Content Include="Media\css\Site.css" />
+    <Content Include="Media\css\Site-old.css" />
+    <Content Include="Media\file\upload\logo\1.jpg" />
+    <Content Include="Media\file\upload\logo\2.jpg" />
+    <Content Include="Media\file\upload\logo\3.jpg" />
+    <Content Include="Media\file\upload\logo\4.jpg" />
+    <Content Include="Media\file\upload\logo\5.jpg" />
+    <Content Include="Media\file\upload\logo\6.jpg" />
+    <Content Include="Media\file\upload\logo\7.jpg" />
+    <Content Include="Media\file\upload\logo\8.jpg" />
+    <Content Include="Media\file\upload\photo\1.jpg" />
+    <Content Include="Media\file\upload\cv\1.pdf" />
+    <Content Include="Media\file\upload\photo\2.jpg" />
+    <Content Include="Media\file\upload\cv\2.pdf" />
+    <Content Include="Media\file\upload\photo\3.jpg" />
+    <Content Include="Media\file\upload\cv\3.pdf" />
+    <Content Include="Media\file\upload\photo\4.jpg" />
+    <Content Include="Media\file\upload\cv\4.pdf" />
+    <Content Include="Media\file\upload\photo\5.jpg" />
+    <Content Include="Media\file\upload\cv\5.pdf" />
+    <Content Include="Media\file\upload\photo\6.jpg" />
+    <Content Include="Media\img\commun\drp-de-DE.gif" />
+    <Content Include="Media\img\commun\drp-en-GB.gif" />
+    <Content Include="Media\img\commun\drp-es-ES.gif" />
+    <Content Include="Media\img\commun\drp-fr-FR.gif" />
+    <Content Include="Media\img\commun\drp-it-IT.gif" />
     <Content Include="Media\img\commun\en-GB\FbConnect.png" />
     <Content Include="Media\img\commun\favicon.ico" />
     <Content Include="Media\img\commun\fr-FR\errorConnexion.png" />
@@ -357,10 +511,12 @@
     <Content Include="Media\img\commun\interbook.png" />
     <Content Include="Media\img\commun\fr-FR\bonhommeConnexion.png" />
     <Content Include="Media\img\commun\fr-FR\cadenasConnexion.png" />
+    <Content Include="Media\img\commun\loading.gif" />
     <Content Include="Media\img\home\calendar.png" />
     <Content Include="Media\img\home\flecheAutocompletion.png" />
     <Content Include="Media\img\home\flecheKm.png" />
     <Content Include="Media\img\home\flecheRecherche.png" />
+    <Content Include="Media\img\home\geoloc.png" />
     <Content Include="Media\img\home\loupe.png" />
     <Content Include="Media\img\home\mapMarker.png" />
     <Content Include="Media\img\home\outil.png" />
@@ -368,12 +524,184 @@
     <Content Include="Media\img\search\contacter.png" />
     <Content Include="Media\img\search\flecheCritere.png" />
     <Content Include="Media\img\search\flecheHautCriteres.png" />
+    <Content Include="Media\img\signup\fr-FR\camion.gif" />
+    <Content Include="Media\img\signup\fr-FR\france.png" />
+    <Content Include="Media\img\signup\fr-FR\moto.gif" />
     <Content Include="Media\img\signup\fr-FR\photoCommun.gif" />
+    <Content Include="Media\img\signup\fr-FR\voiture.gif" />
+    <Content Include="Media\img\user\cv.png" />
+    <Content Include="Media\img\user\dispo.png" />
+    <Content Include="Media\img\user\entreprise.png" />
+    <Content Include="Media\img\user\experience.png" />
+    <Content Include="Media\img\user\favorisOff.png" />
+    <Content Include="Media\img\user\favorisOn.png" />
+    <Content Include="Media\img\user\lieu.png" />
+    <Content Include="Media\img\user\mail.png" />
+    <Content Include="Media\img\user\metier.png" />
+    <Content Include="Media\img\user\motiv.png" />
+    <Content Include="Media\img\user\niveauOff.png" />
+    <Content Include="Media\img\user\niveauOn.png" />
+    <Content Include="Media\img\user\outil.png" />
+    <Content Include="Media\img\user\partage.png" />
+    <Content Include="Media\img\user\tel.png" />
     <Content Include="Media\js\easing.js" />
+    <Content Include="Media\js\jquery.bxslider.js" />
+    <Content Include="Media\js\jquery.multiple.select.js" />
+    <Content Include="Media\js\jquery1-11.js" />
+    <Content Include="Media\js\jquery2-1.js" />
+    <Content Include="Media\js\modernizr.js" />
+    <Content Include="Media\js\polyfiller.js" />
+    <Content Include="Media\js\shims\canvas-blob.js" />
+    <Content Include="Media\js\shims\color-picker.js" />
+    <Content Include="Media\js\shims\combos\1.js" />
+    <Content Include="Media\js\shims\combos\10.js" />
+    <Content Include="Media\js\shims\combos\11.js" />
+    <Content Include="Media\js\shims\combos\12.js" />
+    <Content Include="Media\js\shims\combos\13.js" />
+    <Content Include="Media\js\shims\combos\14.js" />
+    <Content Include="Media\js\shims\combos\15.js" />
+    <Content Include="Media\js\shims\combos\16.js" />
+    <Content Include="Media\js\shims\combos\17.js" />
+    <Content Include="Media\js\shims\combos\18.js" />
+    <Content Include="Media\js\shims\combos\2.js" />
+    <Content Include="Media\js\shims\combos\21.js" />
+    <Content Include="Media\js\shims\combos\22.js" />
+    <Content Include="Media\js\shims\combos\23.js" />
+    <Content Include="Media\js\shims\combos\25.js" />
+    <Content Include="Media\js\shims\combos\27.js" />
+    <Content Include="Media\js\shims\combos\28.js" />
+    <Content Include="Media\js\shims\combos\29.js" />
+    <Content Include="Media\js\shims\combos\3.js" />
+    <Content Include="Media\js\shims\combos\30.js" />
+    <Content Include="Media\js\shims\combos\31.js" />
+    <Content Include="Media\js\shims\combos\33.js" />
+    <Content Include="Media\js\shims\combos\34.js" />
+    <Content Include="Media\js\shims\combos\4.js" />
+    <Content Include="Media\js\shims\combos\5.js" />
+    <Content Include="Media\js\shims\combos\6.js" />
+    <Content Include="Media\js\shims\combos\7.js" />
+    <Content Include="Media\js\shims\combos\8.js" />
+    <Content Include="Media\js\shims\combos\9.js" />
+    <Content Include="Media\js\shims\combos\97.js" />
+    <Content Include="Media\js\shims\combos\98.js" />
+    <Content Include="Media\js\shims\combos\99.js" />
+    <Content Include="Media\js\shims\details.js" />
+    <Content Include="Media\js\shims\dom-extend.js" />
+    <Content Include="Media\js\shims\es5.js" />
+    <Content Include="Media\js\shims\es6.js" />
+    <Content Include="Media\js\shims\excanvas.js" />
+    <Content Include="Media\js\shims\filereader-xhr.js" />
+    <Content Include="Media\js\shims\FlashCanvasPro\canvas2png.js" />
+    <Content Include="Media\js\shims\FlashCanvasPro\flash10canvas.swf" />
+    <Content Include="Media\js\shims\FlashCanvasPro\flash9canvas.swf" />
+    <Content Include="Media\js\shims\FlashCanvasPro\flashcanvas.js" />
+    <Content Include="Media\js\shims\FlashCanvas\canvas2png.js" />
+    <Content Include="Media\js\shims\FlashCanvas\flashcanvas.js" />
+    <Content Include="Media\js\shims\FlashCanvas\flashcanvas.swf" />
+    <Content Include="Media\js\shims\form-combat.js" />
+    <Content Include="Media\js\shims\form-core.js" />
+    <Content Include="Media\js\shims\form-datalist-lazy.js" />
+    <Content Include="Media\js\shims\form-datalist.js" />
+    <Content Include="Media\js\shims\form-fixrangechange.js" />
+    <Content Include="Media\js\shims\form-inputmode.js" />
+    <Content Include="Media\js\shims\form-message.js" />
+    <Content Include="Media\js\shims\form-native-extend.js" />
+    <Content Include="Media\js\shims\form-number-date-api.js" />
+    <Content Include="Media\js\shims\form-number-date-ui.js" />
+    <Content Include="Media\js\shims\form-shim-extend.js" />
+    <Content Include="Media\js\shims\form-shim-extend2.js" />
+    <Content Include="Media\js\shims\form-validation.js" />
+    <Content Include="Media\js\shims\form-validators.js" />
+    <Content Include="Media\js\shims\forms-picker.js" />
+    <Content Include="Media\js\shims\geolocation.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-ar.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-ca.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-ch-CN.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-cs.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-de.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-el.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-en.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-es.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-fa.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-fr.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-he.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-hi.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-hu.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-it.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-ja.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-lt.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-nl.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-no.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-pl.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-pt-BR.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-pt-PT.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-pt.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-ru.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-sv.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-zh-CN.js" />
+    <Content Include="Media\js\shims\i18n\formcfg-zh-TW.js" />
+    <Content Include="Media\js\shims\jme\alternate-media.js" />
+    <Content Include="Media\js\shims\jme\base.js" />
+    <Content Include="Media\js\shims\jme\controls.css" />
+    <Content Include="Media\js\shims\jme\jme.svg" />
+    <Content Include="Media\js\shims\jme\mediacontrols-lazy.js" />
+    <Content Include="Media\js\shims\jme\mediacontrols.js" />
+    <Content Include="Media\js\shims\jme\playlist.js" />
+    <Content Include="Media\js\shims\jpicker\images\AlphaBar.png" />
+    <Content Include="Media\js\shims\jpicker\images\bar-opacity.png" />
+    <Content Include="Media\js\shims\jpicker\images\Bars.png" />
+    <Content Include="Media\js\shims\jpicker\images\map-opacity.png" />
+    <Content Include="Media\js\shims\jpicker\images\mappoint.gif" />
+    <Content Include="Media\js\shims\jpicker\images\Maps.png" />
+    <Content Include="Media\js\shims\jpicker\images\NoColor.png" />
+    <Content Include="Media\js\shims\jpicker\images\picker.gif" />
+    <Content Include="Media\js\shims\jpicker\images\preview-opacity.png" />
+    <Content Include="Media\js\shims\jpicker\images\rangearrows.gif" />
+    <Content Include="Media\js\shims\jpicker\jpicker.css" />
+    <Content Include="Media\js\shims\matchMedia.js" />
+    <Content Include="Media\js\shims\mediacapture-picker.js" />
+    <Content Include="Media\js\shims\mediacapture.js" />
+    <Content Include="Media\js\shims\mediaelement-core.js" />
+    <Content Include="Media\js\shims\mediaelement-debug.js" />
+    <Content Include="Media\js\shims\mediaelement-jaris.js" />
+    <Content Include="Media\js\shims\mediaelement-native-fix.js" />
+    <Content Include="Media\js\shims\mediaelement-yt.js" />
+    <Content Include="Media\js\shims\moxie\flash\Moxie.cdn.swf" />
+    <Content Include="Media\js\shims\moxie\flash\Moxie.min.swf" />
+    <Content Include="Media\js\shims\moxie\js\moxie-html4.js" />
+    <Content Include="Media\js\shims\moxie\js\moxie-swf.js" />
+    <Content Include="Media\js\shims\picture.js" />
+    <Content Include="Media\js\shims\plugins\jquery.ui.position.js" />
+    <Content Include="Media\js\shims\range-ui.js" />
+    <Content Include="Media\js\shims\sizzle.js" />
+    <Content Include="Media\js\shims\sticky.js" />
+    <Content Include="Media\js\shims\styles\color-picker.png" />
+    <Content Include="Media\js\shims\styles\forms-ext.css" />
+    <Content Include="Media\js\shims\styles\forms-picker.css" />
+    <Content Include="Media\js\shims\styles\progress.gif" />
+    <Content Include="Media\js\shims\styles\progress.png" />
+    <Content Include="Media\js\shims\styles\shim-ext.css" />
+    <Content Include="Media\js\shims\styles\shim.css" />
+    <Content Include="Media\js\shims\styles\transparent.png" />
+    <Content Include="Media\js\shims\styles\widget.svg" />
+    <Content Include="Media\js\shims\swfmini-embed.js" />
+    <Content Include="Media\js\shims\swfmini.js" />
+    <Content Include="Media\js\shims\swf\JarisFLVPlayer.swf" />
+    <Content Include="Media\js\shims\track-ui.js" />
+    <Content Include="Media\js\shims\track.js" />
+    <Content Include="Media\js\shims\url.js" />
+    <Content Include="Media\js\shims\usermedia-core.js" />
+    <Content Include="Media\js\shims\usermedia-shim.js" />
     <Content Include="Media\js\vendors\all.js" />
     <Content Include="Media\js\vendors\chosen.jquery.js" />
     <Content Include="Media\js\vendors\chosen.jquery.min.js" />
     <Content Include="Media\js\vendors\easing\EasePack.min.js" />
+    <Content Include="Media\js\shims\jme\jme.eot" />
+    <Content Include="Media\js\shims\jme\jme.ttf" />
+    <Content Include="Media\js\shims\jme\jme.woff" />
+    <Content Include="Media\js\shims\styles\widget.eot" />
+    <Content Include="Media\js\shims\styles\widget.ttf" />
+    <Content Include="Media\js\shims\styles\widget.woff" />
     <None Include="Media\js\vendors\jquery-1.10.2.intellisense.js" />
     <Content Include="Media\js\vendors\jquery-1.10.2.js" />
     <Content Include="Media\js\vendors\jquery-1.10.2.min.js" />
@@ -407,6 +735,7 @@
     <Content Include="Media\js\vendors\validators.js" />
     <Content Include="Media\js\vendors\widgets.js" />
     <Content Include="Media\js\vendors\xtcore.js" />
+    <Content Include="Media\mail\0002.html" />
     <Content Include="Media\mail\0001.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -419,17 +748,23 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
-    <Content Include="Views\Dashboard\Index.cshtml" />
-    <Content Include="Views\Account\Criterions.cshtml" />
+    <Content Include="Views\Account\SignUpE.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\ShowSession\Index.cshtml" />
-    <Content Include="Views\BuyPlans\Index.cshtml" />
+    <Content Include="Views\Dashboard\Premium.cshtml" />
     <Content Include="Views\How\Index.cshtml" />
     <Content Include="Views\Confirm\Index.cshtml" />
     <Content Include="Views\Desabo\Index.cshtml" />
+    <Content Include="Media\police\Bauhaus.ttf" />
     <None Include="Properties\PublishProfiles\InterBook.pubxml" />
     <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Error\Http404.cshtml" />
+    <Content Include="Views\Dashboard\messages.cshtml" />
+    <Content Include="Views\Dashboard\disponibility.cshtml" />
+    <Content Include="Views\Shared\_MenuProfil.cshtml" />
+    <Content Include="Views\Dashboard\favoris.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Dashboard\ModifProfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -487,17 +822,45 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Criterions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\BuyPlans\App_LocalResources\Index.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Index.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\Dashboard\App_LocalResources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\App_LocalResources\Index.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\App_LocalResources\Index.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.it.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\App_LocalResources\Index.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Home\App_LocalResources\Index.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\App_LocalResources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\How\App_LocalResources\Index.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.es.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\How\App_LocalResources\Index.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\How\App_LocalResources\Index.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.it.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\How\App_LocalResources\Index.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\How\App_LocalResources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -506,6 +869,22 @@
     <EmbeddedResource Include="Views\Search\App_LocalResources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Shared\App_LocalResources\Index.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Shared\App_LocalResources\Index.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Shared\App_LocalResources\Index.it.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.it.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Shared\App_LocalResources\Index.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.es.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Shared\App_LocalResources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

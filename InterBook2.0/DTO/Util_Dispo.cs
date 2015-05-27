@@ -19,7 +19,7 @@ namespace InterBook2._0.DTO
         public Nullable<int> idU { get; set; }
         public Nullable<int> id_Ref_Dispo { get; set; }
     
-        public virtual Ref_Dispo Ref_Dispo { get; set; }
         public virtual Util Util { get; set; }
+        public virtual Ref_Dispo Ref_Dispo { get; set; }
     }
 }

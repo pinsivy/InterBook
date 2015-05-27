@@ -36,12 +36,6 @@ namespace InterBook2._0.BLL
 
             int idu = SessionManager.Current.Util.IdU;
 
-            // Création de la dernière page vue
-            if(SessionManager.Current.Util.Util_Postal == null)
-                SessionManager.Current.CurrentPage = "/Account/SignUp";
-            else
-                SessionManager.Current.CurrentPage = "/Dashboard";
-
             // Création des optins
             List<Util_Consentement> consentements = UtilConsentementManager.GetUtilConsentementByIdu(idu);
 

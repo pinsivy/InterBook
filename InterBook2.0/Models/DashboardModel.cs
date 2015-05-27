@@ -11,5 +11,7 @@ namespace InterBook2._0.Models
     {
         //public Util u { return SessionManager.Current.Util }
         public Util u { get; set; }
+
+        public List<Util_Contact> luc { get; set; }
     }
 }

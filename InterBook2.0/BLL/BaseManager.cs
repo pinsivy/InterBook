@@ -12,9 +12,19 @@ namespace InterBook2._0.BLL
         private static readonly List<string> AuthorizedBacks = new List<string>
         {
             "home/index",
+            "home/getvilles",
+            "home/getprofessions",
+            "home/getvillegeoloc",
             "account/signin",
-            "signup/index",
-            "user/index"
+            "account/signuphome",
+            "account/changeculture",
+            "search/index",
+            "user/index",
+            "user/reserve",
+            "user/addfavori",
+            "dashboard/recupdispo",
+            "how/index",
+            "premium/index"
         };
 
         public static Back HandleBacks(string controlerAction)
@@ -33,16 +43,28 @@ namespace InterBook2._0.BLL
                         return homeBack;
 
                     //gestion des backs sur la bonne page ou pas
-                    if (SessionManager.Current.CurrentPage != null && controlerAction != SessionManager.Current.CurrentPage.ToLower())
+                    if ((controlerAction.ToLower() != "account/signup" && controlerAction.ToLower() != "account/signupe")
+                        && (SessionManager.Current.Util.Util_Postal == null 
+                            || (SessionManager.Current.Util.Util_Postal != null && SessionManager.Current.Util.Util_Postal.prenom == null)))
                     {
-                        return CreateBack(SessionManager.Current.CurrentPage);
+                        if (SessionManager.Current.Util.particulier == true)
+                            return CreateBack("Account/SignUp");
+                        else
+                            return CreateBack("Account/SignUpE");
                     }
+                    if (controlerAction.ToLower() == "account/signup" && SessionManager.Current.Util.particulier == false)
+                        return CreateBack("Account/SignUpe");
+                    else if (controlerAction.ToLower() == "account/signupe" && SessionManager.Current.Util.particulier == true)
+                        return CreateBack("Account/SignUp");
+
+                    //if (SessionManager.Current.CurrentPage != null && controlerAction.ToLower() != SessionManager.Current.CurrentPage.ToLower())
+                    //    return CreateBack(SessionManager.Current.CurrentPage);
                 }
             }
-            else if (SessionManager.Current.Util != null && SessionManager.Current.Util.IdU > 0)
-            {
-                return CreateBack(SessionManager.Current.CurrentPage);
-            }
+            //else if (SessionManager.Current.Util != null && SessionManager.Current.Util.IdU > 0)
+            //{
+            //    return CreateBack(SessionManager.Current.CurrentPage);
+            //}
 
             return null;
         }

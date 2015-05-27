@@ -1,0 +1,64 @@
+﻿@using System.Web.Optimization
+@using InterBook2._0.Views.Shared.App_LocalResources;
+@model InterBook2._0.Models.ModelBase
+
+@{
+    var action = ViewContext.RouteData.GetRequiredString("action");
+    var particulier = InterBook2._0.BLL.SessionManager.Current.Util.particulier;
+}
+
+<menu id="monProfil" class="left">
+    <div class="blocMenu">
+        <div class="blocMenuTh">Mon Profil</div>
+        @if (particulier == true)
+        {
+            if (action.ToLower() == "disponibility")
+            {<div class='blocMenuLiSelect'>Disponibilités</div>}
+            else
+            {<div class='blocMenuLi'>@Html.ActionLink("Disponibilités", "Disponibility")</div>}
+            if (action.ToLower() == "job")
+            {<div class='blocMenuLiSelect'>Job</div>}
+            else
+            {<div class='blocMenuLi'>@Html.ActionLink("Job", "Job")</div>}
+        }
+        @if (action.ToLower() == "messages")
+        {<div class='blocMenuLiSelect'>Messages</div>}
+        else
+        {<div class='blocMenuLi'>@Html.ActionLink("Messages", "Messages")</div>}
+        @if (particulier == false)
+        {
+            if (action.ToLower() == "favoris")
+            {<div class='blocMenuLiSelect'>Favoris</div>}
+            else
+            {<div class='blocMenuLi'>@Html.ActionLink("Favoris", "Favoris")</div>}
+        }
+        @if (action.ToLower() == "premium")
+        {<div class='blocMenuLiSelect'>Messages</div>}
+        else
+        {<div class='blocMenuLi'>@Html.ActionLink("Premium", "Premium")</div>}
+    </div>
+
+    <div class="blocMenu">
+        <div class="blocMenuTh">Paramètres</div>
+        @if (action.ToLower() == "modifprofil")
+        {<div class='blocMenuLiSelect'>Modifier Profil</div>}
+        else
+        {<div class='blocMenuLi'>@Html.ActionLink("Modifier Profil", "ModifProfil")</div>        }
+        @if (action.ToLower() == "compte")
+        {<div class='blocMenuLiSelect'>Compte</div>}
+        else
+        {<div class='blocMenuLi'>@Html.ActionLink("Compte", "Compte")</div>        }
+        @if (action.ToLower() == "notifications")
+        {<div class='blocMenuLiSelect'>Notifications</div>}
+        else
+        {<div class='blocMenuLi'>@Html.ActionLink("Notifications", "Notifications")</div>        }
+        @if (action.ToLower() == "password")
+        {<div class='blocMenuLiSelect'>Mot de passe</div>}
+        else
+        {<div class='blocMenuLi'>@Html.ActionLink("Mot de passe", "Password")</div>        }
+        @if (action.ToLower() == "2")
+        {<div class='blocMenuLiSelect'>Supprimer compte</div>}
+        else
+        {<div class='blocMenuLi'>@Html.ActionLink("Supprimer compte", "")</div>}
+    </div>
+</menu>

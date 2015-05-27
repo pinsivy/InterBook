@@ -1,0 +1,30 @@
+﻿@using InterBook2._0.Views.Dashboard.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.DashboardModel
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@Styles.Render("~/Media/css/dashboard")
+<link href="~/Media/css/Dashboard.css" rel="stylesheet" />
+
+<section class="container">
+
+    @Html.Partial("_MenuProfil")
+
+    @*FAVORIS*@
+
+    <div class="panelDroite right">
+        <h1>FAVORIS</h1>
+        @if (Model.u.Util_Favoris != null)
+        {
+            foreach (var u in Model.u.Util_Favoris)
+            {
+                <a href="/u/@(u.idU)">@u.Util.Util_Postal.prenom @u.Util.Util_Postal.nom</a>
+            }
+        }
+        else
+        {
+            <text>Vous n'avez pas encore de favoris, <a href="/">faites des recherches</a></text>
+        }
+    </div>
+    <div class="clear"></div>
+</section>

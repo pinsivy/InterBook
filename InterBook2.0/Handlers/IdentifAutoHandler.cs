@@ -56,7 +56,7 @@ namespace Website.Handlers
                     SessionManager.BuildSession(u.Util_Email.email);
 
                     //redirection sur la bonne page
-                    HttpContext.Current.Response.Redirect(SessionManager.Current.CurrentPage);
+                    HttpContext.Current.Response.Redirect("Dashboard");
                 }
                 else
                 {

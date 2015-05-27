@@ -10,16 +10,454 @@
 
 @*FORMULAIRE*@
 <section class="container">
-    <div class="form">@Model.u.IdU
-        <br />
-        @Model.u.idu_Email
-        <br />
-        @*@foreach (var ue in Model.u.Util_Experience)
+    <div id="panelGauche" class="left">
+        <div>
+            @if (Model.u.Util_Info != null && Model.u.Util_Info.photo != null)
             {
-                <p>ue.id_Util_Experience.toString()</p>
-            }*@
-
-
-
+                    <img id="photo" src="~/Media/file/upload/photo/@(Model.u.Util_Info.photo).gif" />
+            }
+            else
+            {
+                <img id="photo" src="~/Media/img/signup/fr-FR/photoCommun.gif" />
+            }
+        </div>
+        <div>
+            <div id="nom" class="left">
+                <span id="prenom">@Model.u.Util_Postal.prenom</span><br />
+                @Model.u.Util_Postal.nom
+            </div>
+            <div id="age" class="left">
+                28<br />
+                <span id="ans">ans</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="ville">
+            <img src="~/Media/img/user/lieu.png" />&nbsp;@Model.u.Util_Postal.Ref_Ville.ville
+        </div>
+        <div id="profession">
+            @if (Model.u.Util_Profession != null)
+            {
+                foreach (var up in Model.u.Util_Profession)
+                {
+                    <div><img src="~/Media/img/user/outil.png" />&nbsp;@up.Ref_Profession.Description</div>
+                }
+            }
+        </div>
+        <div id="contacts">
+            @if (Model.u.Util_Info != null && Model.u.Util_Info.cv != null)
+            {
+                <a id="contactTel" href="tel:@(Model.u.Util_Info.numTel)"><img src="~/Media/img/user/tel.png" />&nbsp;Contacter par téléphone</a>
+            }
+            <a id="contactMail"><img src="~/Media/img/user/mail.png" />&nbsp;Envoyer un mail</a>
+            @if (Model.u.Util_Info != null && Model.u.Util_Info.cv != null)
+            {
+                <a id="telechargerCV" target="_blank" href="/Media/file/upload/cv/@(Model.u.Util_Info.cv).pdf"><img src="~/Media/img/user/cv.png" />&nbsp;Télécharger mon C.V.</a>
+            }
+        </div>
     </div>
+    <div id="panelDroite" class="left">
+        <div>
+            <div class="titrePanel left">
+                <img src="~/Media/img/user/motiv.png" />
+                A propos de moi<br />
+                <span class="sousTitrePanel">Mes motivations</span>
+            </div>
+            <div class="right" id="hautDroit">
+                <a>
+                    <img src="~/Media/img/user/partage.png" id="logoPartage" />
+                    <span id="partager">Partager</span>
+                </a>
+                <a>
+                    @if (Model.u.Util_Favoris != null)
+                    {
+                        var favori = false;
+                    
+                        foreach(var uf in Model.u.Util_Favoris)
+                        {
+                            if (uf.idU == Model.u.IdU && InterBook2._0.BLL.SessionManager.Current.Util != null && InterBook2._0.BLL.SessionManager.Current.Util.IdU == uf.idUEntreprise)
+                            {
+                                favori = true;
+                            }
+                        }
+                        if(favori)
+                        {
+                            <img src="~/Media/img/user/favorisOn.png" id="etoileFavori" />
+                        }
+                        else
+                        {
+                            <img src="~/Media/img/user/favorisOff.png" id="etoileFavori" />
+                        }
+                    }
+                    else
+                    {
+                        <img src="~/Media/img/user/favorisOff.png" id="etoileFavori" />
+                    }
+                    <span id="favoris">Favoris</span>
+                </a>
+            </div>
+        </div>
+        <div class="clear">
+            <div id="job" class="left">
+                36 jobs
+            </div>
+            <div id="niveauExp" class="left">
+                @if (Model.u.Util_Info != null && Model.u.Util_Info.cv != null)
+                {
+                    @Model.u.Util_Info.Ref_Experience.Description
+                    for(int i = 0; i < @Model.u.Util_Info.experience; i++)
+                    {
+                        <img src="~/Media/img/user/niveauOn.png" />
+                    }
+                }
+            </div>
+        </div>
+        @if (Model.u.Util_Info != null && Model.u.Util_Info.cv != null)
+        {
+            <div id="motivations" class="clear">
+                <div>
+                    @Model.u.Util_Info.motivation
+                </div>
+            </div>
+        }
+        @*Mes disponibilités*@
+        <div class="titrePanel">
+            <img src="~/Media/img/user/dispo.png" />
+            Mes disponibilités<br />
+            <span class="sousTitrePanel">Consultez mon agenda pour voir mes disponibilités</span>
+        </div>
+        <div id="datepicker"></div>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script>
+        <script>
+            var disponible = [];
+            var reserver = [];
+            var i = 0;
+
+            $.ajax({
+                type: 'Get',
+                async: false,
+                data: 'idu=' + @Model.u.IdU + '',
+                url: '/Dashboard/RecupDispo',
+                success: function (dataString) {
+                    data = JSON.parse(dataString);
+                    for (i = 0; i < data.length; i++) {
+                        if (data[i].id_Ref_Dispo == 1) {
+                            disponible.push(data[i]);
+                        }
+                        else if (data[i].id_Ref_Dispo == 2) {
+                            reserver.push(data[i]);
+                        }
+                    }
+                }
+            });
+
+
+            setDays = function (day, month, year) {
+                var result = [true, 'option', 'En option'];	//par défaut, on affiche la date
+                var boolReserver = false;
+                var rl = 0;
+                var i = 0;
+
+                /*
+                * Les données peuvent contenir, par erreur, des chevauchements de dates !
+                * Priorité des événements : Reserver > Disponible
+                * Évite l'ajout de la "class" d'un événement non prioritaire !
+                */
+
+                if ((reserver != null)) {
+                    rl = reserver.length;
+
+                    for (i = 0; i < rl; i++) {
+                        //var milli = reserver[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
+                        //var d = new Date(parseInt(milli));
+                        var d = new Date(reserver[i].dDispo);
+                        var dtemp = new Date(year, month, day);
+                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
+                            result = [false, "reserver", "Déjà réservé"];
+                            boolReserver = true;
+                        }
+                    }
+                }
+
+                if ((!boolReserver) && disponible != null) {
+                    rl = disponible.length;
+
+                    for (i = 0; i < rl; i++) {
+                        //var milli = disponible[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
+                        //var d = new Date(parseInt(milli));
+                        var d = new Date(disponible[i].dDispo);
+                        var dtemp = new Date(year, month, day);
+                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
+                            result = [true, 'disponible', "Disponible"];
+                        }
+                    }
+                }
+
+                return result;
+            }
+
+            $("#datepicker").datepicker({
+                firstDay: 1, //0=Dim, 1=Lun
+                numberOfMonths: 2,
+                stepMonths: 1,
+                showButtonPanel: true,
+                currentText: "Aujourd'hui",
+                nextText: "Suivant",
+                prevText: "Précédent",
+                minDate: new Date(),
+                beforeShowDay: function (date) {
+                    return setDays(date.getDate(), date.getMonth(), date.getFullYear());
+                }
+            });
+
+            $(window).load(function () {
+                /*
+                * Bricolage indispensable pour colorer les dates choisies
+                * chaque fois que le datepicker se redessine !
+                */
+                $("#datepicker").bind("mouseover", function () {
+                    $("td.reserver > span", this).css("background", "#c32e2e");
+                    $("td.option > a", this).css("background", "#ffcc00");
+                    $("td.disponible > a", this).css("background", "#87ce18");
+                });
+                $("#datepicker").mouseover();
+            });
+        </script>
+        <div id="legendeCalendar">
+            <span style="background:#c32e2e;">Reservé</span>
+            <span style="background:#87ce18;">Disponible</span>
+            <span style="background:#ffcc00;">En option</span>
+        </div>
+        @*Reservation*@
+        <div id="panelReservation">
+            <div id="panelReservationTitre">Réservez avec InterBook !</div>
+            @using (Html.BeginForm("", "", FormMethod.Get))
+            {
+                <div class="left panelReservationDate">
+                    <label for="dDebutReserve">Date de début de contrat</label><br /><br />
+                    @Html.TextBoxFor(x => x.DebutReserve, new { @class = "inputDateQuery", @type = "date", id = "dDebutReserve", data_dependent_validation = "{\"from\": \"dFinReserve\", \"prop\": \"max\"}" })
+                </div>
+                <div class="left panelReservationDate">
+                    <label for="dFinReserve">Date de fin de contrat</label><br /><br />
+                    @Html.TextBoxFor(x => x.FinReserve, new { @class = "inputDateQuery", @type = "date", id = "dFinReserve", data_dependent_validation = "{\"from\": \"dDebutReserve\", \"prop\": \"min\"}" })
+                </div>
+                <div class="clear">
+                    <button id="btnReserver">Réservez</button>
+                </div>
+            }
+            <div class="clear"></div>
+            <script src="~/Media/js/polyfiller.js"></script>
+            <script type="text/javascript">
+                $(function () {
+
+
+                    webshim.setOptions('forms', {
+                        lazyCustomMessages: true,
+                        addValidators: true
+                    });
+                    webshim.setOptions('forms-ext', {
+                        replaceUI: 'auto',
+                        types: 'date',
+                        date: {
+                            startView: 2,
+                            classes: 'hide-btnrow hide-spinbtns hide-dropdownbtn DatePicker inputQuery',
+                            openOnFocus: true,
+                            dateFormat: 'dd mm yyyy'
+                        }
+                    });
+
+                    //start polyfilling
+                    webshim.polyfill('forms forms-ext');
+
+                    //initial max/min attributes should be done serverside.
+                    $('#dDebutReserve, #dFinReserve').prop('min', function () {
+                        return new Date().toJSON().split('T')[0];
+                    });
+
+                    $("#btnReserver").click(function (evt) {
+                        evt.preventDefault();
+
+                        if($("#dDebutReserve").val() == "" || $("#dDebutReserve").val() == "")
+                        {
+                            alert("remplissez les champs !");
+                            return false;
+                        }
+
+                        //SE CONNECTER
+                        var o = { idu: @Model.u.IdU + "", dDebutReserve: $("#dDebutReserve").val(), dFinReserve: $("#dFinReserve").val() };
+                        $.ajax({
+                            type: "POST",
+                            url: "/User/Reserve",
+                            data: o,
+                            datatype: 'json',
+                            success: function (result) {
+                                if (result.Reponse == "0")
+                                {
+                                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                                    $("#seConnecter").click();
+                                    return false;
+                                }
+                                if (result.Reponse == "1") {
+                                    alert("Vous devez vous reconnecter en tant qu'entreprise pour pouvoir envoyer une demande.");
+                                    return false;
+                                }
+
+                                if (result.Reponse == "2")
+                                    $("#panelReservation").html("Votre demande a bien été envoyée !");
+                            }
+                        });
+                        return false;
+                    });
+                    $("#etoileFavori").click(function (evt) {
+                        evt.preventDefault();
+                        
+                        //SE CONNECTER
+                        var o = { idu: @Model.u.IdU + "" };
+                        $.ajax({
+                            type: "POST",
+                            url: "/User/addFavori",
+                            data: o,
+                            datatype: 'json',
+                            success: function (result) {
+                                if (result.Reponse == "0")
+                                {
+                                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                                    $("#seConnecter").click();
+                                    return false;
+                                }
+                                if (result.Reponse == "1") {
+                                    alert("Vous devez vous reconnecter en tant qu'entreprise pour ajouter des favoris.");
+                                    return false;
+                                }
+
+                                if (result.Reponse == "2")
+                                    $("#etoileFavori").attr("src", "/Media/img/user/favorisOn.png");
+
+                                if (result.Reponse == "3")
+                                    $("#etoileFavori").attr("src", "/Media/img/user/favorisOff.png");
+                            }
+                        });
+                        return false;
+                    });
+                });
+            </script>
+        </div>
+        @*Mes expériences*@
+        <div class="titrePanel">
+            <img src="~/Media/img/user/experience.png" />
+            Mes expériences<br />
+            <span class="sousTitrePanel">Consultez toutes mes expériences professionnelles</span>
+        </div>
+        <div id="panelExp">
+            <div class="exp">
+                <div class="left imageExp"><img src="~/Media/file/upload/logo/1.jpg" /></div>
+                <div class="left nameExp">TF1</div>
+                <div class="left dateExp">12 Fev. 2015 - Aujourd'hui</div>
+                <div class="left professionExp">Réalisateur</div>
+                <div class="clear"></div>
+                <hr />
+            </div>
+            <div class="exp">
+                <div class="left imageExp"><img src="~/Media/file/upload/logo/1.jpg" /></div>
+                <div class="left nameExp">TF1</div>
+                <div class="left dateExp">19 Avr. 2014 - 3 Mai 2014</div>
+                <div class="left professionExp">Réalisateur</div>
+                <div class="clear"></div>
+                <hr />
+            </div>
+            <div class="exp">
+                <div class="left imageExp"><img src="~/Media/file/upload/logo/1.jpg" /></div>
+                <div class="left nameExp">TF1</div>
+                <div class="left dateExp">5 Fev. 2014 - 28 Fev. 2014</div>
+                <div class="left professionExp">Réalisateur</div>
+                <div class="clear"></div>
+                <hr />
+            </div>
+            <div class="exp">
+                <div class="left imageExp"><img src="~/Media/file/upload/logo/1.jpg" /></div>
+                <div class="left nameExp">TF1</div>
+                <div class="left dateExp">12 Fev. 2013 - 19 Fev. 2013</div>
+                <div class="left professionExp">Réalisateur</div>
+                <div class="clear"></div>
+                <hr />
+            </div>
+            <div class="exp">
+                <div class="left imageExp"><img src="~/Media/file/upload/logo/1.jpg" /></div>
+                <div class="left nameExp">TF1</div>
+                <div class="left dateExp">17 Fev. 2012 - 12 Fev. 2013</div>
+                <div class="left professionExp">Réalisateur</div>
+                <div class="clear"></div>
+                <hr />
+            </div>
+            <div class="exp">
+                <div class="left imageExp"><img src="~/Media/file/upload/logo/1.jpg" /></div>
+                <div class="left nameExp">TF1</div>
+                <div class="left dateExp">12 Sept. 2012 - 17 Fev. 2012</div>
+                <div class="left professionExp">Réalisateur</div>
+                <div class="clear"></div>
+                <hr />
+            </div>
+            <div id="deroulerExp">Dérouler v</div>
+            <script>
+                $(document).ready(function () {
+                    derouler = false;
+                    $('#panelExp .exp:nth-child(n+4)').slideUp('medium');
+                    $("#deroulerExp").click(
+                      function () {
+                          derouler = !derouler;
+                          if (derouler) {
+                              $('#panelExp .exp:nth-child(n+4)').slideDown('medium');
+                              $("#deroulerExp").text("Enrouler ^");
+                          }
+                          else {
+                              $('#panelExp .exp:nth-child(n+4)').slideUp('medium');
+                              $("#deroulerExp").text("Dérouler v");
+                          }
+
+                      }
+                    );
+                });
+            </script>
+
+        </div>
+        @*Les entreprises*@
+        <div class="titrePanel">
+            <img src="~/Media/img/user/entreprise.png" />
+            Les entreprises<br />
+            <span class="sousTitrePanel">Consultez toutes les entreprises qui me suivent</span>
+        </div>
+        <script src="~/Media/js/jquery.bxslider.js"></script>
+        <link href="~/Media/css/lib/jquery.bxslider.css" rel="stylesheet" />
+        <div id="slideEntr">
+            <div class="slide"><img src="~/media/file/upload/logo/1.png" /></div>
+            <div class="slide"><img src="~/media/file/upload/logo/2.png" /></div>
+            <div class="slide"><img src="~/media/file/upload/logo/3.png" /></div>
+            <div class="slide"><img src="~/media/file/upload/logo/4.png" /></div>
+            <div class="slide"><img src="~/media/file/upload/logo/5.png" /></div>
+            <div class="slide"><img src="~/media/file/upload/logo/6.png" /></div>
+            <div class="slide"><img src="~/media/file/upload/logo/7.png" /></div>
+            <div class="slide"><img src="~/media/file/upload/logo/8.png" /></div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('#slideEntr').bxSlider({
+                    slideWidth: 100,
+                    maxSlides: 50,
+                    moveSlides: 1,
+                    auto: true,
+                    pager: false,
+                    slideMargin: 10,
+                    randomStart: true
+                });
+            });
+        </script>
+    </div>
+    <div class="clear"></div>
+
+
+
+
+
 </section>

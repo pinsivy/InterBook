@@ -10,5 +10,8 @@ namespace InterBook2._0.Models
     public class UserModel : ModelBase
     {
         public Util u { get; set; }
+
+        public String DebutReserve { get; set; }
+        public String FinReserve { get; set; }
     }
 }

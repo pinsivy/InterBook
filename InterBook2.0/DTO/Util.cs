@@ -19,10 +19,17 @@ namespace InterBook2._0.DTO
             this.UE_envoi = new HashSet<UE_envoi>();
             this.Util_Consentement = new HashSet<Util_Consentement>();
             this.Util_Contrat = new HashSet<Util_Contrat>();
-            this.Util_Dispo = new HashSet<Util_Dispo>();
-            this.Util_Experience = new HashSet<Util_Experience>();
             this.Util_Profession = new HashSet<Util_Profession>();
-            this.Util_Ville = new HashSet<Util_Ville>();
+            this.Util_Message = new HashSet<Util_Message>();
+            this.Util_Contact = new HashSet<Util_Contact>();
+            this.Util_Contact1 = new HashSet<Util_Contact>();
+            this.Util_Message1 = new HashSet<Util_Message>();
+            this.Util_Geo = new HashSet<Util_Geo>();
+            this.Reservations = new HashSet<Reservation>();
+            this.Util_Favoris = new HashSet<Util_Favoris>();
+            this.Util_Favoris1 = new HashSet<Util_Favoris>();
+            this.ReservationsEmploye = new HashSet<Reservation>();
+            this.Abonnements = new HashSet<Abonnement>();
         }
     
         public int IdU { get; set; }
@@ -35,15 +42,27 @@ namespace InterBook2._0.DTO
         public Nullable<int> idu_Telmobile { get; set; }
         public Nullable<System.DateTime> dCrea { get; set; }
         public Nullable<System.DateTime> dMAJ { get; set; }
+        public Nullable<bool> particulier { get; set; }
+        public Nullable<int> id_Util_Info { get; set; }
+        public Nullable<int> id_Util_Info_Entreprise { get; set; }
     
         public virtual ICollection<UE_envoi> UE_envoi { get; set; }
         public virtual ICollection<Util_Consentement> Util_Consentement { get; set; }
         public virtual ICollection<Util_Contrat> Util_Contrat { get; set; }
-        public virtual ICollection<Util_Dispo> Util_Dispo { get; set; }
-        public virtual ICollection<Util_Experience> Util_Experience { get; set; }
         public virtual ICollection<Util_Profession> Util_Profession { get; set; }
         public virtual Util_Email Util_Email { get; set; }
         public virtual Util_Postal Util_Postal { get; set; }
-        public virtual ICollection<Util_Ville> Util_Ville { get; set; }
+        public virtual ICollection<Util_Message> Util_Message { get; set; }
+        public virtual ICollection<Util_Contact> Util_Contact { get; set; }
+        public virtual ICollection<Util_Contact> Util_Contact1 { get; set; }
+        public virtual ICollection<Util_Message> Util_Message1 { get; set; }
+        public virtual Util_Info Util_Info { get; set; }
+        public virtual ICollection<Util_Geo> Util_Geo { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
+        public virtual ICollection<Util_Favoris> Util_Favoris { get; set; }
+        public virtual ICollection<Util_Favoris> Util_Favoris1 { get; set; }
+        public virtual Util_Info_Entreprise Util_Info_Entreprise { get; set; }
+        public virtual ICollection<Reservation> ReservationsEmploye { get; set; }
+        public virtual ICollection<Abonnement> Abonnements { get; set; }
     }
 }

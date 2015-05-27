@@ -4,15 +4,23 @@
     <Key>
       <PropertyRef Name="id_Contrat" />
     </Key>
-    <Property Name="id_Contrat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Contrat" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="nvarchar" MaxLength="80" />
   </EntityType>
   <EntityType Name="Ref_Culture">
     <Key>
       <PropertyRef Name="id_Culture" />
     </Key>
-    <Property Name="id_Culture" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Culture" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="description" Type="nvarchar" MaxLength="80" />
+  </EntityType>
+  <EntityType Name="Ref_Departement">
+    <Key>
+      <PropertyRef Name="id_Departement" />
+    </Key>
+    <Property Name="id_Departement" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_Region" Type="int" />
   </EntityType>
   <EntityType Name="Ref_Dispo">
     <Key>
@@ -21,11 +29,18 @@
     <Property Name="id_Ref_Dispo" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="Ref_EtatReservation">
+    <Key>
+      <PropertyRef Name="id_Ref_EtatReservation" />
+    </Key>
+    <Property Name="id_Ref_EtatReservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="Ref_Experience">
     <Key>
       <PropertyRef Name="id_Experience" />
     </Key>
-    <Property Name="id_Experience" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Experience" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="nvarchar" MaxLength="80" Nullable="false" />
   </EntityType>
   <EntityType Name="Ref_Mailing">
@@ -39,7 +54,7 @@
     <Key>
       <PropertyRef Name="id_Pays" />
     </Key>
-    <Property Name="id_Pays" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Pays" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="codeINSEE" Type="int" />
     <Property Name="id_Culture" Type="int" />
     <Property Name="description" Type="nvarchar" MaxLength="80" />
@@ -48,7 +63,14 @@
     <Key>
       <PropertyRef Name="id_Profession" />
     </Key>
-    <Property Name="id_Profession" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Profession" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Ref_Region">
+    <Key>
+      <PropertyRef Name="id_Region" />
+    </Key>
+    <Property Name="id_Region" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Ref_TypeConsentement">
@@ -62,8 +84,27 @@
     <Key>
       <PropertyRef Name="id_Ville" />
     </Key>
-    <Property Name="id_Ville" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Ville" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="cp" Type="nvarchar" MaxLength="50" />
+    <Property Name="insee" Type="nchar" MaxLength="10" />
+    <Property Name="article" Type="nvarchar" MaxLength="50" />
+    <Property Name="ville" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_Region" Type="int" />
+    <Property Name="id_Departement" Type="nvarchar" MaxLength="50" />
+    <Property Name="longitude" Type="nvarchar" MaxLength="50" />
+    <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="id_Reservation" />
+    </Key>
+    <Property Name="id_Reservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idU" Type="int" />
+    <Property Name="idUEntreprise" Type="int" />
+    <Property Name="debut" Type="datetime" />
+    <Property Name="fin" Type="datetime" />
+    <Property Name="id_EtatReservation" Type="int" />
   </EntityType>
   <EntityType Name="UE_envoi">
     <Key>
@@ -89,6 +130,8 @@
     <Property Name="idu_Telmobile" Type="int" />
     <Property Name="dCrea" Type="datetime" />
     <Property Name="dMAJ" Type="datetime" />
+    <Property Name="particulier" Type="bit" />
+    <Property Name="id_Util_Info" Type="int" />
   </EntityType>
   <EntityType Name="Util_Consentement">
     <Key>
@@ -101,22 +144,30 @@
     <Property Name="idu" Type="int" />
     <Property Name="dRecueil" Type="datetime" />
   </EntityType>
+  <EntityType Name="Util_Contact">
+    <Key>
+      <PropertyRef Name="id_Util_Contact" />
+    </Key>
+    <Property Name="id_Util_Contact" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="iduFrom" Type="int" />
+    <Property Name="iduTo" Type="int" />
+  </EntityType>
   <EntityType Name="Util_Contrat">
     <Key>
       <PropertyRef Name="id_Util_Contrat" />
     </Key>
     <Property Name="id_Util_Contrat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdU" Type="int" Nullable="false" />
-    <Property Name="id_Contrat" Type="int" Nullable="false" />
+    <Property Name="IdU" Type="int" />
+    <Property Name="id_Contrat" Type="int" />
   </EntityType>
   <EntityType Name="Util_Dispo">
     <Key>
       <PropertyRef Name="id_Util_Dispo" />
     </Key>
     <Property Name="id_Util_Dispo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="dDispo" Type="datetime" Nullable="false" />
-    <Property Name="idU" Type="int" Nullable="false" />
-    <Property Name="id_Ref_Dispo" Type="int" Nullable="false" />
+    <Property Name="dDispo" Type="datetime" />
+    <Property Name="idU" Type="int" />
+    <Property Name="id_Ref_Dispo" Type="int" />
   </EntityType>
   <EntityType Name="Util_Email">
     <Key>
@@ -131,42 +182,87 @@
       <PropertyRef Name="id_Util_Experience" />
     </Key>
     <Property Name="id_Util_Experience" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdU" Type="int" Nullable="false" />
-    <Property Name="id_Experience" Type="int" Nullable="false" />
+    <Property Name="IdU" Type="int" />
+    <Property Name="id_Experience" Type="int" />
+  </EntityType>
+  <EntityType Name="Util_Favoris">
+    <Key>
+      <PropertyRef Name="id_Util_Favoris" />
+    </Key>
+    <Property Name="id_Util_Favoris" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idU" Type="int" />
+    <Property Name="idUEntreprise" Type="int" />
+    <Property Name="actif" Type="bit" />
+  </EntityType>
+  <EntityType Name="Util_Geo">
+    <Key>
+      <PropertyRef Name="id_Util_Geo" />
+    </Key>
+    <Property Name="id_Util_Geo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_Departement" Type="nvarchar" MaxLength="50" />
+    <Property Name="id_Region" Type="int" />
+    <Property Name="idU" Type="int" />
+  </EntityType>
+  <EntityType Name="Util_Info">
+    <Key>
+      <PropertyRef Name="id_Util_Info" />
+    </Key>
+    <Property Name="id_Util_Info" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="photo" Type="int" />
+    <Property Name="cv" Type="int" />
+    <Property Name="numTel" Type="nvarchar" MaxLength="50" />
+    <Property Name="dNaissance" Type="datetime" />
+    <Property Name="experience" Type="int" />
+    <Property Name="motivation" Type="nvarchar(max)" />
+    <Property Name="permisA" Type="bit" />
+    <Property Name="permisB" Type="bit" />
+    <Property Name="permisC" Type="bit" />
+  </EntityType>
+  <EntityType Name="Util_Message">
+    <Key>
+      <PropertyRef Name="id_Util_Message" />
+    </Key>
+    <Property Name="id_Util_Message" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUFrom" Type="int" />
+    <Property Name="idUTo" Type="int" />
+    <Property Name="message" Type="nvarchar(max)" />
+    <Property Name="dMessage" Type="datetime" />
   </EntityType>
   <EntityType Name="Util_Postal">
     <Key>
       <PropertyRef Name="idu_Postal" />
     </Key>
     <Property Name="idu_Postal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="id_Civilite" Type="int" Nullable="false" />
+    <Property Name="id_Civilite" Type="int" />
     <Property Name="nom" Type="nvarchar" MaxLength="80" />
     <Property Name="prenom" Type="nvarchar" MaxLength="80" />
     <Property Name="adresse1" Type="nvarchar" MaxLength="80" />
     <Property Name="adresse2" Type="nvarchar" MaxLength="80" />
     <Property Name="cp" Type="nvarchar" MaxLength="80" />
-    <Property Name="ville" Type="nvarchar" MaxLength="80" />
+    <Property Name="id_Ville" Type="int" />
     <Property Name="id_Pays" Type="int" />
     <Property Name="dCrea" Type="datetime" />
-    <Property Name="numeroTel" Type="nvarchar" MaxLength="50" />
-    <Property Name="permis" Type="int" />
   </EntityType>
   <EntityType Name="Util_Profession">
     <Key>
       <PropertyRef Name="id_Util_Profession" />
     </Key>
     <Property Name="id_Util_Profession" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="id_Profession" Type="int" Nullable="false" />
-    <Property Name="IdU" Type="int" Nullable="false" />
+    <Property Name="id_Profession" Type="int" />
+    <Property Name="IdU" Type="int" />
   </EntityType>
-  <EntityType Name="Util_Ville">
-    <Key>
-      <PropertyRef Name="id_Util_Ville" />
-    </Key>
-    <Property Name="id_Util_Ville" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="id_Ville" Type="int" Nullable="false" />
-    <Property Name="IdU" Type="int" Nullable="false" />
-  </EntityType>
+  <Association Name="FK_Ref_Departement_Ref_Region">
+    <End Role="Ref_Region" Type="Self.Ref_Region" Multiplicity="0..1" />
+    <End Role="Ref_Departement" Type="Self.Ref_Departement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Region">
+        <PropertyRef Name="id_Region" />
+      </Principal>
+      <Dependent Role="Ref_Departement">
+        <PropertyRef Name="id_Region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Ref_Pays_Ref_Culture">
     <End Role="Ref_Culture" Type="Self.Ref_Culture" Multiplicity="0..1" />
     <End Role="Ref_Pays" Type="Self.Ref_Pays" Multiplicity="*" />
@@ -176,6 +272,66 @@
       </Principal>
       <Dependent Role="Ref_Pays">
         <PropertyRef Name="id_Culture" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ref_Ville_Ref_Departement">
+    <End Role="Ref_Departement" Type="Self.Ref_Departement" Multiplicity="0..1" />
+    <End Role="Ref_Ville" Type="Self.Ref_Ville" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Departement">
+        <PropertyRef Name="id_Departement" />
+      </Principal>
+      <Dependent Role="Ref_Ville">
+        <PropertyRef Name="id_Departement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ref_Ville_Ref_Region">
+    <End Role="Ref_Region" Type="Self.Ref_Region" Multiplicity="0..1" />
+    <End Role="Ref_Ville" Type="Self.Ref_Ville" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Region">
+        <PropertyRef Name="id_Region" />
+      </Principal>
+      <Dependent Role="Ref_Ville">
+        <PropertyRef Name="id_Region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservation_Ref_EtatReservation">
+    <End Role="Ref_EtatReservation" Type="Self.Ref_EtatReservation" Multiplicity="0..1" />
+    <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_EtatReservation">
+        <PropertyRef Name="id_Ref_EtatReservation" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="id_EtatReservation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservation_Util">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="idU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservation_UtilEntreprise">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Reservation">
+        <PropertyRef Name="idUEntreprise" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -251,8 +407,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Util_Contact_UtilFrom">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Contact" Type="Self.Util_Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Util_Contact">
+        <PropertyRef Name="iduFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Contact_UtilTo">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Contact" Type="Self.Util_Contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Util_Contact">
+        <PropertyRef Name="iduTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Util_Contrat_Ref_Contrat">
-    <End Role="Ref_Contrat" Type="Self.Ref_Contrat" Multiplicity="1" />
+    <End Role="Ref_Contrat" Type="Self.Ref_Contrat" Multiplicity="0..1" />
     <End Role="Util_Contrat" Type="Self.Util_Contrat" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ref_Contrat">
@@ -264,7 +444,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Util_Contrat_Util">
-    <End Role="Util" Type="Self.Util" Multiplicity="1" />
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
     <End Role="Util_Contrat" Type="Self.Util_Contrat" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Util">
@@ -276,7 +456,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Util_Dispo_Ref_Dispo">
-    <End Role="Ref_Dispo" Type="Self.Ref_Dispo" Multiplicity="1" />
+    <End Role="Ref_Dispo" Type="Self.Ref_Dispo" Multiplicity="0..1" />
     <End Role="Util_Dispo" Type="Self.Util_Dispo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ref_Dispo">
@@ -288,7 +468,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Util_Dispo_Util">
-    <End Role="Util" Type="Self.Util" Multiplicity="1" />
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
     <End Role="Util_Dispo" Type="Self.Util_Dispo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Util">
@@ -300,7 +480,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Util_Experience_Ref_Experience">
-    <End Role="Ref_Experience" Type="Self.Ref_Experience" Multiplicity="1" />
+    <End Role="Ref_Experience" Type="Self.Ref_Experience" Multiplicity="0..1" />
     <End Role="Util_Experience" Type="Self.Util_Experience" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ref_Experience">
@@ -312,7 +492,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Util_Experience_Util">
-    <End Role="Util" Type="Self.Util" Multiplicity="1" />
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
     <End Role="Util_Experience" Type="Self.Util_Experience" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Util">
@@ -320,6 +500,66 @@
       </Principal>
       <Dependent Role="Util_Experience">
         <PropertyRef Name="IdU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Favoris_Util">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Favoris" Type="Self.Util_Favoris" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Util_Favoris">
+        <PropertyRef Name="idU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Favoris_UtilEntreprise">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Favoris" Type="Self.Util_Favoris" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Util_Favoris">
+        <PropertyRef Name="idUEntreprise" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Geo_Util">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Geo" Type="Self.Util_Geo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Util_Geo">
+        <PropertyRef Name="idU" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Message_UtilFrom">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Message" Type="Self.Util_Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Util_Message">
+        <PropertyRef Name="idUFrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Message_UtilTo">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Message" Type="Self.Util_Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Util_Message">
+        <PropertyRef Name="idUTo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -335,8 +575,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Util_Postal_Ref_Ville">
+    <End Role="Ref_Ville" Type="Self.Ref_Ville" Multiplicity="0..1" />
+    <End Role="Util_Postal" Type="Self.Util_Postal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Ville">
+        <PropertyRef Name="id_Ville" />
+      </Principal>
+      <Dependent Role="Util_Postal">
+        <PropertyRef Name="id_Ville" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Util_Profession_Ref_Profession">
-    <End Role="Ref_Profession" Type="Self.Ref_Profession" Multiplicity="1" />
+    <End Role="Ref_Profession" Type="Self.Ref_Profession" Multiplicity="0..1" />
     <End Role="Util_Profession" Type="Self.Util_Profession" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ref_Profession">
@@ -348,7 +600,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Util_Profession_Util">
-    <End Role="Util" Type="Self.Util" Multiplicity="1" />
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
     <End Role="Util_Profession" Type="Self.Util_Profession" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Util">
@@ -371,6 +623,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Util_Util_Info">
+    <End Role="Util_Info" Type="Self.Util_Info" Multiplicity="0..1" />
+    <End Role="Util" Type="Self.Util" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util_Info">
+        <PropertyRef Name="id_Util_Info" />
+      </Principal>
+      <Dependent Role="Util">
+        <PropertyRef Name="id_Util_Info" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Util_Util_Postal">
     <End Role="Util_Postal" Type="Self.Util_Postal" Multiplicity="0..1" />
     <End Role="Util" Type="Self.Util" Multiplicity="*" />
@@ -383,32 +647,28 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Util_Ville_Ref_Ville">
-    <End Role="Ref_Ville" Type="Self.Ref_Ville" Multiplicity="1" />
-    <End Role="Util_Ville" Type="Self.Util_Ville" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ref_Ville">
-        <PropertyRef Name="id_Ville" />
-      </Principal>
-      <Dependent Role="Util_Ville">
-        <PropertyRef Name="id_Ville" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Util_Ville_Util">
-    <End Role="Util" Type="Self.Util" Multiplicity="1" />
-    <End Role="Util_Ville" Type="Self.Util_Ville" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Util">
-        <PropertyRef Name="idU" />
-      </Principal>
-      <Dependent Role="Util_Ville">
-        <PropertyRef Name="IdU" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
+  <Function Name="GetRefVilleByLongLatRayon" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="longitude" Type="float" Mode="In" />
+    <Parameter Name="latitude" Type="float" Mode="In" />
+    <Parameter Name="distance" Type="int" Mode="In" />
+  </Function>
   <Function Name="GetUtilDispoByIdrdIdu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="idu" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetUtilSearchByLongLatIddepRayonDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="longitude" Type="float" Mode="In" />
+    <Parameter Name="latitude" Type="float" Mode="In" />
+    <Parameter Name="idDepartement" Type="nvarchar" Mode="In" />
+    <Parameter Name="distance" Type="int" Mode="In" />
+    <Parameter Name="dateDebut" Type="datetime" Mode="In" />
+    <Parameter Name="dateFin" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetVilleByCentreDistance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="longitude" Type="float" Mode="In" />
+    <Parameter Name="latitude" Type="float" Mode="In" />
+    <Parameter Name="distance" Type="int" Mode="In" />
+    <Parameter Name="dateDebut" Type="datetime" Mode="In" />
+    <Parameter Name="dateFin" Type="datetime" Mode="In" />
   </Function>
   <Function Name="SearchByVilleProfession" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ville" Type="varchar" Mode="In" />
@@ -420,32 +680,75 @@
     <Parameter Name="experience" Type="varchar" Mode="In" />
     <Parameter Name="contrat" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SetReservation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idU" Type="int" Mode="In" />
+    <Parameter Name="idUEntreprise" Type="int" Mode="In" />
+    <Parameter Name="debut" Type="datetime" Mode="In" />
+    <Parameter Name="fin" Type="datetime" Mode="In" />
+    <Parameter Name="etatDemande" Type="int" Mode="In" />
+  </Function>
   <Function Name="SetUtilEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="email" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SetUtilFavoris" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idU" Type="int" Mode="In" />
+    <Parameter Name="idUEntreprise" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="InterBookModelStoreContainer">
     <EntitySet Name="Ref_Contrat" EntityType="Self.Ref_Contrat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Culture" EntityType="Self.Ref_Culture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_Departement" EntityType="Self.Ref_Departement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Dispo" EntityType="Self.Ref_Dispo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_EtatReservation" EntityType="Self.Ref_EtatReservation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Experience" EntityType="Self.Ref_Experience" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Mailing" EntityType="Self.Ref_Mailing" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Pays" EntityType="Self.Ref_Pays" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Profession" EntityType="Self.Ref_Profession" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_Region" EntityType="Self.Ref_Region" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_TypeConsentement" EntityType="Self.Ref_TypeConsentement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Ville" EntityType="Self.Ref_Ville" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UE_envoi" EntityType="Self.UE_envoi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util" EntityType="Self.Util" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Consentement" EntityType="Self.Util_Consentement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util_Contact" EntityType="Self.Util_Contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Contrat" EntityType="Self.Util_Contrat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Dispo" EntityType="Self.Util_Dispo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Email" EntityType="Self.Util_Email" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Experience" EntityType="Self.Util_Experience" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util_Favoris" EntityType="Self.Util_Favoris" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util_Geo" EntityType="Self.Util_Geo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util_Info" EntityType="Self.Util_Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util_Message" EntityType="Self.Util_Message" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Postal" EntityType="Self.Util_Postal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Profession" EntityType="Self.Util_Profession" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Util_Ville" EntityType="Self.Util_Ville" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Ref_Departement_Ref_Region" Association="Self.FK_Ref_Departement_Ref_Region">
+      <End Role="Ref_Region" EntitySet="Ref_Region" />
+      <End Role="Ref_Departement" EntitySet="Ref_Departement" />
+    </AssociationSet>
     <AssociationSet Name="FK_Ref_Pays_Ref_Culture" Association="Self.FK_Ref_Pays_Ref_Culture">
       <End Role="Ref_Culture" EntitySet="Ref_Culture" />
       <End Role="Ref_Pays" EntitySet="Ref_Pays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ref_Ville_Ref_Departement" Association="Self.FK_Ref_Ville_Ref_Departement">
+      <End Role="Ref_Departement" EntitySet="Ref_Departement" />
+      <End Role="Ref_Ville" EntitySet="Ref_Ville" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ref_Ville_Ref_Region" Association="Self.FK_Ref_Ville_Ref_Region">
+      <End Role="Ref_Region" EntitySet="Ref_Region" />
+      <End Role="Ref_Ville" EntitySet="Ref_Ville" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservation_Ref_EtatReservation" Association="Self.FK_Reservation_Ref_EtatReservation">
+      <End Role="Ref_EtatReservation" EntitySet="Ref_EtatReservation" />
+      <End Role="Reservation" EntitySet="Reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservation_Util" Association="Self.FK_Reservation_Util">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Reservation" EntitySet="Reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservation_UtilEntreprise" Association="Self.FK_Reservation_UtilEntreprise">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Reservation" EntitySet="Reservation" />
     </AssociationSet>
     <AssociationSet Name="FK_UE_envoi_Ref_Mailing" Association="Self.FK_UE_envoi_Ref_Mailing">
       <End Role="Ref_Mailing" EntitySet="Ref_Mailing" />
@@ -471,6 +774,14 @@
       <End Role="Util" EntitySet="Util" />
       <End Role="Util_Consentement" EntitySet="Util_Consentement" />
     </AssociationSet>
+    <AssociationSet Name="FK_Util_Contact_UtilFrom" Association="Self.FK_Util_Contact_UtilFrom">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Contact" EntitySet="Util_Contact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Contact_UtilTo" Association="Self.FK_Util_Contact_UtilTo">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Contact" EntitySet="Util_Contact" />
+    </AssociationSet>
     <AssociationSet Name="FK_Util_Contrat_Ref_Contrat" Association="Self.FK_Util_Contrat_Ref_Contrat">
       <End Role="Ref_Contrat" EntitySet="Ref_Contrat" />
       <End Role="Util_Contrat" EntitySet="Util_Contrat" />
@@ -495,8 +806,32 @@
       <End Role="Util" EntitySet="Util" />
       <End Role="Util_Experience" EntitySet="Util_Experience" />
     </AssociationSet>
+    <AssociationSet Name="FK_Util_Favoris_Util" Association="Self.FK_Util_Favoris_Util">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Favoris" EntitySet="Util_Favoris" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Favoris_UtilEntreprise" Association="Self.FK_Util_Favoris_UtilEntreprise">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Favoris" EntitySet="Util_Favoris" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Geo_Util" Association="Self.FK_Util_Geo_Util">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Geo" EntitySet="Util_Geo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Message_UtilFrom" Association="Self.FK_Util_Message_UtilFrom">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Message" EntitySet="Util_Message" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Message_UtilTo" Association="Self.FK_Util_Message_UtilTo">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Message" EntitySet="Util_Message" />
+    </AssociationSet>
     <AssociationSet Name="FK_Util_Postal_Ref_Pays" Association="Self.FK_Util_Postal_Ref_Pays">
       <End Role="Ref_Pays" EntitySet="Ref_Pays" />
+      <End Role="Util_Postal" EntitySet="Util_Postal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Postal_Ref_Ville" Association="Self.FK_Util_Postal_Ref_Ville">
+      <End Role="Ref_Ville" EntitySet="Ref_Ville" />
       <End Role="Util_Postal" EntitySet="Util_Postal" />
     </AssociationSet>
     <AssociationSet Name="FK_Util_Profession_Ref_Profession" Association="Self.FK_Util_Profession_Ref_Profession">
@@ -511,17 +846,13 @@
       <End Role="Util_Email" EntitySet="Util_Email" />
       <End Role="Util" EntitySet="Util" />
     </AssociationSet>
+    <AssociationSet Name="FK_Util_Util_Info" Association="Self.FK_Util_Util_Info">
+      <End Role="Util_Info" EntitySet="Util_Info" />
+      <End Role="Util" EntitySet="Util" />
+    </AssociationSet>
     <AssociationSet Name="FK_Util_Util_Postal" Association="Self.FK_Util_Util_Postal">
       <End Role="Util_Postal" EntitySet="Util_Postal" />
       <End Role="Util" EntitySet="Util" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Util_Ville_Ref_Ville" Association="Self.FK_Util_Ville_Ref_Ville">
-      <End Role="Ref_Ville" EntitySet="Ref_Ville" />
-      <End Role="Util_Ville" EntitySet="Util_Ville" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Util_Ville_Util" Association="Self.FK_Util_Ville_Util">
-      <End Role="Util" EntitySet="Util" />
-      <End Role="Util_Ville" EntitySet="Util_Ville" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

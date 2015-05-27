@@ -11,19 +11,177 @@
 @*FORMULAIRE*@
 <section class="container">
     <div class="form">
-        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
-        {
-            @Html.ValidationSummary(true)
-            @Html.TextBoxFor(x => x.Profession, new { @class = "inputQuery", placeholder = Index.Quoi })
-            @Html.TextBoxFor(x => x.Debut, new { @class = "inputQuery", id = "Date" })
-            @Html.TextBoxFor(x => x.Ville, new { @class = "inputQuery", placeholder = Index.Ou })
-            <input type="submit" value="" />
-            <button id="lienRechercheAvancee"></button>
-            @Html.ValidationMessageFor(x => x.Profession)
-            @Html.ValidationMessageFor(x => x.Ville)
-        }
+        <div class="inForm">
+
+            <div id="rechercherTexte">
+
+                <div class="searchJob">@Model.Profession</div>
+                <div class="searchDate">@Model.Debut - @Model.Fin</div>
+                <div class="searchTown">@Model.Ville</div>
+
+                <a href="#" id="pushSearch"></a>
+
+            </div>
+            @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+            {
+                @Html.ValidationSummary(true)
+                @Html.TextBoxFor(x => x.Profession, new { @class = "inputQuery", placeholder = Index.Quoi })
+                @Html.TextBoxFor(x => x.Debut, new { @class = "inputDateQuery", @type = "date", id = "DateDebut", placeholder = "De", data_dependent_validation = "{\"from\": \"DateFin\", \"prop\": \"max\"}" })
+                @Html.TextBoxFor(x => x.Fin, new { @class = "inputDateQuery", @type = "date", id = "DateFin", placeholder = "à", data_dependent_validation = "{\"from\": \"DateDebut\", \"prop\": \"min\"}" })
+                @Html.TextBoxFor(x => x.Ville, new { @class = "inputQuery", required = "required", placeholder = Index.Ou })
+                <div class="subMit">
+                    <input type="submit" value="" />    
+                </div>
+            }
+        </div>
     </div>
 </section>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="~/Media/js/polyfiller.js"></script>
+<script>
+    $(function () {
+
+
+        webshim.setOptions('forms', {
+            lazyCustomMessages: true,
+            addValidators: true
+        });
+        webshim.setOptions('forms-ext', {
+            replaceUI: 'auto',
+            types: 'date',
+            date: {
+                startView: 2,
+                classes: 'hide-btnrow hide-spinbtns hide-dropdownbtn DatePicker inputQuery',
+                openOnFocus: true,
+                dateFormat: 'dd mm yyyy'
+            }
+        });
+
+        //start polyfilling
+        webshim.polyfill('forms forms-ext');
+
+        //initial max/min attributes should be done serverside.
+        $(function () {
+            $('#DateDebut, #DateFin').prop('min', function () {
+                return new Date().toJSON().split('T')[0];
+            });
+        });
+
+        $("#Profession").autocomplete({
+            source: function (request, response) {
+
+                $.ajax({
+                    dataType: "json",
+                    type: 'Get',
+                    url: 'Home/GetProfessions',
+                    search: function () { $(this).addClass('ui-autocomplete-loading'); },
+                    open: function () { $(this).removeClass('ui-autocomplete-loading'); },
+                    delay: 0,
+                    data: {
+                        debut: request.term,
+                        maxRows: 8
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item.Description;
+                        }));
+                    }
+                });
+            }
+        });
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                $.ajax({
+                    dataType: "json",
+                    type: 'Get',
+                    url: '/Home/GetVilleGeoloc',
+                    delay: 0,
+                    data: {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        distance: 5
+                    },
+                    success: function (item) {
+                        $("#Ville").val(item.article + item.ville + " (" + item.cp + ")");
+                    }
+                });
+            });
+        }
+        else
+            alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
+
+        $("#Ville").autocomplete({
+            source: function (request, response) {
+
+                $.ajax({
+                    dataType: "json",
+                    type: 'Get',
+                    url: 'Home/GetVilles',
+                    search: function () { $(this).addClass('ui-autocomplete-loading'); },
+                    open: function () { $(this).removeClass('ui-autocomplete-loading'); },
+                    delay: 0,
+                    data: {
+                        debut: request.term,
+                        maxRows: 8
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            var retour = "";
+                            if (item.article != "") {
+                                retour = item.article;
+                                if (item.article.indexOf("'") < 0)
+                                    retour += " ";
+                            }
+                            retour += item.ville + " (" + item.cp + ")";
+                            return retour;
+                        }));
+                    }
+                });
+            }
+        });
+    });
+
+</script>
+<script type="text/javascript">
+
+    function animeSearch() {
+        var nonVisible = true;
+        $("a#pushSearch").on("click", function () {
+            if (nonVisible) {
+                nonVisible = false;
+                $(".form")
+                .animate(
+                    { height: "310px" },
+                    {
+                        duration: 600,
+                        easing: "easeInOutExpo"
+                    });
+
+                $(".form .inForm .inputQuery").fadeIn().show();
+                $(".form .inForm .subMit").fadeIn().show();
+            }
+            else {
+                nonVisible = true;
+
+                $(".form .inForm .inputQuery").css({ display: "none" });
+                $(".form .inForm .subMit").css({ display: "none" });
+
+                $(".form")
+                .animate(
+                    { height: "60px" },
+                    {
+                        duration: 600,
+                        easing: "easeInOutExpo"
+                    });
+            }
+        });
+    }
+    animeSearch();
+</script>
+
+
 
 @*FILTRES*@
 <script type="text/javascript">
@@ -49,6 +207,7 @@
     function changeResults(vars) {
         var filtres = {
             ville: vars["ville"],
+            idVille: vars["idVille"],
             debut: vars["debut"],
             fin: vars["fin"],
             profession: vars["profession"],
@@ -123,7 +282,6 @@
     }
 
     $(function () {
-        filter();
         recur();
     });
 </script>
@@ -131,35 +289,53 @@
 <section id="filtreResultat" class="container">
 
     <div id="filter" class="filter left">
-        <h3><img src="~/Media/img/search/flecheHautCriteres.png" />Critères de recherce</h3>
-        <span>Niveau d'expérience</span>
+        <h3>Critères de recherce</h3>
+        <div class="nameFilter">Niveau d'expérience</div>
         <ul id="exp">
             <li id="exp-0">Tous</li>
             <li id="exp-1">Junior (0 à 1 ans)</li>
             <li id="exp-2">Expérimenté (2 à 5 ans)</li>
             <li id="exp-3">Senior (6+)</li>
         </ul>
-        <span>Région</span>
-        <ul id="cont">
-            <li id="cont-0">Tous</li>
-            <li id="cont-1">CDI</li>
-            <li id="cont-2">CDD</li>
-            <li id="cont-3">Stage</li>
-            <li id="cont-4">Freelance</li>
-        </ul>
     </div>
 
     @*RESULTATS*@
     <div id="results" class="results left">
-        <h3>566 résultats trouvés</h3>
+        <h3><span>@(Model.luSearch != null ? Model.luSearch.Count.ToString() : "Aucun")</span> @(Model.luSearch == null || (Model.luSearch != null && Model.luSearch.Count <= 1) ? "résultat trouvé" : "résultats trouvés")</h3>
         <div>
-            @*@foreach (var u in Model.lu)
+            @if (Model.luSearch != null)
             {
-                <p>@u.IdU.ToString()</p>
-                <br />
-                <p>@u.idu_email.ToString()</p>
-                <hr />
-            }*@
+                foreach (var u in Model.luSearch)
+                {
+                    <a href="/u/@u.uSearch.IdU.ToString()" class="lienUtil">
+                        <article>
+                            <div class="left image">
+                                @if (u.uSearch.Util_Info != null && u.uSearch.Util_Info.photo != null)
+                                {
+                                    <img id="photo" src="~/Media/file/upload/photo/@(u.uSearch.Util_Info.photo).gif" width="85" height="85" />
+                                }
+                            </div>
+                            <div class="left detail">
+                                @u.uSearch.Util_Postal.prenom.ToString() @u.uSearch.Util_Postal.nom.ToString()
+                                @if (u.dist >= 0 && u.dist <= 1)
+                                {
+                                    <span class="distanceUtil"> - à @Model.Ville</span>
+                                }
+                                else if (u.dist > 1)
+                                {
+                                    <span class="distanceUtil"> - à @String.Format("{0:0.}", u.dist)km</span>
+                                }
+                                <br />
+                                <p class="villeUtil">@u.uSearch.Util_Postal.Ref_Ville.ville.ToString()</p>
+                            </div>
+                            <div class="left">
+                                <button class="contacterUtil"><img src="~/Media/img/search/contacter.png" /> Contacter</button>
+                            </div>
+                        </article>
+                    </a>
+                    <div class="clear"></div>
+                }
+            }
         </div>
     </div>
     <div class="clear"></div>

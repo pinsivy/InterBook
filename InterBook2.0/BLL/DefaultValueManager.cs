@@ -13,8 +13,9 @@ namespace InterBook2._0.BLL
         /// <returns>Retourne la getdate() SQL</returns>
         public static DateTime ReturnSQLDate()
         {
-            IBWS ws = new IBWS();
-            return ws.ReturnSQLDate();
+            if (SessionManager.Current.ws == null)
+                SessionManager.Current.ws = new IBWS();
+            return SessionManager.Current.ws.ReturnSQLDate();
         }
 
         /// <summary>
@@ -23,8 +24,9 @@ namespace InterBook2._0.BLL
         /// <returns>Retourne le newid() SQL</returns>
         public static Guid ReturnSQLGuid()
         {
-            IBWS ws = new IBWS();
-            return ws.ReturnSQLGuid();
+            if (SessionManager.Current.ws == null)
+                SessionManager.Current.ws = new IBWS();
+            return SessionManager.Current.ws.ReturnSQLGuid();
         }
     }
 }

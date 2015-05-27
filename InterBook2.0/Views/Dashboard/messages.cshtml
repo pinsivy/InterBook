@@ -1,0 +1,95 @@
+﻿@using InterBook2._0.Views.Dashboard.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.DashboardModel
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@Styles.Render("~/Media/css/dashboard")
+<link href="~/Media/css/Dashboard.css" rel="stylesheet" />
+
+<section class="container">
+
+    @Html.Partial("_MenuProfil")
+
+    @*MESSAGES*@
+
+    <div class="panelDroite right">
+        <h1>MESSAGES</h1>
+        @if (Model.luc != null)
+        {
+            foreach (var u in Model.luc)
+            {
+                <a href="#" class="contact" id="@u.iduTo">@u.UtilTo.Util_Postal.prenom @u.UtilTo.Util_Postal.nom @if(u.UtilTo.Util_Info_Entreprise != null){<text>(@u.UtilTo.Util_Info_Entreprise.Nom)</text>}</a><br />
+            }
+        }
+        else
+        {
+            <p>Aucun message</p>
+        }
+        <div id="partMessage" style="display:none;">
+            <div id="Message">
+
+            </div>
+            <div>
+                <textarea id="messageReader" placeholder="Votre réponse..."></textarea>
+                <input id="iduTo" type="hidden" value="" />
+                <button id="messageSender">Répondre</button>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+
+
+
+    <script>
+        $(".contact").click(function () {
+            var message = {
+                iduTo: this.id
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Dashboard/getMessage",
+                dataType: "json",
+                contentType: "application/json",
+                data: message
+            })
+            .done(function (dataString) {
+                $("#partMessage").show();
+                $("#Message").html("");
+
+                var data = JSON.parse(dataString);
+                var tab_mois = new Array("Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre");
+                for (i = 0; i < data.length; i++) {
+                    var milli = data[i].dMessage.replace(/\/Date\((-?\d+)\)\//, '$1');
+                    var d = new Date(data[i].dMessage);
+                    $("#Message").append("          \
+                    <article id='result" + data[i].id_Util_Message + "'>     \
+                        " + data[i].idUFrom + " : " + data[i].message + " envoyé le " + d.getDate() + " " + tab_mois[d.getMonth()] + " à " + d.getHours() + "h" + d.getMinutes() + "           \
+                    </article>                  \
+                    ");
+                }
+            })
+            .fail(function () {
+                console.log("error");
+            });
+            $("#iduTo").val(this.id);
+        });
+        $("#messageSender").click(function () {
+            var texte = $("#messageReader").val();
+            var iduToTemp = $("#iduTo").val();
+            var message2 = {
+                iduTo: iduToTemp,
+                message: texte
+            };
+            $.ajax({
+                type: "POST",
+                url: "/Dashboard/addMessage",
+                dataType: "json",
+                data: message2,
+                success: function (result) {
+                    $("#" + iduToTemp).click();
+                }
+            });
+        });
+    </script>
+
+</section>

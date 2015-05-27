@@ -1,13 +1,5 @@
 ﻿/*
  *
- * BODY
- *
- */
-body{
-     background: #e7e7e7;
-}
-/*
- *
  * Information
  *
  */
@@ -33,11 +25,6 @@ body{
     display : table;
     width : 100%;
 }
-.titreBloc > div, .questionBloc > div
-{
-    display : table-cell;
-    vertical-align: middle;
-}
 .numero
 {
     border: 1px solid #e7e7e7;
@@ -59,6 +46,11 @@ body{
 {
     width: 150px;
     padding-left: 20px;
+}
+.sousTitre
+{
+    color: #888888;
+    font-size: 14px;
 }
 .titreBloc
 {
@@ -100,7 +92,84 @@ body{
  */
 #bloc1
 {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+.divInfos
+{
+    max-width: 790px;
+}
+.divchamps
+{
+    min-width: 270px;
+    max-width: 395px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.divchamps .left
+{
+      margin-left: 40px;
+}
+#tableProfession input
+{
+    margin-bottom : 20px;
+}
+#tableProfession div:last-child input
+{
+    margin-bottom : 0px;
+}
+#plus
+{
+    text-decoration: underline;
+    color: #888888;
+    background: none;
+    border: none;
+    font-size: 12px;
+}
+.ui-autocomplete-loading
+{
+    background:url('../img/commun/loading.gif') no-repeat right 10px center;
+    background-size: 20px 20px;
+}
+.blocGeo
+{
+    background: url(../img/signup/fr-FR/france.png) top 10px right 20px  no-repeat #d7ebec;
+    padding: 25px;
+    min-height: 130px;
+}
+.blocGeo .table-row
+{
+    min-height: 30px;
+}
+.blocGeo #selectChoisi
+{
+    margin: 15px 0px;
+    max-width: 400px;
+}
+.blocGeo .choisi
+{
+    display: none;
+    margin-bottom: 25px;
+}
+.blocGeo .croixDep
+{
+    cursor: pointer;
+    font-size: 10px;
+    border-radius:50%;
+    color: #e41717;
+    padding: 2px;
+}
+.blocGeo .croixDep:hover
+{
+    color: #ffffff;
+    background-color: #e41717;
+}
+#ajouterDepartement
+{
+    width: 150px;
+    height: 40px;
+    background-color: #2e94da;
+    border: none;
+    color: #FFFFFF;
 }
 /*
  *
@@ -114,18 +183,47 @@ body{
 }
 #bloc2
 {
-    margin-right: 8px;
+    margin-right: 10px;
 }
 #bloc2, #bloc3
 {
-    width: 416px;
+    width: 430px;
     float: left;
+}
+#bloc2 .table-row
+{
+    height: 50px;
+}
+#bloc2 textarea
+{
+    width: 300px;
+    height: 200px;
+    resize: none;
 }
 /*
  *
  * BLOC 3
  *
  */
+div.ui-datepicker{
+    width: 80%;
+    margin: auto;
+    border: none;
+}
+div.ui-widget-header{
+    background: #FFFFFF;
+    border: none;
+}
+div.ui-datepicker td a, div.ui-datepicker td span
+{
+    height: 30px;
+    text-align:right;
+}
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current
+{
+    background: #ffffff;
+    border: none;
+}
 .table-row
 {
     display: table-row;
@@ -148,6 +246,11 @@ body{
     border-left:1px solid #e7e7e7;
     padding: 10px;
     width : 15%;
+}
+select
+{
+    width: 300px;
+    height: 30px;
 }
 
 

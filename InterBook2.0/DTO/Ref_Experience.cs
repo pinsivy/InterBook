@@ -17,11 +17,13 @@ namespace InterBook2._0.DTO
         public Ref_Experience()
         {
             this.Util_Experience = new HashSet<Util_Experience>();
+            this.Util_Info = new HashSet<Util_Info>();
         }
     
         public int id_Experience { get; set; }
         public string Description { get; set; }
     
         public virtual ICollection<Util_Experience> Util_Experience { get; set; }
+        public virtual ICollection<Util_Info> Util_Info { get; set; }
     }
 }

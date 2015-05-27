@@ -17,11 +17,13 @@ namespace InterBook2._0.DTO
         public Ref_Culture()
         {
             this.Ref_Pays = new HashSet<Ref_Pays>();
+            this.Ref_Declinaison_Culture = new HashSet<Ref_Declinaison_Culture>();
         }
     
         public int id_Culture { get; set; }
         public string description { get; set; }
     
         public virtual ICollection<Ref_Pays> Ref_Pays { get; set; }
+        public virtual ICollection<Ref_Declinaison_Culture> Ref_Declinaison_Culture { get; set; }
     }
 }

@@ -59,5 +59,20 @@ namespace InterBook2._0.Views.How.App_LocalResources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à &lt;h1&gt;Comment ça marche ?&lt;/h1&gt;
+        ///&lt;h2&gt;1. CONNEXION&lt;/h2&gt;
+        ///&lt;p&gt;Connectez-vous en cliquant sur &quot;Connecter&quot; en haut de la page&lt;/p&gt;
+        ///&lt;h2&gt;2. Complétez votre profil&lt;/h2&gt;
+        ///&lt;p&gt;Remplir complètement son profil est important si vous voulez être repérer&lt;/p&gt;
+        ///&lt;h2&gt;3. Soyez actif&lt;/h2&gt;
+        ///&lt;p&gt;Il faut être attentif sur Interbook, soyez actif en mettant à jour vos informations et en répondant rapidement à vos message&lt;/p&gt;.
+        /// </summary>
+        public static string texte {
+            get {
+                return ResourceManager.GetString("texte", resourceCulture);
+            }
+        }
     }
 }

@@ -1,0 +1,207 @@
+﻿@using InterBook2._0.Views.Account.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.SignUpEModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Styles.Render("~/Media/css/Account")
+<link href="~/Media/css/lib/multiple-select.css" rel="stylesheet" />
+
+@*FORMULAIRE*@
+<section class="container">
+    <div id="info">
+        Bienvenue,<br /><br />
+        Vous venez de vous inscrire sur interbook veuillez remplir vore profil afin de commencer l’aventure.
+    </div>
+
+    <div class="form">
+        @using (Html.BeginForm("SignUpE", "Account", FormMethod.Post, new { enctype = "multipart/form-data", name = "monFormulaire", id = "form1" }))
+        {
+            <div id="bloc1" class="bloc">
+                <div class="titreBloc">
+                    <div class="numero"><div>1</div></div>
+                    <div class="titre">Mon Profil</div>
+                    <div class=""><hr /></div>
+                </div>
+                <div class="questionBloc">
+                    <div class="left divInfos">
+                        @*
+                            PRENOM
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.Prenom, SignUp.Prenom, new { @for = "prenom" }) :</div>
+                            <div class="right">@Html.TextBoxFor(x => x.Prenom, new { @class = "inputQuery", Name = "prenom" })</div>
+                        </div>
+                        @*
+                            NOM
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.Nom, SignUp.Nom, new { @for = "nom" }) :</div>
+                            <div class="right">@Html.TextBoxFor(x => x.Nom, new { @class = "inputQuery", Name = "nom" })</div>
+                        </div>
+                        @*
+                            AGE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Date de naissance : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.DateDeNaissance, new { @class = "birthdate", @type = "date", placeholder = "yyyy-mm-jj" })</div>
+                            <script src="~/Media/js/polyfiller.js"></script>
+                            <script type="text/javascript">
+                                        webshim.setOptions('forms-ext', {
+                                            replaceUI: 'auto',
+                                            types: 'date',
+                                            date: {
+                                                nopicker: true,
+                                                splitInput: true,
+                                                calculateWidth: false,
+                                                classes: "a11yhide-inputbtns"
+                                            }
+                                        });
+                                        webshim.polyfill('forms forms-ext');
+
+                                        //set max to today's value. Better you do this serverside :-D
+                                        $(function () {
+                                            $('[type="date"].birthdate').prop('max', function () {
+                                                var d = new Date();
+                                                d.setFullYear(d.getFullYear() - 18);
+                                                return new Date().toJSON().split('T')[0];
+                                            });
+                                            $('[type="date"].birthdate').prop('min', function () {
+                                                return new Date(1915, 01, 01).toJSON().split('T')[0];
+                                            });
+                                        });
+                            </script>
+                        </div>
+                        @*
+                            SEXE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Civilité :</div>
+                            <div class="right">
+                                @Html.RadioButtonFor(mdl => mdl.Civilite, "2", new { @class = "inputQuery", id = "Mme", Name = "civilite" })
+                                @Html.LabelFor(x => x.Civilite, SignUp.CivMme, new { @class = "civ", @for = "Mme" })
+
+                                @Html.RadioButtonFor(mdl => mdl.Civilite, "1", new { @class = "inputQuery", id = "M", Name = "civilite" })
+                                @Html.LabelFor(x => x.Civilite, SignUp.CivM, new { @class = "civ", @for = "M" })
+                            </div>
+                        </div>
+                        @*
+                            EMAIL
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Mail : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.Email, new { @class = "inputQuery", Name = "email" })</div>
+                        </div>
+                        @*
+                            TELEPHONE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.NumTel, "Tel", new { @for = "numTel" }) :</div>
+                            <div class="right">@Html.TextBoxFor(x => x.NumTel, new { @class = "inputQuery", Name = "numTel", placeholder = "0612345678" })</div>
+                        </div>
+                        @*
+                            SECTEUR
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">Secteur : <br /></div>
+                            <div class="right"><input type="text" name="lProfession" class="inputQuery Profession" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bloc2et3">
+                <div class="bloc left">
+                    <div class="titreBloc">
+                        <div class="numero"><div>2</div></div>
+                        <div class="titre">Mon Entreprise</div>
+                        <div><hr /></div>
+                    </div>
+                    <div class="table">
+                        <div class="left">
+                            @*
+                                LOGO
+                            *@
+                            <div style="position:relative;">
+                                <img id="Photo" src="~/Media/img/signup/fr-FR/photoCommun.gif" width="138" height="158" />
+                                <input type="file" id="inputFileJpg" name="inputFileJpg" style="width: 138px;height:158px;opacity:0;position: absolute;vertical-align: middle;left: 0px;cursor:pointer;top: 0px;" />
+                                <button id="supprFileJpg" style="display:none;">Supprimer</button>
+                            </div>
+                            <span class="field-validation-error" id="errorJpg"></span>
+                        </div>
+                        @*
+                            NOM
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.NomEntreprise, "Nom de l'entreprise", new { @for = "NomEntreprise" }) : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.NomEntreprise, new { @class = "inputQuery", required = "required" })</div>
+                        </div>
+                        @*
+                            TELEPHONE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.NumTelEntreprise, "Tel", new { @for = "NumTelEntreprise" }) :</div>
+                            <div class="right">@Html.TextBoxFor(x => x.NumTelEntreprise, new { @class = "inputQuery", placeholder = "0112345678" })</div>
+                        </div>
+                        @*
+                            Email
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.EmailEntreprise, "Email", new { @for = "EmailEntreprise" }) :</div>
+                            <div class="right">@Html.TextBoxFor(x => x.EmailEntreprise, new { @class = "inputQuery", placeholder = "contact@entreprise.fr" })</div>
+                        </div>
+                        @*
+                            VILLE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.VilleEntreprise, "Ville", new { @for = "villeEntreprise" }) : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.VilleEntreprise, new { @class = "inputQuery"})</div>
+                        </div>
+                        @*
+                            FAX
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.Fax, "Fax", new { @for = "Fax" }) : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.Fax, new { @class = "inputQuery" })</div>
+                        </div>
+                        @*
+                            APE
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.APE, "APE", new { @for = "APE" }) : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.APE, new { @class = "inputQuery" })</div>
+                        </div>
+                        @*
+                            SIRET
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.Siret, "Siret", new { @for = "Siret" }) : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.Siret, new { @class = "inputQuery" })</div>
+                        </div>
+                        @*
+                            SIREN
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.Siren, "Siren", new { @for = "Siren" }) : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.Siren, new { @class = "inputQuery" })</div>
+                        </div>
+                        @*
+                            SITE WEB
+                        *@
+                        <div class="left divchamps">
+                            <div class="left">@Html.LabelFor(x => x.SiteWeb, "Site Web", new { @for = "SiteWeb" }) : </div>
+                            <div class="right">@Html.TextBoxFor(x => x.SiteWeb, new { @class = "inputQuery" })</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            /*********************/
+            /*      BOUTON      **/
+            /*********************/
+            <div>
+                <input type="submit" class="inputQuery" id="btnEnregistrer" value="@SignUp.Enregistrer" onclick="return checkfile('Jpg');" />
+            </div>
+        }
+    </div>
+</section>

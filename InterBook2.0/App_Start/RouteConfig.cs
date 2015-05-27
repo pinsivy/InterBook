@@ -38,9 +38,15 @@ namespace InterBook2._0
             );
 
             routes.MapRoute(
-                name: "BuyPlans",
-                url: "BuyPlans/{action}/{id}",
-                defaults: new { controller = "BuyPlans", action = "Index", id = UrlParameter.Optional }
+                name: "Premium",
+                url: "Premium/{action}/{id}",
+                defaults: new { controller = "Premium", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Dashboard",
+                url: "Dashboard/{action}/{id}",
+                defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
 
             // Handlers
@@ -48,6 +54,7 @@ namespace InterBook2._0
             routes.Add("Delog", new Route("Delog", new DelogRouteHandler()));
             routes.Add("IdentifAuto", new Route("IdentifAuto", new IdentifAutoRouteHandler()));
             routes.Add("Mail", new Route("Mail", new MailRouteHandler()));
+            routes.Add("Reservation", new Route("Reservation", new ReservationRouteHandler()));
 
             //Default
             routes.MapRoute(

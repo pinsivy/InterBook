@@ -4,71 +4,99 @@
 
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 @Styles.Render("~/Media/css/home")
+
 <section class="container">
+
     <div id="titre">
-        <div id="titreTexte1">Bienvenue sur <span>InterBook</span></div>
-        <div id="titreTexte2">Le site qui vous accompagne dans la recherche d’emploi spécialisé dans l’univers des spectacles...</div>
+
+        <h1 id="titreTexte1">
+            @Html.Raw(Index.titreTexte1)
+        </h1>
+        <div id="titreTexte2">
+            @Index.titreTexte2
+        </div>
+
     </div>
+
     <div class="form">
-        <div id="rechercherTexte"><img src="~/Media/img/home/flecheRecherche.png" />Rechercher</div>
-        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
-        {
-            @Html.ValidationSummary(true)
-            @Html.TextBoxFor(x => x.Profession, new { @class = "inputQuery", placeholder = Index.Quoi })
-            @Html.TextBoxFor(x => x.Debut, new { @class = "inputQuery", id = "DateDebut", placeholder = "De" })
-            @Html.TextBoxFor(x => x.Fin, new { @class = "inputQuery", id = "DateFin", placeholder = "à" })
-            @Html.TextBoxFor(x => x.Ville, new { @class = "inputQuery", placeholder = Index.Ou })
-            <input type="submit" value="" />
-            <button id="lienRechercheAvancee"></button>
-            @Html.ValidationMessageFor(x => x.Profession)
-            @Html.ValidationMessageFor(x => x.Ville)
-        }
+
+        <div class="inForm">
+
+            <div id="rechercherTexte"><img src="~/Media/img/home/flecheRecherche.png" />@Index.Rechercher</div>
+            @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+            {
+                @Html.TextBoxFor(x => x.Profession, new { @class = "inputQuery", placeholder = Index.Quoi })
+                @Html.TextBoxFor(x => x.Debut, new { @class = "inputDateQuery", @type = "date", id = "DateDebut", placeholder = Index.De, data_dependent_validation = "{\"from\": \"DateFin\", \"prop\": \"max\"}" })
+                @Html.TextBoxFor(x => x.Fin, new { @class = "inputDateQuery", @type = "date", id = "DateFin", placeholder = Index.A, data_dependent_validation = "{\"from\": \"DateDebut\", \"prop\": \"min\"}" })
+                @Html.TextBoxFor(x => x.Ville, new { @class = "inputQuery", required = "required", placeholder = Index.Ou })
+                <a id="btnGeo">&nbsp;</a>
+                <div class="subMit">
+                    <input type="submit" value="" />
+                    @Html.ActionLink(" ", "Index", "Search", null, new { id = "lienRechercheAvancee" })
+                </div>
+            }
+
+        </div>
+
     </div>
+
 </section>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script> @*http://keith-wood.name/datepick.html*@
-
+@*<script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>*@
+<script src="~/Media/js/polyfiller.js"></script>
 <script>
-    $(function () {
 
-        $("#DateDebut").datepicker({
-            firstDay: 1, //0=Dim, 1=Lun
-            defaultDate: "-1",
-            changeMonth: true,
-            numberOfMonths: 1,
-            dateFormat: 'dd MM yy',
-            onClose: function (selectedDate) {
-                $("#DateFin").datepicker("option", "minDate", selectedDate);
+       /*
+       *
+       * DATE
+       *
+       */
+        webshim.setOptions('forms', {
+            lazyCustomMessages: true,
+            addValidators: true
+        });
+        webshim.setOptions('forms-ext', {
+            replaceUI: 'auto',
+            types: 'date',
+            date: {
+                startView: 2,
+                classes: 'hide-btnrow hide-inputbtns DatePicker inputQuery',
+                openOnFocus: true,
+                calculateWidth: false
             }
         });
-        $("#DateFin").datepicker({
-            changeMonth: true,
-            numberOfMonths: 1,
-            dateFormat: 'dd MM yy',
-            onClose: function (selectedDate) {
-                $("#DateDebut").datepicker("option", "maxDate", selectedDate);
-            }
+
+        webshim.activeLang('fr');
+        webshim.polyfill('forms forms-ext');
+
+        $(function () {
+            $('#DateDebut, #DateFin').prop('min', function () {
+                return new Date().toJSON().split('T')[0];
+            });
         });
 
-        var availableTags = [
-            "Réalisateur",
-            "Autre"
-        ];
+       /*
+       *
+       * PROFESSION
+       *
+       */
         $("#Profession").autocomplete({
             source: function (request, response) {
-
                 $.ajax({
                     dataType: "json",
                     type: 'Get',
-                    url: 'Home/GetProfessions',
+                    url: '/Home/GetProfessions',
+                    search: function () { $(this).addClass('ui-autocomplete-loading'); },
+                    open: function () { $(this).removeClass('ui-autocomplete-loading'); },
+                    delay: 0,
                     data: {
-                        debut: $('#Profession').val(),
+                        debut: request.term,
                         maxRows: 8
                     },
                     success: function (data) {
-                        console.log(data);
                         response($.map(data, function (item) {
                             return item.Description;
                         }));
@@ -76,18 +104,157 @@
                 });
             }
         });
-        
-        var autocompleteVille;
-        function initialize() {
-            autocompleteVille = new google.maps.places.Autocomplete(
-                (document.getElementById('Ville')),
-                { types: ['geocode'] });
-        }
-        $(function () {
-            initialize();
+
+       /*
+       *
+       * VILLE
+       *
+       */
+        $("#Ville").autocomplete({
+            source: function (request, response) {
+
+                $.ajax({
+                    dataType: "json",
+                    type: 'Get',
+                    url: '/Home/GetVilles',
+                    search: function () { $(this).addClass('ui-autocomplete-loading'); },
+                    open: function () { $(this).removeClass('ui-autocomplete-loading'); },
+                    delay: 0,
+                    data: {
+                        debut: request.term,
+                        maxRows: 8
+                    },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return retour = item.article + item.ville + " (" + item.cp + ")";
+                        }));
+                    }
+                });
+            }
         });
 
-        
+        /*
+        *
+        * VILLE GEOLOCALISATION
+        *
+        */
+        function getLocation()
+        {
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
+            }
+            else
+            {
+                alert("Votre navigateur ne prend pas en compte la géolocalisation HTML5");
+            }
+        }
+        function showPosition(position)
+        {
+            $("#Ville").addClass('ui-autocomplete-loading');
+            $.ajax({
+                dataType: "json",
+                type: 'Get',
+                url: '/Home/GetVilleGeoloc',
+                delay: 0,
+                data: {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    distance: 5
+                },
+                success: function (item) {
+                    $("#Ville").removeClass('ui-autocomplete-loading');
+                    $("#Ville").val(item.article + item.ville + " (" + item.cp + ")");
+                }
+            });
+        }
+        function showError(error)
+        {
+            switch(error.code) 
+            {
+                case error.PERMISSION_DENIED:
+                    //alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Information sur votre position indisponible.");
+                    break;
+                case error.TIMEOUT:
+                    alert("La demande pour obtenir l'emplacement de l'utilisateur a expiré.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("Une erreur inconnue est survenue.");
+                    break;
+            }
+        }
+
+        var isMobile = {
+            Android: function () {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function () {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function () {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function () {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function () {
+                return navigator.userAgent.match(/IEMobile/i);
+            },
+            any: function () {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+
+        if (isMobile.any())
+        {
+            getLocation();
+        }
+
+        $("#btnGeo").on("click", function () {
+            getLocation();
+        });
+
+        //DATEPICKER JQUERY
+        //$("#DateDebut").datepicker({
+        //    firstDay: 1, //0=Dim, 1=Lun
+        //    defaultDate: "-1",
+        //    changeMonth: true,
+        //    numberOfMonths: 1,
+        //    dateFormat: 'dd MM yy',
+        //    onClose: function (selectedDate) {
+        //        $("#DateFin").datepicker("option", "minDate", selectedDate);
+        //    }
+        //});
+        //$("#DateFin").datepicker({
+        //    changeMonth: true,
+        //    numberOfMonths: 1,
+        //    dateFormat: 'dd MM yy',
+        //    onClose: function (selectedDate) {
+        //        $("#DateDebut").datepicker("option", "maxDate", selectedDate);
+        //    }
+        //});
+
+        //AUTOCOMPLETION MAP.GOOGLE
+        //var autocompleteVille;
+        //function initialize() {
+        //    autocompleteVille = new google.maps.places.Autocomplete(
+        //        (document.getElementById('Ville')),
+        //        {
+        //            types: ['(regions)'],
+        //            componentRestrictions: { country: ['fr'] }
+        //        });
+        //    google.maps.event.addListener(autocompleteVille, 'place_changed', function () {
+        //        var place = autocompleteVille.getPlace();
+        //    });
+        //}
+        //$(function () {
+        //    initialize();
+        //});
+
+
         //var user = {
         //    id: 1,
         //    Firstname: "sdfs"
@@ -101,6 +268,5 @@
         //        console.log(data);
         //    }
         //});
-    });
 
 </script>

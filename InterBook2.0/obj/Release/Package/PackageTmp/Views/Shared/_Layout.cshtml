@@ -12,110 +12,201 @@
 <!--[if gte IE 9]><style type="text/css">.gradient {filter: none;}</style><![endif]-->
 <head>
     <meta charset="utf-8" />
+    <meta name="robots" content="noindex">
+    <meta name="googlebot" content="noindex">
     <meta name="viewport" content="width=device-width" />
     <title>@Model.Title</title>
-    <link rel="shortcut icon" type="image/x-icon" href="~/Images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Media/img/commun/favicon.ico" />
     <!--Global Css-->
     @Styles.Render("~/Media/css/base")
 
     <!--Page Css-->
     @RenderSection("styles", required: false)
+    <link href='http://fonts.googleapis.com/css?family=Gafata' rel='stylesheet' type='text/css'>
 
     <!--Global JS-->
     @Styles.Render("~/Media/js/base")
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/Media/js/jquery1-11.js"></script>
+    <script src="~/Media/js/jquery2-1.js"></script>
+    <script src="~/Media/js/easing.js"></script>
+    <script src="~/Media/js/modernizr.js"></script>
 
     <!--Modernizr-->
     @Scripts.Render("~/Media/js/modernizr")
 </head>
 <body>
-    <header class="page-row">
-        <div class=" header">
-        <div id="desktop" class="container">
-            <div class="menu left">
-                <a href="/" id="logoHeader"><img src="~/Media/img/commun/fr-FR/logoHeader.png" /></a>
-            </div>
-            <div id="rsHeader" class="menu left">
-                <div>
-                    <a href="#" id="googleHeader"><img src="~/Media/img/commun/fr-FR/googleHeader.png" /></a>
-                    <a href="#" id="fbHeader"><img src="~/Media/img/commun/fr-FR/fbHeader.png" /></a>
+
+
+    <div id="wrap">
+
+        <header class="page-row">
+
+
+            <!-- HEADER DEBUT PANEL -->
+
+            <div class="header">
+
+                <div id="desktop" class="container">
+
+                    <!--  LEFT PANEL LOGO SOCIAL BOUTON -->
+
+                    <div id="leftPanel">
+
+                        <div id="logo">
+                            <a href="/" id="logoHeader"><img src="~/Media/img/commun/fr-FR/logoHeader.png" /></a>
+                        </div>
+
+                        <div id="rsHeader">
+                            <div>
+                                <a href="#" id="gHeader"><img src="~/Media/img/commun/fr-FR/googleHeader.png" /></a>
+                                <a href="#" id="fbHeader"><img src="~/Media/img/commun/fr-FR/fbHeader.png" /></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT PANEL CONNEXION -->
+
+                    <div id="rightPanel">
+
+
+
+                        <div class="howWork"><a href='/How'>Comment ça marche ?</a></div>
+
+                        @if (Model.SessionObject.Util != null && Model.SessionObject.Util.Util_Postal != null)
+                        {
+                            <div class="nameHeader">
+                                <a href='/dashboard' id="nameHeader">@Model.SessionObject.Util.Util_Postal.prenom</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href='/dashboard/disponibility'>Disponibilité</a></li>
+                                    <li><a href='/dashboard/messages'>Messages</a></li>
+                                    <li><a href='/delog'>Se déconnecter</a></li>
+                                </ul>
+                            </div>
+                        }
+                        else if (Model.SessionObject.Util != null && Model.SessionObject.Util.Util_Email != null)
+                        {
+                            <span>@Model.SessionObject.Util.Util_Email.email</span>
+                        }
+                        else
+                        {
+
+                            <div>
+                                <a href="#" id="tabletteHeader"><img src="~/Media/img/commun/fr-FR/tabletteHeader.png" /></a>
+                            </div>
+                            <div>
+                                <a href="#" id="seConnecter">Se connecter</a>
+                            </div>
+                        }
+
+                    </div>
+
                 </div>
             </div>
-            <div id="headerDroite" class="menu right">
-                <span><a href='/How'>Comment ça marche ?</a></span>
-                @if (Model.SessionObject.Util != null && Model.SessionObject.Util.Util_Postal != null)
-                {
-                    <span><a href='/dashboard'>@Model.SessionObject.Util.Util_Postal.prenom</a></span>
-                }
-                @if (Model.SessionObject.Util != null && Model.SessionObject.Util.Util_Email != null)
-                {
-                    <span><a href='/dashboard'>@Model.SessionObject.Util.Util_Email.email</a></span>
-                }
-                else
-                {
+            @if (Model.SessionObject.Util == null)
+            {
+                <div id="connexionPart">
+                    @Html.Partial("_Login")
+                </div>
+            }
+        </header>
 
-                    <div>
-                        <a href="#" id="tabletteHeader"><img src="~/Media/img/commun/fr-FR/tabletteHeader.png" /></a>
-                    </div>
-                    <div>
-                        <a href="#" id="seConnecter">Se connecter</a>
+        <!-- FIN HEADER PANEL -->
+
+
+        <div id="page" class="page-row page-row-expanded container">
+            <div style="height:60px"></div>
+            @RenderBody()
+            <div style="height:60px"></div>
+        </div>
+
+
+
+
+
+
+        <footer class="page-row">
+
+            <div class="container">
+
+                <div class="footer">
+
+                    <div id="interbookFooter">
+                        InterBook <span style="color: red;">&reg;</span> 2014
                     </div>
 
-                }
+                    <div id="mentionsFooter">
+                        <a href="#" class="mentionsFooter">Mentions Légales</a>
+                        <a href="#" class="mentionsFooter">CGU</a>
+                        <a href="#" class="mentionsFooter">FAQ</a>
+                        <a href="#" class="mentionsFooter">A propos</a>
+                        <a href="#" class="mentionsFooter">Contact</a>
+                    </div>
+
+                    <div id="logoFooter">
+                        <img src="~/Media/img/commun/fr-FR/logoFooter.png" />
+                    </div>
+
+                </div>
             </div>
-        </div>
-        </div>
-        @if (Model.SessionObject.Util == null)
-        {
-            <div id="connexionPart">
-                @Html.Partial("_Login");
-            </div>
-        }
-    </header>
-    <div id="page" class="page-row page-row-expanded">
-        @RenderBody()
+
+        </footer>
+
     </div>
-    <footer class="page-row">
-        <div class="container menu">
-            <div id="interbookFooter">
-                InterBook &reg; 2014
-            </div>
-            <div id="mentionsFooter">
-                <a href="#" class="mentionsFooter">Mentions Légales</a>
-                <a href="#" class="mentionsFooter">CGU</a>
-                <a href="#" class="mentionsFooter">FAQ</a>
-                <a href="#" class="mentionsFooter">A propos</a>
-                <a href="#" class="mentionsFooter">Contact</a>
-            </div>
-            <div id="logoFooter">
-                <img src="~/Media/img/commun/fr-FR/logoFooter.png" />
-            </div>
-        </div>
-    </footer>
+
     <script src="~/Media/js/easing.js"></script>
     <script>
+
         jQuery(function ($) {
 
             $('#seConnecter').on('click', function () {
-                if ($('a.close').length == 0) {
-                $('#connexionPart').append('<a href="#" class="close"><span id="fermePop">X<span></a>').show().animate({ 'top': '+=300px' }, 800);
+
+                if ($("a.close").length == 0) {
+                    $('#connexionPart')
+                    .delay(250)
+                    .append('<a href="#" class="close"><span id="fermePop">X<span></a>')
+                    .show()
+                    .animate
+                    (
+                        { top: "60px" },
+                        { duration: 600, easing: "easeInOutExpo" }
+                    );
+                }
+
                 //Apparition du fond - .css({'filter' : 'alpha(opacity=80)'}) pour corriger les bogues d'anciennes versions de IE
                 $('body').append('<div id="fade"></div>');
-                $('#fade').css({ 'filter': 'alpha(opacity=80)' }).fadeIn();
-                }
+                $('#fade').css({ 'filter': 'alpha(opacity=87)' }).fadeIn();
+
                 return false;
             });
 
             //Close Popups and Fade Layer
             $('body').on('click', 'a.close, #fade', function () { //Au clic sur le body...
                 $('#fade').fadeOut().remove();
-                $('#connexionPart').animate({ 'top': '-=300px' }, 800, function () { $('#connexionPart').hide(); $('a.close').remove(); });
-                //$('#connexionPart').slideUp(2000, 'easeOutBack');
-                
+                $('#connexionPart').animate
+                (
+                    { top: "-300px" },
+                    {
+                        duration: 600,
+                        easing: "easeInOutBack",
+                        complete: function () {
+
+                            $('#connexionPart').hide();
+                            $('a.close').remove();
+
+
+                        }
+                    });
+                return false;
+            });
+            $('#nameHeader').on('click', function () {
+                if ($('.nameHeader .dropdown-menu').is(":visible"))
+                    $('.nameHeader .dropdown-menu').hide();
+                else
+                    $('.nameHeader .dropdown-menu').show();
                 return false;
             });
         });
+
     </script>
-    </body>
+</body>
 </html>

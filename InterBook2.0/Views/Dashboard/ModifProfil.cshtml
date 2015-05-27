@@ -1,0 +1,19 @@
+﻿@using InterBook2._0.Views.Dashboard.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.DashboardModel
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@Styles.Render("~/Media/css/dashboard")
+<link href="~/Media/css/Dashboard.css" rel="stylesheet" />
+
+<section class="container">
+
+    @Html.Partial("_MenuProfil")
+
+    @*FAVORIS*@
+
+    <div class="panelDroite right">
+        <h1>Votre Profil</h1>
+    </div>
+    <div class="clear"></div>
+</section>

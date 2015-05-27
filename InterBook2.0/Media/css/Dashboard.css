@@ -1,0 +1,59 @@
+﻿/*
+ *
+ * Information
+ *
+ */
+#info
+{
+    margin : 30px auto 15px auto;
+    background-color: #9bd7eb;
+    border : #9ab9e9 solid 3px;
+    padding : 20px 30px 20px 30px;
+}
+/*
+ *
+ */
+section.container
+{
+    background-color: #FFFFFF;
+}
+#monProfil
+{
+    width: 20%;
+    margin: 5%;
+}
+.blocMenu
+{
+    border: 1px solid #cecece;
+    -webkit-box-shadow: 0 0 5px 0 #cecece;
+    box-shadow: 0 0 5px 0 #cecece;
+    margin-bottom: 25px;
+}
+.blocMenuTh
+{
+    background-color: #cecece;
+    font-weight: bold;
+    padding: 20px 0 20px 50px;
+}
+.blocMenuLi
+{
+    background-color: #ffffff;
+    padding: 20px 0 20px 40px;
+    border-top: 1px solid #cecece;
+}
+.blocMenuLiSelect
+{
+    background-color: #1d1a1a;
+    color: #ffffff;
+    border-left: 10px solid #c32e2e;
+    padding: 20px 0 20px 30px;
+}
+.blocMenuLi a
+{
+    text-decoration: none;
+    color: #1d1a1a;
+}
+.panelDroite
+{
+    width: 70%;
+}

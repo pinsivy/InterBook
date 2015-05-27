@@ -16,12 +16,22 @@ namespace InterBook2._0.DTO
     {
         public Ref_Ville()
         {
-            this.Util_Ville = new HashSet<Util_Ville>();
+            this.Util_Postal = new HashSet<Util_Postal>();
         }
     
         public int id_Ville { get; set; }
         public string Description { get; set; }
+        public string cp { get; set; }
+        public string insee { get; set; }
+        public string article { get; set; }
+        public string ville { get; set; }
+        public Nullable<int> id_Region { get; set; }
+        public string id_Departement { get; set; }
+        public string longitude { get; set; }
+        public string latitude { get; set; }
     
-        public virtual ICollection<Util_Ville> Util_Ville { get; set; }
+        public virtual Ref_Departement Ref_Departement { get; set; }
+        public virtual Ref_Region Ref_Region { get; set; }
+        public virtual ICollection<Util_Postal> Util_Postal { get; set; }
     }
 }

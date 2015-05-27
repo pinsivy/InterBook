@@ -11,8 +11,6 @@ namespace InterBook2._0.Models
 {
     public class SearchModel : ModelBase
     {
-        public List<Util> lu { get; set; }
-
         [DisplayName("Quoi ?")]
         [Required(ErrorMessageResourceName = "RequiredProfession", ErrorMessageResourceType = typeof(Errors))]
         public string Profession { get; set; }
@@ -23,9 +21,20 @@ namespace InterBook2._0.Models
 
 
         [DisplayName("De")]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM}", ApplyFormatInEditMode = true)]
         public DateTime Debut { get; set; }
 
         [DisplayName("à")]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Fin { get; set; }
+
+        public List<UtilSearch> luSearch { get; set; }
+    }
+
+    public class UtilSearch
+    {
+        public Util uSearch { get; set; }
+
+        public double dist { get; set; }
     }
 }

@@ -1,59 +1,125 @@
 ﻿/*
  *
- *BODY
- *
- */
-body{
-     background: #e7e7e7;
-}
-/*
- *
  *FORMULAIRE
  *
  */
 .form
-{
-    margin-top: 30px;
-    background-color : #231d1c;
-    padding: 35px;
+{    
+    width: 100%; height: 110px;
+    margin:20px auto auto;
+    background: rgba(35,29,28,1);
+    
 }
-.form .inputQuery{
+
+.form > .inForm {
+
+    width: 90%; height: auto;
+    margin: auto auto;
+}
+
+.form .inForm > #rechercherTexte
+{
+    color:#FFFFFF;
+    padding-top: 10px;
+    width: 100%;
+}
+
+
+
+    .form .inForm #rechercherTexte > .searchJob {
+
+        text-transform: uppercase;
+        font-size: 16px; padding-top: 15px;
+    }
+
+
+.form .inForm #rechercherTexte > a#pushSearch {
+    font-size:2em;
+    margin-top: -10px;
+    display: none;
+}
+
+
+.form .inForm form
+{
+    margin: auto auto;
+    width: 100%;
+    padding-top: 10px;
+    /*float: left;*/
+
+}
+
+.form .inForm .inputQuery, .form .inForm .inputDateQuery{
+
     font-size: 1em;
-    height: 35px;
+    height: 35px; width: 190px;
     margin-right : 5px;
-    padding-left:40px;
+    padding-left: 40px;
     background-size: 35px 35px;
     background-position: left center;
     background-repeat: no-repeat;
-    border:none;
+    border:none; 
     border-bottom: 2px #c32e2e solid;
 }
-.form .inputQuery:focus
+
+.form .inForm .dateStart { width: 80px; }
+
+.form .inForm .dateEnd { width: 80px; }
+
+.form .inForm .inputQuery:focus
 {
     border-bottom: 1px #dbdbdb solid;
 }
-.form #Profession{
+.form .inForm #Profession{
     background: white url(../img/home/outil.png) no-repeat left center;
 }
-.form #Ville{
-    background: white url(../img/home/mapMarker.png) no-repeat left center;
-
+.form .inForm #Ville{
+    background:url('../img/home/geoloc.png') no-repeat right 5px center, white url(../img/home/mapMarker.png) no-repeat left center;
+    background-size: 20px 20px, auto;
+    padding-right: 30px;
+    width: 145px;
 }
-.form #DateDebut, .form #DateFin{
+.form .inForm #Ville.ui-autocomplete-loading
+{
+    background:url('../img/commun/loading.gif') no-repeat right 5px center, white url(../img/home/mapMarker.png) no-repeat left center;
+    background-size: 20px 20px, auto;
+}
+.form .inForm .inputDateQuery{
     background: white url(../img/home/calendar.png) no-repeat left center;
+    width: 80px;
+}
+#btnGeo
+{
+    margin-left: -34px;
+    margin-right: 5px;
+    line-height: 35px;
+    display: inline-block;
+    cursor: pointer;
+    width: 25px;
+}
+.form .inForm .subMit {
+
+    width: 75px; height: 35px;
+    float: right;
 }
 
-.form input[type="submit"]
+.form .inForm input[type="submit"]
 {
     border: none;
+    width: 35px; height: 35px;
+    float: left;
+    margin: 0;
     background: #c32e2e url(../img/home/loupe.png) no-repeat center center;
-    padding: 5px 20px 13px 20px;
+    /*padding: 10px 20px 10px 20px;*/
 }
 #lienRechercheAvancee
 {
     border: none;
-    background: #ffffff url(../img/home/rechercheAvancee.png) no-repeat center center;
-    padding: 23px 20px 13px 20px;
+    width: 35px; height: 35px;
+    margin-left: 5px;
+    float: left;
+    margin-bottom: 5px;
+    background: #888 url(../img/home/rechercheAvancee.png) no-repeat center center;
     text-decoration: none;
 }
     /*
@@ -122,6 +188,16 @@ div.ui-corner-all
 {
     border: 1px solid #dbdbdb;
 }
+
+
+
+
+
+
+
+
+
+
 /*
  *
  *FILTRE
@@ -129,22 +205,53 @@ div.ui-corner-all
  */
 #filtreResultat
 {
+    width: 100%;
     background: #FFFFFF;
     min-height: 300px;
+
 }
+
+#filtreResultat > .inSearch{
+
+    width: 90%; height: auto;
+    padding: 2% 5% 2% 5%;
+}
+
 #filter
 {
-    border: none;
-    -webkit-box-shadow: 0 0 10px 0 #c7c7c7;
-    box-shadow: 0 0 10px 0 #c7c7c7;
-    margin: 30px 0 15px 30px;
-    padding: 15px 10px;
-    width: 230px;
+    border-left: 1px #eeeeee solid;
+    border-right: 1px #eeeeee solid;
+    width: 29%;
+    float: left;
+    margin: 5%;
 }
-#filter h3 img
+#filter h3
 {
-    margin-right: 15px;
+    background-color : #eeeeee;
+    text-align: center;
+    padding: 15px;
 }
+#filter .nameFilter
+{
+    margin-top: 15px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+#filter ul
+{
+    border-bottom: 1px #eeeeee solid;
+    padding-bottom: 15px;
+}
+
+#filter li
+{
+    list-style-type: none;
+    padding-left: 25px;
+}
+
+
+
+
 /*
  *
  *RESULTAT
@@ -152,54 +259,170 @@ div.ui-corner-all
  */
 #results
 {
-    margin: 30px;
-    width: 560px;
-    margin: 30px 0 15px 15px;
+
+    width: 55%;
+    float: left;
+    margin-right: 5%;
 }
 #results h3
 {
     padding: 20px;
-    background-color: #e7e7e7;
+    color: #231d1c;
+}
+#results h3 span
+{
+    color: #c32e2e;
 }
 #results > div
 {
     border-top: 4px solid #000000;
-    margin-top: 15px;
 }
 #results article
 {
     padding: 20px 30px;
     border-bottom: #e7e7e7 solid 1px;
+    position: relative;
 }
 #results article:hover
 {
-    background-color: #f8f8f8;
+    background-color: #faadad;
 }
 #results article:last-child
 {
     border: none;
 }
+.lienUtil
+{
+    color: #231d1c;
+    text-decoration: none;
+    font-size: 16px;
+}
+.lienUtil article
+{
+    min-height: 110px;
+}
+.lienUtil .image img
+{
+    width: 85px;
+    height: 85px;
+}
+.lienUtil .image
+{
+    width: 100px;
+    padding: 12px 0px;
+}
+.lienUtil .detail
+{
+    padding: 12px 0px;
+}
+.distanceUtil
+{
+    color: #c32e2e;
+    font-size: 12px;
+}
+.villeUtil
+{
+    color: #4f95e5;
+    font-size: 14px;
+}
+.contacterUtil
+{
+    background-color: #4f95e5;
+    width:120px;
+    height:30px;
+    border: none;
+    color: #FFFFFF;
+    position: absolute;
+    top: 30%;
+    right: 10%;
+}
 /*********************/
 
 
-@media screen and (max-width: 1225px) {
+
+
+
+
+
+@media screen and (max-width: 990px) {
+    
+
+    .form .inForm #rechercherTexte >  div {
+
+        display: block;
+
+    }
+
+    .form .inForm #rechercherTexte > a#pushSearch {
+        border:none;
+        display:block;
+        width: 30px;
+        height: 45px;
+        background-color: #c32e2e;
+        color: #FFF;
+        text-align: center;
+        float: right;
+    }
+
+
     .form 
     {
-        width : 100%;
-        top: 0%;
+        width : 90%;
+        height:40px;
+        overflow: hidden;
     }
-    .form .inputQuery{
+
+    .form .inForm form {
+        margin: auto auto;
+        width: 100%;
+        padding-top: 10px; }
+
+    .form .inForm .inputQuery, .form .inForm #Ville {
+        width: 100%;
+        margin-top: 5px;
+        padding-right: 0px;
+        padding-left: 0px;
+        text-align: center;
+        border: 0px;
+    }
+
+    .form .inForm .subMit {
+        width: 100%;
+        height: 35px;
+    }
+
+    .form .inForm input[type="submit"] {
+        width: 100%;
+        height: 35px;
+        margin: 1% 0 1% 0;
+    }
+
+    #lienRechercheAvancee{
+        width: 100%;
+        height: 35px;
+        margin: 0;
+    }
+
+    /*FILTRE*/
+    #filtreResultat{
         width: 90%;
-        margin-bottom : 1em;
-        margin-right : 0px;
     }
+
     #filter
     {
         width : 100%;
+        display: none;
     }
+
+    /*RESULTAT*/
     #results
     {
         width : 100%;
+    }
+
+    .contacterUtil {
+        top: inherit;
+        bottom: 10px;
     }
 }
 

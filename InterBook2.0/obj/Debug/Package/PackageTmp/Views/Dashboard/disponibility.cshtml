@@ -1,0 +1,169 @@
+﻿@using InterBook2._0.Views.Dashboard.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.DashboardModel
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@Styles.Render("~/Media/css/dashboard")
+<link href="~/Media/css/Dashboard.css" rel="stylesheet" />
+
+<section class="container">
+
+    @Html.Partial("_MenuProfil")
+    
+    @*DISPONIBILITE*@
+
+
+    <div class="panelDroite right">
+        <h1>DISPONIBILITE</h1>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script>
+        <div id="datepicker"></div>
+    </div>
+    <div class="clear"></div>
+
+
+
+
+    <script>
+        (function ($) {
+            var disponible = [];
+            var reserver = [];
+            var i = 0;
+
+            $.ajax({
+                type: 'Get',
+                async: false,
+                data: 'idu=' + @Model.u.IdU + '',
+                url: '/Dashboard/RecupDispo',
+                success: function (dataString) {
+                    var data = JSON.parse(dataString);
+                    for (i = 0; i < data.length; i++) {
+                        if (data[i].id_Ref_Dispo == 1) {
+                            disponible.push(data[i]);
+                        }
+                        else if (data[i].id_Ref_Dispo == 2) {
+                            reserver.push(data[i]);
+                        }
+                    }
+                }
+            });
+
+
+            setDays = function (day, month, year) {
+                var result = [true, 'option', 'En option'];	//par défaut, on affiche la date
+                var boolReserver = false;
+                var rl = 0;
+                var i = 0;
+
+                /*
+                * Les données peuvent contenir, par erreur, des chevauchements de dates !
+                * Priorité des événements : Reserver > Disponible
+                * Évite l'ajout de la "class" d'un événement non prioritaire !
+                */
+
+                if ((reserver != null)) {
+                    rl = reserver.length;
+
+                    for (i = 0; i < rl; i++) {
+                        //var milli = reserver[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
+                        //var d = new Date(parseInt(milli));
+                        var d = new Date(reserver[i].dDispo);
+                        var dtemp = new Date(year, month, day);
+                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
+                            result = [false, "reserver", "Déjà réservé"];
+                            boolReserver = true;
+                        }
+                    }
+                }
+
+                if ((!boolReserver) && disponible != null) {
+                    rl = disponible.length;
+
+                    for (i = 0; i < rl; i++) {
+                        //var milli = disponible[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
+                        //var d = new Date(parseInt(milli));
+                        var d = new Date(disponible[i].dDispo);
+                        var dtemp = new Date(year, month, day);
+                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
+                            result = [true, 'disponible', "Disponible"];
+                        }
+                    }
+                }
+
+                return result;
+            }
+
+            selectedDay = function (dateText, inst) {
+                var i = 0;
+
+                setTimeout(function () {
+                    console.log(dateText);
+                    var j = parseInt(dateText.slice(0, 2), 10);
+                    var m = parseInt(dateText.slice(3, 5), 10) - 1;
+                    var y = parseInt(dateText.slice(6), 10);
+
+                    $.ajax({
+                        type: "POST",
+                        async: false,
+                        url: "/Dashboard/ajoutDispo",
+                        data: { dDispo: dateText },
+                        datatype: 'json',
+                        success: function (result) {
+                            if (result.Message == 1)
+                                disponible.push(JSON.parse(result.Reponse));
+                            else if (result.Message == 3) {
+                                for (var i = 0; i < disponible.length; i++) {
+                                    //var milli = disponible[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
+                                    //var d = new Date(parseInt(milli)).getTime();
+                                    //var dtemp = new Date(y, m, j).getTime();
+                                    var d = new Date(disponible[i].dDispo);
+                                    var dtemp = new Date(y, m, j);
+                                    if ((j == d.getDate()) && (m == d.getMonth()) && (y == d.getFullYear())) {
+                                        disponible.splice(i, 1);
+                                    }
+                                }
+                            }
+
+                        }
+                    });
+
+                    $("#datepicker").datepicker("refresh");
+                }, 0);
+            }
+
+            $(document).ready(function () {
+
+                $("#datepicker").datepicker({
+                    firstDay: 1, //0=Dim, 1=Lun
+                    numberOfMonths: 2,
+                    stepMonths: 1,
+                    showButtonPanel: true,
+                    currentText: "Aujourd'hui",
+                    nextText: "Suivant",
+                    prevText: "Précédent",
+                    minDate: new Date(),
+                    beforeShowDay: function (date) {
+                        return setDays(date.getDate(), date.getMonth(), date.getFullYear());
+                    },
+                    onSelect: function (dateText, inst) {
+                        selectedDay(dateText, inst);
+                    }
+                });
+            });	//fin document ready
+
+            $(window).load(function () {
+                /*
+                * Bricolage indispensable pour colorer les dates choisies
+                * chaque fois que le datepicker se redessine !
+                */
+                $("#datepicker").bind("mouseover", function () {
+                    $("td.reserver > span", this).css("color", "#ff0000");
+                    $("td.option > a", this).css("color", "#ffcc00");
+                    $("td.disponible > a", this).css("color", "#00ff00");
+                });
+                $("#datepicker").mouseover();
+            });	//fin window load
+        })(jQuery);
+    </script>
+</section>

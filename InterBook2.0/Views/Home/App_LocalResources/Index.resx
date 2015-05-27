@@ -117,13 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="A" xml:space="preserve">
+    <value>À</value>
+  </data>
+  <data name="De" xml:space="preserve">
+    <value>De</value>
+  </data>
   <data name="Ou" xml:space="preserve">
     <value>Ou ?</value>
   </data>
   <data name="Quoi" xml:space="preserve">
     <value>Quoi ?</value>
   </data>
+  <data name="titreTexte1" xml:space="preserve">
+    <value>Bienvenue sur &lt;span&gt;InterBook&lt;/span&gt;</value>
+  </data>
+  <data name="titreTexte2" xml:space="preserve">
+    <value>Le site qui vous accompagne dans la recherche d’emploi spécialisé dans l’univers des spectacles...</value>
+  </data>
   <data name="Valider" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Rechercher" xml:space="preserve">
     <value>Rechercher</value>
   </data>
 </root>
