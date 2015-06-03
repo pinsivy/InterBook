@@ -27,8 +27,7 @@
                 @Model.u.Util_Postal.nom
             </div>
             <div id="age" class="left">
-                28<br />
-                <span id="ans">ans</span>
+                28<span id="ans"> ans</span>
             </div>
             <div class="clear"></div>
         </div>
@@ -115,7 +114,7 @@
             <div id="niveauExp" class="left">
                 @if (Model.u.Util_Info != null && Model.u.Util_Info.cv != null)
                 {
-                    @Model.u.Util_Info.Ref_Experience.Description
+                    <span>@Model.u.Util_Info.Ref_Experience.Description</span>
                     for(int i = 0; i < @Model.u.Util_Info.experience; i++)
                     {
                         <img src="~/Media/img/user/niveauOn.png" />
@@ -138,13 +137,9 @@
             <span class="sousTitrePanel">Consultez mon agenda pour voir mes disponibilités</span>
         </div>
         <div id="datepicker"></div>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-        <script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script>
         <script>
             var disponible = [];
             var reserver = [];
-            var i = 0;
 
             $.ajax({
                 type: 'Get',
@@ -153,87 +148,46 @@
                 url: '/Dashboard/RecupDispo',
                 success: function (dataString) {
                     data = JSON.parse(dataString);
-                    for (i = 0; i < data.length; i++) {
+                    for (var i = 0; i < data.length; i++) {
                         if (data[i].id_Ref_Dispo == 1) {
-                            disponible.push(data[i]);
+                            disponible.push(data[i].dDispo.split("T")[0]);
                         }
                         else if (data[i].id_Ref_Dispo == 2) {
-                            reserver.push(data[i]);
+                            reserver.push(data[i].dDispo.split("T")[0]);
                         }
                     }
                 }
             });
 
+            function setDays(date) {
+                var dmy = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate();
 
-            setDays = function (day, month, year) {
-                var result = [true, 'option', 'En option'];	//par défaut, on affiche la date
-                var boolReserver = false;
-                var rl = 0;
-                var i = 0;
-
-                /*
-                * Les données peuvent contenir, par erreur, des chevauchements de dates !
-                * Priorité des événements : Reserver > Disponible
-                * Évite l'ajout de la "class" d'un événement non prioritaire !
-                */
-
-                if ((reserver != null)) {
-                    rl = reserver.length;
-
-                    for (i = 0; i < rl; i++) {
-                        //var milli = reserver[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
-                        //var d = new Date(parseInt(milli));
-                        var d = new Date(reserver[i].dDispo);
-                        var dtemp = new Date(year, month, day);
-                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
-                            result = [false, "reserver", "Déjà réservé"];
-                            boolReserver = true;
-                        }
-                    }
+                if ($.inArray(dmy, reserver) >= 0) {
+                    return [false, "reserver", "Déjà réservé"];
                 }
 
-                if ((!boolReserver) && disponible != null) {
-                    rl = disponible.length;
-
-                    for (i = 0; i < rl; i++) {
-                        //var milli = disponible[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
-                        //var d = new Date(parseInt(milli));
-                        var d = new Date(disponible[i].dDispo);
-                        var dtemp = new Date(year, month, day);
-                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
-                            result = [true, 'disponible', "Disponible"];
-                        }
-                    }
+                if ($.inArray(dmy, disponible) >= 0) {
+                    return [true, 'disponible', "Disponible"];
                 }
 
-                return result;
+                return [true, 'option', 'En option'];
+            }
+
+            var nbMois = 2;
+            if ($(window).width() < 990) {
+                nbMois = 1;
             }
 
             $("#datepicker").datepicker({
                 firstDay: 1, //0=Dim, 1=Lun
-                numberOfMonths: 2,
+                numberOfMonths: nbMois,
                 stepMonths: 1,
                 showButtonPanel: true,
                 currentText: "Aujourd'hui",
                 nextText: "Suivant",
                 prevText: "Précédent",
                 minDate: new Date(),
-                beforeShowDay: function (date) {
-                    return setDays(date.getDate(), date.getMonth(), date.getFullYear());
-                }
-            });
-
-            $(window).load(function () {
-                /*
-                * Bricolage indispensable pour colorer les dates choisies
-                * chaque fois que le datepicker se redessine !
-                */
-                $("#datepicker").bind("mouseover", function () {
-                    $("td.reserver > span", this).css("background", "#c32e2e");
-                    $("td.option > a", this).css("background", "#ffcc00");
-                    $("td.disponible > a", this).css("background", "#87ce18");
-                });
-                $("#datepicker").mouseover();
+                beforeShowDay: setDays
             });
         </script>
         <div id="legendeCalendar">

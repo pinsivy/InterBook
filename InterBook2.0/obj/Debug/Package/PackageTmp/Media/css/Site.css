@@ -7,6 +7,7 @@
 * {
     margin: 0;
     padding: 0;
+    outline: none;
 }
 html, body{
 
@@ -36,10 +37,6 @@ input:-webkit-autofill {
 a {
 
     text-decoration: none;
-}
-input
-{
-    outline: none;
 }
 .clear
 {
@@ -132,11 +129,13 @@ button:focus
 .header .container > #rightPanel {
 
     height: 100%;
-    float:right; margin-right: 10px;
+    float:right;
 }
-
-.howWork a, .nameHeader p, .nameHeader a {
-
+.nameHeader #nameHeader
+{
+    line-height: 60px;
+}
+.howWork a, .nameHeader #nameHeader, .nameHeader a {
     text-decoration: none;
     font-size: 14px;
     color: rgba(180,180,180,1);
@@ -511,11 +510,19 @@ footer {
     border: none; 
 }
 
-
-
-
-
-
+/*DATEPICKER*/
+td.reserver > a.ui-state-default, td.reserver > span.ui-state-default
+{
+    background: #c32e2e;
+}
+td.option > a.ui-state-default, td.option > span.ui-state-default
+{
+    background: #ffcc00;
+}
+td.disponible > a.ui-state-default, td.disponible > span.ui-state-default
+{
+    background: #87ce18;
+}
 
 
 
@@ -558,8 +565,99 @@ footer {
     {
         display:none;
     }
-}
 
+
+    body
+    {
+        overflow-x: hidden;
+    }
+
+    body.with--sidebar
+    {
+        overflow: hidden;
+        height: 100%;
+    }
+    #wrap
+    {
+        transition-duration: 0.3s;
+    }
+    .header__icon
+    {
+        position: relative;
+        display: block;
+        float: right;
+        width: 50px;
+        height: 60px;
+        cursor: pointer;
+    }
+    .header__icon:after
+    {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 1rem;
+        height: 0;
+        top: 16px;
+        right: 15px;
+        box-shadow: 0 10px 0 1px black, 0 16px 0 1px black, 0 22px 0 1px black;
+    }
+    .nameHeader .dropdown-menu {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 250px;
+        transform: translateX(250px); 
+    }
+    .nameHeader #nameHeader
+    {
+        position: absolute;
+        transform: translateX(50px);
+        z-index: 10;
+        width: 250px;
+        text-align: center;
+        border-bottom: 10px solid #f7f6f6;
+    }
+    .nameHeader .dropdown-menu
+    {
+        display: block;
+    }
+    .nameHeader a:focus
+    {
+        background: none;
+    }
+    .nameHeader .dropdown-menu
+    {
+        border: none;
+        height: 500px;
+        top: 0;
+        padding: 70px 0 0 0;
+    }
+    /* Un lien par ligne */
+    .nameHeader .dropdown-menu a {
+        display: block;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        border-bottom: 1px solid #f7f6f6; 
+    }
+
+    .with--sidebar #wrap {
+        transform: translateX(-250px); 
+    }
+    /* On met un cache par dessus le site-content pour bloquer le scroll et permettre le retour au site */
+}
+.with--connectbar .site-cache, .with--sidebar .site-cache {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
 
 
 

@@ -226,7 +226,8 @@ namespace InterBook2._0.Controllers
 
                 //Envoi de l'email de confirmaion
                 MailBase mb = new MailBase("Confirmez votre compte", "Voir ce mail sur ordinateur ?", "InterBook", BaseManager.EmailNoReply, 1, SessionManager.Current.Util, SessionManager.Current.Util.Util_Email);
-                MailManager.SendMail(mb, null);
+                Dictionary<String, String> varsAdd = new Dictionary<String, String>{};
+                MailManager.SendMail(mb, varsAdd);
 
                 return Json(new { Success = true, Message = "200" });
             }

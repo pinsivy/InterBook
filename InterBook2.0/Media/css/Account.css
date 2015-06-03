@@ -208,6 +208,7 @@
 {
     width: 430px;
     float: left;
+    margin-bottom: 10px;
 }
 #bloc2 .table-row
 {
@@ -274,7 +275,16 @@ select
 
 
 
-@media screen and (max-width: 1225px) {
-    
+@media screen and (max-width: 990px) {
+    #bloc2, #bloc3
+    {
+        float: inherit;
+        width: inherit;
+        margin: 0 0 10px 0;
+    }
+    #bloc2 select, #bloc2 input[type="file"], #bloc2 textarea
+    {
+        width: 100%;
+    }
 }
 

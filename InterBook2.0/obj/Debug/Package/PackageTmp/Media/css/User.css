@@ -82,6 +82,8 @@
     font-size: 36px;
     text-align: center;
     width: 35%;
+    line-height: 65%;
+    padding-top: 5px;
 }
 #ans
 {
@@ -101,12 +103,8 @@
     font-size: 18px;
     background-color: #252121;
     width: 100%;
-    line-height: 50px;
+    padding: 8px 0 8px 5px;
     margin-bottom: 30px;
-    padding-left: 5px;
-    img {
-        vertical-align: middle;
-    }
 }
 #profession img
 {
@@ -286,4 +284,57 @@ div.ui-datepicker td a.ui-state-highlight:hover
     cursor: pointer;
 }
 
-
+@media screen and (max-width: 990px) {
+    .container
+    {
+        position: relative;
+    }
+    #panelGauche
+    {
+        width: 100%;
+        margin: 5% 0 5% 0;
+    }
+    #panelGauche div
+    {
+        float: left;
+    }
+    #photo
+    {
+        width: 100px;
+        height: 100px;
+    }
+    #nom
+    {
+        width: auto;
+    }
+    #age
+    {
+        width: 100%;
+    }
+    #profession
+    {
+        padding: 0;
+    }
+    #contacts
+    {
+        width: 100%;
+    }
+    #contacts a
+    {
+        width: auto;
+    }
+    #hautDroit
+    {
+        position: absolute;
+        top: 25px;
+        right: 40px;
+    }
+    #panelDroite
+    {
+        width: 100%;
+    }
+    #niveauExp span
+    {
+        display: none;
+    }
+}

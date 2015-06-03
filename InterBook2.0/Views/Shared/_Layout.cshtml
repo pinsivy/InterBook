@@ -20,7 +20,7 @@
     <meta charset="utf-8" />
     <meta name="robots" content="noindex">
     <meta name="googlebot" content="noindex">
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>@Model.Title</title>
     <link rel="shortcut icon" type="image/x-icon" href="~/Media/img/commun/favicon.ico" />
     <!--Global Css-->
@@ -32,8 +32,10 @@
 
     <!--Global JS-->
     @Styles.Render("~/Media/js/base")
-    <script src="~/Media/js/jquery1-11.js"></script>
     <script src="~/Media/js/jquery2-1.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script>
     <script src="~/Media/js/easing.js"></script>
     <script src="~/Media/js/modernizr.js"></script>
 
@@ -92,7 +94,14 @@
                         @if (Model.SessionObject.Util != null && Model.SessionObject.Util.Util_Postal != null)
                         {
                             <div class="nameHeader">
-                                <p id="nameHeader">@Model.SessionObject.Util.Util_Postal.prenom</p>
+                                <span id="nameHeader">
+                                    @if (Model.SessionObject.Util.Util_Info != null && Model.SessionObject.Util.Util_Info.photo != null)
+                                    {
+                                        <img src="~/media/file/upload/photo/@(Model.SessionObject.Util.Util_Info.photo).jpg" width="27" height="27" />
+                                    }
+                                    @Model.SessionObject.Util.Util_Postal.prenom
+                                </span>
+                                <span class="header__icon" id="header__icon"></span>
                                 <ul class="dropdown-menu">
                                     @*<li><a href='/dashboard/disponibility'>@Index.Disponibilite</a></li>
                                         <li><a href='/dashboard/messages'>@Index.Messages</a></li>
@@ -100,7 +109,7 @@
                                     @if (particulier)
                                     {
                                         <li>@Html.ActionLink(Index.Disponibilite, "Disponibility", "DashBoard")</li>
-                                        <li>@Html.ActionLink("Job", "Job")</li>
+                                        <li>@Html.ActionLink("Job", "Job", "DashBoard")</li>
                                     }
                                     <li>@Html.ActionLink(Index.Messages, "Messages", "DashBoard")</li>
                                     @if (particulier)
@@ -127,7 +136,6 @@
                                 <a href="#" id="seConnecter">@Index.SeConnecter</a>
                             </div>
                         }
-
                     </div>
 
                 </div>
@@ -157,7 +165,8 @@
         </div>
 
 
-
+        <div class="site-cache" id="site-cache">
+        </div>
 
 
 
@@ -195,7 +204,9 @@
 
         jQuery(function ($) {
 
-            $('#seConnecter').on('click', function () {
+            $('#seConnecter').click(function (e) {
+                e.preventDefault();
+                $('body').addClass('with--connectbar');
 
                 if ($("a.close").length == 0) {
                     $('#connexionPart')
@@ -209,16 +220,13 @@
                     );
                 }
 
-                //Apparition du fond - .css({'filter' : 'alpha(opacity=80)'}) pour corriger les bogues d'anciennes versions de IE
-                $('body').append('<div id="fade"></div>');
-                $('#fade').css({ 'filter': 'alpha(opacity=87)' }).fadeIn();
 
                 return false;
             });
 
             //Close Popups and Fade Layer
-            $('body').on('click', 'a.close, #fade', function () { //Au clic sur le body...
-                $('#fade').fadeOut().remove();
+            $('body').on('click', 'a.close, .site-cache', function () { //Au clic sur le body...
+                $('body').removeClass('with--connectbar');
                 $('#connexionPart').animate
                 (
                     { top: "-300px" },
@@ -226,16 +234,15 @@
                         duration: 600,
                         easing: "easeInOutBack",
                         complete: function () {
-
                             $('#connexionPart').hide();
                             $('a.close').remove();
-
-
                         }
                     });
                 return false;
             });
             var t;
+
+            
             $('.drapeauHeader').hover(function () {
                 t = setTimeout(function () {
                     $('.drapeauHeader .dropdown-menu').show();
@@ -245,14 +252,26 @@
                 $('.drapeauHeader .dropdown-menu').hide();
             });
 
-            $('.nameHeader').hover(function () {
-                t = setTimeout(function () {
-                    $('.nameHeader .dropdown-menu').show();
-                }, 200);
-            }, function () {
-                clearTimeout(t);
-                $('.nameHeader .dropdown-menu').hide();
+            if ($(window).width() > 990) {
+                $('.nameHeader').hover(function () {
+                    t = setTimeout(function () {
+                        $('.nameHeader .dropdown-menu').show();
+                    }, 200);
+                }, function () {
+                    clearTimeout(t);
+                    $('.nameHeader .dropdown-menu').hide();
+                });
+            }
+
+            $('#header__icon').click(function (e) {
+                e.preventDefault();
+                $('body').toggleClass('with--sidebar');
             });
+
+            /* Je veux pouvoir masquer le menu si on clique sur le cache */
+            $('#site-cache').click(function (e) {
+                $('body').removeClass('with--sidebar');
+            })
 
             $('.dropdown-menu img').on('click', function () {
                 $.ajax({

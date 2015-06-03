@@ -32,8 +32,6 @@ namespace InterBook2._0.Controllers
         {
             DashboardModel dm = new DashboardModel();
 
-            dm.u = SessionManager.Current.Util;
-
             return View(dm);
         }
 
@@ -52,11 +50,28 @@ namespace InterBook2._0.Controllers
 
         //
         // GET: /Dashboard/Favoris
-        public ActionResult Favoris()
+        public ActionResult Job()
         {
             DashboardModel dm = new DashboardModel();
 
-            dm.u = SessionManager.Current.Util;
+            //REMPLIR LISTE REGION/DEPARTEMENT
+            List<Ref_Departement> lrd = UtilManager.GetDepartements();
+            dm.DepartementList = lrd.ToList().Select(t => new GroupedSelectListItem
+            {
+                GroupKey = t.Ref_Region.id_Region.ToString(),
+                GroupName = t.Ref_Region.Description,
+                Text = t.Description,
+                Value = t.id_Departement.ToString()
+            });
+
+            return View(dm);
+        }
+
+        //
+        // GET: /Dashboard/Favoris
+        public ActionResult Favoris()
+        {
+            DashboardModel dm = new DashboardModel();
 
             return View(dm);
         }
@@ -76,8 +91,6 @@ namespace InterBook2._0.Controllers
 
             DashboardModel dm = new DashboardModel();
 
-            dm.u = SessionManager.Current.Util;
-
             return View(dm);
         }
 
@@ -86,8 +99,6 @@ namespace InterBook2._0.Controllers
         public ActionResult ModifProfil()
         {
             DashboardModel dm = new DashboardModel();
-
-            dm.u = SessionManager.Current.Util;
 
             return View(dm);
         }
@@ -114,7 +125,21 @@ namespace InterBook2._0.Controllers
             {
                 return Json(null);
             }
+            string jsonud = JsonConvert.SerializeObject(ud, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            return Json(jsonud, JsonRequestBehavior.AllowGet);
+            //return Json(new { Success = true, Reponse = new JavaScriptSerializer().Serialize(ud), Message = "lol" });
+        }
 
+        //
+        // GET: /Dashboard/recupDispo
+        [HttpGet]
+        public JsonResult RecupDepartement(int idu)
+        {
+            List<Util_GeoSimple> ud = UtilGeoManager.GetUtilGeoByIdu(idu);
+            if (ud == null)
+            {
+                return Json(null);
+            }
             string jsonud = JsonConvert.SerializeObject(ud, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
             return Json(jsonud, JsonRequestBehavior.AllowGet);
             //return Json(new { Success = true, Reponse = new JavaScriptSerializer().Serialize(ud), Message = "lol" });

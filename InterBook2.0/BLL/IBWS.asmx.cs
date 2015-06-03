@@ -462,6 +462,19 @@ namespace InterBook2._0.BLL
         }
 
         [WebMethod]
+        public List<Util_Geo> GetUtilGeoByIdu(int idu)
+        {
+            if (_db == null)
+                _db = new InterBookEntities();
+
+            List<Util_Geo> lum = (from m in _db.Util_Geo
+                                  where m.idU == idu
+                                    select m).ToList<Util_Geo>();
+
+            return lum;
+        }
+
+        [WebMethod]
         public List<Util_Consentement> GetUtilConsentementByIdu(int idu)
         {
             if (_db == null)

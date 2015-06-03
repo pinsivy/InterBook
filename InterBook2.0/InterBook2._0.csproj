@@ -293,6 +293,7 @@
     <Compile Include="DTO\Util_Dispo.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Util_GeoSimple.cs" />
     <Compile Include="DTO\Util_MessageSimple.cs" />
     <Compile Include="DTO\Util_DispoSimple.cs" />
     <Compile Include="DTO\Ref_VilleSimple.cs" />
@@ -458,6 +459,7 @@
     <Content Include="Media\css\lib\images\bx_loader.gif" />
     <Content Include="Media\css\lib\images\controls.png" />
     <Content Include="Media\css\lib\jquery.bxslider.css" />
+    <Content Include="Media\css\lib\jqueryTheme.css" />
     <Content Include="Media\css\lib\multiple-select.css" />
     <Content Include="Media\css\D.css" />
     <Content Include="Media\css\Dashboard.css" />
@@ -765,6 +767,7 @@
     <Content Include="Views\Dashboard\favoris.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\ModifProfil.cshtml" />
+    <Content Include="Views\Dashboard\job.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

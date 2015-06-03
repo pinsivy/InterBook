@@ -143,8 +143,6 @@
                                     <div class="table-row"><input type="text" name="lProfession[0]" class="inputQuery Profession" /></div>
                                 </div>
                                 <button id="plus">Ajouter une autre profession</button>
-                                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-                                <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
                                 <script>
                                     var nbP = 1;
                                     $("#plus").click(function () {
@@ -188,8 +186,6 @@
                     </div>
                 </div>
 
-                <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-                <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
                 <script>
                     //Autocompletion Ville
                     $(function () {
@@ -230,7 +226,6 @@
                     </div>
                     <div id="selectChoisi">
                         @Html.DropDownGroupListFor(m => m.SubmittedDepartement, Model.DepartementList, new { multiple = "multiple", @class = "multiselect" })
-
                         <script src="~/Media/js/jquery.multiple.select.js"></script>
                         <script>
                             var json = {"DepartementChoisi" : []}
@@ -406,94 +401,55 @@
                     </div>
                     <div>
                         <div id="datepicker"></div>
-                        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-                        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-                        <script src="http://jqueryui.com/resources/demos/datepicker/datepicker-fr.js"></script>
                         <script>
                             //DATEPICKER
                             var disponible = [];
                             var reserver = [];
-                            var i = 0;
 
                             $.ajax({
-                                dataType: "json",
                                 type: 'Get',
                                 async: false,
+                                data: 'idu=' + @Model.u.IdU + '',
                                 url: '/Dashboard/RecupDispo',
-                                success: function (data) {
-                                    for (i = 0; i < data.length; i++) {
+                                success: function (dataString) {
+                                    data = JSON.parse(dataString);
+                                    for (var i = 0; i < data.length; i++) {
                                         if (data[i].id_Ref_Dispo == 1) {
-                                            disponible.push(data[i]);
+                                            disponible.push(data[i].dDispo.split("T")[0]);
                                         }
                                         else if (data[i].id_Ref_Dispo == 2) {
-                                            reserver.push(data[i]);
+                                            reserver.push(data[i].dDispo.split("T")[0]);
                                         }
                                     }
                                 }
                             });
 
+                            function setDays(date) {
+                                var dmy = date.getFullYear() + "-" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + date.getDate();
 
-                            setDays = function (day, month, year) {
-                                var result = [true, 'option', 'En option'];
-                                var boolReserver = false;
-                                var rl = 0;
-                                var i = 0;
-
-                                if ((reserver != null)) {
-                                    rl = reserver.length;
-
-                                    for (i = 0; i < rl; i++) {
-                                        var milli = reserver[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
-                                        var d = new Date(parseInt(milli));
-                                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
-                                            result = [false, "reserver", "Déjà réservé"];
-                                            boolReserver = true;
-                                        }
-                                    }
+                                if ($.inArray(dmy, reserver) >= 0) {
+                                    return [false, "reserver", "Déjà réservé"];
                                 }
 
-                                if ((!boolReserver) && disponible != null) {
-                                    rl = disponible.length;
-
-                                    for (i = 0; i < rl; i++) {
-                                        var milli = disponible[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
-                                        var d = new Date(parseInt(milli));
-                                        if ((day == d.getDate()) && (month == d.getMonth()) && (year == d.getFullYear())) {
-                                            result = [true, 'disponible', "Disponible"];
-                                        }
-                                    }
+                                if ($.inArray(dmy, disponible) >= 0) {
+                                    return [true, 'disponible', "Disponible"];
                                 }
 
-                                return result;
+                                return [true, 'option', 'En option'];
                             }
 
-                            selectedDay = function (dateText, inst) {
-                                var i = 0;
+                            function selectedDay(dateText, inst) {
+                                var d = dateText.slice(0, 2);
+                                var m = dateText.slice(3, 5);
+                                var y = dateText.slice(6);
+                                var ymd = y + "-" + m + "-" + d;
 
-                                setTimeout(function () {
-                                    var j = parseInt(dateText.slice(0, 2), 10);
-                                    var m = parseInt(dateText.slice(3, 5), 10) - 1;
-                                    var y = parseInt(dateText.slice(6), 10);
+                                if ($.inArray(ymd, disponible) >= 0)
+                                    disponible.splice($.inArray(ymd, disponible), 1);
+                                else
+                                    disponible.push(ymd);
 
-                                    var dtemp = new Date(y, m, j).getTime();
-                                    var suppr = false;
-                                    for (var i = 0; i < disponible.length; i++) {
-                                        var milli = disponible[i].dDispo.replace(/\/Date\((-?\d+)\)\//, '$1');
-                                        var d = new Date(parseInt(milli)).getTime();
-                                        var dtemp = new Date(y, m, j).getTime();
-                                        if (d == dtemp) {
-                                            disponible.splice(i, 1);
-                                            suppr = true;
-                                        }
-                                    }
-
-                                    if (!suppr)
-                                    {
-                                        disponible.push({ dDispo: "" + dtemp });
-                                    }
-
-                                    $("#datepicker").datepicker("refresh");
-                                }, 0);
+                                $("#datepicker").datepicker("refresh");
                             }
 
                             $("#datepicker").datepicker({
@@ -505,21 +461,8 @@
                                 nextText: "Suivant",
                                 prevText: "Précédent",
                                 minDate: new Date(),
-                                beforeShowDay: function (date) {
-                                    return setDays(date.getDate(), date.getMonth(), date.getFullYear());
-                                },
-                                onSelect: function (dateText, inst) {
-                                    selectedDay(dateText, inst);
-                                }
-                            });
-
-                            $(window).load(function () {
-                                $("#datepicker").bind("mouseover", function () {
-                                    $("td.reserver > span", this).css("background", "#c32e2e");
-                                    $("td.option > a", this).css("background", "#ffcc00");
-                                    $("td.disponible > a", this).css("background", "#87ce18");
-                                });
-                                $("#datepicker").mouseover();
+                                beforeShowDay: setDays,
+                                onSelect: selectedDay
                             });
 
                             //IMAGE
@@ -656,7 +599,7 @@
                                 var dateTemp;
                                 for(var i = 0; i < disponible.length; i++)
                                 {
-                                    dateTemp = new Date(parseInt(disponible[i].dDispo));
+                                    dateTemp = new Date(disponible[i]);
                                     dates += dateTemp.getDate() + "/" + (dateTemp.getMonth()+1) + "/" + dateTemp.getFullYear() + ";";
                                 }
                                 $('#lDate').val(dates);

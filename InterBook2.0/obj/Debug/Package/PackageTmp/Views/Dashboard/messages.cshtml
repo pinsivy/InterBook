@@ -12,13 +12,14 @@
 
     @*MESSAGES*@
 
-    <div class="panelDroite right">
+    <div class="panelDroite left">
         <h1>MESSAGES</h1>
         @if (Model.luc != null)
         {
             foreach (var u in Model.luc)
             {
-                <a href="#" class="contact" id="@u.iduTo">@u.UtilTo.Util_Postal.prenom @u.UtilTo.Util_Postal.nom @if(u.UtilTo.Util_Info_Entreprise != null){<text>(@u.UtilTo.Util_Info_Entreprise.Nom)</text>}</a><br />
+                <a href="#" class="contact" id="@u.iduTo">@u.UtilTo.Util_Postal.prenom @u.UtilTo.Util_Postal.nom @if (u.UtilTo.Util_Info_Entreprise != null)
+                {<text>(@u.UtilTo.Util_Info_Entreprise.Nom)</text>}</a><br />
             }
         }
         else

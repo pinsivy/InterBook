@@ -1,4 +1,5 @@
 ﻿using InterBook2._0.App_GlobalResources;
+using InterBook2._0.BLL;
 using InterBook2._0.DTO;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,7 @@ namespace InterBook2._0.Models
 
     public class SignInModel : ModelBase
     {
-        public Util u { get; set; }
+        
     }
 
     public class SignUpModel : ModelBase
@@ -69,6 +70,8 @@ namespace InterBook2._0.Models
         public SignUpModel() { 
             ExperienceList = new List<SelectListItem>();
         }
+
+        public Util u { get { return SessionManager.Current.Util; } }
 
         [Required(ErrorMessageResourceName = "RequiredCivilite", ErrorMessageResourceType = typeof(Errors))]
         [Range(1, 2, ErrorMessageResourceName = "InvalidCivilite", ErrorMessageResourceType = typeof(Errors))]

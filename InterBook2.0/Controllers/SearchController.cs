@@ -21,7 +21,7 @@ namespace InterBook2._0.Controllers
         //
         // Get: /Search/
         [HttpGet]
-        public ActionResult Index(SearchModel model, string experience)
+        public ActionResult Index(SearchModel model, string exp)
         {
             if (model == null)
                 model = new SearchModel();
@@ -49,8 +49,8 @@ namespace InterBook2._0.Controllers
             List<Util> la = null;
             if (rv != null)
             {
-                if (!String.IsNullOrEmpty(experience))
-                    la = SessionManager.Current.ws.GetUtilSearchByLongLatIddepRayonDateAndParam(double.Parse(rv.longitude.Replace(".", ",")), double.Parse(rv.latitude.Replace(".", ",")), rv.id_Departement, 2000, model.Debut, model.Fin, experience, null);//RAYON
+                if (!String.IsNullOrEmpty(exp))
+                    la = SessionManager.Current.ws.GetUtilSearchByLongLatIddepRayonDateAndParam(double.Parse(rv.longitude.Replace(".", ",")), double.Parse(rv.latitude.Replace(".", ",")), rv.id_Departement, 2000, model.Debut, model.Fin, exp, null);//RAYON
                 else
                     la = SessionManager.Current.ws.GetUtilSearchByLongLatIddepRayonDate(double.Parse(rv.longitude.Replace(".", ",")), double.Parse(rv.latitude.Replace(".", ",")), rv.id_Departement, 2000, model.Debut, model.Fin);//RAYON
             }
@@ -72,18 +72,18 @@ namespace InterBook2._0.Controllers
             return View(model);
         }
 
-        //
-        // Get: /Search/Filtre
-        [AllowAnonymous]
-        public String Filtre(string ville, string idVille, DateTime? debut, DateTime? fin, string profession, string experience, string contrat)
-        {
-            if (SessionManager.Current.ws == null)
-                SessionManager.Current.ws = new IBWS();
-            string json = SessionManager.Current.ws.GetUtilsByVilleProfessionExperienceContrat(ville, profession, experience, contrat);
-            Ref_Ville rv = SessionManager.Current.ws.GetVille(int.Parse(idVille == null ? "0" : idVille));
-            List<Util> la = JsonConvert.DeserializeObject<List<Util>>(json);
-            return json;
-        }
+        ////
+        //// Get: /Search/Filtre
+        //[AllowAnonymous]
+        //public String Filtre(string ville, string idVille, DateTime? debut, DateTime? fin, string profession, string experience, string contrat)
+        //{
+        //    if (SessionManager.Current.ws == null)
+        //        SessionManager.Current.ws = new IBWS();
+        //    string json = SessionManager.Current.ws.GetUtilsByVilleProfessionExperienceContrat(ville, profession, experience, contrat);
+        //    Ref_Ville rv = SessionManager.Current.ws.GetVille(int.Parse(idVille == null ? "0" : idVille));
+        //    List<Util> la = JsonConvert.DeserializeObject<List<Util>>(json);
+        //    return json;
+        //}
 
         private double distance(double lat1, double lon1, double lat2, double lon2) {
           double theta = lon1 - lon2;

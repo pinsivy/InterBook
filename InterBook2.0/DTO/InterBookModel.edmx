@@ -634,6 +634,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Util_Geo_Ref_Departement">
+          <End Role="Ref_Departement" Type="Self.Ref_Departement" Multiplicity="0..1" />
+          <End Role="Util_Geo" Type="Self.Util_Geo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Departement">
+              <PropertyRef Name="id_Departement" />
+            </Principal>
+            <Dependent Role="Util_Geo">
+              <PropertyRef Name="id_Departement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Util_Geo_Util">
           <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
           <End Role="Util_Geo" Type="Self.Util_Geo" Multiplicity="*" />
@@ -963,6 +975,10 @@
           <AssociationSet Name="FK_Util_Favoris_UtilEntreprise" Association="Self.FK_Util_Favoris_UtilEntreprise">
             <End Role="Util" EntitySet="Util" />
             <End Role="Util_Favoris" EntitySet="Util_Favoris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Util_Geo_Ref_Departement" Association="Self.FK_Util_Geo_Ref_Departement">
+            <End Role="Ref_Departement" EntitySet="Ref_Departement" />
+            <End Role="Util_Geo" EntitySet="Util_Geo" />
           </AssociationSet>
           <AssociationSet Name="FK_Util_Geo_Util" Association="Self.FK_Util_Geo_Util">
             <End Role="Util" EntitySet="Util" />
