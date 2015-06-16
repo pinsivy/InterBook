@@ -79,7 +79,7 @@
                         <div class="drapeauHeader">
                             <p><img id="drapeauHeader" src="~/Media/img/commun/drp-@(InterBook2._0.BLL.SessionManager.Current.CurrentUICulture.Name).gif" /></p>
                             <ul class="dropdown-menu">
-                                @foreach (InterBook2._0.DTO.Ref_Culture rf in InterBook2._0.BLL.ApplicationObject.CulturesInfos)
+                                @foreach (InterBook2._0.DTO.Ref_CultureSimple rf in InterBook2._0.BLL.ApplicationObject.CulturesInfos)
                                 {
                                     if (rf.description != InterBook2._0.BLL.SessionManager.Current.CurrentUICulture.Name)
                                     {
@@ -94,7 +94,13 @@
                         @if (Model.SessionObject.Util != null && Model.SessionObject.Util.Util_Postal != null)
                         {
                             <div class="nameHeader">
-                                <span id="nameHeader">@Model.SessionObject.Util.Util_Postal.prenom</span>
+                                <span id="nameHeader">
+                                    @if (Model.SessionObject.Util.Util_Info != null && Model.SessionObject.Util.Util_Info.photo != null)
+                                    {
+                                        <img src="~/media/file/upload/photo/@(Model.SessionObject.Util.Util_Info.photo).jpg" width="27" height="27" />
+                                    }
+                                    @Model.SessionObject.Util.Util_Postal.prenom
+                                </span>
                                 <span class="header__icon" id="header__icon"></span>
                                 <ul class="dropdown-menu">
                                     @*<li><a href='/dashboard/disponibility'>@Index.Disponibilite</a></li>
@@ -103,7 +109,7 @@
                                     @if (particulier)
                                     {
                                         <li>@Html.ActionLink(Index.Disponibilite, "Disponibility", "DashBoard")</li>
-                                        <li>@Html.ActionLink("Job", "Job")</li>
+                                        <li>@Html.ActionLink("Job", "Job", "DashBoard")</li>
                                     }
                                     <li>@Html.ActionLink(Index.Messages, "Messages", "DashBoard")</li>
                                     @if (particulier)

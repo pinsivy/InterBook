@@ -1,0 +1,172 @@
+﻿@using InterBook2._0.Views.Dashboard.App_LocalResources;
+@using System.Web.Optimization
+@model InterBook2._0.Models.DashboardModel
+
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@Styles.Render("~/Media/css/dashboard")
+<link href="~/Media/css/Dashboard.css" rel="stylesheet" />
+<link href="~/Media/css/lib/multiple-select.css" rel="stylesheet" />
+
+<section class="container">
+
+    @Html.Partial("_MenuProfil")
+    
+    @*DISPONIBILITE*@
+
+
+    <div class="panelDroite left">
+        <h1>Job</h1>
+        <div class="titreBloc">
+            Ma Géolocalisation<br />
+            <span class="sousTitre">Selectionnez les zones de recherche où l'on pourra vous localiser</span>
+        </div>
+        <div class="blocGeo">
+            <div class="choisi" id="choisi">
+
+            </div>
+            <div>
+                <input type="checkbox" name="france" id="franceInput"><label for="franceInput">Je souhaite travailler dans toute la France</label>
+            </div>
+            <div id="selectChoisi">
+                @Html.DropDownGroupListFor(m => m.SubmittedDepartement, Model.DepartementList, new { multiple = "multiple", @class = "multiselect" })
+                <script src="~/Media/js/jquery.multiple.select.js"></script>
+                <script>
+
+                    var json = { "DepartementChoisi": [] }
+
+                    // MAJ HTML
+                    function refreshListe() {
+                        textDepartementChoisi = "";
+
+                        $.each(json.DepartementChoisi, function (i, v) {
+                            textDepartementChoisi += v.Region + " / ";
+                            $.each(json.DepartementChoisi[i].Departement, function (j, w) {
+                                if (j > 0)
+                                    textDepartementChoisi += ", ";
+                                textDepartementChoisi += w.nom_Departement + "<span class=\"croixDep\" onclick='$(\"label input[value=" + w.id_Departement + "]\").click();'>X</span>";
+                            });
+                            textDepartementChoisi += "<br/>";
+                        });
+
+                        if (textDepartementChoisi != "") {
+                            $("#choisi").html(textDepartementChoisi);
+                            $("#choisi").show();
+                        }
+                        else
+                            $("#choisi").hide();
+
+                    }
+
+                    //  jDuery MultipleSelect
+                    $('#SubmittedDepartement').multipleSelect({
+                        allSelected: 'Toute la France', selectAllText: 'Toute la France', selectAllDelimiter: ['', ''],
+                        selectAll: false, multiple: true, multipleWidth: 150, width: '100%', placeholder: "Sélectionnez les départements", countSelected: "# département(s) choisi(s)",
+                        onSelectAll: function(aRowids,status) {
+                            if (status) {
+
+                            }
+                        },
+                        onOptgroupClick: function (view) {
+
+                            var existe = -1;
+                            $.each(json.DepartementChoisi, function (i, v) {
+                                if (v.Region == view.label.trim()) {
+                                    existe = i;
+                                }
+                            });
+
+                            if (view.checked) {
+                                var departementsDuGroupe = [];
+                                $('#SubmittedDepartement').find("optgroup[label='" + view.label.trim() + "'] option").each(function () {
+                                    departementsDuGroupe.push({ "id_Departement": $(this).attr("value"), "nom_Departement": $(this).text() });
+                                });
+                                if (existe != -1) {//existe
+                                    json.DepartementChoisi[existe].Departement = departementsDuGroupe;
+                                }
+                                else {//créer
+                                    json.DepartementChoisi.push({ "Region": view.label.trim(), "Departement": departementsDuGroupe });
+                                }
+                            }
+                            else {
+                                if (existe != -1) {//existe
+                                    json.DepartementChoisi.splice(existe, 1);
+                                }
+                            }
+                            refreshListe();
+                        },
+                        onClick: function (view) {
+                            var region = $("#SubmittedDepartement option[value=" + view.value + "]").parent().attr("label");
+
+                            var existe = -1;
+                            $.each(json.DepartementChoisi, function (i, v) {
+                                if (v.Region == region) {
+                                    existe = i;
+                                }
+                            });
+
+                            if (view.checked) {
+
+                                if (existe != -1) {//existe
+                                    json.DepartementChoisi[existe].Departement.push({ "id_Departement": view.value, "nom_Departement": view.label.trim() });
+                                }
+                                else {//créer
+                                    json.DepartementChoisi.push({ "Region": region, "Departement": [{ "id_Departement": view.value, "nom_Departement": view.label.trim() }] });
+                                }
+                            }
+                            else {
+                                if (existe != -1) {//existe
+                                    var depSuppr = -1;
+                                    $.each(json.DepartementChoisi[existe].Departement, function (j, w) {
+                                        if (w.id_Departement == view.value) {
+                                            depSuppr = j;
+                                        }
+                                    });
+                                    if (depSuppr != -1)
+                                        json.DepartementChoisi[existe].Departement.splice(depSuppr, 1);
+                                    if (json.DepartementChoisi[existe].Departement.length == 0)
+                                        json.DepartementChoisi.splice(existe, 1);
+                                }
+                            }
+                            refreshListe();
+                        }
+                    });
+
+                    $('#franceInput').change(function () {
+                        if ($(this).prop('checked')) {
+                            $('#SubmittedDepartement').multipleSelect('disable');
+                            $("#SubmittedDepartement").multipleSelect("checkAll");
+                            $("#choisi").hide();
+                            json.DepartementChoisi.splice(0);
+                        }
+                        else {
+                            $('#SubmittedDepartement').multipleSelect('enable');
+                            $("#SubmittedDepartement").multipleSelect("uncheckAll");
+                        }
+                    });
+
+                        $.ajax({
+                            type: 'Get',
+                            data: 'idu=' + @Model.u.IdU + '',
+                            url: '/Dashboard/RecupDepartement',
+                            success: function (dataString) {
+                                data = JSON.parse(dataString);
+                                if (data.length == 104)
+                                    $('#franceInput').prop("checked", true);
+                                else {
+                                    $('#franceInput').prop("checked", false);
+                                    for (var i = 0; i < data.length; i++) {
+                                        $("label input[value=" + data[i].id_Departement + "]").click();
+                                    }
+                                }
+                            }
+                        });
+                </script>
+            </div>
+            <div>
+                <input type="checkbox" name="etranger" id="etrangerInput"><label for="etrangerInput">Je souhaite travailler à l'étranger</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="clear"></div>
+</section>

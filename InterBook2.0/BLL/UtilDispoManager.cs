@@ -14,18 +14,8 @@ namespace InterBook2._0.BLL
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
 
-            List<Util_Dispo> lud = SessionManager.Current.ws.GetUtilDispoByIdu(idu);
-            List<Util_DispoSimple> luds = new List<Util_DispoSimple>();
-            foreach(Util_Dispo ud in lud)
-            {
-                luds.Add(new Util_DispoSimple()
-                {
-                    dDispo = ud.dDispo,
-                    idU = ud.idU,
-                    id_Ref_Dispo = ud.id_Ref_Dispo
-                });
-            }
-            lud = null;
+            List<Util_DispoSimple> luds = SessionManager.Current.ws.GetUtilDispoByIdu(idu);
+            
             return luds;
         }
 
@@ -33,40 +23,30 @@ namespace InterBook2._0.BLL
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
-            Util_Dispo ud = SessionManager.Current.ws.GetUtilDispoByDateIdu(dDispo, idu);
-
-            Util_DispoSimple uds = new Util_DispoSimple()
-            {
-                dDispo = dDispo,
-                idU = idu,
-                id_Ref_Dispo = 1
-            };
+            Util_DispoSimple uds = SessionManager.Current.ws.GetUtilDispoByDateIdu(dDispo, idu);
 
             //Modifier ou ajouter
-            if (ud != null)
+            if (uds != null)
             {
-                uds.id_Util_Dispo = ud.id_Util_Dispo;
-                if (ud.id_Ref_Dispo == 1)
+                if (uds.id_Ref_Dispo == 1)
                 {
-                    ud.id_Ref_Dispo = uds.id_Ref_Dispo = 3;
+                    uds.id_Ref_Dispo = 3;
                 }
-                else if (ud.id_Ref_Dispo == 3)
+                else if (uds.id_Ref_Dispo == 3)
                 {
-                    ud.id_Ref_Dispo = uds.id_Ref_Dispo = 1;
+                    uds.id_Ref_Dispo = 1;
                 }
             }
             else
             {
-                ud = new Util_Dispo()
+                uds = new Util_DispoSimple()
                 {
                     dDispo = dDispo,
                     idU = idu,
                     id_Ref_Dispo = 1
                 };
             }
-            SessionManager.Current.ws.InsertLine(ud);
-
-
+            SessionManager.Current.ws.InsertLine_Util_Dispo(uds);
 
             return uds;
         }
@@ -75,31 +55,23 @@ namespace InterBook2._0.BLL
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
-            Util_Dispo ud = SessionManager.Current.ws.GetUtilDispoByDateIdu(dDispo, idu);
-
-            Util_DispoSimple uds = new Util_DispoSimple()
-            {
-                dDispo = dDispo,
-                idU = idu,
-                id_Ref_Dispo = 1
-            };
+            Util_DispoSimple uds = SessionManager.Current.ws.GetUtilDispoByDateIdu(dDispo, idu);
 
             //Modifier ou ajouter
-            if (ud != null)
+            if (uds != null)
             {
-                uds.id_Util_Dispo = ud.id_Util_Dispo;
-                ud.id_Ref_Dispo = uds.id_Ref_Dispo = 2;
+                uds.id_Ref_Dispo = 2;
             }
             else
             {
-                ud = new Util_Dispo()
+                uds = new Util_DispoSimple()
                 {
                     dDispo = dDispo,
                     idU = idu,
                     id_Ref_Dispo = 2
                 }; ;
             }
-            SessionManager.Current.ws.InsertLine(ud);
+            SessionManager.Current.ws.InsertLine_Util_Dispo(uds);
 
 
 

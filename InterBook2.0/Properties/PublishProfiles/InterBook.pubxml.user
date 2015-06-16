@@ -26,19 +26,19 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>02/12/2015 01:07:50</publishTime>
     </File>
     <File Include="bin/App_GlobalResources/Errors.resx">
-      <publishTime>06/11/2014 21:51:01</publishTime>
+      <publishTime>11/06/2014 21:51:01</publishTime>
     </File>
     <File Include="bin/AuthorizeNet.dll">
       <publishTime>05/27/2015 13:43:23</publishTime>
     </File>
     <File Include="bin/de/InterBook2._0.resources.dll">
-      <publishTime>05/28/2015 16:59:38</publishTime>
+      <publishTime>06/15/2015 05:28:04</publishTime>
     </File>
     <File Include="bin/DropDownList_Optgroup.dll">
       <publishTime>02/25/2015 18:09:43</publishTime>
     </File>
     <File Include="bin/en/InterBook2._0.resources.dll">
-      <publishTime>05/28/2015 16:59:39</publishTime>
+      <publishTime>06/15/2015 05:28:07</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>10/27/2014 18:09:57</publishTime>
@@ -47,7 +47,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>10/27/2014 18:09:57</publishTime>
     </File>
     <File Include="bin/es/InterBook2._0.resources.dll">
-      <publishTime>05/28/2015 16:59:39</publishTime>
+      <publishTime>06/15/2015 05:28:06</publishTime>
     </File>
     <File Include="bin/fr/EntityFramework.resources.dll">
       <publishTime>10/27/2014 18:10:02</publishTime>
@@ -56,10 +56,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>10/27/2014 18:05:09</publishTime>
     </File>
     <File Include="bin/fr/System.Net.Http.resources.dll">
-      <publishTime>09/07/2013 11:34:42</publishTime>
+      <publishTime>07/09/2013 11:34:42</publishTime>
     </File>
     <File Include="bin/fr/System.Net.Http.WebRequest.resources.dll">
-      <publishTime>09/07/2013 11:34:40</publishTime>
+      <publishTime>07/09/2013 11:34:40</publishTime>
     </File>
     <File Include="bin/fr/System.Web.Helpers.resources.dll">
       <publishTime>10/27/2014 18:05:07</publishTime>
@@ -86,13 +86,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>10/27/2014 18:05:07</publishTime>
     </File>
     <File Include="bin/InterBook2._0.dll">
-      <publishTime>05/28/2015 16:59:38</publishTime>
+      <publishTime>06/15/2015 05:27:58</publishTime>
     </File>
     <File Include="bin/InterBook2._0.pdb">
-      <publishTime>05/28/2015 16:59:38</publishTime>
+      <publishTime>06/15/2015 05:27:57</publishTime>
     </File>
     <File Include="bin/it/InterBook2._0.resources.dll">
-      <publishTime>05/28/2015 16:59:38</publishTime>
+      <publishTime>06/15/2015 05:28:05</publishTime>
     </File>
     <File Include="bin/Media/file/upload/1.jpg">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -110,13 +110,13 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>10/27/2014 18:46:12</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
-      <publishTime>10/07/2012 12:07:38</publishTime>
+      <publishTime>07/10/2012 12:07:38</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>10/27/2014 18:05:05</publishTime>
     </File>
     <File Include="bin/System.Net.Http.WebRequest.dll">
-      <publishTime>10/07/2012 12:07:38</publishTime>
+      <publishTime>07/10/2012 12:07:38</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>10/27/2014 18:05:04</publishTime>
@@ -164,7 +164,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>04/23/2015 15:42:05</publishTime>
     </File>
     <File Include="Media/css/Dashboard.css">
-      <publishTime>05/28/2015 22:31:19</publishTime>
+      <publishTime>05/30/2015 01:55:28</publishTime>
     </File>
     <File Include="Media/css/Home.css">
       <publishTime>05/26/2015 15:22:32</publishTime>
@@ -200,7 +200,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>01/06/2015 16:39:52</publishTime>
     </File>
     <File Include="Media/css/Site.css">
-      <publishTime>05/29/2015 02:51:47</publishTime>
+      <publishTime>05/29/2015 23:54:45</publishTime>
     </File>
     <File Include="Media/css/User.css">
       <publishTime>05/28/2015 16:15:51</publishTime>
@@ -410,7 +410,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>10/27/2014 19:27:01</publishTime>
     </File>
     <File Include="Media/img/commun/loading.gif">
-      <publishTime>01/04/2015 12:56:14</publishTime>
+      <publishTime>04/01/2015 12:56:14</publishTime>
     </File>
     <File Include="Media/img/home/calendar.png">
       <publishTime>12/17/2014 17:37:37</publishTime>
@@ -521,10 +521,10 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>02/25/2015 11:37:16</publishTime>
     </File>
     <File Include="Media/js/jquery1-11.js">
-      <publishTime>01/04/2015 12:47:07</publishTime>
+      <publishTime>04/01/2015 12:47:07</publishTime>
     </File>
     <File Include="Media/js/jquery2-1.js">
-      <publishTime>01/04/2015 12:47:04</publishTime>
+      <publishTime>04/01/2015 12:47:04</publishTime>
     </File>
     <File Include="Media/js/modernizr.js">
       <publishTime>02/18/2015 14:01:15</publishTime>
@@ -1109,7 +1109,7 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>07/11/2014 16:11:21</publishTime>
     </File>
     <File Include="Views/Account/SignUp.cshtml">
-      <publishTime>05/28/2015 17:33:52</publishTime>
+      <publishTime>05/30/2015 00:36:50</publishTime>
     </File>
     <File Include="Views/Account/SignUpE.cshtml">
       <publishTime>01/01/0001 00:00:00</publishTime>
@@ -1128,6 +1128,9 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
     </File>
     <File Include="Views/Dashboard/Index.cshtml">
       <publishTime>05/28/2015 22:34:10</publishTime>
+    </File>
+    <File Include="Views/Dashboard/job.cshtml">
+      <publishTime>06/03/2015 00:01:42</publishTime>
     </File>
     <File Include="Views/Dashboard/messages.cshtml">
       <publishTime>05/28/2015 22:34:14</publishTime>
@@ -1154,28 +1157,28 @@ en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, consultez la p
       <publishTime>05/12/2015 12:06:43</publishTime>
     </File>
     <File Include="Views/Search/Index.cshtml">
-      <publishTime>05/28/2015 12:59:38</publishTime>
+      <publishTime>06/09/2015 23:55:39</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>05/29/2015 02:49:51</publishTime>
+      <publishTime>06/09/2015 23:24:46</publishTime>
     </File>
     <File Include="Views/Shared/_Login.cshtml">
       <publishTime>05/18/2015 12:50:52</publishTime>
     </File>
     <File Include="Views/Shared/_MenuProfil.cshtml">
-      <publishTime>05/22/2015 01:57:21</publishTime>
+      <publishTime>05/30/2015 00:05:12</publishTime>
     </File>
     <File Include="Views/ShowSession/Index.cshtml">
       <publishTime>12/14/2014 23:29:03</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>05/28/2015 22:29:05</publishTime>
+      <publishTime>06/10/2015 00:56:28</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>10/27/2014 18:04:59</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/27/2015 15:05:16</publishTime>
+      <publishTime>06/15/2015 05:21:01</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -30,14 +30,14 @@ namespace InterBook2._0.Controllers
                 sum.Email = SessionManager.Current.Util.Util_Email.email;
 
             //REMPLIR LISTE EXPERIENCE
-            List<Ref_Experience> re = UtilManager.GetExperiences();
-            foreach (Ref_Experience reTemp in re)
+            List<Ref_ExperienceSimple> re = UtilManager.GetExperiences();
+            foreach (Ref_ExperienceSimple reTemp in re)
             {
                 sum.ExperienceList.Add(new SelectListItem { Text = reTemp.Description, Value = reTemp.id_Experience.ToString() });
             }
 
             //REMPLIR LISTE REGION/DEPARTEMENT
-            List<Ref_Departement> lrd = UtilManager.GetDepartements();
+            List<Ref_Departement> lrd = UtilManager.GetCompletDepartements();
             sum.DepartementList = lrd.ToList().Select(t => new GroupedSelectListItem
             {
                 GroupKey = t.Ref_Region.id_Region.ToString(),
@@ -65,12 +65,18 @@ namespace InterBook2._0.Controllers
                 ////INSERTION BDD UTIL_EMAIL
                 if (SessionManager.Current.Util.Util_Email.email != model.Email)
                 {
-                    SessionManager.Current.Util.Util_Email = UtilEmailManager.ReturnUtilEmailByEmail(model.Email);
-                    UtilEmailManager.InsertLine(SessionManager.Current.Util.Util_Email);
+                    //SessionManager.Current.Util.Util_Email = UtilEmailManager.ReturnUtilEmailByEmail(model.Email);
                 }
 
                 ////INSERTION BDD UTIL_POSTAL
                 Util_Postal up = new Util_Postal
+                {
+                    dCrea = DateTime.Now,
+                    id_Civilite = model.Civilite,
+                    nom = Capitalize(model.Nom),
+                    prenom = Capitalize(model.Prenom)
+                };
+                Util_PostalSimple ups = new Util_PostalSimple
                 {
                     dCrea = DateTime.Now,
                     id_Civilite = model.Civilite,
@@ -82,7 +88,7 @@ namespace InterBook2._0.Controllers
                     up.id_Ville = UtilPostalManager.GetRefVilleByDescription(model.Ville).id_Ville;
                 
                 //INSERTION BDD UTIL
-                UtilPostalManager.InsertLine(up);
+                UtilPostalManager.InsertLine(ups);
 
                 //////INSERTION BDD UTIL_INFO
                 Util_Info ui = new Util_Info
@@ -97,15 +103,27 @@ namespace InterBook2._0.Controllers
                     experience = int.Parse(model.Experience.ToString()),
                     motivation = model.Motivation
                 };
-                UtilInfoManager.InsertLine(ui);
+                Util_InfoSimple uis = new Util_InfoSimple
+                {
+                    photo = numFileJpg,
+                    cv = numFilePdf,
+                    permisA = model.PermisA,
+                    permisB = model.PermisB,
+                    permisC = model.PermisC,
+                    numTel = model.NumTel,
+                    dNaissance = model.DateDeNaissance,
+                    experience = int.Parse(model.Experience.ToString()),
+                    motivation = model.Motivation
+                };
+                UtilInfoManager.InsertLine(uis);
 
                 foreach (string p in model.lProfession)
                 {
-                    Ref_Profession rf = UtilProfessionManager.GetRefProfessionByDescription(p.ToString());
+                    Ref_ProfessionSimple rf = UtilProfessionManager.GetRefProfessionByDescription(p.ToString());
 
                     if (rf != null)
                     {
-                        UtilProfessionManager.InsertLine(new Util_Profession
+                        UtilProfessionManager.InsertLine(new Util_ProfessionSimple
                         {
                             id_Profession = rf.id_Profession,
                             IdU = SessionManager.Current.Util.IdU
@@ -115,7 +133,7 @@ namespace InterBook2._0.Controllers
 
                 foreach (string idD in model.SubmittedDepartement)
                 {
-                    UtilGeoManager.InsertLine(new Util_Geo
+                    UtilGeoManager.InsertLine(new Util_GeoSimple
                     {
                         id_Departement = idD,
                         idU = SessionManager.Current.Util.IdU
@@ -124,7 +142,6 @@ namespace InterBook2._0.Controllers
 
                 SessionManager.Current.Util.Util_Postal = up;
                 SessionManager.Current.Util.Util_Info = ui;
-                UtilManager.InsertLine(SessionManager.Current.Util, true);
 
                 foreach(string d in model.lDate.Split(';'))
                 {
@@ -192,7 +209,7 @@ namespace InterBook2._0.Controllers
         [HttpPost]
         public JsonResult SignUpHome(string particulier, string email, string mdp)
         {
-            Util_Email utilEmail = UtilEmailManager.GetUtilEmailByEmail(email, (particulier == "1"));
+            Util_EmailSimple utilEmail = UtilEmailManager.GetUtilEmailByEmail(email, (particulier == "1"));
             if (utilEmail != null)
             {
                 return Json(new { Success = true, Message = "connu" });
@@ -200,7 +217,7 @@ namespace InterBook2._0.Controllers
             else
             {
                 ////INSERTION BDD UTIL_EMAIL
-                Util_Email ue = UtilEmailManager.ReturnUtilEmailByEmail(email);
+                Util_EmailSimple ue = UtilEmailManager.ReturnUtilEmailByEmail(email);
 
                 //Hachage MdP
                 byte[] data = System.Text.Encoding.ASCII.GetBytes(mdp);
@@ -208,7 +225,7 @@ namespace InterBook2._0.Controllers
                 String mdpHash = System.Text.Encoding.Default.GetString(data);
 
                 //INSERTION BDD UTIL
-                Util u = new Util
+                UtilSimple u = new UtilSimple
                 {
                     dCrea = DateTime.Now,
                     id_Declinaison_Culture = 1,
@@ -218,7 +235,7 @@ namespace InterBook2._0.Controllers
                     particulier = (particulier == "1")
                 };
                 UtilManager.InsertLine(u, true);
-                SessionManager.Current.Util.Util_Email = ue;
+                //SessionManager.Current.Util.Util_Email = ue;
 
                 //Insertion Consentement
                 UtilConsentementManager.InsertConsentement(null, u.IdU, 1, 0);
@@ -268,8 +285,7 @@ namespace InterBook2._0.Controllers
                 ////INSERTION BDD UTIL_EMAIL
                 if (SessionManager.Current.Util.Util_Email.email != model.Email)
                 {
-                    SessionManager.Current.Util.Util_Email = UtilEmailManager.ReturnUtilEmailByEmail(model.Email);
-                    UtilEmailManager.InsertLine(SessionManager.Current.Util.Util_Email);
+                    //SessionManager.Current.Util.Util_Email = UtilEmailManager.ReturnUtilEmailByEmail(model.Email);
                 }
 
                 ////INSERTION BDD UTIL_POSTAL
@@ -280,9 +296,16 @@ namespace InterBook2._0.Controllers
                     nom = Capitalize(model.Nom),
                     prenom = Capitalize(model.Prenom)
                 };
+                Util_PostalSimple ups = new Util_PostalSimple
+                {
+                    dCrea = DateTime.Now,
+                    id_Civilite = model.Civilite,
+                    nom = Capitalize(model.Nom),
+                    prenom = Capitalize(model.Prenom)
+                };
 
                 //INSERTION BDD UTIL
-                UtilPostalManager.InsertLine(up);
+                UtilPostalManager.InsertLine(ups);
 
                 //////INSERTION BDD UTIL_INFO
                 Util_Info ui = new Util_Info
@@ -291,7 +314,13 @@ namespace InterBook2._0.Controllers
                     numTel = model.NumTel,
                     dNaissance = model.DateDeNaissance
                 };
-                UtilInfoManager.InsertLine(ui);
+                Util_InfoSimple uis = new Util_InfoSimple
+                {
+                    photo = numFileJpg,
+                    numTel = model.NumTel,
+                    dNaissance = model.DateDeNaissance
+                };
+                UtilInfoManager.InsertLine(uis);
 
                 Util_Info_Entreprise uie = new Util_Info_Entreprise
                 {
@@ -306,13 +335,25 @@ namespace InterBook2._0.Controllers
                     Siren = model.Siren,
                     SiteWeb = model.SiteWeb,
                 };
-                UtilInfoManager.InsertLine(uie);
+                Util_Info_EntrepriseSimple uies = new Util_Info_EntrepriseSimple
+                {
+                    Nom = model.NomEntreprise,
+                    Email = model.EmailEntreprise,
+                    Ville = model.VilleEntreprise,
+                    Tel = model.NumTelEntreprise,
+                    Fax = model.Fax,
+                    APE = model.APE,
+                    Logo = numFileJpg,
+                    Siret = model.Siret,
+                    Siren = model.Siren,
+                    SiteWeb = model.SiteWeb,
+                };
+                UtilInfoManager.InsertLine(uies);
 
                 
                 SessionManager.Current.Util.Util_Postal = up;
                 SessionManager.Current.Util.Util_Info = ui;
                 SessionManager.Current.Util.Util_Info_Entreprise = uie;
-                UtilManager.InsertLine(SessionManager.Current.Util, true);
 
                 return this.SetPageRedirect("DashBoard", "Disponibility");
             }
@@ -340,15 +381,15 @@ namespace InterBook2._0.Controllers
             String mdpHash = System.Text.Encoding.Default.GetString(data);
             bool f = particulier == "1";
 
-            Util util = UtilManager.GetUtilByEmailMdp(f, email, mdpHash);
+            UtilSimple util = UtilManager.GetUtilByEmailMdp(f, email, mdpHash);
             if (util == null)
             {
                 return Json(new { Success = true, Reponse = "0", Message = "inconnu" });
             }
-            SessionManager.Current.Util = util;
+            SessionManager.BuildSession(email);
 
-            if (util.Util_Postal != null)
-                return Json(new { Success = true, Reponse = "1", Message = util.Util_Postal.prenom });
+            if (util != null)
+                return Json(new { Success = true, Reponse = "1", Message = "connu" });
             else
                 return Json(new { Success = true, Reponse = "2", Message = email });
         }
@@ -368,7 +409,7 @@ namespace InterBook2._0.Controllers
         [HttpGet]
         public JsonResult GetRegions()
         {
-            List<Ref_Region> rps = UtilManager.GetRegions();
+            List<Ref_RegionSimple> rps = UtilManager.GetRegions();
             if (rps == null)
             {
                 return Json(null);
@@ -381,7 +422,7 @@ namespace InterBook2._0.Controllers
         [HttpGet]
         public JsonResult GetDepartements()
         {
-            List<Ref_Departement> rps = UtilManager.GetDepartements();
+            List<Ref_DepartementSimple> rps = UtilManager.GetDepartements();
             if (rps == null)
             {
                 return Json(null);

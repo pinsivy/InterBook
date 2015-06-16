@@ -8,7 +8,7 @@ namespace InterBook2._0.BLL
 {
     public class UtilConsentementManager
     {
-        public static List<Util_Consentement> GetUtilConsentementByIdu(int idu)
+        public static List<Util_ConsentementSimple> GetUtilConsentementByIdu(int idu)
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
@@ -19,7 +19,7 @@ namespace InterBook2._0.BLL
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
-            Util_Consentement uc = SessionManager.Current.ws.GetUtilConsentementByIduIdm(idu, id_TypeConsentement);
+            Util_ConsentementSimple uc = SessionManager.Current.ws.GetUtilConsentementByIduIdm(idu, id_TypeConsentement);
             if(uc != null)
             {
                 uc.id_Mailing = id_Mailing;
@@ -29,7 +29,7 @@ namespace InterBook2._0.BLL
             }
             else
             {
-                uc = new Util_Consentement()
+                uc = new Util_ConsentementSimple()
                 {
                     id_Mailing = id_Mailing,
                     id_TypeConsentement = id_TypeConsentement,
@@ -39,7 +39,7 @@ namespace InterBook2._0.BLL
                 };
             }
 
-            SessionManager.Current.ws.InsertLine(uc);
+            SessionManager.Current.ws.InsertLine_Util_Consentement(uc);
         }
     }
 }

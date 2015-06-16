@@ -278,13 +278,13 @@
                     <a href="/u/@u.uSearch.IdU.ToString()" class="lienUtil">
                         <article>
                             <div class="left image">
-                                @if (u.uSearch.Util_Info != null && u.uSearch.Util_Info.photo != null)
+                                @if (u.uInfoSearch != null && u.uInfoSearch.photo != null)
                                 {
-                                    <img id="photo" src="~/Media/file/upload/photo/@(u.uSearch.Util_Info.photo).jpg" width="85" height="85" />
+                                    <img id="photo" src="~/Media/file/upload/photo/@(u.uInfoSearch.photo).jpg" width="85" height="85" />
                                 }
                             </div>
                             <div class="left detail">
-                                @u.uSearch.Util_Postal.prenom.ToString() @u.uSearch.Util_Postal.nom.ToString()
+                                @u.uPostalSearch.prenom.ToString() @u.uPostalSearch.nom.ToString()
                                 @if (u.dist >= 0 && u.dist <= 1)
                                 {
                                     <span class="distanceUtil"> - à @Model.Ville</span>
@@ -294,7 +294,7 @@
                                     <span class="distanceUtil"> - à @String.Format("{0:0.}", u.dist)km</span>
                                 }
                                 <br />
-                                <p class="villeUtil">@u.uSearch.Util_Postal.Ref_Ville.ville.ToString()</p>
+                                <p class="villeUtil">@u.uVilleSearch.ville.ToString()</p>
                             </div>
                             <div class="left">
                                 <button class="contacterUtil"><img src="~/Media/img/search/contacter.png" /> Contacter</button>

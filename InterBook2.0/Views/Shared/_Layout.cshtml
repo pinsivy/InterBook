@@ -79,7 +79,7 @@
                         <div class="drapeauHeader">
                             <p><img id="drapeauHeader" src="~/Media/img/commun/drp-@(InterBook2._0.BLL.SessionManager.Current.CurrentUICulture.Name).gif" /></p>
                             <ul class="dropdown-menu">
-                                @foreach (InterBook2._0.DTO.Ref_Culture rf in InterBook2._0.BLL.ApplicationObject.CulturesInfos)
+                                @foreach (InterBook2._0.DTO.Ref_CultureSimple rf in InterBook2._0.BLL.ApplicationObject.CulturesInfos)
                                 {
                                     if (rf.description != InterBook2._0.BLL.SessionManager.Current.CurrentUICulture.Name)
                                     {

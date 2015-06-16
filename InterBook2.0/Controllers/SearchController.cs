@@ -31,7 +31,7 @@ namespace InterBook2._0.Controllers
             SessionManager.Current.ws = new IBWS();
 
             //Recupère la ville en BDD
-            Ref_Ville rv = null;
+            Ref_VilleSimple rv = null;
             if (model.Ville != null)
             {
                 String ville = model.Ville.Split(new string[] { " (" }, StringSplitOptions.None)[0];
@@ -46,7 +46,7 @@ namespace InterBook2._0.Controllers
                 model.Debut = model.Fin = DateTime.Now;
 
             //Recupère les Util avec le rayon
-            List<Util> la = null;
+            List<UtilSimple> la = null;
             if (rv != null)
             {
                 if (!String.IsNullOrEmpty(exp))
@@ -59,13 +59,22 @@ namespace InterBook2._0.Controllers
             {
                 model.luSearch = new List<UtilSearch>();
                 UtilSearch us = null;
-                foreach (Util u in la)
+                foreach (UtilSimple u in la)
                 {
                     us = new UtilSearch();
                     us.uSearch = u;
-                    if (rv != null)
-                        us.dist = distance(double.Parse(rv.latitude.Replace(".", ",")), double.Parse(rv.longitude.Replace(".", ",")), double.Parse(u.Util_Postal.Ref_Ville.latitude.Replace(".", ",")), double.Parse(u.Util_Postal.Ref_Ville.longitude.Replace(".", ",")));
-                    model.luSearch.Add(us);
+                    Ref_VilleSimple rvs = new Ref_VilleSimple();
+                    if (u.idu_Postal != null)
+                    {
+                        us.uInfoSearch = UtilInfoManager.GetUtilInfoByIdu((int)u.IdU);
+                        us.uPostalSearch = UtilPostalManager.GetUtilPostalByIdu((int)u.IdU);
+                        us.uVilleSearch = UtilPostalManager.GetRefVilleByIduPostal((int)u.idu_Postal);
+                    }
+                    if (rv != null && us.uVilleSearch != null)
+                    {
+                        us.dist = distance(double.Parse(rv.latitude.Replace(".", ",")), double.Parse(rv.longitude.Replace(".", ",")), double.Parse(us.uVilleSearch.latitude.Replace(".", ",")), double.Parse(us.uVilleSearch.longitude.Replace(".", ",")));
+                        model.luSearch.Add(us);
+                    }
                 }
             }
 

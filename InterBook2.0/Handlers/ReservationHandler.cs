@@ -45,14 +45,17 @@ namespace InterBook2._0.Handlers
                     SessionManager.BuildSession(u.Util_Email.email);
 
                     //check si il y a vraiment une réservation pour cet idu
-                    Reservation r = ReservationManager.GetReservationByIdr(int.Parse(HttpContext.Current.Request["idr"]));
+                    ReservationSimple r = ReservationManager.GetReservationByIdr(int.Parse(HttpContext.Current.Request["idr"]));
                     if(r.idUEmploye == SessionManager.Current.Util.IdU)
                     {
+                        Util_PostalSimple ups = UtilPostalManager.GetUtilPostalByIdu((int)r.idUEntreprise);
+                        Util_Info_EntrepriseSimple uies = UtilInfoManager.GetUtilInfoEntrepriseByIdu((int)r.idUEntreprise);
+                        
                         if (HttpContext.Current.Request["act"] == "0" && r.id_EtatReservation == 1)
                         {
                             r.id_EtatReservation = 3;
                             ReservationManager.InsertLine(r);
-                            SessionManager.Current.Notification = "Vous avez refusé que " + r.UtilEntreprise.Util_Postal.prenom + " " + r.UtilEntreprise.Util_Postal.nom + " (" + r.UtilEntreprise.Util_Info_Entreprise.Nom + ") puisse vous parler.";
+                            SessionManager.Current.Notification = "Vous avez refusé que " + ups.prenom + " " + ups.nom + " (" + uies.Nom + ") puisse vous parler.";
                         }
                         else if (HttpContext.Current.Request["act"] == "1" && r.id_EtatReservation == 1)
                         {
@@ -60,8 +63,8 @@ namespace InterBook2._0.Handlers
                             r.id_EtatReservation = 2;
                             ReservationManager.InsertLine(r);
                             //Util_Contact
-                            Util_Contact uc = new Util_Contact(){iduFrom = r.idUEntreprise,iduTo = r.idUEmploye};
-                            Util_Contact uc2 = new Util_Contact(){iduFrom = r.idUEmploye,iduTo = r.idUEntreprise};
+                            Util_ContactSimple uc = new Util_ContactSimple(){iduFrom = r.idUEntreprise,iduTo = r.idUEmploye};
+                            Util_ContactSimple uc2 = new Util_ContactSimple(){iduFrom = r.idUEmploye,iduTo = r.idUEntreprise};
                             UtilContactManager.InsertLine(uc);
                             UtilContactManager.InsertLine(uc2);
                             //Util_Dispo
@@ -72,7 +75,7 @@ namespace InterBook2._0.Handlers
                                 dt = dt.AddDays(1);
                             }
                             while (dt <= (DateTime)r.fin);
-                            SessionManager.Current.Notification = r.UtilEntreprise.Util_Postal.prenom + " " + r.UtilEntreprise.Util_Postal.nom + " (" + r.UtilEntreprise.Util_Info_Entreprise.Nom + ") peut maintenant vous envoyer un message.";
+                            SessionManager.Current.Notification = ups.prenom + " " + ups.nom + " (" + uies.Nom + ") peut maintenant vous envoyer un message.";
                         }
                         else
                         {

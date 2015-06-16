@@ -58,8 +58,56 @@ section.container
     width: 70%;
 }
 
+/*******************************************/
+/*JOB*/
+/*******************************************/
+.blocGeo
+{
+    background: url(../img/signup/fr-FR/france.png) top 10px right 20px  no-repeat #d7ebec;
+    padding: 25px;
+    min-height: 130px;
+}
+.blocGeo .table-row
+{
+    min-height: 30px;
+}
+.blocGeo #selectChoisi
+{
+    margin: 15px 0px;
+    max-width: 400px;
+}
+.blocGeo .choisi
+{
+    display: none;
+    margin-bottom: 25px;
+}
+.blocGeo .croixDep
+{
+    cursor: pointer;
+    font-size: 10px;
+    border-radius:50%;
+    color: #e41717;
+    padding: 2px;
+}
+.blocGeo .croixDep:hover
+{
+    color: #ffffff;
+    background-color: #e41717;
+}
+#ajouterDepartement
+{
+    width: 150px;
+    height: 40px;
+    background-color: #2e94da;
+    border: none;
+    color: #FFFFFF;
+}
+/*******************************************/
 
 @media screen and (max-width: 990px) {
+    .panelDroite {
+        width: 100%;
+    }
     #monProfil
     {
         display: none;

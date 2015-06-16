@@ -40,8 +40,8 @@ namespace InterBook2._0.BLL
 
 
                 //on récupére la collection de refdomaine et de refculture de la classe ApplicationObject.cs qui représente les données en base
-                List<Ref_Domaine> rfc = ApplicationObject.DomainesInfos;
-                List<Ref_Culture> rcc = ApplicationObject.CulturesInfos;
+                List<Ref_DomaineSimple> rfc = ApplicationObject.DomainesInfos;
+                List<Ref_CultureSimple> rcc = ApplicationObject.CulturesInfos;
 
 
                 //test du cookie
@@ -57,13 +57,14 @@ namespace InterBook2._0.BLL
                 {
                     //2) On va regarder si le domaine du httpcontext est bien un domaine existant dans la collection de domaines
                     bool urlOK = false;
-                    foreach (Ref_Domaine item in rfc)
+                    foreach (Ref_DomaineSimple item in rfc)
                     {
                         //on set la culture du domaine qu'on connait
                         if (item.Domaine.Equals(HttpContext.Current.Request["SERVER_NAME"], StringComparison.OrdinalIgnoreCase))
                         {
                             urlOK = true;
-                            mCurrentUICulture = new CultureInfo(item.Ref_Declinaison_Culture.Ref_Culture.description);
+                            Ref_CultureSimple rcs = GetRefCultureByIdDeclCult((int)item.id_Declinaison_Culture);
+                            mCurrentUICulture = new CultureInfo(rcs.description);
                             break;
                         }
                     }
@@ -73,7 +74,7 @@ namespace InterBook2._0.BLL
                     {
                         Int32 Id_From;
                         bool IdFromOK = false;
-                        List<Ref_From> rfrc = new List<Ref_From>();
+                        List<Ref_FromSimple> rfrc = new List<Ref_FromSimple>();
                         if (Int32.TryParse(HttpContext.Current.Request["idfrom"], out Id_From))
                         {
                             rfrc = GetRefFromByIdfrom(Id_From);
@@ -87,7 +88,8 @@ namespace InterBook2._0.BLL
                         //si idfrom est présent en base ou non, si oui on set la culture correspondant pour l'idfrom
                         if (IdFromOK)
                         {
-                            mCurrentUICulture = new CultureInfo(rfrc[0].Ref_Declinaison_Culture.Ref_Culture.description);
+                            Ref_CultureSimple rcs = GetRefCultureByIdDeclCult((int)rfrc[0].id_Declinaison_Culture);
+                            mCurrentUICulture = new CultureInfo(rcs.description);
                         }
                         else
                         {
@@ -102,7 +104,7 @@ namespace InterBook2._0.BLL
                                 for (int it = 0; it < (HttpContext.Current.Request.UserLanguages.Length); it++)
                                 {
                                     //pour chaque langue on va tester sur toutes les cultures
-                                    foreach (Ref_Culture item in rcc)
+                                    foreach (Ref_CultureSimple item in rcc)
                                     {
                                         //obligation de faire un split car certaines langues ça renvoie par exemple en-US;XXX
                                         cultureNavigateur = HttpContext.Current.Request.UserLanguages[it].Split(';')[0];
@@ -152,9 +154,9 @@ namespace InterBook2._0.BLL
                 ApplicationManager.SetDomaineDictionnary();
             }
 
-            List<Ref_Domaine> rdc = ApplicationObject.DomainesInfos;
+            List<Ref_DomaineSimple> rdc = ApplicationObject.DomainesInfos;
             string itemDomaine;
-            foreach (Ref_Domaine item in rdc)
+            foreach (Ref_DomaineSimple item in rdc)
             {
                 itemDomaine = item.Domaine;
                 if (item.Domaine.Contains("localhost"))
@@ -170,32 +172,39 @@ namespace InterBook2._0.BLL
 
         }
 
-        public static List<Ref_Domaine> SelectAllRefDomaine()
+        public static List<Ref_DomaineSimple> SelectAllRefDomaine()
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
             return SessionManager.Current.ws.SelectAllRefDomaine();
         }
 
-        public static List<Ref_Culture> SelectAllRefCulture()
+        public static List<Ref_CultureSimple> SelectAllRefCulture()
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
             return SessionManager.Current.ws.SelectAllRefCulture();
         }
 
-        public static List<Ref_Declinaison_Culture> SelectAllRefDeclinaisonCulture()
+        public static List<Ref_Declinaison_CultureSimple> SelectAllRefDeclinaisonCulture()
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
             return SessionManager.Current.ws.SelectAllRefDeclinaisonCulture();
         }
 
-        public static List<Ref_From> GetRefFromByIdfrom(int idf)
+        public static List<Ref_FromSimple> GetRefFromByIdfrom(int idf)
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
             return SessionManager.Current.ws.GetRefFromByIdfrom(idf);
+        }
+
+        public static Ref_CultureSimple GetRefCultureByIdDeclCult(int iddc)
+        {
+            if (SessionManager.Current.ws == null)
+                SessionManager.Current.ws = new IBWS();
+            return SessionManager.Current.ws.GetRefCultureByIdDeclCult(iddc);
         }
 
         //public static Ref_Declinaison_Culture GetById(int id)

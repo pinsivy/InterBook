@@ -34,7 +34,7 @@ namespace InterBook2._0.Controllers
             //    ws.save();
             //}
             //BLL.SessionManager.Current.Util = u;
-
+            SessionManager.SendNotification("", "Text IB4");
             return View(hm);
         }
 
@@ -42,7 +42,7 @@ namespace InterBook2._0.Controllers
         [HttpGet]
         public JsonResult GetProfessions(string debut, string maxRows)
         {
-            List<Ref_Profession> rps = UtilManager.GetProfessions(debut, maxRows);
+            List<Ref_ProfessionSimple> rps = UtilManager.GetProfessions(debut, maxRows);
             if (rps == null)
             {
                 return Json(null);

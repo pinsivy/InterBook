@@ -33,7 +33,13 @@ namespace InterBook2._0.Models
 
     public class UtilSearch
     {
-        public Util uSearch { get; set; }
+        public UtilSimple uSearch { get; set; }
+
+        public Util_PostalSimple uPostalSearch { get; set; }
+
+        public Ref_VilleSimple uVilleSearch { get; set; }
+
+        public Util_InfoSimple uInfoSearch { get; set; }
 
         public double dist { get; set; }
     }

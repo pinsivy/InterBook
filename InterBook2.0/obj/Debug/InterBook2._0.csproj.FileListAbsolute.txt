@@ -93,7 +93,6 @@ C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.dll
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.pdb
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.User.App_LocalResources.Index.resources
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Shared.App_LocalResources.Index.resources
-C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.csprojResolveAssemblyReference.cache
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Dashboard.App_LocalResources.Index.resources
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Account.App_LocalResources.Criterions.resources
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Account.App_LocalResources.SignUp.resources
@@ -135,3 +134,4 @@ C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Home.App_LocalResources.Index.it.resources
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.Views.Home.App_LocalResources.Index.es.resources
 C:\Users\dell\Documents\Git\InterBook\InterBook2.0\bin\AuthorizeNet.dll
+C:\Users\dell\Documents\Git\InterBook\InterBook2.0\obj\Debug\InterBook2._0.csprojResolveAssemblyReference.cache

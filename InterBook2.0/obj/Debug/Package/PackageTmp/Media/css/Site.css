@@ -149,7 +149,7 @@ button:focus
     width: auto; height: auto;
     float:left;
     display: block;
-    margin-left: 20px;
+    margin-left: 50px;
     position: relative;
 }
 .header .container #rightPanel .drapeauHeader
@@ -650,14 +650,20 @@ td.disponible > a.ui-state-default, td.disponible > span.ui-state-default
     }
     /* On met un cache par dessus le site-content pour bloquer le scroll et permettre le retour au site */
 }
-.with--connectbar .site-cache, .with--sidebar .site-cache {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.6);
-    }
+.with--connectbar .site-cache, .with--sidebar .site-cache
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.nameHeader img
+{
+    vertical-align: middle;
+    border-radius: 50%;
+}
 
 
 

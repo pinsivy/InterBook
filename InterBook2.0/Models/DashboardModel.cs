@@ -13,7 +13,7 @@ namespace InterBook2._0.Models
     {
         public Util u { get { return SessionManager.Current.Util; } }
 
-        public List<Util_Contact> luc { get; set; }
+        public List<Util_ContactSimple> luc { get; set; }
 
         [DisplayName("Departement")]
         public IEnumerable<GroupedSelectListItem> DepartementList { get; set; }

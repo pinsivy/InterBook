@@ -257,6 +257,13 @@
     <Compile Include="DTO\Ref_Profession.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Ref_DepartementSimple.cs" />
+    <Compile Include="DTO\Ref_ExperienceSimple.cs" />
+    <Compile Include="DTO\Ref_FromSimple.cs" />
+    <Compile Include="DTO\Ref_Declinaison_CultureSimple.cs" />
+    <Compile Include="DTO\Ref_CultureSimple.cs" />
+    <Compile Include="DTO\Ref_DomaineSimple.cs" />
+    <Compile Include="DTO\Ref_RegionSimple.cs" />
     <Compile Include="DTO\Ref_Region.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
@@ -266,6 +273,18 @@
     <Compile Include="DTO\Ref_Ville.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\Ref_ProfessionSimple.cs" />
+    <Compile Include="DTO\ReservationSimple.cs" />
+    <Compile Include="DTO\UE_envoiSimple.cs" />
+    <Compile Include="DTO\Util_FavorisSimple.cs" />
+    <Compile Include="DTO\Util_ProfessionSimple.cs" />
+    <Compile Include="DTO\Util_PostalSimple.cs" />
+    <Compile Include="DTO\Util_EmailSimple.cs" />
+    <Compile Include="DTO\Util_ConsentementSimple.cs" />
+    <Compile Include="DTO\Util_ContactSimple.cs" />
+    <Compile Include="DTO\Util_Info_EntrepriseSimple.cs" />
+    <Compile Include="DTO\Util_InfoSimple.cs" />
+    <Compile Include="DTO\UtilSimple.cs" />
     <Compile Include="DTO\Reservation.cs">
       <DependentUpon>InterBookModel.tt</DependentUpon>
     </Compile>

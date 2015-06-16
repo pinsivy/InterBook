@@ -19,7 +19,8 @@ namespace InterBook2._0.Controllers
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
             UserModel um = new UserModel();
-            um.u = UtilManager.GetUtilByIdU(idu);
+            um.u = UtilManager.GetCompletUtilByIdu(idu);
+
             return View(um);
         }
 
@@ -50,12 +51,21 @@ namespace InterBook2._0.Controllers
                 id_EtatReservation = 1
             };
 
-            SessionManager.Current.ws.InsertLine(r);
+            ReservationSimple rs = new ReservationSimple();
+
+            SessionManager.Current.ws.InsertLine_Reservation(rs.id_Reservation.ToString(), rs.idUEntreprise.ToString(), rs.id_EtatReservation.ToString(), rs.idUEmploye.ToString());
             SessionManager.Current.Util.Reservations.Add(r);
 
             //Envoi de l'email de reservation
-            Util uTo = UtilManager.GetUtilByIdU(int.Parse(idu));
-            MailBase mb = new MailBase(SessionManager.Current.Util.Util_Info_Entreprise.Nom + " souhaîte vous contacter sur InterBook.fr", "Voir ce mail sur ordinateur ?", SessionManager.Current.Util.Util_Info_Entreprise.Nom, SessionManager.Current.Util.Util_Info_Entreprise.Email, 2, SessionManager.Current.Util, uTo.Util_Email);
+            UtilSimple uTo = UtilManager.GetUtilByIdU(int.Parse(idu));
+            Util_EmailSimple uesTo = UtilEmailManager.GetUtilEmailByIduEmail(int.Parse(idu));
+            Util_Email ueTo = new Util_Email
+            {
+                idu_Email = uesTo.idu_Email,
+                email = uesTo.email,
+                dCrea = uesTo.dCrea
+            };
+            MailBase mb = new MailBase(SessionManager.Current.Util.Util_Info_Entreprise.Nom + " souhaîte vous contacter sur InterBook.fr", "Voir ce mail sur ordinateur ?", SessionManager.Current.Util.Util_Info_Entreprise.Nom, SessionManager.Current.Util.Util_Info_Entreprise.Email, 2, SessionManager.Current.Util, ueTo);
             Dictionary<String, String> varsAdd = new Dictionary<String, String> 
             {
                 {"[[uidto]]", uTo.uid.ToString()},
@@ -81,15 +91,15 @@ namespace InterBook2._0.Controllers
                 SessionManager.Current.ws = new IBWS();
 
             //voir si existe
-            Util_Favoris uf = UtilFavorisManager.GetUtilFavorisByIduIduEnt(int.Parse(idu), SessionManager.Current.Util.IdU);
+            Util_FavorisSimple ufs = UtilFavorisManager.GetUtilFavorisByIduIduEnt(int.Parse(idu), SessionManager.Current.Util.IdU);
             
             //Si existe, changer actif
-            if (uf != null)
-                uf.actif = !uf.actif;
+            if (ufs != null)
+                ufs.actif = !ufs.actif;
             //Sinon créer avec actif = 1
             else
             {
-                uf = new Util_Favoris
+                ufs = new Util_FavorisSimple
                 {
                     idU = int.Parse(idu),
                     idUEntreprise = SessionManager.Current.Util != null ? SessionManager.Current.Util.IdU : 45,
@@ -98,10 +108,10 @@ namespace InterBook2._0.Controllers
             }
 
             //insérer et mettre en session
-            UtilFavorisManager.InsertLine(uf);
-            SessionManager.Current.Util.Util_Favoris.Add(uf);
+            UtilFavorisManager.InsertLine(ufs);
+            //SessionManager.Current.Util.Util_Favoris.Add(ufs);
 
-            if(uf.actif == true)
+            if(ufs.actif == true)
                 return Json(new { Success = true, Reponse = "2", Message = "" });
             else
                 return Json(new { Success = true, Reponse = "3", Message = "" });

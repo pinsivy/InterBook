@@ -55,7 +55,7 @@ namespace InterBook2._0.Controllers
             DashboardModel dm = new DashboardModel();
 
             //REMPLIR LISTE REGION/DEPARTEMENT
-            List<Ref_Departement> lrd = UtilManager.GetDepartements();
+            List<Ref_Departement> lrd = UtilManager.GetCompletDepartements();
             dm.DepartementList = lrd.ToList().Select(t => new GroupedSelectListItem
             {
                 GroupKey = t.Ref_Region.id_Region.ToString(),
@@ -165,7 +165,7 @@ namespace InterBook2._0.Controllers
         [HttpPost]
         public JsonResult addMessage(string iduTo, string message)
         {
-            Util_Message um = UtilMessageManager.addMessage(SessionManager.Current.Util.IdU, int.Parse(iduTo), message);
+            Util_MessageSimple um = UtilMessageManager.addMessage(SessionManager.Current.Util.IdU, int.Parse(iduTo), message);
             return Json(new { Success = true, Reponse = um, Message = "" });
         }
     }

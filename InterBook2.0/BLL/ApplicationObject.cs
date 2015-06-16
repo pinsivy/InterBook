@@ -11,8 +11,8 @@ namespace InterBook2._0.BLL
     [Serializable]
     public static class ApplicationObject
     {
-        public static List<Ref_Domaine> DomainesInfos;
-        public static List<Ref_Culture> CulturesInfos;
-        public static List<Ref_Declinaison_Culture> DeclinaisonCultureInfos;
+        public static List<Ref_DomaineSimple> DomainesInfos;
+        public static List<Ref_CultureSimple> CulturesInfos;
+        public static List<Ref_Declinaison_CultureSimple> DeclinaisonCultureInfos;
     }
 }
