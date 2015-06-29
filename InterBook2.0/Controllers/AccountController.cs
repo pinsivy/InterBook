@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -220,9 +221,16 @@ namespace InterBook2._0.Controllers
                 Util_EmailSimple ue = UtilEmailManager.ReturnUtilEmailByEmail(email);
 
                 //Hachage MdP
-                byte[] data = System.Text.Encoding.ASCII.GetBytes(mdp);
-                data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-                String mdpHash = System.Text.Encoding.Default.GetString(data);
+                //byte[] data = System.Text.Encoding.ASCII.GetBytes(mdp);
+                //data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+                //String mdpHash = System.Text.Encoding.Default.GetString(data);
+
+                var secret = "interbook";
+                var encoding = new System.Text.ASCIIEncoding();
+                byte[] keyByte = encoding.GetBytes(secret);
+                byte[] messageBytes = encoding.GetBytes(mdp);
+                byte[] hashmessage = new System.Security.Cryptography.HMACSHA256(keyByte).ComputeHash(messageBytes);
+                String mdpHash = Convert.ToBase64String(hashmessage);
 
                 //INSERTION BDD UTIL
                 UtilSimple u = new UtilSimple
@@ -376,9 +384,17 @@ namespace InterBook2._0.Controllers
         public JsonResult SignIn(string particulier, string email, string mdp)
         {
             //Hachage MdP
-            byte[] data = System.Text.Encoding.ASCII.GetBytes(mdp);
-            data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-            String mdpHash = System.Text.Encoding.Default.GetString(data);
+            //byte[] data = System.Text.Encoding.ASCII.GetBytes(mdp);
+            //data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
+            //String mdpHash = System.Text.Encoding.Default.GetString(data);
+
+            var secret = "interbook";
+            var encoding = new System.Text.ASCIIEncoding();
+            byte[] keyByte = encoding.GetBytes(secret);
+            byte[] messageBytes = encoding.GetBytes(mdp);
+            byte[] hashmessage = new System.Security.Cryptography.HMACSHA256(keyByte).ComputeHash(messageBytes);
+            String mdpHash = Convert.ToBase64String(hashmessage);
+
             bool f = particulier == "1";
 
             UtilSimple util = UtilManager.GetUtilByEmailMdp(f, email, mdpHash);

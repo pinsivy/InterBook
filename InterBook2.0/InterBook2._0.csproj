@@ -163,6 +163,7 @@
     <Compile Include="BLL\DefaultValueManager.cs" />
     <Compile Include="BLL\Mail\MailBase.cs" />
     <Compile Include="BLL\DeclinaisonCultureManager.cs" />
+    <Compile Include="BLL\NotificationManager.cs" />
     <Compile Include="BLL\SessionManager.cs" />
     <Compile Include="BLL\SessionObject.cs" />
     <Compile Include="BLL\UtilConsentementManager.cs" />
@@ -276,6 +277,10 @@
     <Compile Include="DTO\Ref_ProfessionSimple.cs" />
     <Compile Include="DTO\ReservationSimple.cs" />
     <Compile Include="DTO\UE_envoiSimple.cs" />
+    <Compile Include="DTO\Util_Android.cs">
+      <DependentUpon>InterBookModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTO\Util_AndroidSimple.cs" />
     <Compile Include="DTO\Util_FavorisSimple.cs" />
     <Compile Include="DTO\Util_ProfessionSimple.cs" />
     <Compile Include="DTO\Util_PostalSimple.cs" />

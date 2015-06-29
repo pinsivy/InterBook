@@ -367,5 +367,14 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="GetUtilSearchByLongLatIddepRayonDateAndParam" FunctionName="InterBookModel.Store.GetUtilSearchByLongLatIddepRayonDateAndParam" />
+    <EntitySetMapping Name="Util_Android">
+      <EntityTypeMapping TypeName="InterBookModel.Util_Android">
+        <MappingFragment StoreEntitySet="Util_Android">
+          <ScalarProperty Name="idu" ColumnName="idu" />
+          <ScalarProperty Name="registerid" ColumnName="registerid" />
+          <ScalarProperty Name="id_Util_Android" ColumnName="id_Util_Android" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

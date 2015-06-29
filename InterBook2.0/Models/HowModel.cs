@@ -7,6 +7,6 @@ namespace InterBook2._0.Models
 {
     public class HowModel : ModelBase
     {
-        public string Title { get { return ""; } }
+
     }
 }

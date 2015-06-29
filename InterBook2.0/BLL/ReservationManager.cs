@@ -13,7 +13,7 @@ namespace InterBook2._0.BLL
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
 
-            SessionManager.Current.ws.InsertLine_Reservation(r.id_Reservation.ToString(), r.idUEntreprise.ToString(), r.id_EtatReservation.ToString(), r.idUEmploye.ToString());
+            SessionManager.Current.ws.InsertLine_Reservation(r.id_Reservation.ToString(), r.idUEntreprise.ToString(), r.debut.ToString(), r.fin.ToString(), r.id_EtatReservation.ToString(), r.idUEmploye.ToString());
         }
 
         public static ReservationSimple GetReservationByIdr(int idr)

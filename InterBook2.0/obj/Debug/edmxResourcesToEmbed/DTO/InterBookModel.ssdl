@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="InterBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="InterBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Abonnement">
     <Key>
       <PropertyRef Name="id_Abonnement" />
@@ -170,6 +170,14 @@
     <Property Name="particulier" Type="bit" />
     <Property Name="id_Util_Info" Type="int" />
     <Property Name="id_Util_Info_Entreprise" Type="int" />
+  </EntityType>
+  <EntityType Name="Util_Android">
+    <Key>
+      <PropertyRef Name="id_Util_Android" />
+    </Key>
+    <Property Name="id_Util_Android" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="registerid" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="idu" Type="int" />
   </EntityType>
   <EntityType Name="Util_Consentement">
     <Key>
@@ -473,6 +481,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Util_Android_Util">
+    <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+    <End Role="Util_Android" Type="Self.Util_Android" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="idU" />
+      </Principal>
+      <Dependent Role="Util_Android">
+        <PropertyRef Name="idu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Util_Consentement_Ref_Mailing">
     <End Role="Ref_Mailing" Type="Self.Ref_Mailing" Multiplicity="0..1" />
     <End Role="Util_Consentement" Type="Self.Util_Consentement" Multiplicity="*" />
@@ -638,6 +658,18 @@
       </Principal>
       <Dependent Role="Util_Geo">
         <PropertyRef Name="id_Departement" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Util_Geo_Ref_Region">
+    <End Role="Ref_Region" Type="Self.Ref_Region" Multiplicity="0..1" />
+    <End Role="Util_Geo" Type="Self.Util_Geo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Region">
+        <PropertyRef Name="id_Region" />
+      </Principal>
+      <Dependent Role="Util_Geo">
+        <PropertyRef Name="id_Region" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -850,6 +882,7 @@
     <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UE_envoi" EntityType="Self.UE_envoi" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util" EntityType="Self.Util" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Util_Android" EntityType="Self.Util_Android" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Consentement" EntityType="Self.Util_Consentement" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Contact" EntityType="Self.Util_Contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Util_Contrat" EntityType="Self.Util_Contrat" Schema="dbo" store:Type="Tables" />
@@ -919,6 +952,10 @@
       <End Role="Util_Email" EntitySet="Util_Email" />
       <End Role="UE_envoi" EntitySet="UE_envoi" />
     </AssociationSet>
+    <AssociationSet Name="FK_Util_Android_Util" Association="Self.FK_Util_Android_Util">
+      <End Role="Util" EntitySet="Util" />
+      <End Role="Util_Android" EntitySet="Util_Android" />
+    </AssociationSet>
     <AssociationSet Name="FK_Util_Consentement_Ref_Mailing" Association="Self.FK_Util_Consentement_Ref_Mailing">
       <End Role="Ref_Mailing" EntitySet="Ref_Mailing" />
       <End Role="Util_Consentement" EntitySet="Util_Consentement" />
@@ -973,6 +1010,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Util_Geo_Ref_Departement" Association="Self.FK_Util_Geo_Ref_Departement">
       <End Role="Ref_Departement" EntitySet="Ref_Departement" />
+      <End Role="Util_Geo" EntitySet="Util_Geo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Util_Geo_Ref_Region" Association="Self.FK_Util_Geo_Ref_Region">
+      <End Role="Ref_Region" EntitySet="Ref_Region" />
       <End Role="Util_Geo" EntitySet="Util_Geo" />
     </AssociationSet>
     <AssociationSet Name="FK_Util_Geo_Util" Association="Self.FK_Util_Geo_Util">

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="InterBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="InterBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abonnement">
           <Key>
             <PropertyRef Name="id_Abonnement" />
@@ -175,6 +175,14 @@
           <Property Name="particulier" Type="bit" />
           <Property Name="id_Util_Info" Type="int" />
           <Property Name="id_Util_Info_Entreprise" Type="int" />
+        </EntityType>
+        <EntityType Name="Util_Android">
+          <Key>
+            <PropertyRef Name="id_Util_Android" />
+          </Key>
+          <Property Name="id_Util_Android" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="registerid" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="idu" Type="int" />
         </EntityType>
         <EntityType Name="Util_Consentement">
           <Key>
@@ -478,6 +486,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Util_Android_Util">
+          <End Role="Util" Type="Self.Util" Multiplicity="0..1" />
+          <End Role="Util_Android" Type="Self.Util_Android" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Util">
+              <PropertyRef Name="idU" />
+            </Principal>
+            <Dependent Role="Util_Android">
+              <PropertyRef Name="idu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Util_Consentement_Ref_Mailing">
           <End Role="Ref_Mailing" Type="Self.Ref_Mailing" Multiplicity="0..1" />
           <End Role="Util_Consentement" Type="Self.Util_Consentement" Multiplicity="*" />
@@ -643,6 +663,18 @@
             </Principal>
             <Dependent Role="Util_Geo">
               <PropertyRef Name="id_Departement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Util_Geo_Ref_Region">
+          <End Role="Ref_Region" Type="Self.Ref_Region" Multiplicity="0..1" />
+          <End Role="Util_Geo" Type="Self.Util_Geo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Region">
+              <PropertyRef Name="id_Region" />
+            </Principal>
+            <Dependent Role="Util_Geo">
+              <PropertyRef Name="id_Region" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -855,6 +887,7 @@
           <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UE_envoi" EntityType="Self.UE_envoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Util" EntityType="Self.Util" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Util_Android" EntityType="Self.Util_Android" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Util_Consentement" EntityType="Self.Util_Consentement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Util_Contact" EntityType="Self.Util_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Util_Contrat" EntityType="Self.Util_Contrat" Schema="dbo" store:Type="Tables" />
@@ -924,6 +957,10 @@
             <End Role="Util_Email" EntitySet="Util_Email" />
             <End Role="UE_envoi" EntitySet="UE_envoi" />
           </AssociationSet>
+          <AssociationSet Name="FK_Util_Android_Util" Association="Self.FK_Util_Android_Util">
+            <End Role="Util" EntitySet="Util" />
+            <End Role="Util_Android" EntitySet="Util_Android" />
+          </AssociationSet>
           <AssociationSet Name="FK_Util_Consentement_Ref_Mailing" Association="Self.FK_Util_Consentement_Ref_Mailing">
             <End Role="Ref_Mailing" EntitySet="Ref_Mailing" />
             <End Role="Util_Consentement" EntitySet="Util_Consentement" />
@@ -978,6 +1015,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Util_Geo_Ref_Departement" Association="Self.FK_Util_Geo_Ref_Departement">
             <End Role="Ref_Departement" EntitySet="Ref_Departement" />
+            <End Role="Util_Geo" EntitySet="Util_Geo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Util_Geo_Ref_Region" Association="Self.FK_Util_Geo_Ref_Region">
+            <End Role="Ref_Region" EntitySet="Ref_Region" />
             <End Role="Util_Geo" EntitySet="Util_Geo" />
           </AssociationSet>
           <AssociationSet Name="FK_Util_Geo_Util" Association="Self.FK_Util_Geo_Util">
@@ -1286,6 +1327,11 @@
             <Parameter Name="experience" Mode="In" Type="String" />
             <Parameter Name="contrat" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Util_Android" EntityType="InterBookModel.Util_Android" />
+          <AssociationSet Name="FK_Util_Android_Util" Association="InterBookModel.FK_Util_Android_Util">
+            <End Role="Util" EntitySet="Utils" />
+            <End Role="Util_Android" EntitySet="Util_Android" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Ref_Profession">
           <Key>
@@ -1330,6 +1376,7 @@
           <NavigationProperty Name="Util_Info_Entreprise" Relationship="InterBookModel.FK_Util_Util_Info_Entreprise" FromRole="Util" ToRole="Util_Info_Entreprise" />
           <NavigationProperty Name="ReservationsEmploye" Relationship="InterBookModel.FK_Reservation_UtilEmploye" FromRole="Util" ToRole="Reservation" />
           <NavigationProperty Name="Abonnements" Relationship="InterBookModel.FK_Abonnement_Util" FromRole="Util" ToRole="Abonnement" />
+          <NavigationProperty Name="Util_Android" Relationship="InterBookModel.FK_Util_Android_Util" FromRole="Util" ToRole="Util_Android" />
         </EntityType>
         <EntityType Name="Util_Profession">
           <Key>
@@ -2223,6 +2270,27 @@
           <Property Type="Int32" Name="id_Util_Info" Nullable="true" />
           <Property Type="Int32" Name="id_Util_Info_Entreprise" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Util_Android">
+          <Key>
+            <PropertyRef Name="id_Util_Android" />
+          </Key>
+          <Property Name="id_Util_Android" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="registerid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="idu" Type="Int32" />
+          <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Android_Util" FromRole="Util_Android" ToRole="Util" />
+        </EntityType>
+        <Association Name="FK_Util_Android_Util">
+          <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+          <End Type="InterBookModel.Util_Android" Role="Util_Android" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Util">
+              <PropertyRef Name="IdU" />
+            </Principal>
+            <Dependent Role="Util_Android">
+              <PropertyRef Name="idu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2603,6 +2671,15 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetUtilSearchByLongLatIddepRayonDateAndParam" FunctionName="InterBookModel.Store.GetUtilSearchByLongLatIddepRayonDateAndParam">
           </FunctionImportMapping>
+          <EntitySetMapping Name="Util_Android">
+            <EntityTypeMapping TypeName="InterBookModel.Util_Android">
+              <MappingFragment StoreEntitySet="Util_Android">
+                <ScalarProperty Name="idu" ColumnName="idu" />
+                <ScalarProperty Name="registerid" ColumnName="registerid" />
+                <ScalarProperty Name="id_Util_Android" ColumnName="id_Util_Android" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
