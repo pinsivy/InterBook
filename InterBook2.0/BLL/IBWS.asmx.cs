@@ -441,16 +441,16 @@ namespace InterBook2._0.BLL
         }
 
         [WebMethod]
-        public void InsertLine_Util_Contact(Util_ContactSimple uc)
+        public void InsertLine_Util_Contact(string id_Util_Contact, string iduFrom, string iduTo)
         {
             if (_db == null)
                 _db = new InterBookEntities();
 
             Util_Contact u = new Util_Contact
             {
-                id_Util_Contact = uc.id_Util_Contact,
-                iduFrom = uc.iduFrom,
-                iduTo = uc.iduTo
+                id_Util_Contact = int.Parse(id_Util_Contact),
+                iduFrom = int.Parse(iduFrom),
+                iduTo = int.Parse(iduTo)
             };
 
             var entry = _db.Entry<Util_Contact>(u);
@@ -510,7 +510,7 @@ namespace InterBook2._0.BLL
 
         
         [WebMethod]
-        public void InsertLine_Reservation(string id_Reservation, string idUEntreprise, string id_EtatReservation, string idUEmploye)
+        public void InsertLine_Reservation(string id_Reservation, string idUEntreprise, string debut, string fin, string id_EtatReservation, string idUEmploye)
         {
             if (_db == null)
                 _db = new InterBookEntities();
@@ -519,6 +519,8 @@ namespace InterBook2._0.BLL
             {
                 id_Reservation = int.Parse(id_Reservation),
                 idUEntreprise = int.Parse(idUEntreprise),
+                debut = DateTime.Parse(debut),
+                fin = DateTime.Parse(fin),
                 id_EtatReservation = int.Parse(id_EtatReservation),
                 idUEmploye = int.Parse(idUEmploye)
             };
@@ -632,6 +634,40 @@ namespace InterBook2._0.BLL
                 else
                 {
                     entry.State = u.id_Util_Favoris == 0 ? EntityState.Added : EntityState.Modified; // This should attach entity
+                }
+            }
+
+            Save();
+        }
+
+        [WebMethod]
+        public void InsertLine_Util_Android(string id_Util_Android, string registerid, string idu)
+        {
+            if (_db == null)
+                _db = new InterBookEntities();
+
+            Util_Android u = new Util_Android
+            {
+                id_Util_Android = int.Parse(id_Util_Android),
+                registerid = registerid,
+                idu = int.Parse(idu),
+            };
+
+            var entry = _db.Entry<Util_Android>(u);
+
+            if (entry.State == EntityState.Detached)
+            {
+                var set = _db.Set<Util_Android>();
+                Util_Android attachedEntity = set.Local.SingleOrDefault(e => e.id_Util_Android == u.id_Util_Android);  // You need to have access to key
+
+                if (attachedEntity != null)
+                {
+                    var attachedEntry = _db.Entry(attachedEntity);
+                    attachedEntry.CurrentValues.SetValues(u);
+                }
+                else
+                {
+                    entry.State = u.id_Util_Android == 0 ? EntityState.Added : EntityState.Modified; // This should attach entity
                 }
             }
 
@@ -1373,6 +1409,42 @@ namespace InterBook2._0.BLL
                                    }).FirstOrDefault();
 
             return r;
+        }
+
+        [WebMethod]
+        public Util_AndroidSimple GetUtilAndroidByRegidIdu(string registerid, int idu)
+        {
+            if (_db == null)
+                _db = new InterBookEntities();
+
+            var u = (from m in _db.Util_Android
+                     join e in _db.Utils on m.idu equals e.IdU
+                     where m.registerid == registerid && m.idu == idu
+                     select new Util_AndroidSimple
+                     {
+                         id_Util_Android = m.id_Util_Android,
+                         registerid = m.registerid,
+                         idU = m.idu
+                     }).FirstOrDefault();
+            return u;
+        }
+
+        [WebMethod]
+        public List<Util_AndroidSimple> GetUtilAndroidByIdu(int idu)
+        {
+            if (_db == null)
+                _db = new InterBookEntities();
+
+            var u = (from m in _db.Util_Android
+                     join e in _db.Utils on m.idu equals e.IdU
+                     where m.idu == idu
+                     select new Util_AndroidSimple
+                     {
+                         id_Util_Android = m.id_Util_Android,
+                         registerid = m.registerid,
+                         idU = m.idu
+                     }).ToList<Util_AndroidSimple>();
+            return u;
         }
     }
 }

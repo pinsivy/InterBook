@@ -30,8 +30,14 @@
         <AssociationConnector Association="InterBookModel.FK_Util_Consentement_Util" />
         <AssociationConnector Association="InterBookModel.FK_Util_Contrat_Util" />
         <AssociationConnector Association="InterBookModel.FK_Util_Dispo_Util" ManuallyRouted="true" >
-          <ConnectorPoint PointX="13.096415199009833" PointY="7.75" />
-          <ConnectorPoint PointX="13.096415199009833" PointY="4.0862939453125" />
+          <ConnectorPoint PointX="13.957671150153455" PointY="7.75" />
+          <ConnectorPoint PointX="13.957671150153455" PointY="4.0862939453125" />
+          <ConnectorPoint PointX="13.749668908410062" PointY="4.0862939453124989" />
+          <ConnectorPoint PointX="13.583002241743394" PointY="4.0862939453125" />
+          <ConnectorPoint PointX="13.405916408410063" PointY="4.0862939453124989" />
+          <ConnectorPoint PointX="13.239249741743395" PointY="4.0862939453125" />
+          <ConnectorPoint PointX="13.22849948348679" PointY="4.0862939453124989" />
+          <ConnectorPoint PointX="13.061832816820122" PointY="4.0862939453125" />
           <ConnectorPoint PointX="8.75" PointY="4.0862939453125" />
         </AssociationConnector>
         <AssociationConnector Association="InterBookModel.FK_Util_Experience_Util" />
@@ -59,8 +65,8 @@
         <AssociationConnector Association="InterBookModel.FK_Ref_Departement_Ref_Region" />
         <AssociationConnector Association="InterBookModel.FK_Util_Contact_UtilTo" />
         <AssociationConnector Association="InterBookModel.FK_Util_Message_UtilTo" ManuallyRouted="true" >
-          <ConnectorPoint PointX="13.352837300306911" PointY="7.75" />
-          <ConnectorPoint PointX="13.352111408576928" PointY="2.8648893229166661" />
+          <ConnectorPoint PointX="13.322583075076729" PointY="7.75" />
+          <ConnectorPoint PointX="13.322583075076729" PointY="2.8648893229166661" />
         </AssociationConnector>
         <AssociationConnector Association="InterBookModel.FK_Util_Util_Info" />
         <EntityTypeShape EntityType="InterBookModel.Util_Geo" Width="1.5" PointX="17.25" PointY="17" />
@@ -85,6 +91,8 @@
         <AssociationConnector Association="InterBookModel.FK_Reservation_UtilEmploye" />
         <EntityTypeShape EntityType="InterBookModel.Abonnement" Width="1.5" PointX="7.25" PointY="5.375" />
         <AssociationConnector Association="InterBookModel.FK_Abonnement_Util" />
+        <EntityTypeShape EntityType="InterBookModel.Util_Android" Width="1.5" PointX="23.25" PointY="4.625" />
+        <AssociationConnector Association="InterBookModel.FK_Util_Android_Util" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

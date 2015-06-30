@@ -53,7 +53,7 @@ namespace InterBook2._0.Controllers
 
             ReservationSimple rs = new ReservationSimple();
 
-            SessionManager.Current.ws.InsertLine_Reservation(rs.id_Reservation.ToString(), rs.idUEntreprise.ToString(), rs.id_EtatReservation.ToString(), rs.idUEmploye.ToString());
+            SessionManager.Current.ws.InsertLine_Reservation(rs.id_Reservation.ToString(), rs.idUEntreprise.ToString(), rs.debut.ToString(), rs.fin.ToString(), rs.id_EtatReservation.ToString(), rs.idUEmploye.ToString());
             SessionManager.Current.Util.Reservations.Add(r);
 
             //Envoi de l'email de reservation
@@ -70,9 +70,18 @@ namespace InterBook2._0.Controllers
             {
                 {"[[uidto]]", uTo.uid.ToString()},
                 {"[[idr]]", r.id_Reservation.ToString()},
-                {"[[nomEntreprise]]", SessionManager.Current.Util.Util_Info_Entreprise.Nom}
+                {"[[nomEntreprise]]", SessionManager.Current.Util.Util_Info_Entreprise.Nom},
+                {"[[debut]]", rs.debut.ToString()},
+                {"[[fin]]", rs.fin.ToString()}
             };
             MailManager.SendMail(mb, varsAdd);
+
+            //Envoi Notification Android
+            List<Util_AndroidSimple> uas = UtilManager.GetUtilAndroidByIdu(uTo.IdU);
+            foreach (Util_AndroidSimple ua in uas)
+            {
+                NotificationManager.SendNotification(ua.registerid, "InterBook", SessionManager.Current.Util.Util_Info_Entreprise.Nom + " souhaîte vous contacter", "data.nomEntreprise=" + SessionManager.Current.Util.Util_Info_Entreprise.Nom + "&data.idr=" + r.id_Reservation.ToString() + "&data.debut=" + r.debut.ToString() + "&data.fin=" + r.fin.ToString());
+            }
 
             return Json(new { Success = true, Reponse = "2", Message = ""});
         }

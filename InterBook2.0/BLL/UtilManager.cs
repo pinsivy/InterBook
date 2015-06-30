@@ -159,5 +159,12 @@ namespace InterBook2._0.BLL
 
             return ld;
         }
+        public static List<Util_AndroidSimple> GetUtilAndroidByIdu(int idu)
+        {
+            if (SessionManager.Current.ws == null)
+                SessionManager.Current.ws = new IBWS();
+
+            return SessionManager.Current.ws.GetUtilAndroidByIdu(idu); ;
+        }
     }
 }

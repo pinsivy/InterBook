@@ -59,6 +59,7 @@ namespace InterBook2._0.DTO
         public virtual DbSet<Ref_From> Ref_From { get; set; }
         public virtual DbSet<Util_Info_Entreprise> Util_Info_Entreprise { get; set; }
         public virtual DbSet<Abonnement> Abonnements { get; set; }
+        public virtual DbSet<Util_Android> Util_Android { get; set; }
     
         public virtual ObjectResult<Util> SearchByVilleProfession(string ville, string profession)
         {

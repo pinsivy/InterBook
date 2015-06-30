@@ -12,7 +12,7 @@ namespace InterBook2._0.BLL
         {
             if (SessionManager.Current.ws == null)
                 SessionManager.Current.ws = new IBWS();
-            SessionManager.Current.ws.InsertLine_Util_Contact(UtilContact);
+            SessionManager.Current.ws.InsertLine_Util_Contact(UtilContact.id_Util_Contact.ToString(), UtilContact.iduFrom.ToString(), UtilContact.iduTo.ToString());
         }
     }
 }

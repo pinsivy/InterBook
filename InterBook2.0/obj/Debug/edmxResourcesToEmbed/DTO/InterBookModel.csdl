@@ -257,6 +257,11 @@
       <Parameter Name="experience" Mode="In" Type="String" />
       <Parameter Name="contrat" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Util_Android" EntityType="InterBookModel.Util_Android" />
+    <AssociationSet Name="FK_Util_Android_Util" Association="InterBookModel.FK_Util_Android_Util">
+      <End Role="Util" EntitySet="Utils" />
+      <End Role="Util_Android" EntitySet="Util_Android" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Ref_Profession">
     <Key>
@@ -301,6 +306,7 @@
     <NavigationProperty Name="Util_Info_Entreprise" Relationship="InterBookModel.FK_Util_Util_Info_Entreprise" FromRole="Util" ToRole="Util_Info_Entreprise" />
     <NavigationProperty Name="ReservationsEmploye" Relationship="InterBookModel.FK_Reservation_UtilEmploye" FromRole="Util" ToRole="Reservation" />
     <NavigationProperty Name="Abonnements" Relationship="InterBookModel.FK_Abonnement_Util" FromRole="Util" ToRole="Abonnement" />
+    <NavigationProperty Name="Util_Android" Relationship="InterBookModel.FK_Util_Android_Util" FromRole="Util" ToRole="Util_Android" />
   </EntityType>
   <EntityType Name="Util_Profession">
     <Key>
@@ -1194,4 +1200,25 @@
     <Property Type="Int32" Name="id_Util_Info" Nullable="true" />
     <Property Type="Int32" Name="id_Util_Info_Entreprise" Nullable="true" />
   </ComplexType>
+  <EntityType Name="Util_Android">
+    <Key>
+      <PropertyRef Name="id_Util_Android" />
+    </Key>
+    <Property Name="id_Util_Android" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="registerid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="idu" Type="Int32" />
+    <NavigationProperty Name="Util" Relationship="InterBookModel.FK_Util_Android_Util" FromRole="Util_Android" ToRole="Util" />
+  </EntityType>
+  <Association Name="FK_Util_Android_Util">
+    <End Type="InterBookModel.Util" Role="Util" Multiplicity="0..1" />
+    <End Type="InterBookModel.Util_Android" Role="Util_Android" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Util">
+        <PropertyRef Name="IdU" />
+      </Principal>
+      <Dependent Role="Util_Android">
+        <PropertyRef Name="idu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

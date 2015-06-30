@@ -34,7 +34,8 @@ namespace InterBook2._0.Controllers
             //    ws.save();
             //}
             //BLL.SessionManager.Current.Util = u;
-            SessionManager.SendNotification("", "Text IB4");
+            NotificationManager.SendNotification("APA91bGNt6fM0rpPmQxLs79RqLHqxWBDWkMm7D6cNdiBdvr5jwVP0vbqyX0SPqdzemgXUuRqUnyjiNRRaeiN0lIewIJhh2xzKuxKznn1L9-Qdd0vzrXmSBKYVNPbqu7tPU_extgE_rH51b59gQSLrCwnkYXkb0GSSgdGl8dx61eGZD7fh-rT2QA", "InterBook", "Text IB4", "data.nomEntreprise=EDF&data.idr=55&data.debut=12-01-2015&data.fin=12-01-2015");
+            NotificationManager.SendNotification("APA91bEi_7592mGiSEIl-yM2G7pq7xlfCMYoiNN-nzP_0pyfqUQBNn8w0Mg_TNRw-VwqGUTm1AH2bltcCw9RkJRozbgd43NtlvHtY3gQZ8y-FXFxUM0_EAHaxRrNnHcYNsPl-fAq4cMM7HB-ILI5MxBkt8GE706NtVHCWZqRgFxzJ7p8DOGUizA", "InterBook", "Text IB4", "data.nomEntreprise=EDF&data.idr=55&data.debut=12-01-2015&data.fin=12-01-2015");
             return View(hm);
         }
 

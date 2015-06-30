@@ -30,6 +30,7 @@ namespace InterBook2._0.DTO
             this.Util_Favoris1 = new HashSet<Util_Favoris>();
             this.ReservationsEmploye = new HashSet<Reservation>();
             this.Abonnements = new HashSet<Abonnement>();
+            this.Util_Android = new HashSet<Util_Android>();
         }
     
         public int IdU { get; set; }
@@ -64,5 +65,6 @@ namespace InterBook2._0.DTO
         public virtual Util_Info_Entreprise Util_Info_Entreprise { get; set; }
         public virtual ICollection<Reservation> ReservationsEmploye { get; set; }
         public virtual ICollection<Abonnement> Abonnements { get; set; }
+        public virtual ICollection<Util_Android> Util_Android { get; set; }
     }
 }
